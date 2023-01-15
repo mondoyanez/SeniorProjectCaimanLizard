@@ -1,22 +1,27 @@
 # <center>**Milestone 1**</center>
 
 ## <ins> Team Name </ins> 
-### Team Caiman Lizard
+### Caiman Lizard Development
 
 ## <ins> Team Motto </ins> 
-### insert motto here
+### Never been easier to relax
 
 ## <ins> Team Logo </ins> 
-![Team Caiman Lizard Logo](Logo.png)
+<img src="Logo.png" height="250">
 
 ## <ins> Team Letterhead </ins>
 - #### [Team Letterhead](Letterhead.pdf)
 
+## <ins> Team E-mail Footer </ins>
+
+<img src="e-mail-footer.png">
+
 ## <ins> Team Business Cards </ins>
-- #### [Emily West Business Card]()
-- #### [Nygel Melchor Business Card]()
-- #### [Natalie Malone Business Card]()
-- #### [Armando Yanez Business Card]()
+
+<img src="BusinessCards/EmilyWest/Emily_Business_Card.png" height="250">
+<img src="BusinessCards/NygelMelchor/Nygel_Business_Card.png" height="250">
+<img src="BusinessCards/NatalieMalone/Natalie_Business_Card.png" height="250">
+<img src="BusinessCards/ArmandoYanez/Armando_Business_Card.png" height="250">
 
 ## <ins> Resume's of Each Team Memeber </ins>
 - #### [Emily West Resume](Resumes/Emily_West_Resume.pdf)
