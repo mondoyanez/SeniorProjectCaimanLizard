@@ -1,3 +1,9 @@
+<style>
+    #meeting {
+        background-color: blue;
+    }
+</style>
+
 # <center>**Milestone 1**</center>
 
 ## <ins> Team Name </ins> 
@@ -30,7 +36,172 @@
 - #### [Armando Yanez Resume](Resumes/Armando_Yanez_Resume.pdf)
 
 ## <ins> Team Schedule </ins>
-- #### [Schedule]()
+
+<table>
+
+<table>
+    <tr>
+        <th></th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+    </tr>
+    <tr>
+        <th>8 am</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>9 am</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>10 am</th>
+        <td></td>
+        <td id="meeting">Sprint Review Meeting</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>11 am</th>
+        <td></td>
+        <td id="meeting">Sprint Review Meeting</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>12 pm</th>
+        <td></td>
+        <td id="meeting">Sprint Retrospective Meeting</td>
+        <td></td>
+        <td id="meeting">Sprint Planning Meeting</td>
+        <td></td>
+        <td></td>
+        <td id="meeting">Backlog Refinement Meeting</td>
+    </tr>
+    <tr>
+        <th>1 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td id="meeting">Sprint Planning Meeting</td>
+        <td></td>
+        <td></td>
+        <td id="meeting">Backlog Refinement Meeting</td>
+    </tr>
+    <tr>
+        <th>2 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>3 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>4 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>5 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>6 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>7 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>8 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>9 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>10 pm</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    
+</table>
 
 ## <ins> Project Ideas </ins>
 - #### Idea one
