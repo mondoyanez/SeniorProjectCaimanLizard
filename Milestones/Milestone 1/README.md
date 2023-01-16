@@ -10,7 +10,7 @@
 ### Caiman Lizard Development
 
 ## <ins> Team Motto </ins> 
-### Never been easier to relax
+### Briding the gap between possiblity and reality.
 
 ## <ins> Team Logo </ins> 
 <img src="Logo.png" height="250">
@@ -111,7 +111,7 @@
         <td id="meeting">Backlog Refinement Meeting</td>
     </tr>
     <tr>
-        <th>2 pm</th>
+        <td style="font-weight: bold;">2 pm</td>
         <td></td>
         <td></td>
         <td></td>
@@ -120,92 +120,10 @@
         <td></td>
         <td></td>
     </tr>
-    <tr>
-        <th>3 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>4 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>5 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>6 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>7 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>8 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>9 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>10 pm</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    
+
 </table>
 
 ## <ins> Project Ideas </ins>
-- #### Idea one
-- #### Idea two
-- #### Idea three
-
-### More information about initial project ideas can be found [here]().
+- #### [Simulated Closet](ProjectIdeas/SimulatedCloset/SimulatedCloset.md)
+- #### [Smart Travel Companion](ProjectIdeas/SmartTravelCompanion/SmartTravelCompanion.md)
+- #### [Social Watch Party](ProjectIdeas/SocialWatchParty/SocialWatchParty.md)
