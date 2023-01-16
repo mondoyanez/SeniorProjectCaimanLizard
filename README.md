@@ -43,4 +43,4 @@ We also have a CONTRIBUTORS.md file where we will be listing all the people who 
 We are excited to work on this project together and create something amazing. Thank you for your interest and support. We will do our best to make this project a success!
 
 ## Acknowledgements :heart:
-We would like to thank Dr.Morses and Western Oregon University for their support and guidance throughout this project.
+We would like to thank Dr. Morse and Western Oregon University for their support and guidance throughout this project.
