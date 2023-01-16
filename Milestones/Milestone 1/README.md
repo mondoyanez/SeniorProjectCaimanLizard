@@ -1,9 +1,3 @@
-<style>
-    #meeting {
-        background-color: blue;
-    }
-</style>
-
 # <center>**Milestone 1**</center>
 
 ## <ins> Team Name </ins> 
@@ -73,7 +67,7 @@
     <tr>
         <th>10 am</th>
         <td></td>
-        <td id="meeting">Sprint Review Meeting</td>
+        <td>Sprint Review Meeting</td>
         <td></td>
         <td></td>
         <td></td>
@@ -83,7 +77,7 @@
     <tr>
         <th>11 am</th>
         <td></td>
-        <td id="meeting">Sprint Review Meeting</td>
+        <td>Sprint Review Meeting</td>
         <td></td>
         <td></td>
         <td></td>
@@ -93,25 +87,25 @@
     <tr>
         <th>12 pm</th>
         <td></td>
-        <td id="meeting">Sprint Retrospective Meeting</td>
+        <td>Sprint Retrospective Meeting</td>
         <td></td>
-        <td id="meeting">Sprint Planning Meeting</td>
+        <td>Sprint Planning Meeting</td>
         <td></td>
         <td></td>
-        <td id="meeting">Backlog Refinement Meeting</td>
+        <td>Backlog Refinement Meeting</td>
     </tr>
     <tr>
         <th>1 pm</th>
         <td></td>
         <td></td>
         <td></td>
-        <td id="meeting">Sprint Planning Meeting</td>
+        <td>Sprint Planning Meeting</td>
         <td></td>
         <td></td>
-        <td id="meeting">Backlog Refinement Meeting</td>
+        <td>Backlog Refinement Meeting</td>
     </tr>
     <tr>
-        <td style="font-weight: bold;">2 pm</td>
+        <th>2 pm</th>
         <td></td>
         <td></td>
         <td></td>
