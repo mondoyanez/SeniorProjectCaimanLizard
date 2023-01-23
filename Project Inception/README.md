@@ -1,4 +1,4 @@
-# <center>**Milestone 1**</center>
+# <center>**Project Inception**</center>
 
 ## <ins> Team Name </ins> 
 ### Caiman Lizard Development
