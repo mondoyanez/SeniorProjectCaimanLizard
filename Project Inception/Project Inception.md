@@ -7,7 +7,13 @@ Project Inception Worksheet
     occur every 2 weeks, while having different meetings throughout. At the end of each sprint, our software will be updated and deployed to Azure. We will achieve this by using a few communication resources including Discord and Jira, which will give us the capabilities of working in an Agile environment.
 
 ## Initial Vision Discussion with Stakeholders
-    For individuals who need a tool that simplifies the travel planning process, the Smart Travel Companion is a user-friendly and comprehensive tool that provides an efficient and streamlined way to plan and execute their trips. The web application is a one-stop-shop for all of a traveler's needs, including assistance in comparing prices and fares, language translation, real-time weather, packing lists and etc. This tool will compare hotels and airfare on its site, have an area to translate the local language into English and be informed of local events in the area. Unlike the similar existing products such as TripAdvisor and Google Translate, our Smart Travel Companion will offer a combination of all these features in one place. So that people are free to focus on what really matters.
+    For individuals who need a tool that simplifies the travel planning process, the Smart Travel Companion is a user-friendly
+    and comprehensive tool that provides an efficient and streamlined way to plan and execute their trips. The web application is
+    a one-stop-shop for all of a traveler's needs, including assistance in comparing prices and fares, language translation,
+    real-time weather, packing lists and etc. This tool will compare hotels and airfare on its site, have an area to translate
+    the local language into English and be informed of local events in the area. Unlike the similar existing products such as
+    TripAdvisor and Google Translate, our Smart Travel Companion will offer a combination of all these features in one place. So
+    that people are free to focus on what really matters.
 
 ### Description of Clients/Users
     Users of our application will persist of... 
@@ -52,9 +58,16 @@ Project Inception Worksheet
     Diagrams, UI wireframes, page flows, ...
 
 ## Identify Non-Functional Requirements
-    1.
-    2.
-    3.
+    1. Dependencies:
+        1. Visual Studio Community 2022 v.17.4.4
+        2. Dotnet 7
+        3. SQL Server 2022
+    2. Website should load pages within 1 second, not including information attained from APIs
+    3. Secure login and information storage, following best practices
+    4. Compatability for windows, mac, and ios
+    5. The system must perform without failure in 95 percent of use cases during a sprint
+    6. User-friendly; users are able to learn the application in 5 minutes, users are satisfied with the design
+    7. Follows all legal requirements for an application
 
 ## Identify Functional Requirements (In User Story Format)
 
@@ -76,4 +89,7 @@ T: Task
     Diagrams, SQL modeling (dbdiagram.io), UML diagrams
 
 ## Timeline and Release Plan
-    Schedule: meaningful dates, milestones, sprint cadence, how releases are made (CI/CD, or fixed releases, or ?)
+    Milestones have occured during the inception phase of this group project, occurring every Monday since January 16th. The
+    first sprint will take place on Monday, February 20th. Sprints will have a duration of 14 days and will repeat until Western
+    Oregon University's Academic Excellence Showcase (AES). Initially, releases will be fixed - with a transition to Continuous
+    Integration and Continuous Deployment (CI/CD).
