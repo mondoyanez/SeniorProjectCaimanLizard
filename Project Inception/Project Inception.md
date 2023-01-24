@@ -7,7 +7,13 @@ Project Inception Worksheet
     occur every 2 weeks, while having different meetings throughout. At the end of each sprint, our software will be updated and deployed to Azure. We will achieve this by using a few communication resources including Discord and Jira, which will give us the capabilities of working in an Agile environment.
 
 ## Initial Vision Discussion with Stakeholders
-    For individuals who need a tool that simplifies the travel planning process, the Smart Travel Companion is a user-friendly and comprehensive tool that provides an efficient and streamlined way to plan and execute their trips. The web application is a one-stop-shop for all of a traveler's needs, including assistance in comparing prices and fares, language translation, real-time weather, packing lists and etc. This tool will compare hotels and airfare on its site, have an area to translate the local language into English and be informed of local events in the area. Unlike the similar existing products such as TripAdvisor and Google Translate, our Smart Travel Companion will offer a combination of all these features in one place. So that people are free to focus on what really matters.
+    For individuals who need a tool that simplifies the travel planning process, the Smart Travel Companion is a user-friendly
+    and comprehensive tool that provides an efficient and streamlined way to plan and execute their trips. The web application is
+    a one-stop-shop for all of a traveler's needs, including assistance in comparing prices and fares, language translation,
+    real-time weather, packing lists and etc. This tool will compare hotels and airfare on its site, have an area to translate
+    the local language into English and be informed of local events in the area. Unlike the similar existing products such as
+    TripAdvisor and Google Translate, our Smart Travel Companion will offer a combination of all these features in one place. So
+    that people are free to focus on what really matters.
 
 ### Description of Clients/Users
     Users of our application will persist of... 
@@ -83,4 +89,7 @@ T: Task
     Diagrams, SQL modeling (dbdiagram.io), UML diagrams
 
 ## Timeline and Release Plan
-    Schedule: meaningful dates, milestones, sprint cadence, how releases are made (CI/CD, or fixed releases, or ?)
+    Milestones have occured during the inception phase of this group project, occurring every Monday since January 16th. The
+    first sprint will take place on Monday, February 20th. Sprints will have a duration of 14 days and will repeat until Western
+    Oregon University's Academic Excellence Showcase (AES). Initially, releases will be fixed - with a transition to Continuous
+    Integration and Continuous Deployment (CI/CD).
