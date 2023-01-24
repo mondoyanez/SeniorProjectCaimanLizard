@@ -52,9 +52,16 @@ Project Inception Worksheet
     Diagrams, UI wireframes, page flows, ...
 
 ## Identify Non-Functional Requirements
-    1.
-    2.
-    3.
+    1. Dependencies:
+        1. Visual Studio Community 2022 v.17.4.4
+        2. Dotnet 7
+        3. SQL Server 2022
+    2. Website should load pages within 1 second, not including information attained from APIs
+    3. Secure login and information storage, following best practices
+    4. Compatability for windows, mac, and ios
+    5. The system must perform without failure in 95 percent of use cases during a sprint
+    6. User-friendly; users are able to learn the application in 5 minutes, users are satisfied with the design
+    7. Follows all legal requirements for an application
 
 ## Identify Functional Requirements (In User Story Format)
 
