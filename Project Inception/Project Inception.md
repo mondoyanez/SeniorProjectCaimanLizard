@@ -9,6 +9,10 @@ Project Inception Worksheet
     For individuals who need a tool that simplifies the travel planning process, the Smart Travel Companion is a user-friendly and comprehensive tool that provides an efficient and streamlined way to plan and execute their trips. The web application is a one-stop-shop for all of a traveler's needs, including assistance in comparing prices and fares, language translation, real-time weather, packing lists and etc. This tool will compare hotels and airfare on its site, have an area to translate the local language into English and be informed of local events in the area. Unlike the similar existing products such as TripAdvisor and Google Translate, our Smart Travel Companion will offer a combination of all these features in one place. So that people are free to focus on what really matters.
 
 ### Description of Clients/Users
+    Users of our application will persist of... 
+    1. Tourists
+    2. Individuals on a business trip
+    3. Students traveling for school
 
 ### List of Stakeholders and their Positions (if applicable)
     Who are they? Why are they a stakeholder?
