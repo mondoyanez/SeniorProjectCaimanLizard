@@ -8,14 +8,16 @@ The Team Caiman Lizard Project will be following the architecture style for ASP.
 Our project is for individuals who are looking for an entertaining website to connect with their friends and community over TV shows and movies. The Social Watch Party is an application that allows users to watch shows simultaneously, without having to be in the same place. It also allows users to share what they are watching, their thoughts, and ratings for shows. Users will have a profile, where they can see their past watched shows, upcoming shows, and posts created. This feature benefits the entertainment of users and their ability to find new interesting shows on all streaming platforms. Unlike other movie platforms, Social Watch Party will have a major focus on the social media aspect, making it user friendly and more interactive, allowing the user to easily access information about shows and connect with their friends online, simultaneously. 
 
 ### Description of Clients/Users
+Users of our application will persist of... 
     Users of our application will persist of... 
-    1. People who watch tv shows and movies
-    2. Users of streaming services
-    3. Users of other social media platforms
-    4. People who enjoy watching TV shows/movies with others
+Users of our application will persist of... 
+1. People who watch tv shows and movies
+2. Users of streaming services
+3. Users of other social media platforms
+4. People who enjoy watching TV shows/movies with others
 
 ### List of Stakeholders and their Positions (if applicable)
-    Who are they? Why are they a stakeholder?
+Who are they? Why are they a stakeholder?
 
 ## Initial Requirements Elaboration and Elicitation
 ###### Requirement #1 - Profile
@@ -31,24 +33,26 @@ The database search requirement is located on the home page. From there a user i
 The watch party requirement is where users are able to watch a show or movie with their friend, in an online setting at the same time. The functionality for this will be provided through the use of an API or chrome extension, which has yet to be decided. The user will be able to chat with their friends while watching a shared screen. Users will be able to invite their friends to their watch party through a link or invite request through the application. This requirementis still a work in progress.
 
 ### Elicitation Questions
-    1. 
+1. 
+2. 
     2.
-    3. ...
+2. 
+3. ...
 
 ### Elicitation Interviews
-    Transcript or summary of what was learned
+Transcript or summary of what was learned
 
 ### Other Elicitation Activities?
-    As needed
+As needed
 
 ## List of Needs and Features
-    1. Recommendations for what shows/movies to watch
-    2. Stay updated on latest shows/movies
-    3. See what your friends are watching and recommending
-    4. Watch shows/movies with friends at the same time in a different place
-    5. Lists of watched, currently watching, and watch next movies and shows
-    6. Reviewing and rating what you watch
-    7. Up to date database of TV shows and movies
+1. Recommendations for what shows/movies to watch
+2. Stay updated on latest shows/movies
+3. See what your friends are watching and recommending
+4. Watch shows/movies with friends at the same time in a different place
+5. Lists of watched, currently watching, and watch next movies and shows
+ 6. Reviewing and rating what you watch
+ 7. Up to date database of TV shows and movies
 
 
 ## Initial Modeling
@@ -62,16 +66,16 @@ The watch party requirement is where users are able to watch a show or movie wit
 <img src="Wireframes.jpg">
 
 ## Identify Non-Functional Requirements
-    1. Dependencies:
-        1. Visual Studio Community 2022 v.17.4.4
-        2. Dotnet 7
-        3. SQL Server 2022
-    2. Website should load pages within 1 second, not including information attained from APIs
-    3. Secure login and information storage, following best practices
-    4. Compatability for windows, mac, and ios
-    5. The system must perform without failure in 95 percent of use cases during a sprint
-    6. User-friendly; users are able to learn the application in 5 minutes, users are satisfied with the design
-    7. Follows all legal requirements for an application
+1. Dependencies:
+    1. Visual Studio Community 2022 v.17.4.4
+    2. Dotnet 7
+    3. SQL Server 2022
+2. Website should load pages within 1 second, not including information attained from APIs
+3. Secure login and information storage, following best practices
+4. Compatability for windows, mac, and ios
+5. The system must perform without failure in 95 percent of use cases during a sprint
+6. User-friendly; users are able to learn the application in 5 minutes, users are satisfied with the design
+7. Follows all legal requirements for an application
 
 ## Identify Functional Requirements (In User Story Format)
 
@@ -90,10 +94,10 @@ T: Task
 <img src="ArchitectureDiagram.png">
 
 ## Agile Data Modeling
-    Diagrams, SQL modeling (dbdiagram.io), UML diagrams
+Diagrams, SQL modeling (dbdiagram.io), UML diagrams
 
 ## Timeline and Release Plan
-    Milestones have occured during the inception phase of this group project, occurring every Monday since January 16th. The
-    first sprint will take place on Monday, February 20th. Sprints will have a duration of 14 days and will repeat until Western
-    Oregon University's Academic Excellence Showcase (AES). Initially, releases will be fixed - with a transition to Continuous
-    Integration and Continuous Deployment (CI/CD).
+Milestones have occured during the inception phase of this group project, occurring every Monday since January 16th. The
+first sprint will take place on Monday, February 20th. Sprints will have a duration of 14 days and will repeat until Western
+Oregon University's Academic Excellence Showcase (AES). Initially, releases will be fixed - with a transition to Continuous
+Integration and Continuous Deployment (CI/CD).
