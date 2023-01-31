@@ -43,7 +43,7 @@ Our project is for individuals who are looking for an entertaining website to co
 ## Initial Modeling
 
 ### Use Case Diagrams
-    Diagrams
+<img src="WatchPartyUseCase.png">
 
 ### Sequence Diagrams
 
@@ -76,7 +76,7 @@ T: Task
         a. [T]
 
 ## Initial Architecture Envisioning
-    Diagrams and drawings, lists of components
+<img src="ArchitectureDiagram.png">
 
 ## Agile Data Modeling
     Diagrams, SQL modeling (dbdiagram.io), UML diagrams
