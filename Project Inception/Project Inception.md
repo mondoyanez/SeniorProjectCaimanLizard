@@ -31,13 +31,14 @@ Project Inception Worksheet
     As needed
 
 ## List of Needs and Features
-    1. Retrieve hotel prices in an area
-    2. Retrieve rental car rates
-    3. Retrieve airfare for given dates
-    4. Be able to translate into English
-    5. Provide real-time weather
-    6. "Packing list", created by the user (CRUD)
-    7. "Souvenir list", created by the user to track items that they should bring back for others - gifts (CRUD)
+    1. Recommendations for what shows/movies to watch
+    2. Stay updated on latest shows/movies
+    3. See what your friends are watching and recommending
+    4. Watch shows/movies with friends at the same time in a different place
+    5. Lists of watched, currently watching, and watch next movies and shows
+    6. Reviewing and rating what you watch
+    7. Up to date database of TV shows and movies
+
 
 ## Initial Modeling
 
