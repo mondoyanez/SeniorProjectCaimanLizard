@@ -54,12 +54,12 @@ The watch party requirement is where users are able to watch a show or movie wit
 ## Initial Modeling
 
 ### Use Case Diagrams
-    Diagrams
+<img src="WatchPartyUseCase.png">
 
 ### Sequence Diagrams
 
 ### Other Modeling
-    Diagrams, UI wireframes, page flows, ...
+<img src="Wireframes.jpg">
 
 ## Identify Non-Functional Requirements
     1. Dependencies:
@@ -87,7 +87,7 @@ T: Task
         a. [T]
 
 ## Initial Architecture Envisioning
-    Diagrams and drawings, lists of components
+<img src="ArchitectureDiagram.png">
 
 ## Agile Data Modeling
     Diagrams, SQL modeling (dbdiagram.io), UML diagrams
