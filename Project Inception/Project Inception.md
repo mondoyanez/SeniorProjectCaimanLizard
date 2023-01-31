@@ -9,15 +9,17 @@ Our project is for individuals who are looking for an entertaining website to co
 
 ### Description of Clients/Users
 Users of our application will persist of... 
-    Users of our application will persist of... 
-Users of our application will persist of... 
 1. People who watch tv shows and movies
 2. Users of streaming services
 3. Users of other social media platforms
 4. People who enjoy watching TV shows/movies with others
 
 ### List of Stakeholders and their Positions (if applicable)
-Who are they? Why are they a stakeholder?
+1. Project Manager (Professor Morse) - responsible for managing the project
+2. Project Team (Armando, Emily, Natalie, Nygel) - responsible for development work of the project
+3. Company (Caiman Lizard Development) - organization responsible for the project and whose developers are directly involved
+4. Client (Professor Morse)- the person/organization for who the project is being sold to
+5. End User - people who are expected to make use of the project
 
 ## Initial Requirements Elaboration and Elicitation
 ###### Requirement #1 - Profile
@@ -34,8 +36,6 @@ The watch party requirement is where users are able to watch a show or movie wit
 
 ### Elicitation Questions
 1. 
-2. 
-    2.
 2. 
 3. ...
 
