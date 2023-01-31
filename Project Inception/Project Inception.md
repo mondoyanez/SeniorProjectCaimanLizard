@@ -48,7 +48,7 @@ Our project is for individuals who are looking for an entertaining website to co
 ### Sequence Diagrams
 
 ### Other Modeling
-    Diagrams, UI wireframes, page flows, ...
+<img src="Wireframes.jpg">
 
 ## Identify Non-Functional Requirements
     1. Dependencies:
