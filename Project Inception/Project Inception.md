@@ -2,18 +2,10 @@ Project Inception Worksheet
 =====================================
 
 ## Summary of Our Approach to Software Development
-    The Team Caiman Lizard Project will be following the architecture style for ASP.NET Core, along with Agile principles.
-    Our use of scrum will mean that we will build our software in a dynamic and iterative approach. We are choosing to work in sprints that will
-    occur every 2 weeks, while having different meetings throughout. At the end of each sprint, our software will be updated and deployed to Azure. We will achieve this by using a few communication resources including Discord and Jira, which will give us the capabilities of working in an Agile environment.
+    The Team Caiman Lizard Project will be following the architecture style for ASP.NET Core, along with Agile principles.git branch Our use of scrum will mean that we will build our software in a dynamic and iterative approach. We are choosing to work in sprints that will occur every 2 weeks, while having different meetings throughout. At the end of each sprint, our software will be updated and deployed to Azure. We will achieve this by using a few communication resources including Discord and Jira, which will give us the capabilities of working in an Agile environment.
 
 ## Initial Vision Discussion with Stakeholders
-    For individuals who need a tool that simplifies the travel planning process, the Smart Travel Companion is a user-friendly
-    and comprehensive tool that provides an efficient and streamlined way to plan and execute their trips. The web application is
-    a one-stop-shop for all of a traveler's needs, including assistance in comparing prices and fares, language translation,
-    real-time weather, packing lists and etc. This tool will compare hotels and airfare on its site, have an area to translate
-    the local language into English and be informed of local events in the area. Unlike the similar existing products such as
-    TripAdvisor and Google Translate, our Smart Travel Companion will offer a combination of all these features in one place. So
-    that people are free to focus on what really matters.
+    Our project is for individuals who are looking for an entertaining website to connect with their friends and community over TV shows and movies. The Social Watch Party is an application that allows users to watch shows simultaneously, without having to be in the same place. It also allows users to share what they are watching, their thoughts, and ratings for shows. Users will have a profile, where they can see their past watched shows, upcoming shows, and posts created. This feature benefits the entertainment of users and their ability to find new interesting shows on all streaming platforms. Unlike other movie platforms, Social Watch Party will have a major focus on the social media aspect, making it user friendly and more interactive, allowing the user to easily access information about shows and connect with their friends online, simultaneously. 
 
 ### Description of Clients/Users
     Users of our application will persist of... 
