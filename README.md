@@ -25,6 +25,17 @@ To get started, please ensure that you have the necessary tools and dependencies
 - Bootstrap 5.3
 - jQuery 3.6.3
 
+## Architechtural Decisions :triangular_ruler:
+- Lazy Loading: Enabled
+- Test projects will have `_Tests` appended to their names
+- Naming scheme for git branches will be lowercase and based on Jira
+    - i.e `cld-7-landing-page`
+- Database syntax:
+    - Statements are ended with a semicolon instead of `GO`
+    - Foreign and Primary keys will be an `ID` of type `int`
+    - Foreign key declarations will go in an `ALTER TABLE`
+    - Named constraints are in the form of `Fk_key_name` (i.e `Fk_CharcterClass_ID`)
+
 ## Communication :mailbox:
 We will be primarily communicating via Discord. However, feel free to reach out to any team member directly if you have any questions or concerns.
 
