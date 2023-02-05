@@ -1,10 +1,10 @@
 # Senior Project :rocket:
 Welcome to our Senior Project! This project is a 6-month long endeavor by a team of 4 students: Nygel, Armando, Emily, and Natalie. We are excited to embark on this journey together and create something amazing.
 
-## Overview
+## Overview :mag:
 The goal of our project is to develop a public-facing web application using ASP.NET Core MVC and SQL Server. We will be utilizing Azure for deployment and will also be incorporating best practices for security, scalability, and maintainability. Throughout the project, we will be updating this README with our progress, challenges, and solutions.
 
-## Technology Stack
+## Technology Stack :tool_box:
 - ASP.NET Core MVC
 - SQL Server
 - Azure
