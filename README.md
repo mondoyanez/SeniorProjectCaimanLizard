@@ -20,8 +20,10 @@ To get started, please ensure that you have the necessary tools and dependencies
 
 ## Dependencies :package:
 - Visual Studio Community 2022 v.17.4.4
-- Dotnet 7
+- .NET Core 7.0.2
 - SQL Server 2022
+- Bootstrap 5.3
+- jQuery 3.6.3
 
 ## Communication :mailbox:
 We will be primarily communicating via Discord. However, feel free to reach out to any team member directly if you have any questions or concerns.
