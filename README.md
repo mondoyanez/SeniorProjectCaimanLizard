@@ -9,11 +9,11 @@ The goal of our project is to develop a public-facing web application using ASP.
 - SQL Server
 - Azure
 
-## Team Members
-- Armando @mondoyanez
-- Emily @Ewest19
-- Natalie @nmalone20
-- Nygel @nymelchor
+## Team Members :busts_in_silhouette:
+- Armando [@mondoyanez](https://github.com/mondoyanez)
+- Emily [@Ewest19](https://github.com/Ewest19)
+- Natalie [@nmalone20](https://github.com/nmalone20)
+- Nygel [@nymelchor](https://github.com/nymelchor)
 
 ## Getting Started :computer:
 To get started, please ensure that you have the necessary tools and dependencies installed on your computer. A list of these can be found in the **dependencies** section.
