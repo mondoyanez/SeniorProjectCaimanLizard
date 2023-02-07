@@ -68,7 +68,13 @@ As needed
 ## Initial Modeling
 
 ### Use Case Diagrams
-<img src="WatchPartyUseCase.png">
+<img src="Usecases/ContentSearching/ContentSearching.png">
+<img src="Usecases/Moderate/ModerateUsecase.png">
+<img src="Usecases/PostInteraction/PostInteractionUsecase.png">
+<img src="Usecases/SeriesList/SeriesListUsecase.png">
+<img src="Usecases/UserAuthentication/UserAuthenticationUseCase.png">
+<img src="Usecases/UserInteraction/UserInteractionUsecase.png">
+<img src="Usecases/WatchParty/WatchPartyUsecase.png">
 
 ### Sequence Diagrams
 

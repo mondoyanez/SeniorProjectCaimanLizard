@@ -1,0 +1,37 @@
+@startuml ContentSearching
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+actor Visitor
+database WatchPartyDB
+database TMDB_API
+
+rectangle "Content Searching" {
+    usecase "SearchSeries"
+    usecase "FilterSeries"
+    usecase "AddToWatchLater"
+    usecase "AddToCurrentlyWatching"
+    usecase "AddToRecentlyWatched"
+    usecase "SortContent"
+}
+
+WatchPartyUser --> SearchSeries
+WatchPartyUser --> FilterSeries
+WatchPartyUser --> AddToWatchLater
+WatchPartyUser --> AddToCurrentlyWatching
+WatchPartyUser --> AddToRecentlyWatched
+WatchPartyUser --> SortContent
+
+Visitor --> SearchSeries
+
+SearchSeries <-- TMDB_API
+FilterSeries <-- TMDB_API
+
+AddToWatchLater <-- WatchPartyDB
+AddToCurrentlyWatching <-- WatchPartyDB
+AddToRecentlyWatched <-- WatchPartyDB
+SortContent <-- WatchPartyDB
+
+@enduml

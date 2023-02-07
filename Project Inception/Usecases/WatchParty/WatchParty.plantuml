@@ -1,0 +1,30 @@
+@startuml WatchPartyUsecase
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+actor WatchPartyUserFriend
+
+rectangle "Watch Party" {
+    usecase "StartWatchParty"
+    usecase "PauseWatchParty"
+    usecase "EndWatchParty"
+    usecase "CreateToWatchPartyRequest"
+    usecase "AcceptWatchPartyRequest"
+    usecase "CancelWatchPartyRequest"
+    usecase "DeclineWatchPartyRequest"
+    usecase "LeaveWatchParty"
+}
+
+WatchPartyUser --> StartWatchParty
+WatchPartyUser --> PauseWatchParty
+WatchPartyUser --> EndWatchParty
+WatchPartyUser --> CreateToWatchPartyRequest
+WatchPartyUser --> CancelWatchPartyRequest
+
+AcceptWatchPartyRequest <-- WatchPartyUserFriend
+DeclineWatchPartyRequest <-- WatchPartyUserFriend
+LeaveWatchParty <-- WatchPartyUserFriend
+
+@enduml

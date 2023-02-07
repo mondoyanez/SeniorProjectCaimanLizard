@@ -1,0 +1,35 @@
+@startuml SeriesListUsecase
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+database WatchPartyDB
+
+rectangle "Series List" {
+    usecase "FriendSeriesList"
+    usecase "ViewLikedSeries"
+    usecase "SearchLikedSeries"
+    usecase "CurrentlyWatching"
+    usecase "SeriesWatched"
+    usecase "SeriesToWatch"
+    usecase "SortContent"
+}
+
+WatchPartyUser --> FriendSeriesList
+WatchPartyUser --> ViewLikedSeries
+WatchPartyUser --> SearchLikedSeries
+WatchPartyUser --> CurrentlyWatching
+WatchPartyUser --> SeriesWatched
+WatchPartyUser --> SeriesToWatch
+WatchPartyUser --> SortContent
+
+FriendSeriesList <-- WatchPartyDB
+ViewLikedSeries <-- WatchPartyDB
+SearchLikedSeries <-- WatchPartyDB
+CurrentlyWatching <-- WatchPartyDB
+SeriesWatched <-- WatchPartyDB
+SeriesToWatch <-- WatchPartyDB
+SortContent <-- WatchPartyDB
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml ModerateUsecase
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+actor Admin
+database WatchPartyDB
+
+rectangle "Moderate" {
+    usecase "BanUser"
+    usecase "Report"
+    usecase "DisputeReport"
+}
+
+Admin --> BanUser
+
+WatchPartyUser --> Report
+WatchPartyUser --> DisputeReport
+
+BanUser <-- WatchPartyDB
+Report <-- WatchPartyDB
+DisputeReport <-- WatchPartyDB
+
+@enduml
