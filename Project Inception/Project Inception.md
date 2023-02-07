@@ -111,6 +111,7 @@ T: Task
 
 ## Agile Data Modeling
 Diagrams, SQL modeling (dbdiagram.io), UML diagrams
+<img src="WatchPartyDB.png">
 
 ## Timeline and Release Plan
 Milestones have occured during the inception phase of this group project, occurring every Monday since January 16th. The
