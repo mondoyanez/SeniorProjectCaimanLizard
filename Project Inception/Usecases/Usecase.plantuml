@@ -4,8 +4,20 @@ left to right direction
 skinparam actorStyle awesome
 
 actor WatchPartyUser
+actor Admin
+actor Visitor
 database WatchPartyDB
 database TMDB_API
+
+rectangle "Moderate" {
+    usecase "BanUser"
+    usecase "Report"
+    usecase "DisputeReport"
+}
+
+Admin --> BanUser
+WatchPartyUser --> Report
+WatchPartyUser --> DisputeReport
 
 rectangle "Social Media Watch Party" {
     usecase "Login"
@@ -31,6 +43,7 @@ rectangle "Social Media Watch Party" {
     usecase "SortContent"
 }
 
+Admin --> Login
 WatchPartyUser --> Login
 WatchPartyUser --> ForgotPassword
 WatchPartyUser --> ForgotEmail

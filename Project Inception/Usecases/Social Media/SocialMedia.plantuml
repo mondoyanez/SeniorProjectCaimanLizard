@@ -1,0 +1,35 @@
+@startuml WatchPartyUseCase
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+actor Visitor
+
+rectangle "Social Media" {
+    usecase "SearchUsers"
+    usecase "ViewFriends"
+    usecase "SearchFriends"
+    usecase "AddFriend"
+    usecase "RemoveFriend"
+    usecase "CreateReview"
+    usecase "PostComment"
+    usecase "SubmitLike"
+    usecase "SharePost"
+}
+
+WatchPartyUser --> SearchUsers
+WatchPartyUser --> ViewFriends
+WatchPartyUser --> SearchFriends
+WatchPartyUser --> AddFriend
+WatchPartyUser --> RemoveFriend
+WatchPartyUser --> CreateReview
+WatchPartyUser --> PostComment
+WatchPartyUser --> SubmitLike
+WatchPartyUser --> SharePost
+
+SearchUsers <-- Visitor
+
+
+
+@enduml
