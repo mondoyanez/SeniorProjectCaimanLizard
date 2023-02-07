@@ -5,6 +5,7 @@ skinparam actorStyle awesome
 
 actor WatchPartyUser
 actor Visitor
+database WatchPartyDB
 
 rectangle "Social Media" {
     usecase "SearchUsers"
@@ -13,9 +14,13 @@ rectangle "Social Media" {
     usecase "AddFriend"
     usecase "RemoveFriend"
     usecase "CreateReview"
+    usecase "RemoveReview"
     usecase "PostComment"
+    usecase "RemoveComment"
     usecase "SubmitLike"
+    usecase "UnsubmitLike"
     usecase "SharePost"
+    usecase "UnsharePost"
 }
 
 WatchPartyUser --> SearchUsers
@@ -24,12 +29,25 @@ WatchPartyUser --> SearchFriends
 WatchPartyUser --> AddFriend
 WatchPartyUser --> RemoveFriend
 WatchPartyUser --> CreateReview
+WatchPartyUser --> RemoveReview
 WatchPartyUser --> PostComment
+WatchPartyUser --> RemoveComment
 WatchPartyUser --> SubmitLike
+WatchPartyUser --> UnsubmitLike
 WatchPartyUser --> SharePost
+WatchPartyUser --> UnsharePost
 
 SearchUsers <-- Visitor
 
-
+SearchUsers <-- WatchPartyDB
+ViewFriends <-- WatchPartyDB
+SearchFriends <-- WatchPartyDB
+AddFriend <-- WatchPartyDB
+RemoveFriend <-- WatchPartyDB
+CreateReview <-- WatchPartyDB
+PostComment <-- WatchPartyDB
+SubmitLike <-- WatchPartyDB
+SharePost <-- WatchPartyDB
+UnsharePost <-- WatchPartyDB
 
 @enduml

@@ -5,6 +5,7 @@ skinparam actorStyle awesome
 
 actor WatchPartyUser
 actor Admin
+database WatchPartyDB
 
 rectangle "Moderate" {
     usecase "BanUser"
@@ -13,7 +14,12 @@ rectangle "Moderate" {
 }
 
 Admin --> BanUser
+
 WatchPartyUser --> Report
 WatchPartyUser --> DisputeReport
+
+BanUser <-- WatchPartyDB
+Report <-- WatchPartyDB
+DisputeReport <-- WatchPartyDB
 
 @enduml
