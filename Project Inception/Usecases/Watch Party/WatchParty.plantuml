@@ -1,4 +1,4 @@
-@startuml WatchPartyUseCase
+@startuml WatchPartyUsecase
 
 left to right direction
 skinparam actorStyle awesome
