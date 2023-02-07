@@ -68,7 +68,13 @@ As needed
 ## Initial Modeling
 
 ### Use Case Diagrams
-<img src="WatchPartyUseCase.png">
+<img src="Usecases/ContentSearching/ContentSearching.png">
+<img src="Usecases/Moderate/ModerateUsecase.png">
+<img src="Usecases/PostInteraction/PostInteractionUsecase.png">
+<img src="Usecases/SeriesList/SeriesListUsecase.png">
+<img src="Usecases/UserAuthentication/UserAuthenticationUsecase.png">
+<img src="Usecases/UserInteraction/UserInteractionUsecase.png">
+<img src="Usecases/WatchParty/WatchPartyUsecase.png">
 
 ### Sequence Diagrams
 
@@ -105,9 +111,11 @@ T: Task
 
 ## Agile Data Modeling
 Diagrams, SQL modeling (dbdiagram.io), UML diagrams
+<img src="WatchPartyDB.png">
 
 ## Timeline and Release Plan
 Milestones have occured during the inception phase of this group project, occurring every Monday since January 16th. The
 first sprint will take place on Monday, February 20th. Sprints will have a duration of 14 days and will repeat until Western
 Oregon University's Academic Excellence Showcase (AES). Initially, releases will be fixed - with a transition to Continuous
 Integration and Continuous Deployment (CI/CD).
+#### [Release Plan PDF](Timeline%20&%20Release%20Plan.pdf)

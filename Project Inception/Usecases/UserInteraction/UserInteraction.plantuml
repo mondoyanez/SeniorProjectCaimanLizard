@@ -1,0 +1,32 @@
+@startuml UserInteractionUsecase
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+actor Visitor
+database WatchPartyDB
+
+rectangle "User Interaction" {
+    usecase "SearchUsers"
+    usecase "ViewFriends"
+    usecase "SearchFriends"
+    usecase "AddFriend"
+    usecase "RemoveFriend"
+}
+
+WatchPartyUser --> SearchUsers
+WatchPartyUser --> ViewFriends
+WatchPartyUser --> SearchFriends
+WatchPartyUser --> AddFriend
+WatchPartyUser --> RemoveFriend
+
+SearchUsers <-- Visitor
+
+SearchUsers <-- WatchPartyDB
+ViewFriends <-- WatchPartyDB
+SearchFriends <-- WatchPartyDB
+AddFriend <-- WatchPartyDB
+RemoveFriend <-- WatchPartyDB
+
+@enduml

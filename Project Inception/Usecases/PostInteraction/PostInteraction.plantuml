@@ -1,0 +1,35 @@
+@startuml PostInteractionUsecase
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+database WatchPartyDB
+
+rectangle "Post Interaction" {
+    usecase "CreateReview"
+    usecase "RemoveReview"
+    usecase "PostComment"
+    usecase "RemoveComment"
+    usecase "SubmitLike"
+    usecase "UnsubmitLike"
+    usecase "SharePost"
+    usecase "UnsharePost"
+}
+
+WatchPartyUser --> CreateReview
+WatchPartyUser --> RemoveReview
+WatchPartyUser --> PostComment
+WatchPartyUser --> RemoveComment
+WatchPartyUser --> SubmitLike
+WatchPartyUser --> UnsubmitLike
+WatchPartyUser --> SharePost
+WatchPartyUser --> UnsharePost
+
+CreateReview <-- WatchPartyDB
+PostComment <-- WatchPartyDB
+SubmitLike <-- WatchPartyDB
+SharePost <-- WatchPartyDB
+UnsharePost <-- WatchPartyDB
+
+@enduml
