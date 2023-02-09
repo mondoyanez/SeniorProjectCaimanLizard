@@ -1,4 +1,4 @@
--- CREATE DATABASE WatchPartyDB
+-- CREATE DATABASE WatchParty
 
 CREATE TABLE [Watcher] 
 (

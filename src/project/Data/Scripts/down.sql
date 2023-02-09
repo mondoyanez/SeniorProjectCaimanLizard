@@ -11,4 +11,4 @@ DROP TABLE [Post];
 DROP TABLE [Reshare];
 DROP TABLE [LikePost];
 
--- DROP DATABASE WatchPartyDB;
+-- DROP DATABASE WatchParty;
