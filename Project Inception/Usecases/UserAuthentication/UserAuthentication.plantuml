@@ -1,0 +1,29 @@
+@startuml UserAuthenticationUsecase
+
+left to right direction
+skinparam actorStyle awesome
+
+actor WatchPartyUser
+database UserAuthDB
+
+rectangle "User Authentication" {
+    usecase "Login"
+    usecase "Logout"
+    usecase "ForgotPassword"
+    usecase "ForgotEmail"
+    usecase "ResetPassword"
+}
+
+WatchPartyUser --> Login
+WatchPartyUser --> Logout
+WatchPartyUser --> ForgotPassword
+WatchPartyUser --> ForgotEmail
+WatchPartyUser --> ResetPassword
+
+Login <-- UserAuthDB
+Logout <-- UserAuthDB
+ForgotPassword <-- UserAuthDB
+ForgotEmail <-- UserAuthDB
+ResetPassword <-- UserAuthDB
+
+@enduml
