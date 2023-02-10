@@ -20,3 +20,34 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+:root {
+    --cld-off-white: #EDE7D9;
+    --cld-purple: #5D4A66;
+    --cld-blue: #84AFE6;
+    --cld-yellow: #D5A021;
+    --cld-purple-black: #1A1423;
+    --cld-dark-black: #372549;
+    --cld-slate-blue: #725AC1;
+
+}
+.cld-bg-light {
+    background: var(--cld-off-white);
+    transition: 1s ease-in;
+}
+
+.cld-bg-light.scrolled {
+    background: white !important;
+}
+
+.cld-btn-light {
+    background: var(--cld-off-white) !important;
+}
+
+.cld-btn-primary {
+    background: var(--cld-purple) !important;
+}
+
+.cld-text-light {
+    background: var(--cld-off-white) !important;
+}

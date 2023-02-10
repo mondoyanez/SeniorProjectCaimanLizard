@@ -2,3 +2,6 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+$(window).scroll(function () {
+    $('nav').toggleClass('scrolled box-shadow', $(this).scrollTop() > 0);
+});
