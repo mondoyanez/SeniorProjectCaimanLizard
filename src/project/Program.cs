@@ -11,6 +11,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var tmdbKey = builder.Configuration["TMDB:APIKey"];
+
         // Add services to the container.
 
         var watchPartyConnectionString = builder.Configuration.GetConnectionString("WatchPartyConnection") ?? throw new InvalidOperationException("Connection string 'WatchPartyConnection' not found.");
