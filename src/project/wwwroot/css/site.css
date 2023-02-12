@@ -18,5 +18,54 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 0;
+}
+
+/*  COLOR PALETTE
+    Purple is our primary color and blue is our secondary.
+    The off-white is our background color for light mode (yes, dark mode later)
+*/
+:root {
+    --cld-off-white: #EDE7D9;
+    --cld-taupe-gray: #A49694;
+    --cld-purple: #5D4A66;
+    --cld-blue: #84AFE6;
+    --cld-yellow: #D5A021;
+    --cld-black-purple: #1A1423;
+    --cld-dark-purple: #372549;
+    --cld-slate-blue: #725AC1;
+
+}
+
+.cld-description {
+    background-image: linear-gradient( var(--cld-off-white), white);
+}
+
+.cld-footer {
+    background: var(--cld-purple);
+}
+
+.cld-bg-light {
+    background: var(--cld-off-white);
+    transition: 1s ease-in;
+}
+
+.cld-bg-light.scrolled {
+    background: white;
+}
+
+.cld-btn-light {
+    background: var(--cld-off-white);
+}
+
+.cld-btn-primary {
+    background: var(--cld-purple);
+}
+
+.cld-btn-primary:hover {
+    background-color: #4a3b52;
+}
+
+.cld-text-light {
+    background: var(--cld-off-white);
 }
