@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.Data;
 using WatchParty.Models;
+using WatchParty.Services.Abstract;
+using WatchParty.Services.Concrete;
 
 namespace WatchParty;
 
@@ -29,6 +31,8 @@ public class Program
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddScoped<ITMDBService, ITMDBService>(s => new TMDBService(tmdbKey));
 
         var app = builder.Build();
 
