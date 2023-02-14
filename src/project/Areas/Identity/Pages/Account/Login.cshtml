@@ -1,9 +1,9 @@
 ﻿@page
 @model LoginModel
 
-@{
-    ViewData["Title"] = "Log in";
-}
+@*@{
+    ViewData["Title"] = "Watch Party";
+}*@
 
 <h1>@ViewData["Title"]</h1>
 <div class="row">
@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+                <h2 class="text-center">Log in with an existing account.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
