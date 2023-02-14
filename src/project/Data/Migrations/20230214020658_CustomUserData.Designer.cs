@@ -12,7 +12,7 @@ using WatchParty.Data;
 namespace WatchParty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230214004923_CustomUserData")]
+    [Migration("20230214020658_CustomUserData")]
     partial class CustomUserData
     {
         /// <inheritdoc />
