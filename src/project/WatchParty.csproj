@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Scripts\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>
