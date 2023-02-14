@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WatchParty.Areas.Identity.Data;
 using WatchParty.Data;
 using WatchParty.Models;
 

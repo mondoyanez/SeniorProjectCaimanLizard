@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WatchParty.Areas.Identity.Data;
 
 namespace WatchParty.Areas.Identity.Pages.Account.Manage
 {
