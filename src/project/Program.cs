@@ -14,8 +14,8 @@ public class Program
         // Add services to the container.
 
         var watchPartyConnectionString = builder.Configuration.GetConnectionString("WatchPartyConnection") ?? throw new InvalidOperationException("Connection string 'WatchPartyConnection' not found.");
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(watchPartyConnectionString));
+        //builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        //    options.UseSqlServer(watchPartyConnectionString));
 
         var authConnectionString = builder.Configuration.GetConnectionString("AuthConnection") ?? throw new InvalidOperationException("Connection string 'AuthConnection' not found.");
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
