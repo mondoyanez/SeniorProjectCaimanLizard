@@ -69,3 +69,64 @@ body {
 .cld-text-light {
     background: var(--cld-off-white);
 }
+
+.cld-btn-secondary {
+    background: var(--cld-blue);
+}
+
+.cld-btn-secondary:hover {
+    background-color: #76a8e8;
+}
+
+.form-control, .form-check-input {
+    background-color: #f2efe9;
+    border-color: var(--cld-blue);
+}
+
+.form-control:hover, .form-check-input:hover {
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    border-color: var(--cld-blue);
+}
+
+.form-control:focus {
+    background-color: #f2efe9;
+    outline-color: var(--cld-blue);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:focus {
+    outline-color: var(--cld-blue);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:checked {
+    background-color: var(--cld-blue);
+    outline-color: var(--cld-blue);
+    border-color: var(--cld-blue);
+}
+
+.shake-img:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: 1; 
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%
+}
