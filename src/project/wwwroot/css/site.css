@@ -26,6 +26,7 @@ body {
     The off-white is our background color for light mode (yes, dark mode later)
 */
 :root {
+    --lh: 1.4rem;
     --cld-off-white: #EDE7D9;
     --cld-taupe-gray: #A49694;
     --cld-purple: #5D4A66;
@@ -34,9 +35,44 @@ body {
     --cld-black-purple: #1A1423;
     --cld-dark-purple: #372549;
     --cld-slate-blue: #725AC1;
-
 }
 
+.truncate-overflow {
+    --max-lines: 3;
+    position: relative;
+    max-height: calc(var(--lh) * var(--max-lines));
+    overflow: hidden;
+    padding-right: 1rem; /* space for ellipsis */
+    line-height: var(--lh);
+}
+
+/* css-based multiline text truncation based on: 
+    https://css-tricks.com/multi-line-truncation-with-pure-css/ */
+.truncate-overflow::before {
+    position: absolute;
+    content: "...";
+    /* tempting... but shows when lines == content */
+    /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+    /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+    bottom: 0;
+    right: 0;
+}
+
+.truncate-overflow::after {
+    content: "";
+    position: absolute;
+    /*
+  inset-inline-end: 0;
+  */
+    right: 0;
+    /* missing bottom on purpose*/
+    width: 1rem;
+    height: 1rem;
+    background: white;
+}
 .cld-description {
     background-image: linear-gradient( var(--cld-off-white), white);
 }
