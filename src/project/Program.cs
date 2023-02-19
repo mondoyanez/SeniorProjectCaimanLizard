@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.Data;
 using WatchParty.Models;
+using WatchParty.Models.Concrete;
 using WatchParty.Services.Abstract;
 using WatchParty.Services.Concrete;
 
@@ -31,8 +32,8 @@ public class Program
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
-
-        builder.Services.AddScoped<ITMDBService, ITMDBService>(s => new TMDBService(tmdbKey));
+        
+		builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient {BaseAddress = new Uri("https://api.themoviedb.org/3") }));
 
         var app = builder.Build();
 

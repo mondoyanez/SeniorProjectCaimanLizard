@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Net;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using WatchParty.Models.Abstract;
 using WatchParty.Models.Concrete;
 using WatchParty.Models.DTO;
 using WatchParty.Services.Abstract;
@@ -9,12 +10,13 @@ namespace WatchParty.Services.Concrete
 {
 	public class TMDBService : ITMDBService
 	{
-		public static readonly HttpClient _httpClient = new HttpClient();
+		private readonly TMDBClient _httpClient;
 		public string BaseSource { get; set; }
 		public string? Key { get; set; }
 
-		public TMDBService(string? key)
+		public TMDBService(string? key, TMDBClient client)
 		{
+			_httpClient = client;
 			BaseSource = "https://api.themoviedb.org/3";
 			SetCredentials(key ?? "");
 		}
@@ -23,10 +25,9 @@ namespace WatchParty.Services.Concrete
 		{
 			this.Key = apiKey;
 		}
-		public TMDBImageConfig SetImageConfig()
+		public TMDBImageConfig SetImageConfig(string relativePath="/configuration")
 		{
-			var source = $"{BaseSource}/configuration";
-			var jsonResponse = GetJsonStringFromEndpoint(this.Key, source);
+			var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, relativePath);
 			Debug.WriteLine(jsonResponse);
 
 			TMDBJsonDTO? tmdbJsonDTO = new();
@@ -45,7 +46,7 @@ namespace WatchParty.Services.Concrete
 				return new TMDBImageConfig()
 				{
 					BaseUrl = tmdbJsonDTO.images.secure_base_url,
-					PosterSizes = tmdbJsonDTO.images.profile_sizes,
+					PosterSizes = tmdbJsonDTO.images.poster_sizes,
 					ProfileSizes = tmdbJsonDTO.images.profile_sizes
 				};
 			}
@@ -53,30 +54,29 @@ namespace WatchParty.Services.Concrete
 			return new TMDBImageConfig();
 		}
 
-		public IEnumerable<TMDBGenre> GetMovieGenres()
+		public IEnumerable<TMDBGenre> GetMovieGenres(string relativePath)
 		{
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<TMDBGenre> GetShowGenres()
+		public IEnumerable<TMDBGenre> GetShowGenres(string relativePath)
 		{
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<TMDBTitle> SearchMovies(string movieTitle)
+		public IEnumerable<TMDBTitle> SearchMovies(string movieTitle, string relativePath)
 		{
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<TMDBTitle> SearchShows(string showTitle)
+		public IEnumerable<TMDBTitle> SearchShows(string showTitle, string relativePath)
 		{
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<TMDBTitle> SearchTitles(string title)
+		public IEnumerable<TMDBTitle> SearchTitles(string title, string relativePath = "/search/multi?query=")
 		{
-			var source = $"{BaseSource}/search/multi?query={title}";
-			var jsonResponse = GetJsonStringFromEndpoint(this.Key, source);
+			var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
 			Debug.WriteLine(jsonResponse);
 
 			TMDBJsonDTO? tmdbJsonDTO = new();
@@ -105,35 +105,9 @@ namespace WatchParty.Services.Concrete
 				.ToList();
 		}
 
-		public IEnumerable<TMDBPerson> SearchPerson(string personName)
+		public IEnumerable<TMDBPerson> SearchPerson(string personName, string relativePath)
 		{
 			throw new NotImplementedException();
-		}
-
-		public string GetJsonStringFromEndpoint(string? token, string uri)
-		{
-			HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri)
-			{
-				Headers =
-				{
-					{"Accept", "application/json"},
-					{"Authorization", "Bearer " + token},
-				}
-			};
-
-			HttpResponseMessage response = _httpClient.Send(httpRequestMessage);
-			// FIXME: this is only a minimal version; make sure to cover all other bases here
-			if (response.IsSuccessStatusCode)
-			{
-				// Note there is only an async version of this so to avoid forcing us to use async, Scott is waiting for the result manually
-				string responseText = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-				return responseText;
-			}
-			else
-			{
-				// FIXME: What to do if failure? Should throw and catch specific exceptions that explain what happened
-				return null;
-			}
 		}
 	}
 }
