@@ -1,18 +1,25 @@
-﻿@{
+﻿@model Watcher
+@{
     ViewData["Title"] = "Profile Page";
 }
 
 <section class="cld-bg-light">
+    <br />
+    <br />
+
     <div class="row">
         <div class="col-md-3">
             <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="60" height="48" class="center">
         </div>
         <div class="col-md-9">
-            <h3>Email / Username</h3>
-            <h5>FirstName LastName</h5>
-            <div class="col-sm-3">
+            <h3>@ViewBag.Username</h3> 
+@*            <h5>@Model.FirstName @Model.LastName</h5>
+*@            <div class="col-sm-3">
                 Following 0    Followers 0
             </div>
         </div>
     </div>
+
+    <br />
+    <br />
 </section>
