@@ -58,6 +58,16 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllerRoute(
+            name: "profile",
+            pattern: "user/{username}",
+            defaults: new { controller = "User", action = "Profile" });
+
+        app.MapControllerRoute(
+            name: "notfound",
+            pattern: "user",
+            defaults: new { controller = "User", action = "NotFound" });
+
+        app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
         app.MapRazorPages();

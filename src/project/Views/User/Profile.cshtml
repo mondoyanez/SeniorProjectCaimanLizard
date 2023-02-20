@@ -1,4 +1,4 @@
-﻿@model Watcher
+﻿@*@model ProfileVM
 @{
     ViewData["Title"] = "Profile Page";
 }
@@ -7,19 +7,55 @@
     <br />
     <br />
 
-    <div class="row">
-        <div class="col-md-3">
-            <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="60" height="48" class="center">
-        </div>
-        <div class="col-md-9">
-            <h3>@ViewBag.Username</h3> 
-@*            <h5>@Model.FirstName @Model.LastName</h5>
-*@            <div class="col-sm-3">
-                Following 0    Followers 0
+    @if (Model.Watcher != null)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="60" height="48" class="center">
+            </div>
+            <div class="col-md-9">
+                <h3>@Model.Username</h3> 
+            <h5>@Model.FirstName @Model.LastName</h5>
+            <div class="col-sm-3">
+                Following @Model.FollowerCount    Followers @Model.FollowerCount
+            </div>
+                <h3>@Model.Watcher.Username</h3>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <p>watcher is null</p>
+    }
 
     <br />
     <br />
-</section>
+</section>*@
+
+@model WatchParty.Models.Watcher
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Watcher</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AspNetIdentityId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AspNetIdentityId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+    </dl>
+</div>
+
