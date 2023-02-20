@@ -2,7 +2,8 @@
 
 CREATE TABLE [Watcher] 
 (
-    [Id]      INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [Id]                    INT           NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [AspNetIdentityId]      NVARCHAR(450)       NOT NULL,
     [Username]              NVARCHAR(256)       NOT NULL,
     [FirstName]             NVARCHAR(64),
     [LastName]              NVARCHAR(64),

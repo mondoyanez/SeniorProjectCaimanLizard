@@ -1,33 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace WatchParty.Models;
 
-[Table("Watcher")]
 public partial class Watcher
 {
-    [Key]
-    [Column("ID")]
     public int Id { get; set; }
 
-    [StringLength(64)]
-    public string FirstName { get; set; } = null!;
+    public string AspNetIdentityId { get; set; } = null!;
 
-    [StringLength(64)]
-    public string LastName { get; set; } = null!;
+    public string Username { get; set; } = null!;
 
-    [StringLength(64)]
+    public string? FirstName { get; set; }
+
+    public string? LastName { get; set; }
+
     public string? Email { get; set; }
 
-    [InverseProperty("User")]
+    public int? FollowingCount { get; set; }
+
+    public int? FollowerCount { get; set; }
+
+    public string? Bio { get; set; }
+
     public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();
 
-    [InverseProperty("User")]
     public virtual ICollection<Post> Posts { get; } = new List<Post>();
 
-    [InverseProperty("User")]
     public virtual ICollection<Reshare> Reshares { get; } = new List<Reshare>();
 }
