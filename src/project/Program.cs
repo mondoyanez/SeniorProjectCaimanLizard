@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using WatchParty.Areas.Identity.Data;
 using WatchParty.Data;
 using WatchParty.Models;
+using WatchParty.Models.Concrete;
+using WatchParty.Services.Abstract;
+using WatchParty.Services.Concrete;
 
 namespace WatchParty;
 
@@ -11,6 +14,8 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        var tmdbKey = builder.Configuration["TMDB:APIKey"];
 
         // Add services to the container.
 
@@ -28,6 +33,8 @@ public class Program
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
+        
+		builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient {BaseAddress = new Uri("https://api.themoviedb.org/3") }));
 
         var app = builder.Build();
 
