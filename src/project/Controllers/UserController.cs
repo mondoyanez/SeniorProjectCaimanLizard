@@ -26,7 +26,7 @@ public class UserController : Controller
     }
 
     // GET: user/ {username}
-    //[Authorize]
+    [Authorize]
     public ActionResult<Watcher> Profile(string username)
     {
         if (_watcherRepository == null)
@@ -49,46 +49,6 @@ public class UserController : Controller
     {
         return View();
     }
-
-    //public IActionResult Edit(int id)
-    //{
-    //    if (_watcherRepository == null || id == null)
-    //    {
-    //        return View("Notfound");
-    //    }
-
-    //    Watcher watcher = _watcherRepository.FindById(id);
-    //    if(watcher == null)
-    //    {
-    //        return View("Notfound");
-    //    }
-
-    //    return View(watcher);
-    //}
-
-    //[HttpPost]
-    //public IActionResult Edit(int id, [Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
-    //{
-    //    if (id != watcher.Id)
-    //    {
-    //        return View("Notfound");
-    //    }
-    //    if (ModelState.IsValid)
-    //    {
-    //        try
-    //        {
-
-    //            _watcherRepository.AddOrUpdate(watcher);
-    //        }
-    //        catch (DbUpdateConcurrencyException)
-    //        {
-
-    //        }
-    //        return RedirectToAction(nameof(Watcher.Username));
-    //    }
-
-    //    return View(watcher);
-    //}
 
     public async Task<IActionResult> Edit(int? id)
     {

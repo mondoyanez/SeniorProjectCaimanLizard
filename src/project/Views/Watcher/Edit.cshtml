@@ -61,7 +61,8 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <@*a asp-action="Index">Back to List</a>*@
+    <a href=/User/@Model.Username class="btn cld-btn-secondary text-light">Back to Profile</a>
 </div>
 
 @section Scripts {
