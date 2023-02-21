@@ -106,8 +106,8 @@ $(document).ready(function () {
         $.when(
             $.ajax({
                 type: "GET",
-                url: "/api/searchShows",
-                data: { title: title },
+                url: "/api/searchShow",
+                data: { showTitle: title },
                 dataType: "json",
                 success: function (response) {
                     displayTitles(response);

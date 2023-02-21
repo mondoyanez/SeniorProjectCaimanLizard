@@ -97,7 +97,7 @@ namespace WatchParty.Services.Concrete
                 .ToList();
         }
 
-        public IEnumerable<TMDBTitle> SearchShows(string showTitle, string relativePath = "/search/tv?query=")
+        public IEnumerable<TMDBTitle> SearchShows(string showTitle, string relativePath = "/search/multi?query=")
         {
             var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{showTitle}");
             Debug.WriteLine(jsonResponse);
@@ -115,15 +115,15 @@ namespace WatchParty.Services.Concrete
 
             if (tmdbJsonDTO.results == null) return new List<TMDBTitle>();
 
-            return tmdbJsonDTO.results.Where(results => results.media_type != "person")
+            return tmdbJsonDTO.results.Where(results => results.media_type == "tv")
                 .OrderByDescending(results => results.popularity).Select(r => new TMDBTitle()
                 {
                     Id = r.id,
-                    Title = r.title ?? r.name,
+                    Title = r.name,
                     MediaType = r.media_type,
                     ImagePath = r.poster_path ?? "",
                     Popularity = r.popularity,
-                    ReleaseDate = r.release_date ?? r.first_air_date,
+                    ReleaseDate = r.first_air_date,
                     PlotSummary = r.overview
                 })
                 .ToList();
