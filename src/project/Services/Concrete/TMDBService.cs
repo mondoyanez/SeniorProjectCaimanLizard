@@ -90,7 +90,7 @@ namespace WatchParty.Services.Concrete
 				Debug.WriteLine(e);
 			}
 
-			if (tmdbJsonDTO.results == null) return new List<TMDBTitle>();
+			if (tmdbJsonDTO?.results == null) return new List<TMDBTitle>();
 
 			return tmdbJsonDTO.results.Where(results => results.media_type != "person").OrderByDescending(results => results.popularity).Select(r => new TMDBTitle()
 				{
@@ -105,9 +105,43 @@ namespace WatchParty.Services.Concrete
 				.ToList();
 		}
 
-		public IEnumerable<TMDBPerson> SearchPerson(string personName, string relativePath)
+		public IEnumerable<TMDBPerson> SearchPerson(string personName, string relativePath = "/search/person?query=")
 		{
-			throw new NotImplementedException();
-		}
+			
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{personName}");
+            Debug.WriteLine(jsonResponse);
+
+            TMDBJsonPersonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonPersonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO?.results == null) return new List<TMDBPerson>();
+
+            return tmdbJsonDTO.results.OrderByDescending(results => results.popularity).Select(r => new TMDBPerson()
+                {
+                    Id = r.id,
+                    Name = r.name ?? r.original_name,
+					ImagePath = r.profile_path ?? string.Empty,
+					Popularity = r.popularity,
+					KnownFor = r.known_for.Select(t => new TMDBTitle()
+                    {
+                        Id = t.id,
+                        Title = t.title ?? String.Empty,
+                        MediaType = t.media_type,
+                        ImagePath = t.poster_path ?? String.Empty,
+                        Popularity = t.popularity,
+                        ReleaseDate = t.release_date,
+                        PlotSummary = t.overview
+                    })
+                })
+                .ToList();
+        }
 	}
 }
