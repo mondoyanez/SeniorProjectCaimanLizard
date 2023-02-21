@@ -11,7 +11,7 @@ $(document).ready(function () {
                 data: { personName: actor },
                 dataType: "json",
                 success: function(response) {
-                    displayActors(response);
+                    displayTitles(response);
                 },
                 error: function() {
                     errorOnAjax();
@@ -48,9 +48,35 @@ $(document).ready(function () {
     });
 });
 
-function displayActors(data) {
+function displayTitles(data) {
     console.log("populating actor info with the following data");
     console.log(data);
+
+    $("#resultCards").empty();
+    $.each(data, function (actorIndex, actorItem) {
+            $.each(actorItem.knownFor, function (knownForIndex, knownForItem) {
+                console.log(knownForItem);
+                let result =
+                    `<div class="col cld-bg-light">
+                    <div class="card mb-3">
+                      <div class="row g-0">
+                        <div class="col-sm-2 col-4 align-self-center">
+                          <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${knownForItem.imagePath}" >
+                        </div>
+                        <div class="col">
+                          <div class="card-body text-start">
+                            <h4 class="card-title">${knownForItem.title} (${knownForItem.releaseDate.substr(0, 4)})</h4>
+                            <p class="card-text truncate-overflow">${knownForItem.plotSummary}</p>
+                            <p class="card-text"><small class="text-muted">Rated: ${knownForItem.popularity}</small></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+			    </div>`;
+                $("#resultCards").append($(result));
+            });
+        }
+    );
 }
 
 function errorOnAjax() {
