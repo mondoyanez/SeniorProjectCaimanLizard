@@ -49,11 +49,12 @@
                 <span asp-validation-for="FollowerCount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Bio" class="control-label"></label>
+                <label asp-for="Bio" class="control-label">Bio: 256 Characters Max</label>
                 <input asp-for="Bio" class="form-control" />
                 <span asp-validation-for="Bio" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <br />
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -61,7 +62,8 @@
 </div>
 
 <div>
-    <@*a asp-action="Index">Back to List</a>*@
+    @*a asp-action="Index">Back to List</a>*@
+    <br />
     <a href=/User/@Model.Username class="btn cld-btn-secondary text-light">Back to Profile</a>
 </div>
 
