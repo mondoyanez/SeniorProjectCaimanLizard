@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.Areas.Identity.Data;
+using WatchParty.DAL.Abstract;
+using WatchParty.DAL.Concrete;
 using WatchParty.Data;
 using WatchParty.Models;
 using WatchParty.Models.Concrete;
@@ -35,6 +37,8 @@ public class Program
         builder.Services.AddControllersWithViews();
         
 		builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient {BaseAddress = new Uri("https://api.themoviedb.org/3") }));
+        builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
 
         var app = builder.Build();
 
@@ -58,8 +62,24 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllerRoute(
+           name: "editProfile",
+           pattern: "user/edit",
+           defaults: new { controller = "User", action = "Edit" });
+
+        app.MapControllerRoute(
+            name: "profile",
+            pattern: "user/{username}",
+            defaults: new { controller = "User", action = "Profile" });
+
+        app.MapControllerRoute(
+            name: "notfound",
+            pattern: "user",
+            defaults: new { controller = "User", action = "NotFound" });
+
+        app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
+
         app.MapRazorPages();
 
         app.Run();
