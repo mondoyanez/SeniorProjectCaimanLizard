@@ -1,0 +1,41 @@
+﻿@model ProfileVM
+@{
+    ViewData["Title"] = "Profile Page";
+}
+
+<section class="cld-bg-light">
+    <br />
+    <br />
+
+    @if (Model != null)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="120" height="96" class="center">
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body profile-card">
+                        <h3 class="card-title">@Model.Watcher.Username</h3>
+                        <h5 class="card-subtitle mb-2">@Model.Watcher.FirstName @Model.Watcher.LastName</h5>
+                        <p></p>
+                        <h6 class="card-subtitle mb-2 text-muted">Following @Model.Watcher.FollowingCount    Followers @Model.Watcher.FollowerCount</h6>
+                        <p class="card-text">@Model.Watcher.Bio</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <a href=/Watcher/Edit/@Model.Watcher.Id class="btn cld-btn-primary text-light">Edit Profile</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>watcher is null</p>
+    }
+
+    <br />
+    <br />
+</section>
+
+

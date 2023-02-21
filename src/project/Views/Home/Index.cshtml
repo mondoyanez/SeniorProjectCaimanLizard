@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Watch Party";
+}
+
+<section class="text-center cld-bg-light">
+	<div class="container text-center">
+		<div class="row align-items-center text-start">
+			<div class="col pb-5">
+				<h1 class="fw-bold">Where Entertainment Meets Community</h1>
+				<p>Your place for all things film and television</p>
+				<a class="btn cld-btn-primary text-light btn-lg px-3 pb-2" asp-area="Identity" asp-page="/Account/Register" role="button">
+					Get Started Today
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+					</svg>
+				</a>
+			</div>
+			<div class="col">
+				<img class="text-primary" src="@Url.Content("~/img/Telecommuting-amico.svg")" alt="Bootstrap" width="auto" height="75%">
+			</div>
+		</div>
+	</div>
+</section>
+<section class="cld-description pb-3">
+	<div class="container text-center py-4">
+		<div class="row g-4 row-cols-1 row-cols-lg-3">
+			<div class="col text-start">
+				<div class="d-flex flex-row">
+					<svg xmlns="http://www.w3.org/2000/svg" width="auto" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+					</svg>
+					<h3 class="ps-2">Share Your Reviews</h3>
+				</div>
+				<p>Join the conversation - discover, review, and share your opinions. Whether you're a film buff or just enjoy a good binge-watch, reviews can help others make informed decisions on what to watch next, and you can also see what others have to say about your favorite shows and movies.</p>
+			</div>
+			<div class="col text-start">
+				<div class="d-flex flex-row">
+					<svg xmlns="http://www.w3.org/2000/svg" width="auto" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+						<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+					</svg>
+					<h3 class="ps-2">Discover Something New</h3>
+				</div>
+				<p>Effortlessly find your next great watch, uncover your next favorite.  Say goodbye to the frustration of not knowing what to watch next, and hello to discovering new, must-see movies and TV shows. Whether you're in the mood for a drama, comedy, or action, this feature has you covered.</p>
+			</div>
+			<div class="col text-start">
+				<div class="d-flex flex-row">
+					<svg xmlns="http://www.w3.org/2000/svg" width="auto" height="30" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+						<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+						<path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+					</svg>
+					<h3 class="ps-2">Stay Up-To-Date</h3>
+				</div>
+				<p>Get organized with lists, never miss a show/movie again. Keep track of all your favorite shows and movies with ease, and never forget what you're watching, or what you want to watch next. Say goodbye to cluttered bookmarks and hello to a simple and seamless movie and TV experience!</p>
+			</div>
+		</div>
+	</div>
+</section>

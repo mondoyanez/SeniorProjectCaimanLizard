@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WatchParty</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WatchParty.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light cld-bg-light fixed-top pb-2">
+            <div class="container-fluid">
+	            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="30" height="24" class="d-inline-block align-text-top shake-img">
+		            Social Watch Party
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+	                    <li class="nav-item">
+		                    <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Watch Lists</a>
+	                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Search">Search Titles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Actors">Search Actors</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main" class="mt-5">
+            @RenderBody()
+        </main>
+    </div>
+
+	<div class="container-fluid cld-footer">
+		<footer class="d-flex flex-wrap justify-content-between py-3">
+			<div class="col-md-4 d-flex align-items-center">
+				<img src="@Url.Content("~/img/cld-lizard.svg")" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+				<span class="mb-3 mb-md-0 ps-2 text-black text-opacity-50">Developed by Caiman Lizard<br>Bridging the gap between possibility and reality</span>
+			</div>
+			<div class="col-md-4 d-flex align-items-center">
+				<span class="mb-3 mb-md-0">
+					<a href="https://github.com/mondoyanez/SeniorProjectCaimanLizard" class="mb-3 me-2 mb-md-0 text-black text-opacity-50 text-decoration-none lh-1">
+						<img src="@Url.Content("~/img/github-mark.svg")" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
+						Interested in what you see? Check us out!
+					</a>
+				</span>
+			</div>
+			<div class="col-md-4 d-flex align-items-center">
+				<span class="mb-3 mb-md-0">
+					<a href="https://storyset.com/work" class="mb-3 me-2 mb-md-0 text-black text-opacity-50 text-decoration-none lh-1">
+						Work illustrations by Storyset
+					</a>
+					<a href="https://www.themoviedb.org/" class="mb-3 me-2 mb-md-0 text-black text-opacity-50 text-decoration-none lh-1">
+						API access by The Movie Database
+					</a>
+				</span>
+			</div>
+		</footer>
+	</div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<section class="cld-bg-light">
+
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="60" height="48" class="center shake-img">
+            <section>
+                <form id="account" method="post">
+                    <h2 class="text-center">Welcome to Social Watch Party</h2>
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="username" />
+                        <label asp-for="Input.UserName" class="form-label">Username</label>
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password" class="form-label">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                    <div>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg cld-btn-primary text-light">Log In</button>
+                    </div>
+                    <br />
+                    <h5 class="text-center">or</h5>
+                    <br />
+                    <div>
+                        <p>
+                            <a class="w-100 btn btn-lg cld-btn-secondary text-light" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register Here</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+    <br />
+    <br />
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

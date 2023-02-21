@@ -1,0 +1,172 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 0;
+}
+
+/*  COLOR PALETTE
+    Purple is our primary color and blue is our secondary.
+    The off-white is our background color for light mode (yes, dark mode later)
+*/
+:root {
+    --lh: 1.4rem;
+    --cld-off-white: #EDE7D9;
+    --cld-taupe-gray: #A49694;
+    --cld-purple: #5D4A66;
+    --cld-blue: #84AFE6;
+    --cld-yellow: #D5A021;
+    --cld-black-purple: #1A1423;
+    --cld-dark-purple: #372549;
+    --cld-slate-blue: #725AC1;
+}
+
+.truncate-overflow {
+    --max-lines: 3;
+    position: relative;
+    max-height: calc(var(--lh) * var(--max-lines));
+    overflow: hidden;
+    padding-right: 1rem; /* space for ellipsis */
+    line-height: var(--lh);
+}
+
+/* css-based multiline text truncation based on: 
+    https://css-tricks.com/multi-line-truncation-with-pure-css/ */
+.truncate-overflow::before {
+    position: absolute;
+    content: "...";
+    /* tempting... but shows when lines == content */
+    /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+    /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+    bottom: 0;
+    right: 0;
+}
+
+.truncate-overflow::after {
+    content: "";
+    position: absolute;
+    /*
+  inset-inline-end: 0;
+  */
+    right: 0;
+    /* missing bottom on purpose*/
+    width: 1rem;
+    height: 1rem;
+    background: white;
+}
+.cld-description {
+    background-image: linear-gradient( var(--cld-off-white), white);
+}
+
+.cld-footer {
+    background: var(--cld-purple);
+}
+
+.cld-bg-light {
+    background: var(--cld-off-white);
+    transition: 1s ease-in;
+}
+
+.cld-bg-light.scrolled {
+    background: white;
+}
+
+.cld-btn-light {
+    background: var(--cld-off-white);
+}
+
+.cld-btn-primary {
+    background: var(--cld-purple);
+}
+
+.cld-btn-primary:hover {
+    background-color: #4a3b52;
+}
+
+.cld-text-light {
+    background: var(--cld-off-white);
+}
+
+.cld-btn-secondary {
+    background: var(--cld-blue);
+}
+
+.cld-btn-secondary:hover {
+    background-color: #76a8e8;
+}
+
+.form-control, .form-check-input {
+    background-color: #f2efe9;
+    border-color: var(--cld-blue);
+}
+
+.form-control:hover, .form-check-input:hover {
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    border-color: var(--cld-blue);
+}
+
+.form-control:focus {
+    background-color: #f2efe9;
+    outline-color: var(--cld-blue);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:focus {
+    outline-color: var(--cld-blue);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:checked {
+    background-color: var(--cld-blue);
+    outline-color: var(--cld-blue);
+    border-color: var(--cld-blue);
+}
+
+.shake-img:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: 1; 
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%
+}
+
+.profile-card {
+    background-color: #f2efe9;
+}

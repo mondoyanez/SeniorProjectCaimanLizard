@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Search Titles";
+}
+<section style="height: 100vh; overflow: scroll" class="text-center cld-bg-light">
+	<h2>Discover Something New</h2>
+	<div class="container text-center">
+		<form id="search-bar" class="d-flex pb-5" role="search">
+			<input id="searchQuery" class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+			<button id="search-btn" class="btn btn-outline-success" type="submit">Search Titles</button>
+		</form>
+		<form id="search-bar-movies" class ="d-flex pb-5" role="search">
+			<input id="searchMovie" class="form-control me-2" type="search" name="search-movies" placeholder="Search Movies" aria-label="Search Movies"/>
+			<button id="search-movies-btn" class="btn btn-outline-success" type="submit">Search Movies</button>
+		</form>
+		<form id="search-bar-tv" class="d-flex pb-5" role="search">
+			<input id="searchTv" class="form-control me-2" type="search" name="search-tv" placeholder="Search TV Shows" aria-label="Search TV Shows">
+			<button id="search-tv-btn" class="btn btn-outline-success" type="submit">Search TV Shows</button>
+		</form>
+		<div id="resultCards" class="row row-cols-1 g-4">
+
+		</div>
+	</div>
+</section>
+@section Scripts
+	{
+	<script type="text/javascript" src="~/js/search.js"></script>
+	<script>
+		console.log("loaded Scripts section");
+	</script>
+}
