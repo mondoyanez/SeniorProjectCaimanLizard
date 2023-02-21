@@ -124,7 +124,7 @@ namespace WatchParty.Services.Concrete
 
             if (tmdbJsonDTO?.results == null) return new List<TMDBPerson>();
 
-            return tmdbJsonDTO.results.OrderByDescending(results => results.popularity).Select(r => new TMDBPerson()
+            return tmdbJsonDTO.results.Where(results => results.known_for_department.Equals("Acting")).OrderByDescending(results => results.popularity).Select(r => new TMDBPerson()
                 {
                     Id = r.id,
                     Name = r.name ?? r.original_name,

@@ -11,6 +11,7 @@
             public string original_name { get; set; }
             public string profile_path { get; set; }
             public float popularity { get; set; }
+            public string known_for_department { get; set; }
             public KnownFor[] known_for { get; set; }
 
             public class KnownFor
