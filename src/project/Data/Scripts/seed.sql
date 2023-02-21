@@ -1,16 +1,16 @@
 SET IDENTITY_INSERT [Watcher] ON;
-INSERT INTO [Watcher](ID, FirstName, LastName, Email)
+INSERT INTO [Watcher](ID, Username, FirstName, LastName, Email, FollowingCount, FollowerCount, Bio)
 VALUES
-(1, 'Sandra', 'Hart', 'SandraHart@email.com'),
-(2, 'Carson', 'Daniel', 'DanielCarson@domain.net'),
-(3, 'Paige', 'Cole', null),
-(4, 'Jayson', 'Lawrence', 'jLawrence@name.edu'),
-(5, 'Gabriel', 'Grant', 'gGabriel@differentMail.com'),
-(6, 'Brad', 'Porter', 'BradPorter@email.com'),
-(7, 'Judson', 'Cooke', null),
-(8, 'Sofia', 'Carpenter', 'CarpenterSofia@mail.org'),
-(9, 'Josef', 'Meyer', 'JosefMeyer@mail.edu'),
-(10, 'Bobbie', 'Mcintyre', null);
+('1', 'first', 'SandraHart', 'Sandra', 'Hart', 'SandraHart@email.com', 0, 0, NULL),
+('2', 'second', 'CarsonDaniel', 'Carson', 'Daniel', 'DanielCarson@domain.net', 0, 0, NULL),
+('3', 'third', 'PaigeCole', 'Paige', 'Cole', null, 0, 0, NULL),
+('4', 'fourth', 'JaysonLawrence', 'Jayson', 'Lawrence', 'jLawrence@name.edu', 0, 0, NULL),
+('5', 'fifth', 'GabrielGrant', 'Gabriel', 'Grant', 'gGabriel@differentMail.com', 0, 0, NULL),
+('6', 'sixth', 'BradPorter', 'Brad', 'Porter', 'BradPorter@email.com', 0, 0, NULL),
+('7', 'seventh', 'JudsonCooke', 'Judson', 'Cooke', null, 0, 0, NULL),
+('8', 'eigth', 'SofiaCarpenter', 'Sofia', 'Carpenter', 'CarpenterSofia@mail.org', 0, 0, NULL),
+('9', 'ninth', 'JosefMeyer', 'Josef', 'Meyer', 'JosefMeyer@mail.edu', 0, 0, NULL),
+('10', 'tenth', 'BobbieMcintyre', 'Bobbie', 'Mcintyre', null, 0, 0, NULL);
 SET IDENTITY_INSERT [Watcher] OFF;
 
 SET IDENTITY_INSERT [Post] ON;
