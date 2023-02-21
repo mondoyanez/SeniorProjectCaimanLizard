@@ -57,5 +57,11 @@ namespace WatchParty.Controllers
 		{
 			return Ok(_tmdbService.SearchPerson(personName));
 		}
+
+        [HttpGet("searchYear")]
+        public IActionResult SearchYear(string year)
+        {
+            return Ok(_tmdbService.SearchYear(year));
+        }
 	}
 }
