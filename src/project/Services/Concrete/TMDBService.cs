@@ -133,11 +133,11 @@ namespace WatchParty.Services.Concrete
 					KnownFor = r.known_for.Select(t => new TMDBTitle()
                     {
                         Id = t.id,
-                        Title = t.title ?? String.Empty,
+                        Title = t.title ?? t.name,
                         MediaType = t.media_type,
                         ImagePath = t.poster_path ?? String.Empty,
                         Popularity = t.popularity,
-                        ReleaseDate = t.release_date,
+                        ReleaseDate = t.release_date ?? t.first_air_date,
                         PlotSummary = t.overview
                     })
                 })
