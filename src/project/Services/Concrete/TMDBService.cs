@@ -64,15 +64,67 @@ namespace WatchParty.Services.Concrete
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<TMDBTitle> SearchMovies(string movieTitle, string relativePath)
+		public IEnumerable<TMDBTitle> SearchMovies(string movieTitle, string relativePath = "/search/movie?query=")
 		{
-			throw new NotImplementedException();
-		}
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{Title}");
+            Debug.WriteLine(jsonResponse);
 
-		public IEnumerable<TMDBTitle> SearchShows(string showTitle, string relativePath)
+            TMDBJsonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO.results == null) return new List<TMDBTitle>();
+
+            return tmdbJsonDTO.results.Where(results => results.media_type != "person").OrderByDescending(results => results.popularity).Select(r => new TMDBTitle()
+                {
+                    Id = r.id,
+                    Title = r.title ?? r.name,
+                    MediaType = r.media_type,
+                    ImagePath = r.poster_path ?? "",
+                    Popularity = r.popularity,
+                    ReleaseDate = r.release_date ?? r.first_air_date,
+                    PlotSummary = r.overview
+                })
+                .ToList();
+        }
+
+		public IEnumerable<TMDBTitle> SearchShows(string showTitle, string relativePath = "/search/tv?query=")
 		{
-			throw new NotImplementedException();
-		}
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{showTitle}");
+            Debug.WriteLine(jsonResponse);
+
+            TMDBJsonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO.results == null) return new List<TMDBTitle>();
+
+            return tmdbJsonDTO.results.Where(results => results.media_type != "person").OrderByDescending(results => results.popularity).Select(r => new TMDBTitle()
+                {
+                    Id = r.id,
+                    Title = r.title ?? r.name,
+                    MediaType = r.media_type,
+                    ImagePath = r.poster_path ?? "",
+                    Popularity = r.popularity,
+                    ReleaseDate = r.release_date ?? r.first_air_date,
+                    PlotSummary = r.overview
+                })
+                .ToList();
+        }
 
 		public IEnumerable<TMDBTitle> SearchTitles(string title, string relativePath = "/search/multi?query=")
 		{
@@ -109,5 +161,36 @@ namespace WatchParty.Services.Concrete
 		{
 			throw new NotImplementedException();
 		}
+
+        public IEnumerable<TMDBTitle> SearchYear(string year, string relativePath = "/search/multi?query=")
+        {
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{year}");
+            Debug.WriteLine(jsonResponse);
+
+            TMDBJsonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO.results == null) return new List<TMDBTitle>();
+
+            return tmdbJsonDTO.results.Where(results => results.release_date.Contains(year)).OrderByDescending(results => results.popularity).Select(r => new TMDBTitle()
+                {
+                    Id = r.id,
+                    Title = r.title ?? r.name,
+                    MediaType = r.media_type,
+                    ImagePath = r.poster_path ?? "",
+                    Popularity = r.popularity,
+                    ReleaseDate = r.release_date ?? r.first_air_date,
+                    PlotSummary = r.overview
+                })
+                .ToList();
+        }
 	}
 }

@@ -33,7 +33,6 @@ $(document).ready(function () {
         });
 
 
-
         console.log(`searching for the title: ${title}`);
     });
 
@@ -50,6 +49,103 @@ $(document).ready(function () {
     });
 });
 
+// Search for movies
+$(document).ready(function () {
+    $("#search-bar-movies").submit(function (e) {
+        e.preventDefault(); // prevent the form from submitting normally
+        var title = $("input[name='search-movies']").val();
+        $.when(
+            $.ajax({
+                type: "GET",
+                url: "/api/searchMovies",
+                data: { title: title },
+                dataType: "json",
+                success: function (response) {
+                    displayTitles(response);
+                },
+                error: function () {
+                    errorOnAjax();
+                }
+            })
+        ).then(function () {
+            $.ajax({
+                type: "GET",
+                url: "/api/imageConfig",
+                dataType: "json",
+                success: function (response) {
+                    getImageConfig(response);
+                },
+                error: function () {
+                    errorOnAjax();
+                }
+            });
+        });
+
+
+        console.log(`searching for the title: ${title}`);
+    });
+
+    $("#search-movies-btn").click(function () {
+        console.log("click occured");
+        $("#search-bar-movies").submit(); // submit the form on button click
+    });
+
+    $("#search-movies input").keypress(function (e) {
+        if (e.which == 13) { // if the enter key is pressed
+            $('#search-bar-movies').submit(); // submit the form
+            return false; // prevent the form from submitting normally
+        }
+    });
+});
+
+// Search for tv shows
+$(document).ready(function () {
+    $("#search-bar-tv").submit(function (e) {
+        e.preventDefault(); // prevent the form from submitting normally
+        var title = $("input[name='search-tv']").val();
+        $.when(
+            $.ajax({
+                type: "GET",
+                url: "/api/searchShows",
+                data: { title: title },
+                dataType: "json",
+                success: function (response) {
+                    displayTitles(response);
+                },
+                error: function () {
+                    errorOnAjax();
+                }
+            })
+        ).then(function () {
+            $.ajax({
+                type: "GET",
+                url: "/api/imageConfig",
+                dataType: "json",
+                success: function (response) {
+                    getImageConfig(response);
+                },
+                error: function () {
+                    errorOnAjax();
+                }
+            });
+        });
+
+
+        console.log(`searching for the title: ${title}`);
+    });
+
+    $("#search-tv-btn").click(function () {
+        console.log("click occured");
+        $("#search").submit(); // submit the form on button click
+    });
+
+    $("#search-tv input").keypress(function (e) {
+        if (e.which == 13) { // if the enter key is pressed
+            $('#search-bar-tv').submit(); // submit the form
+            return false; // prevent the form from submitting normally
+        }
+    });
+});
 
 // Callback functions that execute once the AJAX calls return
 function displayTitles(data) {
