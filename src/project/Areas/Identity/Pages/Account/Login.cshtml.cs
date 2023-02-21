@@ -117,6 +117,7 @@ namespace WatchParty.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    returnUrl = Url.Content($"~/user/{Input.UserName}");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

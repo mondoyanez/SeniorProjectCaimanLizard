@@ -1,4 +1,4 @@
-﻿@model Watcher
+﻿@model ProfileVM
 @{
     ViewData["Title"] = "Profile Page";
 }
@@ -11,14 +11,19 @@
     {
         <div class="row">
             <div class="col-md-3">
-                <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="60" height="48" class="center">
+                <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="120" height="96" class="center">
             </div>
-            <div class="col-md-9">
-                <h3>@Model.Username</h3> 
-            <h5>@Model.FirstName @Model.LastName</h5>
-            <div class="col-sm-3">
-                Following @Model.FollowerCount    Followers @Model.FollowerCount
+            <div class="col-md-7">
+                <h1>@Model.Watcher.Username</h1>
+                <h3>@Model.Watcher.FirstName @Model.Watcher.LastName</h3>
+                <div class="col-sm-3">
+                    <h6>Following @Model.Watcher.FollowerCount    Followers @Model.Watcher.FollowerCount</h6>
+                </div>
             </div>
+            <div class="col-md-2">
+
+
+                <a href=/Watcher/Edit/@Model.Watcher.Id class="btn cld-btn-primary text-light">Edit Profile</a>
             </div>
         </div>
     }

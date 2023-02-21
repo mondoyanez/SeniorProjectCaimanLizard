@@ -21,24 +21,44 @@ namespace WatchPartyTest
         [SetUp]
         public void Setup()
         {
-            //_watchers = new List<Watcher>
-            //{
-            //    new Watcher {1, "one", "SandraHart", "Sandra", "Hart", "sandra@mail.com", 0, 0, null}
-            //};
+            _watchers = new List<Watcher>()
+            {
+                new Watcher { Id=1, AspNetIdentityId="one", Username="SandraHart", FirstName="Sandra", LastName="Hart" },
+                new Watcher { Id=2, AspNetIdentityId="two", Username="CarsonDaniel", FirstName="Carson"},
+                new Watcher { Id=3, AspNetIdentityId="three", Username=null}
+            };
 
-            _watcher = new Watcher();
-            _watcher.Id = 1;
-            _watcher.Username = "SandraHart";
-            _watcher.FirstName = "Sandra";
-            _watcher.LastName = "Hart";
+            _watcher = new Watcher { Id = 1, AspNetIdentityId = "one", Username = "SandraHart", FirstName = "Sandra", LastName = "Hart" };
 
-            
+            _mockContext = new Mock<WatchPartyDbContext>();
+            _dbSet = MockHelpers.GetMockDbSet(_watchers.AsQueryable());
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
         }
 
-        //[Test]
-        //public void GetCorrectUsername_ReturnsSandraHart()
-        //{
-        //    IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
-        //}
+        [Test]
+        public void GetCorrectUsername_ReturnsSandraHart()
+        {
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            string expected = "SandraHart";
+            string actual = watcherRepository.FindByUsername(expected).Username;
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void wrongUsername_ReturnsNull()
+        {
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+            Watcher expected = null;
+            Watcher actual = watcherRepository.FindByUsername("wrong");
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

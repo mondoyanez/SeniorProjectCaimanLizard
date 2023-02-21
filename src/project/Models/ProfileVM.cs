@@ -2,6 +2,6 @@
 {
     public class ProfileVM
     {
-        public Watcher? Watcher { get; set; }
+        public Watcher Watcher { get; set; }
     }
 }
