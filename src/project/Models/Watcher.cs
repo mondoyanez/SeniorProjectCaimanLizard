@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WatchParty.Models;
 
@@ -21,6 +22,7 @@ public partial class Watcher
 
     public int? FollowerCount { get; set; }
 
+    [StringLength(256)]
     public string? Bio { get; set; }
 
     public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();

@@ -166,3 +166,7 @@ body {
     margin-right: auto;
     width: 75%
 }
+
+.profile-card {
+    background-color: #f2efe9;
+}
