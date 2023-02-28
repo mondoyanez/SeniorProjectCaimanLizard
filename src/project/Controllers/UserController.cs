@@ -27,7 +27,7 @@ public class UserController : Controller
 
     // GET: user/ {username}
     [Authorize]
-    public ActionResult<Watcher> Profile(string username)
+    public async Task<ActionResult<Watcher>> Profile(string username)
     {
         if (_watcherRepository == null)
         {
@@ -36,6 +36,16 @@ public class UserController : Controller
         ProfileVM vm = new ProfileVM();
         Watcher watcher = _watcherRepository.FindByUsername(username);
         vm.Watcher = watcher;
+
+        var currentUser = await _userManager.GetUserAsync(User);
+        if (currentUser.UserName == username)
+        {
+            vm.isCurrentUser = true;
+        }
+        else
+        {
+            vm.isCurrentUser = false;
+        }
 
         if (watcher == null)
         {
@@ -50,52 +60,67 @@ public class UserController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Edit(int? id)
+    public async Task<IActionResult> Edit(string? username)
     {
-        if (id == null || _context.Watchers == null)
+        if (username == null || _context.Watchers == null)
         {
             return NotFound();
         }
 
-        var watcher = await _context.Watchers.FindAsync(id);
+        ProfileVM vm = new ProfileVM();
+
+        Watcher watcher = _watcherRepository.FindByUsername(username);
+        vm.Watcher = watcher;
+
+        var currentUser = await _userManager.GetUserAsync(User);
+        if (currentUser.UserName == username)
+        {
+            vm.isCurrentUser = true;
+        }
+        else
+        {
+            vm.isCurrentUser = false;
+        }
+
         if (watcher == null)
         {
             return NotFound();
         }
-        return View(watcher);
+
+        return View(vm);
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
-    {
-        if (id != watcher.Id)
-        {
-            return NotFound();
-        }
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //public async Task<IActionResult> Edit(int id, [Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
+    //{
+    //    if (id != watcher.Id)
+    //    {
+    //        return NotFound();
+    //    }
 
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                _context.Update(watcher);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WatcherExists(watcher.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
-        return View(watcher);
-    }
+    //    if (ModelState.IsValid)
+    //    {
+    //        try
+    //        {
+    //            _context.Update(watcher);
+    //            await _context.SaveChangesAsync();
+    //        }
+    //        catch (DbUpdateConcurrencyException)
+    //        {
+    //            if (!WatcherExists(watcher.Id))
+    //            {
+    //                return NotFound();
+    //            }
+    //            else
+    //            {
+    //                throw;
+    //            }
+    //        }
+    //        return RedirectToAction(nameof(Index));
+    //    }
+    //    return View(watcher);
+    //}
 
     private bool WatcherExists(int id)
     {

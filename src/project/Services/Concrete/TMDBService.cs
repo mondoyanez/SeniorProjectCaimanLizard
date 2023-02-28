@@ -66,7 +66,7 @@ namespace WatchParty.Services.Concrete
 
 		public IEnumerable<TMDBTitle> SearchMovies(string movieTitle, string relativePath = "/search/movie?query=")
 		{
-            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{Title}");
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{movieTitle}");
             Debug.WriteLine(jsonResponse);
 
             TMDBJsonDTO? tmdbJsonDTO = new();

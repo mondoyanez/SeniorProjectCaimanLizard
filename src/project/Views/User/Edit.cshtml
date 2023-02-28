@@ -1,4 +1,7 @@
-﻿@model Watcher
+﻿@using Microsoft.AspNetCore.Identity;
+@model ProfileVM
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Edit profile";
 }
@@ -6,52 +9,17 @@
 <section class="cld-bg-light">
     <div class="text-center">
         <br />
-        <h1 class="display-4">Edit Profile</h1>
-
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 text-center">
-                <form asp-action="Edit">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
-                    <div class="form-group">
-                        <label asp-for="FirstName" class="control-label"></label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LastName" class="control-label"></label>
-                        <input asp-for="LastName" class="form-control" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Bio" class="control-label"></label>
-                        <input asp-for="Bio" class="form-control" />
-                        <span asp-validation-for="Bio" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Save" class="btn cld-btn-primary text-light" />                        
-                    </div>
-                </form>
-                
-                <br />
-                <a href=/User/@Model.Username class="btn cld-btn-secondary text-light">Back to Profile</a>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
+        
+        @if (Model.isCurrentUser == true)
+        {
+            <p>This is the current User</p>
+        }
+        else
+        {
+            <p>not the current user</p>
+        }
 
         <br />
         <br />
     </div>
 </section>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
