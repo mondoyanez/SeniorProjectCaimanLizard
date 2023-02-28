@@ -1,14 +1,22 @@
 @model IEnumerable<WatchParty.Models.Post>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Feed";
 }
 
-<h1>Index</h1>
+<a asp-action="Create" class="btn btn-outline-primary btn-create-post" role="button">Create New</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row">
+    <div class="card post-card">
+        <div class="card-body text-center">
+            <h3 class="card-title">Card title</h3>
+            <h6 class="card-subtitle mb-2 text-muted">@@user 02/27/23</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+</div>
+
+@*
 <table class="table">
     <thead>
         <tr>
@@ -40,14 +48,10 @@
                 @Html.DisplayFor(modelItem => item.DatePosted)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @item.User.Username
             </td>
         </tr>
 }
     </tbody>
 </table>
+*@

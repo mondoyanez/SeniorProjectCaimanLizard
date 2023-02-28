@@ -23,27 +23,11 @@ namespace WatchParty.Controllers
         // GET: Post
         public async Task<IActionResult> Index()
         {
-            var watchPartyDbContext = _context.Posts.Include(p => p.User);
-            return View(await watchPartyDbContext.ToListAsync());
-        }
-
-        // GET: Post/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Posts == null)
-            {
-                return NotFound();
-            }
-
-            var post = await _context.Posts
+            var watchPartyDbContext = _context.Posts
                 .Include(p => p.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (post == null)
-            {
-                return NotFound();
-            }
+                .OrderByDescending(p => p.DatePosted);
 
-            return View(post);
+            return View( await watchPartyDbContext.ToListAsync());
         }
 
         // GET: Post/Create
