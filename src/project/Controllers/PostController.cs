@@ -14,9 +14,9 @@ namespace WatchParty.Controllers;
 [Authorize]
 public class PostController : Controller
 {
-    private readonly IRepository<Post> _postRepository;
+    private readonly IPostRepository _postRepository;
 
-    public PostController(IRepository<Post> postRepository)
+    public PostController(IPostRepository postRepository)
     {
         _postRepository = postRepository;
     }
@@ -24,9 +24,7 @@ public class PostController : Controller
     // GET: Post
     public IActionResult Index()
     {
-        var allPosts = _postRepository.GetAll()
-            .OrderByDescending(p => p.DatePosted)
-            .ToList();
+        var allPosts = _postRepository.GetAllPostsDescending();
 
         return View(allPosts);
     }
