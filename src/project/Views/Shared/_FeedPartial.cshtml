@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WatchParty.Areas.Identity.Data;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Index">View Your Feed</a>
+    </li>
+}
