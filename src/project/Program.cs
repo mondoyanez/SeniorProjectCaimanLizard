@@ -8,6 +8,7 @@ using WatchParty.Models;
 using WatchParty.Models.Concrete;
 using WatchParty.Services.Abstract;
 using WatchParty.Services.Concrete;
+using WatchParty.Utilities;
 
 namespace WatchParty;
 
@@ -42,6 +43,33 @@ public class Program
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
 
         var app = builder.Build();
+
+        // After Build has been called, all services have been registered (by running Startup)
+        // By using a scope for the services to be requested below, we limit their lifetime to this set of calls.
+        // See: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0#call-services-from-main
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                // Get the IConfiguration service that allows us to query user-secrets and 
+                // the configuration on Azure
+                var config = app.Services.GetRequiredService<IConfiguration>();
+                // Set password with the Secret Manager tool, or store in Azure app configuration
+                // dotnet user-secrets set SeedUserPW <pw>
+
+                var testUserPw = config["SeedUserPW"];
+                var adminPw = config["SeedAdminPW"];
+
+                SeedUsers.Initialize(services, SeedData.UserSeedData, testUserPw).Wait();
+                SeedUsers.InitializeAdmin(services, "admin@example.com", "admin", adminPw, "The", "Admin").Wait();
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred seeding the DB.");
+            }
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
