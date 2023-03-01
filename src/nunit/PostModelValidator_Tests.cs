@@ -294,4 +294,42 @@ public class PostModelValidator_Tests
             Assert.That(actual, Is.Not.EqualTo("wrong text"));
         });
     }
+
+    [Test]
+    public void Post_WithValidDatePosted_IsCorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        DateTime actual = post.DatePosted;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("DatePosted"), Is.False);
+            Assert.That(actual, Is.EqualTo(new DateTime(2023, 2, 28, 15, 0, 0)));
+        });
+    }
+
+    [Test]
+    public void Post_WithValidDatePosted_IsIncorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        DateTime actual = post.DatePosted;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("DatePosted"), Is.False);
+            Assert.That(actual, Is.Not.EqualTo(new DateTime(2022, 5, 25, 8, 25, 45)));
+        });
+    }
 }
