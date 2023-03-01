@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +17,14 @@ namespace WatchParty.Controllers;
 public class PostController : Controller
 {
     private readonly IPostRepository _postRepository;
+    private readonly IWatcherRepository _watcherRepository;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public PostController(IPostRepository postRepository)
+    public PostController(IPostRepository postRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager)
     {
         _postRepository = postRepository;
+        _watcherRepository = watcherRepository;
+        _userManager = userManager;
     }
 
     // GET: Post
@@ -28,31 +34,34 @@ public class PostController : Controller
 
         return View(allPosts);
     }
-    /*
+    
     // GET: Post/Create
     public IActionResult Create()
     {
-        ViewData["UserId"] = new SelectList(_postRepository.Watchers, "Id", "Id");
         return View();
     }
-
+    
     // POST: Post/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,PostTitle,PostDescription,DatePosted,UserId")] Post post)
+    public IActionResult Create([Bind("PostTitle, PostDescription")] Post post)
     {
-        if (ModelState.IsValid)
-        {
-            _postRepository.Add(post);
-            await _postRepository.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        ViewData["UserId"] = new SelectList(_postRepository.Watchers, "Id", "Id", post.UserId);
-        return View(post);
-    }
+        post.DatePosted = DateTime.Now;
+        post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
+        post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
 
+        ModelState.ClearValidationState(nameof(post));
+
+        if (TryValidateModel(post, nameof(post))) 
+            return View();
+
+        _postRepository.AddPost(post);
+        return RedirectToAction(nameof(Index));
+
+    }
+    /*
     // GET: Post/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {

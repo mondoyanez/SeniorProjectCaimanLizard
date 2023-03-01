@@ -13,4 +13,9 @@ public class PostRepository: Repository<Post>, IPostRepository
     {
         return GetAll().OrderByDescending(p => p.DatePosted).ToList();
     }
+
+    public void AddPost(Post post)
+    {
+        throw new NotImplementedException();
+    }
 }
