@@ -14,9 +14,9 @@ public class PostModelValidator_Tests
         {
             Id = 1,
             AspNetIdentityId = "b2f96999-701e-4ad6-8ab7-e0825b49387c",
-            Username = "fakeUser",
-            FirstName = "Fake",
-            LastName = "User",
+            Username = "Ja",
+            FirstName = "Ja",
+            LastName = "Morrant",
             Email = "MorrantJa@gmail.com",
             FollowingCount = 1000000,
             FollowerCount = 50,
@@ -330,6 +330,44 @@ public class PostModelValidator_Tests
             Assert.That(mv.Valid, Is.True);
             Assert.That(mv.ContainsFailureFor("DatePosted"), Is.False);
             Assert.That(actual, Is.Not.EqualTo(new DateTime(2022, 5, 25, 8, 25, 45)));
+        });
+    }
+
+    [Test]
+    public void Post_WithValidUserId_IsIncorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        int actual = post.UserId;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("UserId"), Is.False);
+            Assert.That(actual, Is.Not.EqualTo(10));
+        });
+    }
+
+    [Test]
+    public void Post_WithValidUserId_IsCorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        int actual = post.UserId;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("UserId"), Is.False);
+            Assert.That(actual, Is.EqualTo(1));
         });
     }
 }
