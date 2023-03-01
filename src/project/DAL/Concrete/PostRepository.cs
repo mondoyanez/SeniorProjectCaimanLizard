@@ -14,8 +14,20 @@ public class PostRepository: Repository<Post>, IPostRepository
         return GetAll().OrderByDescending(p => p.DatePosted).ToList();
     }
 
-    public void AddPost(Post post)
+    public void AddPost(Post? post)
     {
-        throw new NotImplementedException();
+        if (post == null)
+        {
+            throw new ArgumentNullException(nameof(post));
+        }
+
+        try
+        {
+            AddOrUpdate(post);
+        }
+        catch
+        {
+            throw new Exception("Something went wrong with submitting post");
+        }
     }
 }
