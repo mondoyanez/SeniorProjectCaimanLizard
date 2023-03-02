@@ -57,13 +57,13 @@ $(document).ready(function () {
         $.when(
             $.ajax({
                 type: "GET",
-                url: "/api/searchMovies",
-                data: { title: title },
+                url: "/api/searchMovie",
+                data: { movieTitle: title },
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     displayTitles(response);
                 },
-                error: function () {
+                error: function() {
                     errorOnAjax();
                 }
             })
@@ -106,8 +106,8 @@ $(document).ready(function () {
         $.when(
             $.ajax({
                 type: "GET",
-                url: "/api/searchShows",
-                data: { title: title },
+                url: "/api/searchShow",
+                data: { showTitle: title },
                 dataType: "json",
                 success: function (response) {
                     displayTitles(response);
