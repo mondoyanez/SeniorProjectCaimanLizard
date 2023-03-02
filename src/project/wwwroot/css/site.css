@@ -180,7 +180,7 @@ body {
     margin-left: 25%
 }
 
-.create-post {
+.create-post-link {
     margin-top: 1%;
     margin-left: 90%;
 }
@@ -206,4 +206,10 @@ body {
 
 .empty-page {
     padding-bottom: 40%;
+}
+
+.create-post-submit-btn {
+    margin-left: 88%;
+    margin-top: 17%;
+    margin-bottom: 5%;
 }

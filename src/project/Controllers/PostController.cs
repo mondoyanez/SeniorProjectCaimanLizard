@@ -52,14 +52,37 @@ public class PostController : Controller
         post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
         post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
 
+        ModelState.Clear();
+        TryValidateModel(post);
+
+        if (!ModelState.IsValid) 
+            return View(post);
+        
+        try
+        {
+            _postRepository.AddPost(post);
+        }
+        catch (DbUpdateConcurrencyException e)
+        {
+            ViewBag.Message = "A concurrency error occurred while trying to create the item.  Please try again.";
+            return View(post);
+        }
+
+        return RedirectToAction("Index");
+
+        /*
+        post.DatePosted = DateTime.Now;
+        post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
+        post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
+
         ModelState.ClearValidationState(nameof(post));
 
-        if (TryValidateModel(post, nameof(post))) 
+        if (TryValidateModel(post, nameof(Post))) 
             return View();
 
         _postRepository.AddPost(post);
         return RedirectToAction(nameof(Index));
-
+        */
     }
     /*
     // GET: Post/Edit/5

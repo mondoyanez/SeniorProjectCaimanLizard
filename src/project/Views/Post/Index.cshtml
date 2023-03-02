@@ -4,14 +4,13 @@
     ViewData["Title"] = "Feed";
 }
 
-@*<a asp-action="Create" class="btn btn-outline-primary btn-create-post" role="button">Create New</a>*@
-
-
 @if (Model.Any())
 {
     <div class="row cld-bg-light">
 
-        <a class="create-post" href="#"><img class="create-post-image" src="~/img/clipboard2-plus.svg" alt="clipboard"/></a>
+        <a asp-controller="Post" asp-action="Create" class="create-post-link">
+            <img class="create-post-image" src="~/img/clipboard2-plus.svg" alt="clipboard"/>
+        </a>
 
         @foreach (var post in Model)
         {
