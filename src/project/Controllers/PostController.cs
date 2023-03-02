@@ -69,20 +69,6 @@ public class PostController : Controller
         }
 
         return RedirectToAction("Index");
-
-        /*
-        post.DatePosted = DateTime.Now;
-        post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
-        post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
-
-        ModelState.ClearValidationState(nameof(post));
-
-        if (TryValidateModel(post, nameof(Post))) 
-            return View();
-
-        _postRepository.AddPost(post);
-        return RedirectToAction(nameof(Index));
-        */
     }
     /*
     // GET: Post/Edit/5

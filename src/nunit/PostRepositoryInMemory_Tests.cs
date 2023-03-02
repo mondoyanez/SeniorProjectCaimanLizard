@@ -1,4 +1,5 @@
-﻿using WatchParty.DAL.Abstract;
+﻿/*
+using WatchParty.DAL.Abstract;
 using WatchParty.DAL.Concrete;
 using WatchParty.Models;
 
@@ -9,11 +10,11 @@ namespace WatchPartyTest;
  * data + anything else you do to it.  No other tests will modify the db for that test.  Every test gets a brand new seeded db.
  * 
  */
-
-public class PostRepository_Tests
+/*
+public class PostRepositoryInMemory_Tests
 {
     private static readonly string _seedFile = @"..\..\..\Data\postRepositorySeed.sql";  // relative path of WatchPartyTest from where the executable is: bin/Debug/net7.0
-
+    
     // Create this helper like this, for whatever context you desire
     private InMemoryDbHelper<WatchPartyDbContext> _dbHelper = new InMemoryDbHelper<WatchPartyDbContext>(_seedFile, DbPersistence.OneDbPerTest);
 
@@ -104,40 +105,39 @@ public class PostRepository_Tests
             Bio = "This bio contains information about myself"
         };
         */
-        /*
-        Post post = new Post
-        {
-            Id = 11,
-            PostTitle = "My very first post!",
-            PostDescription = "Enter a description",
-            DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
-            UserId = 11,
-            User = null!
-        };
+/*
+Post post = new Post
+{
+    Id = 11,
+    PostTitle = "My very first post!",
+    PostDescription = "Enter a description",
+    DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+    UserId = 11,
+    User = null!
+};
 
-        // Act
-        repo.AddPost(post);
-        IEnumerable<Post> posts = repo.GetAllPostsDescending();
-        int count = posts.Count();
+// Act
+repo.AddPost(post);
+IEnumerable<Post> posts = repo.GetAllPostsDescending();
+int count = posts.Count();
 
-        string title = posts.FirstOrDefault().PostTitle;
-        string? description = posts.FirstOrDefault()?.PostDescription;
-        string date = posts.FirstOrDefault().DatePosted.ToString("yyyy-MM-dd hh:mm:ss");
-        int id = posts.FirstOrDefault().UserId;
-        //var username = posts.FirstOrDefault().User.Username;
+string title = posts.FirstOrDefault().PostTitle;
+string? description = posts.FirstOrDefault()?.PostDescription;
+string date = posts.FirstOrDefault().DatePosted.ToString("yyyy-MM-dd hh:mm:ss");
+int id = posts.FirstOrDefault().UserId;
+//var username = posts.FirstOrDefault().User.Username;
 
 
-        // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(count, Is.EqualTo(11));
-            Assert.That(title, Is.EqualTo("My very first post!"));
-            Assert.That(description, Is.EqualTo("Enter a description"));
-            Assert.That(date, Is.EqualTo("2023-03-01 17:25:45"));
-            Assert.That(id, Is.EqualTo(11));
-            //Assert.That(username, Is.EqualTo("OthoT"));
-        });
-    }
-    */
+// Assert
+Assert.Multiple(() =>
+{
+    Assert.That(count, Is.EqualTo(11));
+    Assert.That(title, Is.EqualTo("My very first post!"));
+    Assert.That(description, Is.EqualTo("Enter a description"));
+    Assert.That(date, Is.EqualTo("2023-03-01 17:25:45"));
+    Assert.That(id, Is.EqualTo(11));
+    //Assert.That(username, Is.EqualTo("OthoT"));
+});
 }
-
+*//*
+}*/
