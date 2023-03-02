@@ -60,5 +60,77 @@ namespace WatchPartyTest
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void GetAspNetId_ProperIdProvided_ReturnsCorrectId()
+        {
+            // Arrange
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            // Act
+            Watcher? actual = watcherRepository.FindByAspNetId("one");
+
+
+            // Assert
+            Assert.That(actual.AspNetIdentityId, Is.EqualTo("one"));
+        }
+
+        [Test]
+        public void GetAspNetId_ProvidesProperId_ChecksIfGivenWrongIdReturnsNotEqualToId()
+        {
+            // Arrange
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            // Act
+            Watcher? actual = watcherRepository.FindByAspNetId("two");
+
+
+            // Assert
+            Assert.That(actual?.AspNetIdentityId, Is.Not.EqualTo("one"));
+        }
+
+        [Test]
+        public void GetAspNetId_GibberishPassedInForId_ReturnsNull()
+        {
+            // Arrange
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => watcherRepository.FindByAspNetId("fhjdsahifueoinvoi"));
+        }
+
+        [Test]
+        public void GetAspNetId_NullIsPassedForId_ReturnsNull()
+        {
+            // Arrange
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => watcherRepository.FindByAspNetId(null!));
+        }
+
+        [Test]
+        public void GetAspNetId_ProperIdPassedButIdIsNull_ReturnsNull()
+        {
+            // Arrange
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            // Act
+            Watcher? actual = watcherRepository.FindByAspNetId("three");
+            actual.AspNetIdentityId = null!;
+
+            // Assert
+            Assert.That(actual?.AspNetIdentityId, Is.Null);
+        }
     }
 }

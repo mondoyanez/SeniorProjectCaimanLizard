@@ -24,13 +24,14 @@ public class WatcherRepository : Repository<Watcher>, IWatcherRepository
 
     public Watcher? FindByAspNetId(string aspId)
     {
-        try
-        {
-            return GetAll().FirstOrDefault(w => w.AspNetIdentityId == aspId);
-        }
-        catch
-        {
-            return null;
-        }
+        if (aspId == null)
+            throw new ArgumentNullException(nameof(aspId));
+
+        Watcher? watcher = GetAll().FirstOrDefault(w => w.AspNetIdentityId == aspId);
+
+        if (watcher?.AspNetIdentityId == null)
+            throw new ArgumentNullException(nameof(watcher));
+
+        return watcher;
     }
 }
