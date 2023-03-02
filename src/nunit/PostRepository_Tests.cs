@@ -26,7 +26,7 @@ public class PostRepository_Tests
         // The db has been seeded
 
         // Act
-        var posts = repo.GetAllPostsDescending();
+        IEnumerable<Post> posts = repo.GetAllPostsDescending();
 
         int count = posts.Count();
 
@@ -80,5 +80,64 @@ public class PostRepository_Tests
             //Assert.That(username, Is.EqualTo("GabrielGrant"));
         });
     }
+    
+    /*
+    [Test]
+    public void AddNewPost_ForPostsWithTenPosts_SuccessfullyCreatesPostsUpdatesDatabase()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        /*
+        Watcher watcher = new Watcher
+        {
+            Id = 11,
+            AspNetIdentityId = "b2f96999-701e-4ad6-8ab7-e0825b49387c",
+            Username = "OthoT",
+            FirstName = "Tisha",
+            LastName = "Otho",
+            Email = "TishaOtho@gmail.com",
+            FollowingCount = 500,
+            FollowerCount = 10,
+            Bio = "This bio contains information about myself"
+        };
+        */
+        /*
+        Post post = new Post
+        {
+            Id = 11,
+            PostTitle = "My very first post!",
+            PostDescription = "Enter a description",
+            DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            UserId = 11,
+            User = null!
+        };
+
+        // Act
+        repo.AddPost(post);
+        IEnumerable<Post> posts = repo.GetAllPostsDescending();
+        int count = posts.Count();
+
+        string title = posts.FirstOrDefault().PostTitle;
+        string? description = posts.FirstOrDefault()?.PostDescription;
+        string date = posts.FirstOrDefault().DatePosted.ToString("yyyy-MM-dd hh:mm:ss");
+        int id = posts.FirstOrDefault().UserId;
+        //var username = posts.FirstOrDefault().User.Username;
+
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(count, Is.EqualTo(11));
+            Assert.That(title, Is.EqualTo("My very first post!"));
+            Assert.That(description, Is.EqualTo("Enter a description"));
+            Assert.That(date, Is.EqualTo("2023-03-01 17:25:45"));
+            Assert.That(id, Is.EqualTo(11));
+            //Assert.That(username, Is.EqualTo("OthoT"));
+        });
+    }
+    */
 }
 
