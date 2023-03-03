@@ -106,32 +106,16 @@ public class PostRepository_Tests
         IPostRepository repo = new PostRepository(context);
         // The db has been seeded
 
-        Watcher watcher = new Watcher
-        {
-            Id = 11,
-            AspNetIdentityId = "b2f96999-701e-4ad6-8ab7-e0825b49387c",
-            Username = "OthoT",
-            FirstName = "Tisha",
-            LastName = "Otho",
-            Email = "TishaOtho@gmail.com",
-            FollowingCount = 500,
-            FollowerCount = 10,
-            Bio = "This bio contains information about myself"
-        };
-        
         Post post = new Post
         {
             PostTitle = "My very first post!",
             PostDescription = "Enter a description",
             DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
-            UserId = 11,
-            User = watcher
+            UserId = 10,
+            User = context.Watchers.First(w => w.Id == 10)
         };
 
         // Act
-        context.Posts.Add(post);
-        context.SaveChanges();
-
         repo.AddPost(post);
         IEnumerable<Post> posts = repo.GetAllPostsDescending();
 
@@ -162,32 +146,16 @@ public class PostRepository_Tests
         IPostRepository repo = new PostRepository(context);
         // The db has been seeded
 
-        Watcher watcher = new Watcher
-        {
-            Id = 11,
-            AspNetIdentityId = "b2f96999-701e-4ad6-8ab7-e0825b49387c",
-            Username = "OthoT",
-            FirstName = "Tisha",
-            LastName = "Otho",
-            Email = "TishaOtho@gmail.com",
-            FollowingCount = 500,
-            FollowerCount = 10,
-            Bio = "This bio contains information about myself"
-        };
-
         Post post = new Post
         {
             PostTitle = "My very first post!",
-            PostDescription = null,
+            PostDescription = null!,
             DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
-            UserId = 11,
-            User = watcher
+            UserId = 10,
+            User = context.Watchers.First(w => w.Id == 10)
         };
 
         // Act
-        context.Posts.Add(post);
-        context.SaveChanges();
-
         repo.AddPost(post);
         IEnumerable<Post> posts = repo.GetAllPostsDescending();
 
@@ -211,7 +179,28 @@ public class PostRepository_Tests
     }
 
     [Test]
-    public void AddNewPostWithMissingTitle_ForPostsWithTenPosts_ThrowsException()
+    public void AddNewPostWithMissingTitleAndUserExists_ForPostsWithTenPosts_ThrowsException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        Post post = new Post
+        {
+            PostTitle = null!,
+            PostDescription = "Oops forgot to include title should get an exception though",
+            DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            UserId = 7,
+            User = context.Watchers.First(w => w.Id == 7)
+        };
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.AddPost(post));
+    }
+
+    [Test]
+    public void AddNewPostWithValidInformationButUserDoesNotExist_ForPostsWithTenPosts_ThrowsException()
     {
         // Arrange
         using WatchPartyDbContext context = _dbHelper.GetContext();
@@ -233,8 +222,8 @@ public class PostRepository_Tests
 
         Post post = new Post
         {
-            PostTitle = null!,
-            PostDescription = "Oops forgot to include title should get an exception though",
+            PostTitle = "That was an amazing movie",
+            PostDescription = "So that new movie was amazing so lets talk about it",
             DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
             UserId = 11,
             User = watcher
@@ -251,19 +240,6 @@ public class PostRepository_Tests
         using WatchPartyDbContext context = _dbHelper.GetContext();
         IPostRepository repo = new PostRepository(context);
         // The db has been seeded
-
-        Watcher watcher = new Watcher
-        {
-            Id = 11,
-            AspNetIdentityId = "b2f96999-701e-4ad6-8ab7-e0825b49387c",
-            Username = "OthoT",
-            FirstName = "Tisha",
-            LastName = "Otho",
-            Email = "TishaOtho@gmail.com",
-            FollowingCount = 500,
-            FollowerCount = 10,
-            Bio = "This bio contains information about myself"
-        };
 
         // Act/Assert
         Assert.Throws<ArgumentNullException>(() => repo.AddPost(null!));
