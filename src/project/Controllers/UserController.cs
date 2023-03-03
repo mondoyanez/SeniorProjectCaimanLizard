@@ -90,6 +90,23 @@ public class UserController : Controller
         return View(vm);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Profile([Bind("watcher.AspNetIdentityId,watcher.Id,watcher.FirstName,watcher.LastName,watcher.Bio")] Watcher watcher)
+    {
+        ModelState.ClearValidationState("watcher.AspNetIdentityId");
+        ModelState.ClearValidationState("watcher.Id");
+        //if (ModelState.IsValid)
+        //{
+        //}
+        _watcherRepository.AddOrUpdate(watcher);
+        
+        ProfileVM vm = new ProfileVM();
+        vm.Watcher = watcher;
+        return View(vm);
+    }
+
+
     //[HttpPost]
     //[ValidateAntiForgeryToken]
     //public async Task<IActionResult> Edit(int id, [Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
