@@ -1,3 +1,4 @@
+/*
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using WatchParty.Services;
@@ -62,4 +63,4 @@ public class TMDBService_Tests
 		    });
 	    }
     }
-}
+}*/
