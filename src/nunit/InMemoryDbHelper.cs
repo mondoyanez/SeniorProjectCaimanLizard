@@ -36,6 +36,7 @@ namespace WatchPartyTest
             // Create and save the options needed to create our DbContext
             _dbContextOptions = new DbContextOptionsBuilder<TContext>()
                                     .UseSqlite(_dbConnection)
+                                    .UseLazyLoadingProxies()
                                     .Options;
 
             // Create a context to use in populating the DB with tables defined in the context

@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WatchParty.DAL.Abstract;
+﻿using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 
 namespace WatchParty.DAL.Concrete;
@@ -11,7 +10,12 @@ public class PostRepository: Repository<Post>, IPostRepository
 
     public IEnumerable<Post> GetAllPostsDescending()
     {
-        return GetAll().OrderByDescending(p => p.DatePosted).ToList();
+        IEnumerable<Post> posts = GetAll().OrderByDescending(p => p.DatePosted).ToList();
+
+        if (!posts.Any())
+            throw new Exception("No posts were found");
+
+        return posts;
     }
 
     public void AddPost(Post? post)
@@ -27,7 +31,7 @@ public class PostRepository: Repository<Post>, IPostRepository
         }
         catch
         {
-            throw new Exception("Something went wrong with submitting post");
+            throw new Exception("Invalid information was given while trying to update database");
         }
     }
 }
