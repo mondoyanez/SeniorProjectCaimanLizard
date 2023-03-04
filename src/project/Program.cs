@@ -33,7 +33,11 @@ public class Program
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+        {
+            options.SignIn.RequireConfirmedAccount = false;
+        })
+        
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
 
@@ -93,7 +97,7 @@ public class Program
 
         app.MapControllerRoute(
            name: "editProfile",
-           pattern: "user/edit",
+           pattern: "user/edit/{username}",
            defaults: new { controller = "User", action = "Edit" });
 
         app.MapControllerRoute(

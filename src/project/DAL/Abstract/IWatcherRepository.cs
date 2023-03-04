@@ -1,4 +1,5 @@
-﻿using WatchParty.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using WatchParty.Models;
 
 namespace WatchParty.DAL.Abstract
 {
@@ -6,5 +7,7 @@ namespace WatchParty.DAL.Abstract
     {
         Watcher? FindByUsername(string username);
         Watcher? FindByAspNetId(string aspId);
+
+        bool IsCurrentUser(string username, IdentityUser watcher);
     }
 }
