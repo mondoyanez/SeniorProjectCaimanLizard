@@ -38,15 +38,8 @@ public class UserController : Controller
         vm.Watcher = watcher;
 
         var currentUser = await _userManager.GetUserAsync(User);
+        vm.isCurrentUser = _watcherRepository.IsCurrentUser(username, currentUser);
 
-        if (currentUser.UserName == username)
-        {
-            vm.isCurrentUser = true;
-        }
-        else
-        {
-            vm.isCurrentUser = false;
-        }
 
         if (watcher == null)
         {
@@ -74,14 +67,8 @@ public class UserController : Controller
         vm.Watcher = watcher;
 
         var currentUser = await _userManager.GetUserAsync(User);
-        if (currentUser.UserName == username)
-        {
-            vm.isCurrentUser = true;
-        }
-        else
-        {
-            vm.isCurrentUser = false;
-        }
+        vm.isCurrentUser = _watcherRepository.IsCurrentUser(username, currentUser);
+
 
         if (watcher == null)
         {
@@ -106,85 +93,12 @@ public class UserController : Controller
         vm.Watcher = watcher;
 
         var currentUser = await _userManager.GetUserAsync(User);
-        if (currentUser.UserName == watcher.Username)
-        {
-            vm.isCurrentUser = true;
-        }
-        else
-        {
-            vm.isCurrentUser = false;
-        }
+        vm.isCurrentUser = _watcherRepository.IsCurrentUser(watcher.Username, currentUser);
+
 
         return View(vm);
     }
 
-    //[HttpPost]
-    //[ValidateAntiForgeryToken]
-    //public async Task<IActionResult> Profile(int id, [Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
-    //{
-    //    if (id != watcher.Id)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    if (ModelState.IsValid)
-    //    {
-    //        try
-    //        {
-    //            _context.Update(watcher);
-    //            await _context.SaveChangesAsync();
-    //        }
-    //        catch (DbUpdateConcurrencyException)
-    //        {
-    //            if (!WatcherExists(watcher.Id))
-    //            {
-    //                return NotFound();
-    //            }
-    //            else
-    //            {
-    //                throw;
-    //            }
-    //        }
-    //        return RedirectToAction(nameof(Index));
-    //    }
-
-    //    ProfileVM vm = new ProfileVM();
-    //    vm.Watcher = watcher;
-    //    return View(vm);
-    //}
-
-
-    //[HttpPost]
-    //[ValidateAntiForgeryToken]
-    //public async Task<IActionResult> Edit(int id, [Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
-    //{
-    //    if (id != watcher.Id)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    if (ModelState.IsValid)
-    //    {
-    //        try
-    //        {
-    //            _context.Update(watcher);
-    //            await _context.SaveChangesAsync();
-    //        }
-    //        catch (DbUpdateConcurrencyException)
-    //        {
-    //            if (!WatcherExists(watcher.Id))
-    //            {
-    //                return NotFound();
-    //            }
-    //            else
-    //            {
-    //                throw;
-    //            }
-    //        }
-    //        return RedirectToAction(nameof(Index));
-    //    }
-    //    return View(watcher);
-    //}
 
     private bool WatcherExists(int id)
     {

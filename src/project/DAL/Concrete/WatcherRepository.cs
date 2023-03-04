@@ -36,9 +36,9 @@ public class WatcherRepository : Repository<Watcher>, IWatcherRepository
         return watcher;
     }
 
-    public bool IsCurrentUser(string username, Watcher currentUser)
+    public bool IsCurrentUser(string username, IdentityUser currentUser)
     {
-        if (currentUser.Username == username)
+        if (currentUser.UserName == username)
         {
             return true;
         }
