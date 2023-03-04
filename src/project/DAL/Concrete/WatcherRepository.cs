@@ -1,4 +1,5 @@
-﻿using WatchParty.DAL.Abstract;
+﻿using Microsoft.AspNetCore.Identity;
+using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 
 namespace WatchParty.DAL.Concrete;
@@ -33,5 +34,17 @@ public class WatcherRepository : Repository<Watcher>, IWatcherRepository
             throw new ArgumentNullException(nameof(watcher));
 
         return watcher;
+    }
+
+    public bool IsCurrentUser(string username, Watcher currentUser)
+    {
+        if (currentUser.Username == username)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

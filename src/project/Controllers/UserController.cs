@@ -38,6 +38,7 @@ public class UserController : Controller
         vm.Watcher = watcher;
 
         var currentUser = await _userManager.GetUserAsync(User);
+
         if (currentUser.UserName == username)
         {
             vm.isCurrentUser = true;
@@ -92,7 +93,7 @@ public class UserController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Profile([Bind("watcher.AspNetIdentityId,watcher.Id,watcher.FirstName,watcher.LastName,watcher.Bio")] Watcher watcher)
+    public async Task<IActionResult> ProfileAsync([Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
     {
         ModelState.ClearValidationState("watcher.AspNetIdentityId");
         ModelState.ClearValidationState("watcher.Id");
@@ -100,11 +101,57 @@ public class UserController : Controller
         //{
         //}
         _watcherRepository.AddOrUpdate(watcher);
-        
+
         ProfileVM vm = new ProfileVM();
         vm.Watcher = watcher;
+
+        var currentUser = await _userManager.GetUserAsync(User);
+        if (currentUser.UserName == watcher.Username)
+        {
+            vm.isCurrentUser = true;
+        }
+        else
+        {
+            vm.isCurrentUser = false;
+        }
+
         return View(vm);
     }
+
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //public async Task<IActionResult> Profile(int id, [Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
+    //{
+    //    if (id != watcher.Id)
+    //    {
+    //        return NotFound();
+    //    }
+
+    //    if (ModelState.IsValid)
+    //    {
+    //        try
+    //        {
+    //            _context.Update(watcher);
+    //            await _context.SaveChangesAsync();
+    //        }
+    //        catch (DbUpdateConcurrencyException)
+    //        {
+    //            if (!WatcherExists(watcher.Id))
+    //            {
+    //                return NotFound();
+    //            }
+    //            else
+    //            {
+    //                throw;
+    //            }
+    //        }
+    //        return RedirectToAction(nameof(Index));
+    //    }
+
+    //    ProfileVM vm = new ProfileVM();
+    //    vm.Watcher = watcher;
+    //    return View(vm);
+    //}
 
 
     //[HttpPost]
