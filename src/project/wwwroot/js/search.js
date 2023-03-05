@@ -1,5 +1,49 @@
 ﻿console.log("hello from search.js");
 
+$(document).ready(function () {
+    // Parse the query string to retrieve the values of the parameters
+    var query = ""; // the value of the query
+    var by = "";    // what to search by (title, movie, tv show, actor) - default is title
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has("query")) {
+        query = params.get("query");
+        query = decodeURIComponent(query);
+    }
+    if (params.has("by")) {
+        by = params.get("by");
+    }
+
+    // update search bar with the query value
+    $("#search-form input").val(query);
+
+    $.when(
+        $.ajax({
+            type: "GET",
+            url: "/api/searchTitle",
+            data: { title: query },
+            dataType: "json",
+            success: function (response) {
+                displayTitles(response);
+            },
+            error: function () {
+                errorOnAjax();
+            }
+        })
+    ).then(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/imageConfig",
+            dataType: "json",
+            success: function (response) {
+                getImageConfig(response);
+            },
+            error: function () {
+                errorOnAjax();
+            }
+        });
+    });
+});
 /* TODO: commented out for now, when below functionality is replaced by ability to search by filters then this can be removed
 // Once the DOM is ready, execute everything in this function to set up the UI
 $(document).ready(function () {
