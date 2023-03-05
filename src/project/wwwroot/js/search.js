@@ -1,5 +1,6 @@
 ﻿console.log("hello from search.js");
 
+/* TODO: commented out for now, when below functionality is replaced by ability to search by filters then this can be removed
 // Once the DOM is ready, execute everything in this function to set up the UI
 $(document).ready(function () {
     $("#search-bar").submit(function (e) {
@@ -146,6 +147,7 @@ $(document).ready(function () {
         }
     });
 });
+*/
 
 // Callback functions that execute once the AJAX calls return
 function displayTitles(data) {
@@ -154,7 +156,7 @@ function displayTitles(data) {
 
     $("#resultCards").empty();
     $.each(data,
-        function(index, item) {
+        function (index, item) {
             let result =
                 `<div class="col cld-bg-light">
                     <div class="card mb-3">
@@ -164,7 +166,7 @@ function displayTitles(data) {
                         </div>
                         <div class="col">
                           <div class="card-body text-start">
-                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0,4)})</h4>
+                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                           </div>
@@ -180,7 +182,7 @@ function displayTitles(data) {
 function getImageConfig() {
     console.log("retrieving image config");
 
-    $.ajax({ 
+    $.ajax({
         type: "GET",
         url: "/api/imageConfig",
         dataType: "json",
