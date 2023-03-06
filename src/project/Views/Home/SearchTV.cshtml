@@ -1,0 +1,19 @@
+﻿@{
+	ViewData["Title"] = "Search TV";
+}
+<section style="height: 100vh; overflow: scroll" class="text-center cld-bg-light">
+	<h2>Discover Something New</h2>
+	<div class="container text-center">
+		<form id="search-bar" class="d-flex pb-5" role="search">
+			<input id="searchQuery" class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+			<button id="search-btn" class="btn btn-outline-success" type="submit">Search</button>
+		</form>
+		<div id="resultCards" class="row row-cols-1 g-4">
+
+		</div>
+	</div>
+</section>
+@section Scripts
+{
+	<script type="text/javascript" src="~/js/searchTV.js"></script>
+}
