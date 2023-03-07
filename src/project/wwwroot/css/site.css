@@ -213,3 +213,33 @@ body {
     margin-top: 17%;
     margin-bottom: 5%;
 }
+
+.carousel {
+    overflow: hidden;
+    padding-bottom: 5rem;
+}
+
+.carousel-caption {
+    top: 100%;
+}
+
+.carousel-inner {
+    overflow: visible;
+}
+
+.carousel-control-next, .carousel-control-prev, .carousel-indicators {
+    bottom: 5rem;
+}
+
+.carousel-hidden-text {
+    position: absolute;
+    top: 0;
+    left: 18%;
+    width: 64%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+}
