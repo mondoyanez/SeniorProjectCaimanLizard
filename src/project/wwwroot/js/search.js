@@ -208,6 +208,10 @@ function displayTitles(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
 
+    if (data.item == undefined) {
+        alert("Your search query returned no results");
+    }
+
     $("#resultCards").empty();
     $.each(data,
         function (index, item) {
