@@ -243,3 +243,12 @@ body {
     transition: opacity 0.3s ease-in-out;
     z-index: 2;
 }
+
+.carousel-item > img:hover {
+    transition: filter 0.3s ease-out;
+    filter: brightness(30%);
+}
+
+.carousel-item:hover .carousel-hidden-text {
+    opacity: 1;
+}
