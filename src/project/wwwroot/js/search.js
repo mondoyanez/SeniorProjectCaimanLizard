@@ -24,13 +24,13 @@ $(document).ready(function () {
             data: { title: query },
             dataType: "json",
             success: function (response) {
-                if (by == "") {
+                if (document.getElementById('multiCheck').checked) {
                     displayTitles(response);
                 }
-                if (by == "movie") {
+                if (document.getElementById('moviesCheck').checked) {
                     displayMovies(response);
                 }
-                if (by == "tv") {
+                if (document.getElementById('showsCheck').checked) {
                     displayShows(response);
                 }
             },
@@ -208,7 +208,7 @@ function displayTitles(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
 
-    if (data.item == undefined) {
+    if (data.length == 0) {
         alert("Your search query returned no results");
     }
 
