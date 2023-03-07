@@ -198,7 +198,7 @@ function displayTitles(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
 
-    if (data.item == undefined) {
+    if (data.length == 0) {
         alert("Your search query returned no results");
     }
 
