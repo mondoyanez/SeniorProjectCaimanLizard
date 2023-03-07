@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.Services.Abstract;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
 
@@ -19,20 +21,37 @@ public class PostController : Controller
     private readonly IPostRepository _postRepository;
     private readonly IWatcherRepository _watcherRepository;
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly ITMDBService _tmdbService;
 
-    public PostController(IPostRepository postRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager)
+    public PostController(IPostRepository postRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager, ITMDBService tmdbService)
     {
         _postRepository = postRepository;
         _watcherRepository = watcherRepository;
         _userManager = userManager;
+        _tmdbService = tmdbService;
     }
 
     // GET: Post
     public IActionResult Index()
     {
-        var allPosts = _postRepository.GetAllPostsDescending();
+	    FeedVM vm = new()
+	    {
+		    Posts = _postRepository.GetAllPostsDescending(),
+		    PopularMovies = _tmdbService.GetPopularMovies(),
+            PopularShows = _tmdbService.GetPopularShows(),
+		    ImageConfig = _tmdbService.SetImageConfig()
 
-        return View(allPosts);
+	    };
+	    if (ModelState.IsValid)
+	    {
+		    ViewBag.IsValid = true;
+	    }
+	    else
+	    {
+            ViewBag.IsValid = false;
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+	    }
+        return View(vm);
     }
     
     // GET: Post/Create

@@ -233,5 +233,71 @@ namespace WatchParty.Services.Concrete
                 })
                 .ToList();
         }
+
+        public IEnumerable<TMDBTitle> GetPopularMovies(string relativePath = "/movie/popular")
+        {
+			var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}");
+			Debug.WriteLine(jsonResponse);
+
+			TMDBJsonDTO? tmdbJsonDTO = new();
+			try
+			{
+				tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+			}
+			catch (System.Text.Json.JsonException e)
+			{
+				tmdbJsonDTO = null;
+				Debug.WriteLine(e);
+			}
+
+
+
+			if (tmdbJsonDTO.results == null) return new List<TMDBTitle>();
+
+			return tmdbJsonDTO.results.Select(r => new TMDBTitle()
+				{
+					Id = r.id,
+					Title = r.title ?? r.name,
+					MediaType = "movie",
+					ImagePath = r.poster_path ?? "",
+					Popularity = r.popularity,
+					ReleaseDate = r.release_date ?? "",
+					PlotSummary = r.overview
+				})
+				.ToList();
+		}
+
+        public IEnumerable<TMDBTitle> GetPopularShows(string relativePath = "/tv/popular")
+        {
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}");
+            Debug.WriteLine(jsonResponse);
+
+            TMDBJsonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+
+
+            if (tmdbJsonDTO.results == null) return new List<TMDBTitle>();
+
+            return tmdbJsonDTO.results.Select(r => new TMDBTitle()
+                {
+                    Id = r.id,
+                    Title = r.name,
+                    MediaType = "tv",
+                    ImagePath = r.poster_path ?? "",
+                    Popularity = r.popularity,
+                    ReleaseDate = r.first_air_date ?? "",
+                    PlotSummary = r.overview
+                })
+                .ToList();
+        }
     }
 }
