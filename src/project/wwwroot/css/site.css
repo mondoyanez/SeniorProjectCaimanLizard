@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 /*  COLOR PALETTE
@@ -169,4 +169,86 @@ body {
 
 .profile-card {
     background-color: #f2efe9;
+}
+
+.post {
+    width: 50%;
+    border: 1px ridge var(--cld-yellow);
+    border-radius: 5px;
+    margin-top: -2%;
+    margin-bottom: 5%;
+    margin-left: 25%
+}
+
+.create-post-link {
+    margin-top: 1%;
+    margin-left: 90%;
+}
+
+.create-post-image {
+    width: 50px;
+    height: 50px;
+}
+
+.post-title, .post-text {
+    color: var(--cld-off-white);
+}
+
+.post-date {
+    color: var(--cld-off-white);
+    margin-right: 50%;
+}
+
+.post-username {
+    color: var(--cld-blue);
+    margin-left: 50%
+}
+
+.empty-page {
+    padding-bottom: 40%;
+}
+
+.create-post-submit-btn {
+    margin-left: 88%;
+    margin-top: 17%;
+    margin-bottom: 5%;
+}
+
+.carousel {
+    overflow: hidden;
+    padding-bottom: 5rem;
+}
+
+.carousel-caption {
+    top: 100%;
+}
+
+.carousel-inner {
+    overflow: visible;
+}
+
+.carousel-control-next, .carousel-control-prev, .carousel-indicators {
+    bottom: 5rem;
+}
+
+.carousel-hidden-text {
+    position: absolute;
+    top: 0;
+    left: 18%;
+    width: 64%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+}
+
+.carousel-item > img:hover {
+    transition: filter 0.3s ease-out;
+    filter: brightness(30%);
+}
+
+.carousel-item:hover .carousel-hidden-text {
+    opacity: 1;
 }

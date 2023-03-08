@@ -1,0 +1,115 @@
+@model WatchParty.ViewModels.FeedVM
+
+@{
+    ViewData["Title"] = "Feed";
+}
+
+<div class="container-fluid cld-bg-light pt-4">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h4 class="text-center">Popular Movies</h4>
+            <div id="carouselPopularMoviesAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+                        var i = 0;
+                        foreach (var movie in Model.PopularMovies)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@($"{Model.ImageConfig.BaseUrl}/{Model.ImageConfig.PosterSizes.ElementAt(3)}{movie.ImagePath}")" class="d-block img-fluid mx-auto" alt="...">
+
+                                <div class="carousel-caption d-md-block">
+                                    <h5 class="fw-bold text-black">#@(i + 1) @movie.Title</h5>
+                                    <p class="text-black">@DateTime.Parse(movie.ReleaseDate).ToString("MMMM dd, yyyy") </p>
+                                </div>
+                                <div class="carousel-hidden-text text-white">@movie.PlotSummary</div>
+                            </div>
+
+                            i++;
+                        };
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselPopularMoviesAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselPopularMoviesAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-4">
+            <h4 class="text-center">Popular Shows</h4>
+            <div id="carouselPopularShowsAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+                        var j = 0;
+                        foreach (var show in Model.PopularShows)
+                        {
+                            <div class="carousel-item @(j == 0 ? "active" : "")">
+                                <img src="@($"{Model.ImageConfig.BaseUrl}/{Model.ImageConfig.PosterSizes.ElementAt(3)}{show.ImagePath}")" class="d-block img-fluid mx-auto" alt="...">
+                                <div class="carousel-caption d-md-block">
+                                    <h5 class="fw-bold text-black">#@(j + 1) @show.Title</h5>
+                                    <p class="text-black">@DateTime.Parse(show.ReleaseDate).ToString("MMMM dd, yyyy") </p>
+                                </div>
+                                <div class="carousel-hidden-text text-white">@show.PlotSummary</div>
+                            </div>
+
+                            j++;
+                        };
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselPopularShowsAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselPopularShowsAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@if (Model.Posts.Any())
+{
+    <div class="row cld-bg-light">
+
+        <a asp-controller="Post" asp-action="Create" class="create-post-link">
+            <img class="create-post-image" src="~/img/clipboard2-plus.svg" alt="clipboard" />
+        </a>
+
+        @foreach (var post in Model.Posts)
+        {
+            <div class="row">
+                <div class="card post cld-btn-primary">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <h3 class="card-title post-title">@post.PostTitle</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 post-username">@@@post.User.Username</h6>
+                            </div>
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 post-date">@post.DatePosted.ToString("MM/dd/yy")</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="card-text post-text">@post.PostDescription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="row cld-bg-light text-center empty-page">
+        <h1>No Posts</h1>
+    </div>
+}

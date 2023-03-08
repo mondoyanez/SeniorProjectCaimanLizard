@@ -1,14 +1,16 @@
 ﻿
 @{
-    ViewData["Title"] = "Search Titles";
+    ViewData["Title"] = "Search";
 }
 <section style="height: 100vh; overflow: scroll" class="text-center cld-bg-light">
 	<h2>Discover Something New</h2>
 	<div class="container text-center">
-		<form id="search-bar" class="d-flex pb-5" role="search">
-			<input id="searchQuery" class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-			<button id="search-btn" class="btn btn-outline-success" type="submit">Search Titles</button>
-		</form>
+		@*<form id="search-bar" class="d-flex pb-5" role="search">
+			<button id="search-btn" class="btn btn-outline-success" type="submit">Search All Titles</button>
+			<button id="search-movies" class="btn btn-outline-success" type="submit">Search Movies</button>
+			<button id="search-tv" class="btn btn-outline-success" type="submit">Search TV</button>
+		</form>*@
+		@*TODO: commented out for now, when below functionality is replaced by ability to search by filters then this can be removed
 		<form id="search-bar-movies" class ="d-flex pb-5" role="search">
 			<input id="searchMovie" class="form-control me-2" type="search" name="search-movies" placeholder="Search Movies" aria-label="Search Movies"/>
 			<button id="search-movies-btn" class="btn btn-outline-success" type="submit">Search Movies</button>
@@ -17,8 +19,41 @@
 			<input id="searchTv" class="form-control me-2" type="search" name="search-tv" placeholder="Search TV Shows" aria-label="Search TV Shows">
 			<button id="search-tv-btn" class="btn btn-outline-success" type="submit">Search TV Shows</button>
 		</form>
-		<div id="resultCards" class="row row-cols-1 g-4">
+		*@
+		<div class="row row-cols-1 g-4">
+			<div class="col-2">
+				<h5 class="fw-bold">Search For:</h5>
+				<div class="form-check text-start">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="multiCheck">
+					<label class="form-check-label" for="multiCheck">
+						Movies and Shows
+					</label>
+				</div>
+				<div class="form-check text-start">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="moviesCheck">
+					<label class="form-check-label" for="moviesCheck">
+						Movies
+					</label>
+				</div>
+				<div class="form-check text-start">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="showsCheck" checked>
+					<label class="form-check-label" for="showsCheck">
+						Shows
+					</label>
+				</div>
+				<div class="form-check text-start">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="actorsCheck">
+					<label class="form-check-label" for="actorsCheck">
+						Actor
+					</label>
+				</div>
+			</div>
+			<div id="resultCards" class="col-10 ">
 
+			</div>
+		</div>
+		<div id="resultCards" class="row row-cols-1 g-4">
+			
 		</div>
 	</div>
 </section>
