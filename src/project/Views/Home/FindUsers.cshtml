@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Find Users";
+}
+
+<div class="row empty-page cld-bg-light">
+    
+    <div class="row mt-2 text-center">
+        <h3>Find Other Users</h3>
+    </div>
+    <hr/>
+    
+    <div class="row">
+        <div class="col-1">
+            <label class="mt-2">Enter username:</label>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" placeholder="Watcher"/>
+        </div>
+        <div class="col-1">
+            <input class="form-control" type="submit" value="Submit" />
+        </div>
+    </div>
+
+    <table class="table table-hover table-striped" id="users-found" style="display: none;">
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>First and Last Name</th>
+            <th>Amount Following</th>
+            <th>Amount of Followers</th>
+        </tr>
+    </table>
+
+</div>
