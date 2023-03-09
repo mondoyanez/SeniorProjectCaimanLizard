@@ -12,11 +12,11 @@ $(document).ready(function () {
     }
     if (params.has("by")) {
         by = params.get("by");
+        by = decodeURIComponent(by);
     }
 
     // update search bar with the query value
     $("#search-form input").val(query);
-
     $.when(
         $.ajax({
             type: "GET",
@@ -24,26 +24,36 @@ $(document).ready(function () {
             data: { title: query },
             dataType: "json",
             success: function (response) {
-                displayTitles(response);
+                if (document.getElementById('multiCheck').checked) {
+                    displayTitles(response);
+                }
+                if (document.getElementById('moviesCheck').checked) {
+                    displayMovies(response);
+                }
+                if (document.getElementById('showsCheck').checked) {
+                    displayShows(response);
+                }
             },
-            error: function () {
+            error: function() {
                 errorOnAjax();
             }
         })
-    ).then(function () {
+    ).then(function() {
         $.ajax({
             type: "GET",
             url: "/api/imageConfig",
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 getImageConfig(response);
             },
-            error: function () {
+            error: function() {
                 errorOnAjax();
             }
         });
     });
 });
+
+
 /* TODO: commented out for now, when below functionality is replaced by ability to search by filters then this can be removed
 // Once the DOM is ready, execute everything in this function to set up the UI
 $(document).ready(function () {
@@ -198,7 +208,7 @@ function displayTitles(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
 
-    if (data.item == undefined) {
+    if (data.length == 0) {
         alert("Your search query returned no results");
     }
 
@@ -223,6 +233,68 @@ function displayTitles(data) {
                     </div>
 			    </div>`;
             $("#resultCards").append($(result));
+        }
+    );
+}
+
+function displayMovies(data) {
+    console.log("populating basic user info with the following data:");
+    console.log(data);
+
+    $("#resultCards").empty();
+    $.each(data,
+        function (index, item) {
+            let result =
+                `<div class="col cld-bg-light">
+                    <div class="card mb-3">
+                      <div class="row g-0">
+                        <div class="col-sm-2 col-4 align-self-center">
+                          <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
+                        </div>
+                        <div class="col">
+                          <div class="card-body text-start">
+                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <p class="card-text truncate-overflow">${item.plotSummary}</p>
+                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+			    </div>`;
+            if (item.mediaType == "movie") {
+                $("#resultCards").append($(result));
+            }
+        }
+    );
+}
+
+function displayShows(data) {
+    console.log("populating basic user info with the following data:");
+    console.log(data);
+
+    $("#resultCards").empty();
+    $.each(data,
+        function (index, item) {
+            let result =
+                `<div class="col cld-bg-light">
+                    <div class="card mb-3">
+                      <div class="row g-0">
+                        <div class="col-sm-2 col-4 align-self-center">
+                          <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
+                        </div>
+                        <div class="col">
+                          <div class="card-body text-start">
+                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <p class="card-text truncate-overflow">${item.plotSummary}</p>
+                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+			    </div>`;
+            if (item.mediaType == "tv") {
+                $("#resultCards").append($(result));
+            }
         }
     );
 }
