@@ -14,10 +14,10 @@
             <label class="mt-2">Enter username:</label>
         </div>
         <div class="col-10">
-            <input type="text" class="form-control" placeholder="Watcher"/>
+            <input type="text" class="form-control" placeholder="Watcher" id="username-entered"/>
         </div>
         <div class="col-1">
-            <input class="form-control" type="submit" value="Submit" />
+            <input class="form-control" type="submit" value="Submit" id="username-search-btn" onclick="tsButton();" />
         </div>
     </div>
 
@@ -32,3 +32,8 @@
     </table>
 
 </div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/findUsers.js"></script>
+}
