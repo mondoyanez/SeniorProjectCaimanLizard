@@ -99,6 +99,10 @@ public class UserController : Controller
         return View(vm);
     }
 
+    public IActionResult WatchList()
+    {
+        return View();
+    }
 
     private bool WatcherExists(int id)
     {

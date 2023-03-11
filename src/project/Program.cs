@@ -96,6 +96,11 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllerRoute(
+            name: "WathList",
+            pattern: "user/WatchList",
+            defaults: new { controller = "User", action = "WatchList" });
+
+        app.MapControllerRoute(
            name: "editProfile",
            pattern: "user/edit/{username}",
            defaults: new { controller = "User", action = "Edit" });
