@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.Areas.Identity.Data;
 using WatchParty.DAL.Abstract;
@@ -19,6 +20,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         var tmdbKey = builder.Configuration["TMDB:APIKey"];
+        var sendGridKey = builder.Configuration["SendGrid:APIKey"];
 
         // Add services to the container.
 
@@ -46,7 +48,7 @@ public class Program
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
-
+        builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(sendGridKey));
         var app = builder.Build();
 
         // After Build has been called, all services have been registered (by running Startup)
