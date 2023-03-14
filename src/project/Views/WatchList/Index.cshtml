@@ -8,7 +8,7 @@
     <br />
     <br />
     <h1>Welcome to your watch list</h1>
-    <br />
+    <br>
     <h3>Currently Watching:</h3>
 
     <div class="row">
@@ -18,45 +18,50 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Description</th>
+                        <th>Overview</th>
                         <th>Release Date</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @*This is where the JS will insert the data*@
+                    @*This is where the JS will go*@
                 </tbody>
             </table>
         </div>
 
         <div class="col-md-6">
-            <h4>TV Shows</h4>
+            <h4>Shows</h4>
             <table class="table" id="showTable">
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Description</th>
-                        <th>Release Date</th>
+                        <th>Overview</th>
+                        <th>First Air Date</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @*This is where the JS will insert the data*@
+                    @*This is where the JS will go*@
                 </tbody>
             </table>
         </div>
     </div>
+
 </section>
 
+@*<h1>Index</h1>
 
-@*<p>
+<p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Tmdbid)
+                @Html.DisplayNameFor(model => model.Movie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Show)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User)
@@ -68,7 +73,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Tmdbid)
+                @Html.DisplayFor(modelItem => item.Movie.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Show.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.Id)
@@ -81,4 +89,5 @@
         </tr>
 }
     </tbody>
-</table>*@
+</table>
+*@

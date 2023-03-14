@@ -21,7 +21,7 @@ namespace WatchParty.Controllers
         // GET: WatchList
         public async Task<IActionResult> Index()
         {
-            var watchPartyDbContext = _context.WatchLists.Include(w => w.User);
+            var watchPartyDbContext = _context.WatchLists.Include(w => w.Movie).Include(w => w.Show).Include(w => w.User);
             return View(await watchPartyDbContext.ToListAsync());
         }
 
@@ -34,6 +34,8 @@ namespace WatchParty.Controllers
             }
 
             var watchList = await _context.WatchLists
+                .Include(w => w.Movie)
+                .Include(w => w.Show)
                 .Include(w => w.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (watchList == null)
@@ -47,6 +49,8 @@ namespace WatchParty.Controllers
         // GET: WatchList/Create
         public IActionResult Create()
         {
+            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id");
+            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id");
             ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id");
             return View();
         }
@@ -56,7 +60,7 @@ namespace WatchParty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,Tmdbid")] WatchList watchList)
+        public async Task<IActionResult> Create([Bind("Id,UserId,ShowId,MovieId")] WatchList watchList)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +68,8 @@ namespace WatchParty.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
+            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
             ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
             return View(watchList);
         }
@@ -81,6 +87,8 @@ namespace WatchParty.Controllers
             {
                 return NotFound();
             }
+            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
+            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
             ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
             return View(watchList);
         }
@@ -90,7 +98,7 @@ namespace WatchParty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Tmdbid")] WatchList watchList)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ShowId,MovieId")] WatchList watchList)
         {
             if (id != watchList.Id)
             {
@@ -117,6 +125,8 @@ namespace WatchParty.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
+            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
             ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
             return View(watchList);
         }
@@ -130,6 +140,8 @@ namespace WatchParty.Controllers
             }
 
             var watchList = await _context.WatchLists
+                .Include(w => w.Movie)
+                .Include(w => w.Show)
                 .Include(w => w.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (watchList == null)
