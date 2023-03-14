@@ -4,9 +4,52 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<section class="cld-bg-light" style="text-align:center">
+    <br />
+    <br />
+    <h1>Welcome to your watch list</h1>
+    <br />
+    <h3>Currently Watching:</h3>
 
-<p>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Movies</h4>
+            <table class="table" id="movieTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Release Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*This is where the JS will insert the data*@
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <h4>TV Shows</h4>
+            <table class="table" id="showTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Release Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*This is where the JS will insert the data*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+@*<p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
@@ -38,4 +81,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@
