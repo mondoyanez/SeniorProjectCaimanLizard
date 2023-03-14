@@ -33,6 +33,9 @@ $(document).ready(function () {
                 if (document.getElementById('showsCheck').checked) {
                     displayShows(response);
                 }
+                if (document.getElementById('actorsCheck').checked) {
+                    displayActors(response);
+                }
             },
             error: function() {
                 errorOnAjax();
@@ -208,11 +211,12 @@ function displayTitles(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
 
+    $("#resultCards").empty();
+
     if (data.length == 0) {
         alert("Your search query returned no results");
     }
 
-    $("#resultCards").empty();
     $.each(data,
         function (index, item) {
             let result =
@@ -240,6 +244,10 @@ function displayTitles(data) {
 function displayMovies(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
+
+    if (data.length == 0) {
+        alert("Your search query returned no results");
+    }
 
     $("#resultCards").empty();
     $.each(data,
@@ -273,6 +281,11 @@ function displayShows(data) {
     console.log(data);
 
     $("#resultCards").empty();
+
+    if (data.length == 0) {
+        alert("Your search query returned no results");
+    }
+
     $.each(data,
         function (index, item) {
             let result =
@@ -333,6 +346,8 @@ function displayTextForNoPosters() {
         $(this).replaceWith('<p class="fs-3 text-muted bg-secondary bg-gradient bg-opacity-25 text-center py-3 mb-0">No<br>poster<br>found</p>');
     });
 }
+
+//event listener for radio buttons
 
 function errorOnAjax() {
     console.log("ERROR in ajax request");
