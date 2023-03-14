@@ -13,13 +13,13 @@ public partial class Post
     [Column("ID")]
     public int Id { get; set; }
 
-    [StringLength(2048), Required(AllowEmptyStrings = false, ErrorMessage = "Title is a required field")]
+    [StringLength(2048)]
     public string PostTitle { get; set; } = null!;
 
     [StringLength(2048)]
     public string? PostDescription { get; set; }
 
-    [Column(TypeName = "datetime")] 
+    [Column(TypeName = "datetime")]
     public DateTime DatePosted { get; set; }
 
     [Column("UserID")]
