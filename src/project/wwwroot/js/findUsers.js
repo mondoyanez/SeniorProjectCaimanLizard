@@ -1,18 +1,34 @@
 var submitButton = $("#username-search-btn");
+var errorMessageBody = $("#user-search-input-error-message");
 var re = new RegExp("^[A-Za-z]+$");
-//const query = $("#username-entered").val();
-submitButton.on("click", function () {
-    $("#user-search-input-error-message").empty();
-    if ($("#username-entered").val().toString() === "") {
-        $("#user-search-input-error-message").addClass("user-search-error-rq");
-        $("#user-search-input-error-message").append("<p>This is a required field, please enter a username</p>");
+var usersTable = $("#users-found");
+submitButton.on("click", function (e) {
+    e.preventDefault();
+    var query = $("#username-entered").val().toString();
+    errorMessageBody.empty();
+    if (!validateInput(query)) {
         return;
     }
-    if (!re.test($("#username-entered").val().toString())) {
-        $("#user-search-input-error-message").addClass("user-search-error-rq");
-        $("#user-search-input-error-message").append("<p>Input can only contain alphabetic characters</p>");
-        return;
-    }
-    $("#user-search-input-error-message").append("<p>VALID INPUT</p>");
+    usersTable.css("display", "inline");
 });
+function validateInput(input) {
+    var validInput = true;
+    if (input === "") {
+        errorMessageBody.append("<p>This is a required field, please enter a username</p>");
+        validInput = false;
+    }
+    if (!re.test(input)) {
+        errorMessageBody.append("<p>Input can only contain alphabetic characters</p>");
+        validInput = false;
+    }
+    if (input === undefined || input === null) {
+        errorMessageBody.append("<p>Something went wrong please try again</p>");
+        validInput = false;
+    }
+    if (validInput === false) {
+        errorMessageBody.addClass("user-search-error-rq");
+        usersTable.css("display", "none");
+    }
+    return validInput;
+}
 //# sourceMappingURL=findUsers.js.map
