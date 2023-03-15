@@ -1,4 +1,7 @@
-@model IEnumerable<WatchParty.Models.WatchList>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model WatchParty.ViewModels.WatchListVM
 
 @{
     ViewData["Title"] = "Index";
@@ -10,6 +13,8 @@
     <h1>Welcome to your watch list</h1>
     <br>
     <h3>Currently Watching:</h3>
+    <br />
+
 
     <div class="row">
         <div class="col-md-6">
@@ -24,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @*This is where the JS will go*@
+
                 </tbody>
             </table>
         </div>

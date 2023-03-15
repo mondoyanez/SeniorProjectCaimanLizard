@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 
 namespace WatchParty.Controllers
@@ -12,10 +13,12 @@ namespace WatchParty.Controllers
     public class WatchListController : Controller
     {
         private readonly WatchPartyDbContext _context;
+        private readonly IRepository<WatchList> _watchListRepo;
 
-        public WatchListController(WatchPartyDbContext context)
+        public WatchListController(WatchPartyDbContext context, IRepository<WatchList> watchListRepository)
         {
             _context = context;
+            _watchListRepo = watchListRepository;
         }
 
         // GET: WatchList
@@ -47,89 +50,89 @@ namespace WatchParty.Controllers
         }
 
         // GET: WatchList/Create
-        public IActionResult Create()
-        {
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id");
-            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id");
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id");
+        //    ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id");
+        //    ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id");
+        //    return View();
+        //}
 
-        // POST: WatchList/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,ShowId,MovieId")] WatchList watchList)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(watchList);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
-            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
-            ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
-            return View(watchList);
-        }
+        //// POST: WatchList/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to.
+        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,UserId,ShowId,MovieId")] WatchList watchList)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(watchList);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
+        //    ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
+        //    ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
+        //    return View(watchList);
+        //}
 
         // GET: WatchList/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.WatchLists == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null || _context.WatchLists == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var watchList = await _context.WatchLists.FindAsync(id);
-            if (watchList == null)
-            {
-                return NotFound();
-            }
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
-            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
-            ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
-            return View(watchList);
-        }
+        //    var watchList = await _context.WatchLists.FindAsync(id);
+        //    if (watchList == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
+        //    ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
+        //    ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
+        //    return View(watchList);
+        //}
 
         // POST: WatchList/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ShowId,MovieId")] WatchList watchList)
-        {
-            if (id != watchList.Id)
-            {
-                return NotFound();
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ShowId,MovieId")] WatchList watchList)
+        //{
+        //    if (id != watchList.Id)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(watchList);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WatchListExists(watchList.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
-            ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
-            ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
-            return View(watchList);
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(watchList);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!WatchListExists(watchList.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Id", watchList.MovieId);
+        //    ViewData["ShowId"] = new SelectList(_context.Shows, "Id", "Id", watchList.ShowId);
+        //    ViewData["UserId"] = new SelectList(_context.Watchers, "Id", "Id", watchList.UserId);
+        //    return View(watchList);
+        //}
 
         // GET: WatchList/Delete/5
         public async Task<IActionResult> Delete(int? id)
