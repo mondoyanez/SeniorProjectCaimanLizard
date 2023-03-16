@@ -14,7 +14,7 @@ submitButton.on("click", (e) => {
     usersTable.css("display", "inline");
 });
 
-function validateInput(input) {
+function validateInput(input: string): boolean {
     let validInput = true;
 
     if (input === "") {
@@ -22,12 +22,12 @@ function validateInput(input) {
         validInput = false;
     }
 
-    if (!re.test(input)) {
+    if (!re.test(input) && validInput) {
         errorMessageBody.append("<p>Input can only contain alphabetic characters</p>");
         validInput = false;
     }
 
-    if (input === undefined || input === null) {
+    if ((input === undefined || input === null) && validInput) {
         errorMessageBody.append("<p>Something went wrong please try again</p>");
         validInput = false;
     }
