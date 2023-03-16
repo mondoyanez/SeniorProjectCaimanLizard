@@ -1,10 +1,11 @@
 var submitButton = $("#username-search-btn");
 var errorMessageBody = $("#user-search-input-error-message");
-var re = new RegExp("^[A-Za-z]+$");
+var re = /^[A-Za-z]+$/;
 var usersTable = $("#users-found");
 submitButton.on("click", function (e) {
+    var _a, _b;
     e.preventDefault();
-    var query = $("#username-entered").val().toString();
+    var query = (_b = (_a = $("#username-entered").val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
     errorMessageBody.empty();
     if (!validateInput(query)) {
         return;
@@ -29,17 +30,18 @@ function validateInput(input) {
         errorMessageBody.append("<p>Input can only contain alphabetic characters</p>");
         validInput = false;
     }
-    if ((input === undefined || input === null) && validInput) {
+    if (!input && validInput) {
         errorMessageBody.append("<p>Something went wrong please try again</p>");
         validInput = false;
     }
-    if (validInput === false) {
+    if (!validInput) {
         errorMessageBody.addClass("user-search-error-rq");
         usersTable.hide();
     }
     return validInput;
 }
 function findUsers(data) {
+    var _a, _b;
     console.log(data);
     if (data.length > 0) {
         usersTable.empty();
@@ -47,13 +49,14 @@ function findUsers(data) {
         var usersTableBody_1 = $("#user-tbody");
         generateHeaders(usersTableBody_1);
         $.each(data, function (index, item) {
-            var result = "\n                <tr>\n                    <td>".concat(item.username, "</td>\n                    <td>").concat(item.email ? item.email : "", "</td>\n                    <td>").concat(item.firstName ? item.firstName : "", " ").concat(item.lastName ? item.lastName : "", "</td>\n                    <td>").concat(item.followingCount ? item.followingCount : 0, "</td>\n                    <td>").concat(item.followerCount ? item.followerCount : 0, "</td>\n                </tr>\n            ");
+            var _a, _b, _c, _d, _e;
+            var result = "\n                <tr>\n                    <td>".concat(item.username, "</td>\n                    <td>").concat((_a = item.email) !== null && _a !== void 0 ? _a : "", "</td>\n                    <td>").concat((_b = item.firstName) !== null && _b !== void 0 ? _b : "", " ").concat((_c = item.lastName) !== null && _c !== void 0 ? _c : "", "</td>\n                    <td>").concat((_d = item.followingCount) !== null && _d !== void 0 ? _d : 0, "</td>\n                    <td>").concat((_e = item.followerCount) !== null && _e !== void 0 ? _e : 0, "</td>\n                </tr>\n            ");
             usersTableBody_1.append(result);
         });
         usersTable.show();
     }
     else {
-        var invalidUser = $("#username-entered").val().toString();
+        var invalidUser = (_b = (_a = $("#username-entered").val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
         errorMessageBody.append("No user was found by the name of ".concat(invalidUser, " please try again"));
         errorMessageBody.addClass("user-search-error-rq");
         usersTable.hide();

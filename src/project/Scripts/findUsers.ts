@@ -1,11 +1,11 @@
-﻿const submitButton = $("#username-search-btn");
-const errorMessageBody = $("#user-search-input-error-message");
-const re = new RegExp("^[A-Za-z]+$");
-const usersTable = $("#users-found");
+﻿const submitButton: JQuery<HTMLElement> = $("#username-search-btn");
+const errorMessageBody: JQuery<HTMLElement> = $("#user-search-input-error-message");
+const re: RegExp = /^[A-Za-z]+$/;
+const usersTable: JQuery<HTMLElement> = $("#users-found");
 
-submitButton.on("click", (e) => {
+submitButton.on("click", (e: JQuery.Event) => {
     e.preventDefault();
-    const query = $("#username-entered").val().toString();
+    const query: string = $("#username-entered").val()?.toString() ?? "";
     errorMessageBody.empty();
     if (!validateInput(query)) {
         return;
@@ -22,7 +22,7 @@ submitButton.on("click", (e) => {
 });
 
 function validateInput(input: string): boolean {
-    let validInput = true;
+    let validInput: boolean = true;
 
     if (input === "") {
         errorMessageBody.append("<p>This is a required field, please enter a username</p>");
@@ -34,12 +34,12 @@ function validateInput(input: string): boolean {
         validInput = false;
     }
 
-    if ((input === undefined || input === null) && validInput) {
+    if (!input && validInput) {
         errorMessageBody.append("<p>Something went wrong please try again</p>");
         validInput = false;
     }
 
-    if (validInput === false) {
+    if (!validInput) {
         errorMessageBody.addClass("user-search-error-rq");
         usersTable.hide();
     }
@@ -47,40 +47,39 @@ function validateInput(input: string): boolean {
     return validInput;
 }
 
-
-function findUsers(data) {
+function findUsers(data: any[]) {
     console.log(data);
     if (data.length > 0) {
         usersTable.empty();
         generateTableBody();
-        const usersTableBody = $("#user-tbody");
+        const usersTableBody: JQuery<HTMLElement> = $("#user-tbody");
         generateHeaders(usersTableBody);
 
         $.each(data, (index, item) => {
-            const result =
+            const result: string =
                 `
                 <tr>
                     <td>${item.username}</td>
-                    <td>${item.email ? item.email : ""}</td>
-                    <td>${item.firstName ? item.firstName : ""} ${item.lastName ? item.lastName : ""}</td>
-                    <td>${item.followingCount ? item.followingCount : 0}</td>
-                    <td>${item.followerCount ? item.followerCount : 0}</td>
+                    <td>${item.email ?? ""}</td>
+                    <td>${item.firstName ?? ""} ${item.lastName ?? ""}</td>
+                    <td>${item.followingCount ?? 0}</td>
+                    <td>${item.followerCount ?? 0}</td>
                 </tr>
             `;
             usersTableBody.append(result);
         });
         usersTable.show();
     } else {
-        const invalidUser = $("#username-entered").val().toString();
+        const invalidUser: string = $("#username-entered").val()?.toString() ?? "";
         errorMessageBody.append(`No user was found by the name of ${invalidUser} please try again`);
         errorMessageBody.addClass("user-search-error-rq");
         usersTable.hide();
     }
 }
 
-function generateHeaders(usersTableBody) {
-    const headers =
-    `
+function generateHeaders(usersTableBody: JQuery<HTMLElement>) {
+    const headers: string =
+        `
         <tr>
             <th>Username </th>
             <th> Email </th>
@@ -93,7 +92,7 @@ function generateHeaders(usersTableBody) {
 }
 
 function generateTableBody() {
-    const tBody = "<tbody id=\"user-tbody\"></tbody>";
+    const tBody: string = "<tbody id=\"user-tbody\"></tbody>";
     usersTable.append(tBody);
 }
 
