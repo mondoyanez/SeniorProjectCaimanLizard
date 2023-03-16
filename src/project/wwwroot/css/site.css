@@ -258,3 +258,9 @@ body {
     color: red;
     font-size: 16px;
 }
+
+.user-search-table {
+    margin-top: 5%;
+    margin-left: 15%;
+    width: 70%
+}

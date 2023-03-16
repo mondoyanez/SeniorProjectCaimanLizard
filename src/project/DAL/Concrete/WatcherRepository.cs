@@ -53,9 +53,6 @@ public class WatcherRepository : Repository<Watcher>, IWatcherRepository
                 FollowerCount = r.FollowerCount
             }).ToList();
 
-        if (!watchers.Any())
-            throw new ArgumentNullException(nameof(watchers));
-
         return watchers;
     }
 

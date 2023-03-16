@@ -35,22 +35,37 @@ function validateInput(input) {
     }
     if (validInput === false) {
         errorMessageBody.addClass("user-search-error-rq");
-        usersTable.css("display", "none");
+        usersTable.hide();
     }
     return validInput;
 }
 function findUsers(data) {
-    usersTable.empty();
-    generateHeaders();
-    $.each(data, function (index, item) {
-        var result = "\n                <tr>\n                    <td>".concat(item.username, "</td>\n                    <td>").concat(item.email ? item.email : "", "</td>\n                    <td>").concat(item.firstName ? item.firstName : "", " ").concat(item.lastName ? item.lastName : "", "</td>\n                    <td>").concat(item.followingCount ? item.followingCount : 0, "</td>\n                    <td>").concat(item.followerCount ? item.followerCount : 0, "</td>\n                </tr>\n            ");
-        usersTable.append(result);
-    });
-    usersTable.css("display", "inline");
+    console.log(data);
+    if (data.length > 0) {
+        usersTable.empty();
+        generateTableBody();
+        var usersTableBody_1 = $("#user-tbody");
+        generateHeaders(usersTableBody_1);
+        $.each(data, function (index, item) {
+            var result = "\n                <tr>\n                    <td>".concat(item.username, "</td>\n                    <td>").concat(item.email ? item.email : "", "</td>\n                    <td>").concat(item.firstName ? item.firstName : "", " ").concat(item.lastName ? item.lastName : "", "</td>\n                    <td>").concat(item.followingCount ? item.followingCount : 0, "</td>\n                    <td>").concat(item.followerCount ? item.followerCount : 0, "</td>\n                </tr>\n            ");
+            usersTableBody_1.append(result);
+        });
+        usersTable.show();
+    }
+    else {
+        var invalidUser = $("#username-entered").val().toString();
+        errorMessageBody.append("No user was found by the name of ".concat(invalidUser, " please try again"));
+        errorMessageBody.addClass("user-search-error-rq");
+        usersTable.hide();
+    }
 }
-function generateHeaders() {
-    var headers = "<tr>\n        <th>Username </th>\n        <th> Email </th>\n        <th> First and Last Name </th>\n        <th> Amount Following </th>\n        <th> Amount of Followers </th>\n    < /tr>";
-    usersTable.append(headers);
+function generateHeaders(usersTableBody) {
+    var headers = "\n        <tr>\n            <th>Username </th>\n            <th> Email </th>\n            <th> First and Last Name </th>\n            <th> Amount Following </th>\n            <th> Amount of Followers </th>\n        </tr>\n    ";
+    usersTableBody.append(headers);
+}
+function generateTableBody() {
+    var tBody = "<tbody id=\"user-tbody\"></tbody>";
+    usersTable.append(tBody);
 }
 function errorOnAjax() {
     console.log("ERROR in ajax request");
