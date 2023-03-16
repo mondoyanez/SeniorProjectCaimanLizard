@@ -9,7 +9,15 @@ submitButton.on("click", function (e) {
     if (!validateInput(query)) {
         return;
     }
-    usersTable.css("display", "inline");
+    $(function () {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/watcher/findByUsername?username=".concat(query),
+            success: findUsers,
+            error: errorOnAjax
+        });
+    });
 });
 function validateInput(input) {
     var validInput = true;
@@ -30,5 +38,16 @@ function validateInput(input) {
         usersTable.css("display", "none");
     }
     return validInput;
+}
+function findUsers(data) {
+    usersTable.empty();
+    $.each(data, function (index, item) {
+        var result = "\n                <tr>\n                    <td>".concat(item.username, "</td>\n                    <td>").concat(item.email ? item.email : "", "</td>\n                    <td>").concat(item.firstName ? item.firstName : "", " ").concat(item.lastName ? item.lastName : "", "</td>\n                    <td>").concat(item.followingCount ? item.followingCount : 0, "</td>\n                    <td>").concat(item.followerCount ? item.followerCount : 0, "</td>\n                </tr>\n            ");
+        usersTable.append(result);
+    });
+    usersTable.css("display", "inline");
+}
+function errorOnAjax() {
+    console.log("ERROR in ajax request");
 }
 //# sourceMappingURL=findUsers.js.map

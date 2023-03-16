@@ -7,11 +7,18 @@ submitButton.on("click", (e) => {
     e.preventDefault();
     const query = $("#username-entered").val().toString();
     errorMessageBody.empty();
-
     if (!validateInput(query)) {
         return;
     }
-    usersTable.css("display", "inline");
+    $(() => {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: `/watcher/findByUsername?username=${query}`,
+            success: findUsers,
+            error: errorOnAjax
+        });
+    });
 });
 
 function validateInput(input: string): boolean {
@@ -38,4 +45,27 @@ function validateInput(input: string): boolean {
     }
 
     return validInput;
+}
+
+
+function findUsers(data) {
+    usersTable.empty();
+    $.each(data, (index, item) => {
+        let result =
+            `
+                <tr>
+                    <td>${item.username}</td>
+                    <td>${item.email ? item.email : ""}</td>
+                    <td>${item.firstName ? item.firstName : ""} ${item.lastName ? item.lastName : ""}</td>
+                    <td>${item.followingCount ? item.followingCount : 0}</td>
+                    <td>${item.followerCount ? item.followerCount : 0}</td>
+                </tr>
+            `;
+        usersTable.append(result);
+    });
+    usersTable.css("display", "inline");
+}
+
+function errorOnAjax() {
+    console.log("ERROR in ajax request");
 }
