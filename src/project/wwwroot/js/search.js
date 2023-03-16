@@ -279,7 +279,7 @@ function displayShows(data) {
         function (index, item) {
             let result =
                 `<div class="col cld-bg-light">
-                    <div class="card mb-3">
+                    <div class="card mb-3" id="${index}">
                       <div class="row g-0">
                         <div class="col-sm-2 col-4 align-self-center">
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
@@ -289,7 +289,7 @@ function displayShows(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                            <button class="btn cld-btn-secondary text-light text-right" onclick="addToDB()">Add to List</button>
+                            <button id="card-button" class="btn cld-btn-secondary text-light text-right" onclick="addToWatchList('${item.title}')">Add to Watch List</button>
                           </div>
                         </div>
                       </div>
@@ -341,4 +341,10 @@ function errorOnAjax() {
     console.log("ERROR in ajax request");
     // take care of the error, maybe display a message to the user
     // ...
+}
+
+function addToWatchList(item) {
+    //var item = JSON.parse(item);
+    console.log("Adding item to watch list:", item);
+    // Call your repository pattern function here to add the item to the database
 }

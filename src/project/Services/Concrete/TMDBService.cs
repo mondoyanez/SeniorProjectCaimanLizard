@@ -299,5 +299,15 @@ namespace WatchParty.Services.Concrete
                 })
                 .ToList();
         }
+
+        public TMDBTitle GetShowDetails(string relativePath = "/tv/?query=")
+        {
+            throw new NotImplementedException();
+        }
+
+        public TMDBTitle GetMovieDetails(string relativepath = "/movie/?query=")
+        {
+            throw new NotImplementedException();
+        }
     }
 }
