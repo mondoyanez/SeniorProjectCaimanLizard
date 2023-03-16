@@ -50,8 +50,10 @@ function validateInput(input: string): boolean {
 
 function findUsers(data) {
     usersTable.empty();
+    generateHeaders();
+
     $.each(data, (index, item) => {
-        let result =
+        const result =
             `
                 <tr>
                     <td>${item.username}</td>
@@ -64,6 +66,18 @@ function findUsers(data) {
         usersTable.append(result);
     });
     usersTable.css("display", "inline");
+}
+
+function generateHeaders() {
+    const headers =
+    `<tr>
+        <th>Username </th>
+        <th> Email </th>
+        <th> First and Last Name </th>
+        <th> Amount Following </th>
+        <th> Amount of Followers </th>
+    < /tr>`;
+    usersTable.append(headers);
 }
 
 function errorOnAjax() {

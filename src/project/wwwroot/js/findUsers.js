@@ -41,11 +41,16 @@ function validateInput(input) {
 }
 function findUsers(data) {
     usersTable.empty();
+    generateHeaders();
     $.each(data, function (index, item) {
         var result = "\n                <tr>\n                    <td>".concat(item.username, "</td>\n                    <td>").concat(item.email ? item.email : "", "</td>\n                    <td>").concat(item.firstName ? item.firstName : "", " ").concat(item.lastName ? item.lastName : "", "</td>\n                    <td>").concat(item.followingCount ? item.followingCount : 0, "</td>\n                    <td>").concat(item.followerCount ? item.followerCount : 0, "</td>\n                </tr>\n            ");
         usersTable.append(result);
     });
     usersTable.css("display", "inline");
+}
+function generateHeaders() {
+    var headers = "<tr>\n        <th>Username </th>\n        <th> Email </th>\n        <th> First and Last Name </th>\n        <th> Amount Following </th>\n        <th> Amount of Followers </th>\n    < /tr>";
+    usersTable.append(headers);
 }
 function errorOnAjax() {
     console.log("ERROR in ajax request");
