@@ -6,8 +6,10 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "es5",
-    "outDir": "wwwroot/js"
+    "strict": true,
+    "target": "es6",
+    "module": "es6", 
+    "outDir": "wwwroot/dist"
   },
   "include": [
     "Scripts/**/*"
