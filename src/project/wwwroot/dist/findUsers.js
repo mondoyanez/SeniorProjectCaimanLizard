@@ -24,7 +24,8 @@ submitButton.on("click", (e) => {
     });
 });
 function findUsers(data) {
-    var _a, _b;
+    var _a, _b, _c, _d;
+    const currentUser = (_b = (_a = $("#currentUser").val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
     if (data.length > 0) {
         usersTable.empty();
         generateTableBody(usersTable);
@@ -32,7 +33,8 @@ function findUsers(data) {
         generateHeaders(usersTableBody);
         $.each(data, (index, item) => {
             var _a, _b, _c, _d, _e;
-            const result = `
+            if (currentUser !== item.username) {
+                const result = `
                 <tr>
                     <td>${item.username}</td>
                     <td>${(_a = item.email) !== null && _a !== void 0 ? _a : ""}</td>
@@ -41,12 +43,13 @@ function findUsers(data) {
                     <td>${(_e = item.followerCount) !== null && _e !== void 0 ? _e : 0}</td>
                 </tr>
                 `;
-            usersTableBody.append(result);
+                usersTableBody.append(result);
+            }
         });
         usersTable.show();
     }
     else {
-        const invalidUser = (_b = (_a = $("#username-entered").val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
+        const invalidUser = (_d = (_c = $("#username-entered").val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "";
         errorMessageBody.append(`No user was found by the name of ${invalidUser} please try again`);
         errorMessageBody.addClass("user-search-error-rq");
         usersTable.hide();

@@ -26,6 +26,7 @@ submitButton.on("click", (e: JQuery.Event) => {
 });
 
 function findUsers(data: any[]) {
+    const currentUser: string = $("#currentUser").val()?.toString() ?? "";
     if (data.length > 0) {
         usersTable.empty();
         generateTableBody(usersTable);
@@ -33,8 +34,9 @@ function findUsers(data: any[]) {
         generateHeaders(usersTableBody);
 
         $.each(data, (index, item) => {
-            const result: string = 
-                `
+            if (currentUser !== item.username) {
+                const result: string =
+                    `
                 <tr>
                     <td>${item.username}</td>
                     <td>${item.email ?? ""}</td>
@@ -44,6 +46,7 @@ function findUsers(data: any[]) {
                 </tr>
                 `;
                 usersTableBody.append(result);
+            }
         });
         usersTable.show();
     } else {
