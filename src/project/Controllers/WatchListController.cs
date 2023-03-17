@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers
 {
@@ -14,19 +15,42 @@ namespace WatchParty.Controllers
     {
         private readonly WatchPartyDbContext _context;
         private readonly IRepository<WatchList> _watchListRepo;
+        private readonly IRepository<Show> _showRepo;
+        private readonly IRepository<Movie> _movieRepo;
 
-        public WatchListController(WatchPartyDbContext context, IRepository<WatchList> watchListRepository)
+
+        public WatchListController(WatchPartyDbContext context, IRepository<WatchList> watchListRepository, IRepository<Show> showRepo, IRepository<Movie> movieRepo)
         {
             _context = context;
             _watchListRepo = watchListRepository;
+            _showRepo = showRepo;
+            _movieRepo = movieRepo;
         }
 
         // GET: WatchList
         public async Task<IActionResult> Index()
         {
-            var watchPartyDbContext = _context.WatchLists.Include(w => w.Movie).Include(w => w.Show).Include(w => w.User);
-            return View(await watchPartyDbContext.ToListAsync());
+            //var watchPartyDbContext = _context.WatchLists.Include(w => w.Movie).Include(w => w.Show).Include(w => w.User);
+            //return View(await watchPartyDbContext.ToListAsync());
+
+            WatchListVM watchListVM = new WatchListVM();
+            watchListVM.shows = _showRepo.GetAll();
+            watchListVM.movies = _movieRepo.GetAll();
+
+            return View(watchListVM);
         }
+
+        [HttpPost]
+        [Route("/addShowToWatchList")]
+        public IActionResult AddShowToWatchList(WatchList watchList, Show show)
+        {
+            _watchListRepo.AddOrUpdate(watchList);
+            _showRepo.AddOrUpdate(show);
+
+            Console.WriteLine("inside add to watch list in home controller");
+            return Ok();
+        }
+
 
         // GET: WatchList/Details/5
         public async Task<IActionResult> Details(int? id)

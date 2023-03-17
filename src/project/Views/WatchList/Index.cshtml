@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-md-6">
             <h4>Movies</h4>
-            <table class="table" id="movieTable">
+            <table class="table table-hover" id="movieTable">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -30,13 +30,24 @@
                 </thead>
                 <tbody>
                     @*This is where the JS will go*@
+                    @foreach (var movie in Model.movies)
+                    {
+@*                        if (Model.watchLists.Contains(movie.Tmdbid))
+                        {*@
+                            <tr>
+                                <th>@movie.Title</th>
+                                <th>@movie.Overview</th>
+                                <th>@movie.ReleaseDate</th>
+                            </tr>
+                        @*}*@
+                    }
                 </tbody>
             </table>
         </div>
 
         <div class="col-md-6">
             <h4>Shows</h4>
-            <table class="table" id="showTable">
+            <table class="table table-hover" id="showTable">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -46,10 +57,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @*This is where the JS will go*@
+                    @foreach (var show in Model.shows)
+                    {
+                        <tr>
+                            <th>@show.Title</th>
+                            <th>@show.Overview</th>
+                            <th>@show.FirstAirDate</th>
+                        </tr>
+                        
+                    }
                 </tbody>
             </table>
         </div>
     </div>
+    <br />
+    <br />
 
 </section>
