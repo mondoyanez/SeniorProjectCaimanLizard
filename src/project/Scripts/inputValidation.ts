@@ -1,8 +1,13 @@
-﻿export function validateInput(input: string, re: RegExp, errorMessageBody: JQuery<HTMLElement>, usersTable: JQuery<HTMLElement>): boolean {
+﻿export function validateInput(input: string, currentUser:string, re: RegExp, errorMessageBody: JQuery<HTMLElement>, usersTable: JQuery<HTMLElement>): boolean {
     let validInput: boolean = true;
 
     if (input === "") {
         errorMessageBody.append("<p>This is a required field, please enter a username</p>");
+        validInput = false;
+    }
+
+    if (input === currentUser && validInput) {
+        errorMessageBody.append("<p>You cannot search for yourself, please enter another username</p>")
         validInput = false;
     }
 

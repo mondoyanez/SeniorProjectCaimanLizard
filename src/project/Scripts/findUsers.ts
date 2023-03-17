@@ -9,8 +9,9 @@ const usersTable: JQuery<HTMLElement> = $("#users-found");
 submitButton.on("click", (e: JQuery.Event) => {
     e.preventDefault();
     const query: string = $("#username-entered").val()?.toString() ?? "";
+    const currentUser: string = $("#currentUser").val()?.toString() ?? "";
     errorMessageBody.empty();
-    if (!validateInput(query, re, errorMessageBody, usersTable)) {
+    if (!validateInput(query, currentUser, re, errorMessageBody, usersTable)) {
         return;
     }
     $(() => {
@@ -25,7 +26,6 @@ submitButton.on("click", (e: JQuery.Event) => {
 });
 
 function findUsers(data: any[]) {
-    console.log(data);
     if (data.length > 0) {
         usersTable.empty();
         generateTableBody(usersTable);
@@ -33,7 +33,7 @@ function findUsers(data: any[]) {
         generateHeaders(usersTableBody);
 
         $.each(data, (index, item) => {
-            const result: string =
+            const result: string = 
                 `
                 <tr>
                     <td>${item.username}</td>
@@ -42,8 +42,8 @@ function findUsers(data: any[]) {
                     <td>${item.followingCount ?? 0}</td>
                     <td>${item.followerCount ?? 0}</td>
                 </tr>
-            `;
-            usersTableBody.append(result);
+                `;
+                usersTableBody.append(result);
         });
         usersTable.show();
     } else {

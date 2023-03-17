@@ -5,11 +5,12 @@ const errorMessageBody = $("#user-search-input-error-message");
 const re = /^[A-Za-z]+$/;
 const usersTable = $("#users-found");
 submitButton.on("click", (e) => {
-    var _a, _b;
+    var _a, _b, _c, _d;
     e.preventDefault();
     const query = (_b = (_a = $("#username-entered").val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
+    const currentUser = (_d = (_c = $("#currentUser").val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "";
     errorMessageBody.empty();
-    if (!validateInput(query, re, errorMessageBody, usersTable)) {
+    if (!validateInput(query, currentUser, re, errorMessageBody, usersTable)) {
         return;
     }
     $(() => {
@@ -24,7 +25,6 @@ submitButton.on("click", (e) => {
 });
 function findUsers(data) {
     var _a, _b;
-    console.log(data);
     if (data.length > 0) {
         usersTable.empty();
         generateTableBody(usersTable);
@@ -40,7 +40,7 @@ function findUsers(data) {
                     <td>${(_d = item.followingCount) !== null && _d !== void 0 ? _d : 0}</td>
                     <td>${(_e = item.followerCount) !== null && _e !== void 0 ? _e : 0}</td>
                 </tr>
-            `;
+                `;
             usersTableBody.append(result);
         });
         usersTable.show();
