@@ -1,4 +1,4 @@
-import { test } from "./myModules.js";
+import { validateInput } from "./inputValidation.js";
 const submitButton = $("#username-search-btn");
 const errorMessageBody = $("#user-search-input-error-message");
 const re = /^[A-Za-z]+$/;
@@ -6,10 +6,9 @@ const usersTable = $("#users-found");
 submitButton.on("click", (e) => {
     var _a, _b;
     e.preventDefault();
-    test();
     const query = (_b = (_a = $("#username-entered").val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
     errorMessageBody.empty();
-    if (!validateInput(query)) {
+    if (!validateInput(query, re, errorMessageBody, usersTable)) {
         return;
     }
     $(() => {
@@ -22,26 +21,6 @@ submitButton.on("click", (e) => {
         });
     });
 });
-function validateInput(input) {
-    let validInput = true;
-    if (input === "") {
-        errorMessageBody.append("<p>This is a required field, please enter a username</p>");
-        validInput = false;
-    }
-    if (!re.test(input) && validInput) {
-        errorMessageBody.append("<p>Input can only contain alphabetic characters</p>");
-        validInput = false;
-    }
-    if (!input && validInput) {
-        errorMessageBody.append("<p>Something went wrong please try again</p>");
-        validInput = false;
-    }
-    if (!validInput) {
-        errorMessageBody.addClass("user-search-error-rq");
-        usersTable.hide();
-    }
-    return validInput;
-}
 function findUsers(data) {
     var _a, _b;
     console.log(data);
