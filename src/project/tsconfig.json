@@ -8,7 +8,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "es6",
-    "module": "es6", 
+    "module": "es2015", 
     "outDir": "wwwroot/dist"
   },
   "include": [

@@ -1,10 +1,13 @@
-﻿const submitButton: JQuery<HTMLElement> = $("#username-search-btn");
+﻿import { test } from "./myModules.js";
+
+const submitButton: JQuery<HTMLElement> = $("#username-search-btn");
 const errorMessageBody: JQuery<HTMLElement> = $("#user-search-input-error-message");
 const re: RegExp = /^[A-Za-z]+$/;
 const usersTable: JQuery<HTMLElement> = $("#users-found");
 
 submitButton.on("click", (e: JQuery.Event) => {
     e.preventDefault();
+    test();
     const query: string = $("#username-entered").val()?.toString() ?? "";
     errorMessageBody.empty();
     if (!validateInput(query)) {

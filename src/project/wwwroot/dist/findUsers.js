@@ -1,4 +1,4 @@
-"use strict";
+import { test } from "./myModules.js";
 const submitButton = $("#username-search-btn");
 const errorMessageBody = $("#user-search-input-error-message");
 const re = /^[A-Za-z]+$/;
@@ -6,6 +6,7 @@ const usersTable = $("#users-found");
 submitButton.on("click", (e) => {
     var _a, _b;
     e.preventDefault();
+    test();
     const query = (_b = (_a = $("#username-entered").val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
     errorMessageBody.empty();
     if (!validateInput(query)) {
