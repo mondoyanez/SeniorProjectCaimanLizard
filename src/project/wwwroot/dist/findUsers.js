@@ -1,4 +1,5 @@
 import { validateInput } from "./inputValidation.js";
+import { generateHeaders, generateTableBody } from "./manipulateDomUsers.js";
 const submitButton = $("#username-search-btn");
 const errorMessageBody = $("#user-search-input-error-message");
 const re = /^[A-Za-z]+$/;
@@ -26,7 +27,7 @@ function findUsers(data) {
     console.log(data);
     if (data.length > 0) {
         usersTable.empty();
-        generateTableBody();
+        generateTableBody(usersTable);
         const usersTableBody = $("#user-tbody");
         generateHeaders(usersTableBody);
         $.each(data, (index, item) => {
@@ -50,22 +51,6 @@ function findUsers(data) {
         errorMessageBody.addClass("user-search-error-rq");
         usersTable.hide();
     }
-}
-function generateHeaders(usersTableBody) {
-    const headers = `
-        <tr>
-            <th>Username </th>
-            <th> Email </th>
-            <th> First and Last Name </th>
-            <th> Amount Following </th>
-            <th> Amount of Followers </th>
-        </tr>
-    `;
-    usersTableBody.append(headers);
-}
-function generateTableBody() {
-    const tBody = "<tbody id=\"user-tbody\"></tbody>";
-    usersTable.append(tBody);
 }
 function errorOnAjax() {
     console.log("ERROR in ajax request");
