@@ -100,3 +100,12 @@ VALUES
 (3, 1, null, 1),
 (4, 1, null, 2)
 SET IDENTITY_INSERT [WatchList] OFF;
+
+SET IDENTITY_INSERT [WatchListItems] ON;
+INSERT INTO [WatchListItems] (ID, WatchListID, ShowID, MovieID)
+VALUES
+(1, 1, 1, null),
+(2, 2, 2, null),
+(3, 3, null, 1),
+(4, 4, null, 2)
+SET IDENTITY_INSERT [WatchListItems] OFF;

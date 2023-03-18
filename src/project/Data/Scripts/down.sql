@@ -10,7 +10,9 @@ ALTER TABLE [WatchList]             DROP CONSTRAINT [Fk_WatchList_UserID]
 ALTER TABLE [WatchList]             DROP CONSTRAINT [Fk_WatchList_ShowID]
 ALTER TABLE [WatchList]             DROP CONSTRAINT [Fk_WatchList_MovieID]
 
-
+ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_WatchList]
+ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_Show]
+ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_Movie]
 
 DROP TABLE [Watcher];
 DROP TABLE [Post];
@@ -19,5 +21,6 @@ DROP TABLE [LikePost];
 DROP TABLE [WatchList];
 DROP TABLE [Show];
 DROP TABLE [Movie];
+DROP TABLE [WatchListItems];
 
 -- DROP DATABASE WatchParty;
