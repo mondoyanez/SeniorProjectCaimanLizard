@@ -26,5 +26,8 @@ public partial class Movie
     public string? ReleaseDate { get; set; }
 
     [InverseProperty("Movie")]
+    public virtual ICollection<WatchListItem> WatchListItems { get; } = new List<WatchListItem>();
+
+    [InverseProperty("Movie")]
     public virtual ICollection<WatchList> WatchLists { get; } = new List<WatchList>();
 }

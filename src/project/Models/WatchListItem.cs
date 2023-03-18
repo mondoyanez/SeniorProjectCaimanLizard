@@ -6,15 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WatchParty.Models;
 
-[Table("WatchList")]
-public partial class WatchList
+public partial class WatchListItem
 {
     [Key]
     [Column("ID")]
     public int Id { get; set; }
 
-    [Column("UserID")]
-    public int UserId { get; set; }
+    [Column("WatchListID")]
+    public int WatchListId { get; set; }
 
     [Column("ShowID")]
     public int? ShowId { get; set; }
@@ -23,17 +22,14 @@ public partial class WatchList
     public int? MovieId { get; set; }
 
     [ForeignKey("MovieId")]
-    [InverseProperty("WatchLists")]
+    [InverseProperty("WatchListItems")]
     public virtual Movie? Movie { get; set; }
 
     [ForeignKey("ShowId")]
-    [InverseProperty("WatchLists")]
+    [InverseProperty("WatchListItems")]
     public virtual Show? Show { get; set; }
 
-    [ForeignKey("UserId")]
-    [InverseProperty("WatchLists")]
-    public virtual Watcher User { get; set; } = null!;
-
-    [InverseProperty("WatchList")]
-    public virtual ICollection<WatchListItem> WatchListItems { get; } = new List<WatchListItem>();
+    [ForeignKey("WatchListId")]
+    [InverseProperty("WatchListItems")]
+    public virtual WatchList WatchList { get; set; } = null!;
 }
