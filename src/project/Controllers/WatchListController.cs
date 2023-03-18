@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,28 +16,47 @@ namespace WatchParty.Controllers
     public class WatchListController : Controller
     {
         private readonly WatchPartyDbContext _context;
-        private readonly IRepository<WatchList> _watchListRepo;
-        private readonly IRepository<Show> _showRepo;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IWatchListRepository _watchListRepo;
+        private readonly IShowRepository _showRepo;
         private readonly IRepository<Movie> _movieRepo;
+        private readonly IWatcherRepository _watcherRepository;
 
 
-        public WatchListController(WatchPartyDbContext context, IRepository<WatchList> watchListRepository, IRepository<Show> showRepo, IRepository<Movie> movieRepo)
+        public WatchListController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, IWatchListRepository watchListRepository, IShowRepository showRepo, IRepository<Movie> movieRepo, IWatcherRepository watcherRepository)
         {
             _context = context;
+            _userManager = userManager;
             _watchListRepo = watchListRepository;
             _showRepo = showRepo;
             _movieRepo = movieRepo;
+            _watcherRepository = watcherRepository;
         }
 
-        // GET: WatchList
-        public async Task<IActionResult> Index()
+        // GET: WatchList/username
+        [Authorize]
+        public async Task<IActionResult> Index(string username)
         {
-            //var watchPartyDbContext = _context.WatchLists.Include(w => w.Movie).Include(w => w.Show).Include(w => w.User);
-            //return View(await watchPartyDbContext.ToListAsync());
-
+            // Find the user and add their information to the view model
+            if (_watcherRepository == null)
+            {
+                return View("user/Notfound");
+            }
             WatchListVM watchListVM = new WatchListVM();
-            watchListVM.shows = _showRepo.GetAll();
-            watchListVM.movies = _movieRepo.GetAll();
+            Watcher watcher = _watcherRepository.FindByUsername(username);
+            watchListVM.watcher = watcher;
+            var currentUser = await _userManager.GetUserAsync(User);
+            watchListVM.isCurrentUser = _watcherRepository.IsCurrentUser(username, currentUser);
+            if (watcher == null)
+            {
+                return View("user/Notfound");
+            }
+
+            //Find the watchlist by userID
+            watchListVM.watchList = _watchListRepo.FindByUserID(watcher.Id);
+
+            // Get shows/movies by the ShowId/MovieId
+            watchListVM.shows = _showRepo.GetShows(watchListVM.watchList);
 
             return View(watchListVM);
         }

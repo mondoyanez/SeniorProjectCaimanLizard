@@ -46,6 +46,11 @@ public class Program
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
+        builder.Services.AddScoped<IWatchListRepository, WatchListRepository>();
+        builder.Services.AddScoped<IShowRepository, ShowRepository>();
+        //builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+
+
 
         var app = builder.Build();
 
@@ -94,6 +99,11 @@ public class Program
         app.UseRouting();
 
         app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "watchList",
+            pattern: "watchlist/{username}",
+            defaults: new { controller = "WatchList", action = "Index" });
 
         app.MapControllerRoute(
            name: "editProfile",

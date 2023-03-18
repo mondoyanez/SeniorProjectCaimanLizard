@@ -30,17 +30,17 @@
                 </thead>
                 <tbody>
                     @*This is where the JS will go*@
-                    @foreach (var movie in Model.movies)
+@*                    @foreach (var movie in Model.movies)
                     {
-@*                        if (Model.watchLists.Contains(movie.Tmdbid))
-                        {*@
+                        if (Model.watchLists.Contains(movie.Tmdbid))
+                        {
                             <tr>
                                 <th>@movie.Title</th>
                                 <th>@movie.Overview</th>
                                 <th>@movie.ReleaseDate</th>
                             </tr>
-                        @*}*@
-                    }
+                        }
+                    }*@
                 </tbody>
             </table>
         </div>
@@ -59,10 +59,15 @@
                 <tbody>
                     @foreach (var show in Model.shows)
                     {
+                        
                         <tr>
                             <th>@show.Title</th>
                             <th>@show.Overview</th>
                             <th>@show.FirstAirDate</th>
+                            @if (Model.isCurrentUser)
+                            {
+                                <th>Delete Button</th>
+                            }
                         </tr>
                         
                     }
