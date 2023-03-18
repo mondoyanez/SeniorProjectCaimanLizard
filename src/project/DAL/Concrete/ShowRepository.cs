@@ -14,7 +14,7 @@ public class ShowRepository : Repository<Show>, IShowRepository
     public IEnumerable<Show> GetShows(WatchList watchList)
     {
         if (watchList == null)
-            throw new ArgumentNullException(nameof(watchList));
+            return Enumerable.Empty<Show>();
 
         IEnumerable<Show> shows = GetAll().Where(s => s.Tmdbid == watchList.ShowId);
 

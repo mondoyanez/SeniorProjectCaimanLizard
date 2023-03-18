@@ -11,7 +11,7 @@
     </li>
 *@
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="WatchList">Watch Lists</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="WatchList" asp-action="Index" asp-route-username="@User.Identity?.Name">Watch Lists</a>
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

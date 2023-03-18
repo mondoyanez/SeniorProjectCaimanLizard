@@ -7,9 +7,9 @@ namespace WatchParty.ViewModels
     {
         public bool isCurrentUser;
 
-        public WatchList watchList { get; set; }
+        public WatchList? watchList { get; set; }
 
-        public IEnumerable<WatchList> watchLists { get; set; }
+        public IEnumerable<WatchList>? watchLists { get; set; }
 
         public IEnumerable<Show> shows { get; set; }
 
