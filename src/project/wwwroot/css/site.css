@@ -291,3 +291,7 @@ a.user-profile-link:hover {
         height: 30%;
         background-color: #D5A021;
     }
+
+#user-profile-following-icon {
+    width: 7%;
+}
