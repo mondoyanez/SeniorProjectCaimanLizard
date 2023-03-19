@@ -37,13 +37,17 @@ public class UserController : Controller
         }
         ProfileVM vm = new ProfileVM();
 
-        Watcher watcher = _watcherRepository.FindByUsername(username);
+        Watcher? loggedInUser = _watcherRepository.FindByUsername(User.Identity.Name);
+
+        Watcher? watcher = _watcherRepository.FindByUsername(username);
         List<FollowingList> followingList = _followingListRepository.GetFollowingList(watcher.Id);
         List<FollowingList> followerList = _followingListRepository.GetFollowerList(watcher.Id);
 
         vm.Watcher = watcher;
         vm.Following = followingList;
         vm.Followers = followerList;
+
+        vm.isFollowing = watcher.Id != loggedInUser?.Id ? _followingListRepository.IsFollowing(loggedInUser.Id, watcher.Id) : null;
 
         var currentUser = await _userManager.GetUserAsync(User);
         vm.isCurrentUser = _watcherRepository.IsCurrentUser(username, currentUser);

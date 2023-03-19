@@ -18,4 +18,9 @@ public class FollowingListRepository: Repository<FollowingList>, IFollowingListR
     {
         return GetAll().Where(f => f.FollowingId == id).ToList();
     }
+
+    public bool IsFollowing(int userId, int followerId)
+    {
+        return GetAll().FirstOrDefault(f => f.UserId == userId && f.FollowingId == followerId) != null;
+    }
 }

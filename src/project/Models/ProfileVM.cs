@@ -7,5 +7,6 @@
         public List<FollowingList> Following { get; set; }
 
         public bool isCurrentUser { get; set; }
+        public bool? isFollowing { get; set; }
     }
 }
