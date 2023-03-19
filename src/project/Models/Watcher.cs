@@ -27,10 +27,6 @@ public partial class Watcher
     [StringLength(256)]
     public string? Email { get; set; }
 
-    public int? FollowingCount { get; set; }
-
-    public int? FollowerCount { get; set; }
-
     [StringLength(256)]
     public string? Bio { get; set; }
 

@@ -22,7 +22,7 @@
                         <h3 class="card-title">@Model.Watcher.Username</h3>
                         <h5 class="card-subtitle mb-2">@Model.Watcher.FirstName @Model.Watcher.LastName</h5>
                         <p></p>
-                        @*<h6 class="card-subtitle mb-2 text-muted">Following @Model.Watcher.FollowingCount    Followers @Model.Watcher.FollowerCount</h6>*@
+                        <h6 class="card-subtitle mb-2 text-muted">Following: @Model.Following.Count    Followers: @Model.Followers.Count</h6>
                         <p class="card-text">@Model.Watcher.Bio</p>
                     </div>
                 </div>
@@ -57,8 +57,6 @@
                         <input type="hidden" asp-for="Watcher.Id" />
                         <input type="hidden" asp-for="Watcher.AspNetIdentityId" />
                         <input type="hidden" asp-for="Watcher.Username" />
-                        <input type="hidden" asp-for="Watcher.FollowerCount" />
-                        <input type="hidden" asp-for="Watcher.FollowingCount" />
                         <input type="hidden" asp-for="Watcher.Email" />
                         <div class="form-group">
                             <label asp-for="Watcher.FirstName" class="control-label">First Name</label>

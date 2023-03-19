@@ -45,6 +45,7 @@ public class Program
 		builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient {BaseAddress = new Uri("https://api.themoviedb.org/3") }));
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
+        builder.Services.AddScoped<IFollowingListRepository, FollowingListRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
 
         var app = builder.Build();

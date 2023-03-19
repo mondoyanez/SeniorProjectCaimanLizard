@@ -8,8 +8,6 @@ CREATE TABLE [Watcher]
     [FirstName]             NVARCHAR(64),
     [LastName]              NVARCHAR(64),
     [Email]                 NVARCHAR(256),
-    [FollowingCount]        INT,
-    [FollowerCount]         INT,
     [Bio]                   NVARCHAR(256)
 );
 
