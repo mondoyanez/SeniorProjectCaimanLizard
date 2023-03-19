@@ -48,7 +48,7 @@ public class Program
         builder.Services.AddScoped<IPostRepository, PostRepository>();
         builder.Services.AddScoped<IWatchListRepository, WatchListRepository>();
         builder.Services.AddScoped<IShowRepository, ShowRepository>();
-        //builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+        builder.Services.AddScoped<IMovieRepository, MovieRepository>();
         builder.Services.AddScoped<IWatchListItemRepository, WatchListItemRepository>();
 
 

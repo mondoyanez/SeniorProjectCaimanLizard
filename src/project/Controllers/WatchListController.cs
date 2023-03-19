@@ -19,20 +19,20 @@ namespace WatchParty.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IWatchListRepository _watchListRepo;
         private readonly IShowRepository _showRepo;
-        private readonly IRepository<Movie> _movieRepo;
         private readonly IWatcherRepository _watcherRepository;
         private readonly IWatchListItemRepository _watchListItemsRepo;
+        private readonly IMovieRepository _movieRepo;
 
 
-        public WatchListController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, IWatchListRepository watchListRepository, IShowRepository showRepo, IRepository<Movie> movieRepo, IWatcherRepository watcherRepository, IWatchListItemRepository watchListItemsRepo)
+        public WatchListController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, IWatchListRepository watchListRepository, IShowRepository showRepo, IWatcherRepository watcherRepository, IWatchListItemRepository watchListItemsRepo, IMovieRepository movieRepo)
         {
             _context = context;
             _userManager = userManager;
             _watchListRepo = watchListRepository;
             _showRepo = showRepo;
-            _movieRepo = movieRepo;
             _watcherRepository = watcherRepository;
             _watchListItemsRepo = watchListItemsRepo;
+            _movieRepo = movieRepo;
         }
 
         // GET: WatchList/username
@@ -66,7 +66,7 @@ namespace WatchParty.Controllers
 
             // Get shows/movies by the users watchlistItems
             watchListVM.shows = _showRepo.GetShows(watchListVM.watchListItems);
-            //watchListVM.movies = _movieRepo.GetMovies(watchListVM.watchListItems);
+            watchListVM.movies = _movieRepo.GetMovies(watchListVM.watchListItems);
 
             return View(watchListVM);
         }
