@@ -27,7 +27,4 @@ public partial class Movie
 
     [InverseProperty("Movie")]
     public virtual ICollection<WatchListItem> WatchListItems { get; } = new List<WatchListItem>();
-
-    [InverseProperty("Movie")]
-    public virtual ICollection<WatchList> WatchLists { get; } = new List<WatchList>();
 }

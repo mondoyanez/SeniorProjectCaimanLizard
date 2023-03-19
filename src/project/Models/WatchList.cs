@@ -16,19 +16,7 @@ public partial class WatchList
     [Column("UserID")]
     public int UserId { get; set; }
 
-    [Column("ShowID")]
-    public int? ShowId { get; set; }
-
-    [Column("MovieID")]
-    public int? MovieId { get; set; }
-
-    [ForeignKey("MovieId")]
-    [InverseProperty("WatchLists")]
-    public virtual Movie? Movie { get; set; }
-
-    [ForeignKey("ShowId")]
-    [InverseProperty("WatchLists")]
-    public virtual Show? Show { get; set; }
+    public int? ListType { get; set; }
 
     [ForeignKey("UserId")]
     [InverseProperty("WatchLists")]

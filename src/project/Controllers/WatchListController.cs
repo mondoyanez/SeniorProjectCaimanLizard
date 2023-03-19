@@ -21,9 +21,10 @@ namespace WatchParty.Controllers
         private readonly IShowRepository _showRepo;
         private readonly IRepository<Movie> _movieRepo;
         private readonly IWatcherRepository _watcherRepository;
+        private readonly IWatchListItemRepository _watchListItemsRepo;
 
 
-        public WatchListController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, IWatchListRepository watchListRepository, IShowRepository showRepo, IRepository<Movie> movieRepo, IWatcherRepository watcherRepository)
+        public WatchListController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, IWatchListRepository watchListRepository, IShowRepository showRepo, IRepository<Movie> movieRepo, IWatcherRepository watcherRepository, IWatchListItemRepository watchListItemsRepo)
         {
             _context = context;
             _userManager = userManager;
@@ -31,6 +32,7 @@ namespace WatchParty.Controllers
             _showRepo = showRepo;
             _movieRepo = movieRepo;
             _watcherRepository = watcherRepository;
+            _watchListItemsRepo = watchListItemsRepo;
         }
 
         // GET: WatchList/username
@@ -53,13 +55,14 @@ namespace WatchParty.Controllers
             }
 
             //Find the watchlists by userID
-            //watchListVM.watchLists = _watchListRepo.FindAllByUserID(watcher.Id);
             watchListVM.watchList = _watchListRepo.FindByUserID(watcher.Id);
 
-            // Get shows/movies by the users watchlist
-            //watchListVM.shows = _showRepo.GetShows(watchListVM.watchLists);
-            watchListVM.shows = _showRepo.GetShows(watchListVM.watchList);
+            //Get the items in the watchlistItems
+            watchListVM.watchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.watchList.Id);
 
+            // Get shows/movies by the users watchlistItems
+            watchListVM.shows = _showRepo.GetShows(watchListVM.watchListItems);
+            //watchListVM.movies = _movieRepo.GetMovies(watchListVM.watchListItems);
 
             return View(watchListVM);
         }
@@ -77,25 +80,25 @@ namespace WatchParty.Controllers
 
 
         // GET: WatchList/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.WatchLists == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null || _context.WatchLists == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var watchList = await _context.WatchLists
-                .Include(w => w.Movie)
-                .Include(w => w.Show)
-                .Include(w => w.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (watchList == null)
-            {
-                return NotFound();
-            }
+        //    var watchList = await _context.WatchLists
+        //        .Include(w => w.Movie)
+        //        .Include(w => w.Show)
+        //        .Include(w => w.User)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (watchList == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(watchList);
-        }
+        //    return View(watchList);
+        //}
 
         // GET: WatchList/Create
         //public IActionResult Create()
@@ -183,25 +186,25 @@ namespace WatchParty.Controllers
         //}
 
         // GET: WatchList/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.WatchLists == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null || _context.WatchLists == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var watchList = await _context.WatchLists
-                .Include(w => w.Movie)
-                .Include(w => w.Show)
-                .Include(w => w.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (watchList == null)
-            {
-                return NotFound();
-            }
+        //    var watchList = await _context.WatchLists
+        //        .Include(w => w.Movie)
+        //        .Include(w => w.Show)
+        //        .Include(w => w.User)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (watchList == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(watchList);
-        }
+        //    return View(watchList);
+        //}
 
         // POST: WatchList/Delete/5
         [HttpPost, ActionName("Delete")]

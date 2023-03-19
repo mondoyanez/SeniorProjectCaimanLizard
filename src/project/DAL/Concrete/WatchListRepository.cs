@@ -29,6 +29,9 @@ public class WatchListRepository : Repository<WatchList>, IWatchListRepository
 
         IEnumerable<WatchList>? watchLists = GetAll().Where(w => w.UserId == userID);
 
+        if (watchLists == null)
+            return Enumerable.Empty<WatchList>();
+
         return watchLists;
     }
 

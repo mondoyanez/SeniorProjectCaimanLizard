@@ -9,7 +9,7 @@ namespace WatchParty.ViewModels
 
         public WatchList? watchList { get; set; }
 
-        public IEnumerable<WatchList>? watchLists { get; set; }
+        public IEnumerable<WatchListItem>? watchListItems { get; set; }
 
         public IEnumerable<Show>? shows { get; set; }
 

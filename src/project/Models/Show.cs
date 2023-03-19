@@ -27,7 +27,4 @@ public partial class Show
 
     [InverseProperty("Show")]
     public virtual ICollection<WatchListItem> WatchListItems { get; } = new List<WatchListItem>();
-
-    [InverseProperty("Show")]
-    public virtual ICollection<WatchList> WatchLists { get; } = new List<WatchList>();
 }

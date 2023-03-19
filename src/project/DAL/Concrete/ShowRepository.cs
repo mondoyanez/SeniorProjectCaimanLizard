@@ -12,16 +12,41 @@ public class ShowRepository : Repository<Show>, IShowRepository
     public ShowRepository(WatchPartyDbContext ctx) : base(ctx)
     {
     }
-    public IEnumerable<Show> GetShows(WatchList watchList)
+
+    public IEnumerable<Show> GetShows(IEnumerable<WatchListItem> watchListItems)
     {
-        if (watchList == null)
+        if (watchListItems == null)
             return Enumerable.Empty<Show>();
 
-        IEnumerable<Show> shows = GetAll().Where(s => s.Id == watchList.ShowId);
+        List<Show> result = new();
+        IEnumerable<Show> shows = GetAll();
 
-        return shows;
-
+        foreach (WatchListItem watchListItem in watchListItems)
+        {
+            if (watchListItem.ShowId != null)
+            {
+                result.Append(shows.Where(s => s.Id == watchListItem.ShowId).First());
+            }
+        }
+  
+        return result;
     }
+
+
+
+
+
+
+    //public IEnumerable<Show> GetShows(WatchList watchList)
+    //{
+    //    if (watchList == null)
+    //        return Enumerable.Empty<Show>();
+
+    //    IEnumerable<Show> shows = GetAll().Where(s => s.Id == watchList.ShowId);
+
+    //    return shows;
+
+    //}
 
     //public IEnumerable<Show> GetShows(IEnumerable<WatchList> watchLists)
     //{
