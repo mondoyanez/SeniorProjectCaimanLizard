@@ -1,4 +1,4 @@
-import { validateInput } from "../../project/wwwroot/dist/inputValidation.js";
+import { validateInput } from "../../../project/wwwroot/dist/inputValidation.js"
 const { JSDOM } = require("jsdom");
 const he = require("he");
 

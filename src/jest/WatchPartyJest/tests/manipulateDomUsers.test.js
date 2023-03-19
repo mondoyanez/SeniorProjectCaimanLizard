@@ -1,4 +1,4 @@
-import { generateHeaders, generateTableBody } from "../../project/wwwroot/dist/manipulateDomUsers.js";
+import { generateHeaders, generateTableBody } from "../../../project/wwwroot/dist/manipulateDomUsers.js"
 const { JSDOM } = require("jsdom");
 const he = require("he");
 
