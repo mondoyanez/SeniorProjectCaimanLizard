@@ -22,16 +22,27 @@
                         <h3 class="card-title">@@@Model.Watcher.Username</h3>
                         <h5 class="card-subtitle mb-2">@Model.Watcher.FirstName @Model.Watcher.LastName</h5>
                         <p></p>
-                        <h6 class="card-subtitle mb-2 text-muted">Following: @Model.Following.Count    Followers: @Model.Followers.Count</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 text-muted">Following:</h6>
+                                <h6 class="card-subtitle mb-2 text-muted" id="user-amount-following">@Model.Following.Count</h6>
+                            </div>
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 text-muted">Followers:</h6>
+                                <h6 class="card-subtitle mb-2 text-muted" id="user-amount-followers">@Model.Followers.Count</h6>
+                            </div>
+                        </div>
                         @if (!Model.isCurrentUser)
                         {
                             @if (Convert.ToBoolean(Model.isFollowing))
                             {
+                                <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" style="display: none;" />
                                 <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User"/>
                             }
                             else
                             {
                                 <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" />
+                                <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User" style="display: none;"/>
                             }
                         }
                         <p class="card-text">@Model.Watcher.Bio</p>
@@ -100,4 +111,7 @@
     <br />
 </section>
 
-
+@section Scripts
+{
+    <script type="module" src="~/dist/followUser.js"></script>
+}
