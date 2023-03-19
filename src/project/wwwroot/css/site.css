@@ -252,3 +252,15 @@ body {
 .carousel-item:hover .carousel-hidden-text {
     opacity: 1;
 }
+
+.user-search-error-rq {
+    margin-left: 8%;
+    color: red;
+    font-size: 16px;
+}
+
+.user-search-table {
+    margin-top: 5%;
+    margin-left: 15%;
+    width: 70%
+}

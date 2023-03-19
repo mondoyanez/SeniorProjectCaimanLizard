@@ -1,0 +1,17 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6",
+    "module": "es2015", 
+    "outDir": "wwwroot/dist"
+  },
+  "include": [
+    "Scripts/**/*"
+  ]
+}
