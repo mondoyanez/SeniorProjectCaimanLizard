@@ -40,8 +40,10 @@ $(document).on('click', '.delete-watchlist-item', function () {
     $.ajax({
         url: '/Watchlist/DeleteWatchlistItem/' + showId,
         type: 'POST',
+        data: {showId : showId},
         success: function (result) {
             console.log("success inside watchList.js delete");
+            location.reload();
         },
         error: function (xhr, status, error) {
             // handle error

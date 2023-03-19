@@ -36,10 +36,12 @@
                             <th>@show.Title</th>
                             <th>@show.Overview</th>
                             <th>@show.ReleaseDate</th>
-                            @if (Model.isCurrentUser)
+@*                            @if (Model.isCurrentUser)
                             {
-                                <th>Delete Button</th>
-                            }
+                                <th>
+                                    <button class="btn btn-danger btn-sm delete-watchlist-item" data-show-id="@show.Id">Delete</button>
+                                </th>
+                            }*@ 
                         </tr>
                     }
                 </tbody>
@@ -57,28 +59,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-@*                    @if (Model.watchListItems != null)
-                    {
-                        @foreach (var item in Model.watchListItems)
-                        {
-                            <tr>
-                                <th>@item.Show.Title</th>
-                                <th>@item.Show.Overview</th>
-                                <th>@item.Show.FirstAirDate</th>
-                                @if (Model.isCurrentUser)
-                                {
-                                    <th>
-                                        <form asp-controller="WatchList" asp-action="DeleteWatchListItem" asp-route-Id="@item.Id">
-                                            <input type="submit" value="Delete" class="btn btn-danger" />
-                                        </form>
-                                    </th>
-                                }
-                            </tr>
-                        }
-                    }*@
-
-                    
+                <tbody>                    
                     @foreach (var show in Model.shows)
                     {
                         <tr>
@@ -87,14 +68,10 @@
                             <th>@show.FirstAirDate</th>
                             @if (Model.isCurrentUser)
                             {
-
+                                <th>
+                                    <button class="btn btn-danger btn-sm delete-watchlist-item" data-show-id="@show.Id">Delete</button>
+                                </th>
                             }
-                            <th>
-                                <p>@show.Id</p>
-                                <button class="btn btn-danger btn-sm delete-watchlist-item" data-show-id="@show.Id">Delete</button>
-                                @*<button class="btn btn-danger btn-sm" asp-controller="WatchList" asp-action="DeleteWatchListItem" asp-route-showId="@show.Id">Delete</button>*@
-                            </th>
-
                         </tr> 
                     }
                 </tbody>
