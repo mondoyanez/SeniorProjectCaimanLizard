@@ -18,11 +18,15 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body profile-card">
-                        <h3 class="card-title">@Model.Watcher.Username</h3>
+                    <div class="card-body profile-card text-center">
+                        <h3 class="card-title">@@@Model.Watcher.Username</h3>
                         <h5 class="card-subtitle mb-2">@Model.Watcher.FirstName @Model.Watcher.LastName</h5>
                         <p></p>
                         <h6 class="card-subtitle mb-2 text-muted">Following: @Model.Following.Count    Followers: @Model.Followers.Count</h6>
+                        @if (!Model.isCurrentUser)
+                        {
+                            <input type="submit" value="Follow" class="rounded user-profile-btn-follow" />
+                        }
                         <p class="card-text">@Model.Watcher.Bio</p>
                     </div>
                 </div>
