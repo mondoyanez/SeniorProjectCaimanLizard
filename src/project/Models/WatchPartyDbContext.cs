@@ -15,6 +15,8 @@ public partial class WatchPartyDbContext : DbContext
     {
     }
 
+    public virtual DbSet<FollowingList> FollowingLists { get; set; }
+
     public virtual DbSet<LikePost> LikePosts { get; set; }
 
     public virtual DbSet<Post> Posts { get; set; }
@@ -35,9 +37,22 @@ public partial class WatchPartyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<FollowingList>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Followin__3214EC2760D92C42");
+
+            entity.HasOne(d => d.Following).WithMany(p => p.FollowingListFollowings)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_FollowingList_FollowingID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.FollowingListUsers)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_FollowingList_UserID");
+        });
+
         modelBuilder.Entity<LikePost>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__LikePost__3214EC27297B383E");
+            entity.HasKey(e => e.Id).HasName("PK__LikePost__3214EC276C57B78C");
 
             entity.HasOne(d => d.Post).WithMany(p => p.LikePosts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -50,7 +65,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC279BA667FF");
+            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC27AF483649");
 
             entity.HasOne(d => d.User).WithMany(p => p.Posts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -59,7 +74,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<Reshare>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Reshare__3214EC273C5366D6");
+            entity.HasKey(e => e.Id).HasName("PK__Reshare__3214EC274B1D98D5");
 
             entity.HasOne(d => d.Post).WithMany(p => p.Reshares)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -72,7 +87,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<Watcher>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Watcher__3214EC07A8A4F865");
+            entity.HasKey(e => e.Id).HasName("PK__Watcher__3214EC07940DA08A");
         });
 
         OnModelCreatingPartial(modelBuilder);

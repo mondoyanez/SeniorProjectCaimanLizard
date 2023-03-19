@@ -13,6 +13,13 @@ CREATE TABLE [Watcher]
     [Bio]                   NVARCHAR(256)
 );
 
+CREATE TABLE [FollowingList]
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [UserID]                INT                 NOT NULL,
+    [FollowingID]           INT                 NOT NULL
+);
+
 CREATE TABLE [Post]
 (
     [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -38,6 +45,9 @@ CREATE TABLE [LikePost]
     [PostID]                INT                 NOT NULL,
     [UserID]                INT                 NOT NULL
 );
+
+ALTER TABLE [FollowingList]         ADD CONSTRAINT [Fk_FollowingList_UserID]        FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [FollowingList]         ADD CONSTRAINT [Fk_FollowingList_FollowingID]   FOREIGN KEY([FollowingID])              REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [Post]                  ADD CONSTRAINT [Fk_Post_UserID]                 FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
