@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -62,7 +63,8 @@ namespace WatchParty.Controllers
             {
                 watchListVM.watchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.watchList.Id);
             }
-            
+
+
 
             // Get shows/movies by the users watchlistItems
             watchListVM.shows = _showRepo.GetShows(watchListVM.watchListItems);
@@ -81,6 +83,85 @@ namespace WatchParty.Controllers
             Console.WriteLine("inside add to watch list in home controller");
             return Ok();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteWatchListItem(int showId)
+        {
+            // Get all the watch list items that have the given show id, there can be more than one
+            IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByShowId(showId);
+            //IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByShowId(1);
+
+            if (watchListItems == null)
+                Debug.WriteLine("WatchListItems is null");
+
+            // Get information about the current user
+            var currentUser = await _userManager.GetUserAsync(User);
+            Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
+
+            Debug.WriteLine("Current user: " + currentUser.ToString());
+
+            // Get the users watch list
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+
+            Debug.WriteLine("Watch list: " + watchList.ToString());
+
+            // Filter out the watch list items to find the one specific to the current user
+            WatchListItem watchListItem = watchListItems.Where(wli => wli.WatchListId == watchList.Id).FirstOrDefault();
+
+            Debug.WriteLine("Show id:" + showId);
+            Debug.WriteLine("Watch List Item: " + watchListItem.ToString());
+
+            // Delete the watchListItem from the database
+            if (watchListItem == null)
+            {
+                Debug.WriteLine("Watchlistitem is null");
+                return NotFound();
+            }
+
+            _watchListItemsRepo.Delete(watchListItem);
+            _context.SaveChanges();
+
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult DeleteWatchListItem(int showId)
+        //{
+        //    //IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByShowId(showId);
+
+        //    WatchListItem watchListItem = _watchListItemsRepo.FindAllByShowId(showId, );
+
+
+        //    if (watchListItem != null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    s
+
+        //    _watchListItemsRepo.Delete(watchListItem);
+        //    _context.SaveChanges();
+
+        //    return Ok();
+        //}
+
+        //[HttpPost]
+        //public IActionResult DeleteWatchListItem(int Id)
+        //{
+        //    //IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByShowId(showId);
+
+        //    WatchListItem watchListItem = _watchListItemsRepo.FindById(Id);
+
+
+        //    if (watchListItem != null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _watchListItemsRepo.Delete(watchListItem);
+        //    _context.SaveChanges();
+
+        //    return Ok();
+        //}
 
 
         // GET: WatchList/Details/5
@@ -198,8 +279,6 @@ namespace WatchParty.Controllers
         //    }
 
         //    var watchList = await _context.WatchLists
-        //        .Include(w => w.Movie)
-        //        .Include(w => w.Show)
         //        .Include(w => w.User)
         //        .FirstOrDefaultAsync(m => m.Id == id);
         //    if (watchList == null)
@@ -210,24 +289,26 @@ namespace WatchParty.Controllers
         //    return View(watchList);
         //}
 
-        // POST: WatchList/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.WatchLists == null)
-            {
-                return Problem("Entity set 'WatchPartyDbContext.WatchLists'  is null.");
-            }
-            var watchList = await _context.WatchLists.FindAsync(id);
-            if (watchList != null)
-            {
-                _context.WatchLists.Remove(watchList);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: WatchList/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    if (_context.WatchLists == null)
+        //    {
+        //        return Problem("Entity set 'WatchPartyDbContext.WatchLists'  is null.");
+        //    }
+        //    var watchList = await _context.WatchLists.FindAsync(id);
+        //    //var watchListItem = await _context.WatchListItems.FindAsync(id);
+        //    if (watchList != null)
+        //    {
+        //        _context.WatchLists.Remove(watchList);
+
+        //    }
+
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool WatchListExists(int id)
         {

@@ -7,5 +7,6 @@ namespace WatchParty.DAL.Abstract
     {
         IEnumerable<WatchListItem> GetAllWatchListItemsByID(int watchListId);
 
+        IEnumerable<WatchListItem> FindAllByShowId(int showId);
     }
 }

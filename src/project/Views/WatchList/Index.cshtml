@@ -58,17 +58,43 @@
                     </tr>
                 </thead>
                 <tbody>
+@*                    @if (Model.watchListItems != null)
+                    {
+                        @foreach (var item in Model.watchListItems)
+                        {
+                            <tr>
+                                <th>@item.Show.Title</th>
+                                <th>@item.Show.Overview</th>
+                                <th>@item.Show.FirstAirDate</th>
+                                @if (Model.isCurrentUser)
+                                {
+                                    <th>
+                                        <form asp-controller="WatchList" asp-action="DeleteWatchListItem" asp-route-Id="@item.Id">
+                                            <input type="submit" value="Delete" class="btn btn-danger" />
+                                        </form>
+                                    </th>
+                                }
+                            </tr>
+                        }
+                    }*@
+
+                    
                     @foreach (var show in Model.shows)
                     {
-                        
                         <tr>
                             <th>@show.Title</th>
                             <th>@show.Overview</th>
                             <th>@show.FirstAirDate</th>
                             @if (Model.isCurrentUser)
                             {
-                                <th>Delete Button</th>
+
                             }
+                            <th>
+                                <p>@show.Id</p>
+                                <button class="btn btn-danger btn-sm delete-watchlist-item" data-show-id="@show.Id">Delete</button>
+                                @*<button class="btn btn-danger btn-sm" asp-controller="WatchList" asp-action="DeleteWatchListItem" asp-route-showId="@show.Id">Delete</button>*@
+                            </th>
+
                         </tr> 
                     }
                 </tbody>
@@ -79,3 +105,8 @@
     <br />
 
 </section>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/watchList.js"></script>
+}

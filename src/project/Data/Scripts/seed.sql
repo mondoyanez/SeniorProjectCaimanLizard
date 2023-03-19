@@ -108,5 +108,4 @@ VALUES
 (2, 1, 2, null),
 (3, 1, null, 1),
 (4, 1, null, 2),
-(5, 2, 1, null)
 SET IDENTITY_INSERT [WatchListItems] OFF;

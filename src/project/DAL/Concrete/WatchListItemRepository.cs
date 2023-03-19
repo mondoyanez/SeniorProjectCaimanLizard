@@ -12,6 +12,16 @@ public class WatchListItemRepository : Repository<WatchListItem>, IWatchListItem
     {
     }
 
+    public IEnumerable<WatchListItem> FindAllByShowId(int showId)
+    {
+        if (showId == null)
+            throw new ArgumentNullException(nameof(showId));
+
+        IEnumerable<WatchListItem> watchListItems = GetAll().Where(wli => wli.ShowId == showId);
+
+        return watchListItems;
+    }
+
     public IEnumerable<WatchListItem> GetAllWatchListItemsByID(int watchListId)
     {
         if (watchListId == null)
@@ -24,4 +34,6 @@ public class WatchListItemRepository : Repository<WatchListItem>, IWatchListItem
 
         return watchListItems;
     }
+
+
 }
