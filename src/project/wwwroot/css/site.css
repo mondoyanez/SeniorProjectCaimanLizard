@@ -280,13 +280,13 @@ a.user-profile-link:hover {
     text-decoration: none;
 }
 
-.user-profile-btn-follow {
+#user-profile-btn-follow {
     width: 30%;
     height: 30%;
     background-color: #5D4A66;
 }
 
-    .user-profile-btn-follow:hover {
+    #user-profile-btn-follow:hover {
         width: 30%;
         height: 30%;
         background-color: #D5A021;
