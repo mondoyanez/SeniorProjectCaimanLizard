@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileSystemGlobbing;
 using NuGet.Protocol.Plugins;
+using System.Linq;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 
@@ -16,9 +17,34 @@ public class ShowRepository : Repository<Show>, IShowRepository
         if (watchList == null)
             return Enumerable.Empty<Show>();
 
-        IEnumerable<Show> shows = GetAll().Where(s => s.Tmdbid == watchList.ShowId);
+        IEnumerable<Show> shows = GetAll().Where(s => s.Id == watchList.ShowId);
 
         return shows;
 
     }
+
+    //public IEnumerable<Show> GetShows(IEnumerable<WatchList> watchLists)
+    //{
+    //    if (watchLists == null)
+    //        return Enumerable.Empty<Show>();
+
+    //    IEnumerable<Show> shows = GetAll();
+    //    List<Show> result = new();
+
+    //    result = shows.Where(s => s.Tmdbid == watchList.ShowId);
+
+    //    return result;
+
+    //foreach (WatchList watchList in watchLists)
+    //{
+    //    if (watchList.ShowId != null)
+    //    {
+    //        //result.Add(shows.First(s => s.Tmdbid == watchList.ShowId));
+    //        Show show = shows.First(s => s.Tmdbid == watchList.ShowId);
+    //        result.Append(show);
+    //    }
+    //}
+
+    //return result;
+    //}
 }

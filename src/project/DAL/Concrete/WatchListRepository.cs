@@ -19,9 +19,6 @@ public class WatchListRepository : Repository<WatchList>, IWatchListRepository
 
         WatchList? watchList = GetAll().FirstOrDefault(w => w.UserId == userID);
 
-        //if (watchList.UserId == null)
-        //    throw new ArgumentNullException(nameof(watchList));
-
         return watchList;
     }
 

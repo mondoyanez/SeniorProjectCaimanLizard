@@ -6,7 +6,9 @@ namespace WatchParty.DAL.Abstract
     public interface IShowRepository : IRepository<Show>
     {
 
+        //IEnumerable<Show> GetShows(IEnumerable<WatchList> watchLists);
         IEnumerable<Show> GetShows(WatchList watchList);
+
 
     }
 }

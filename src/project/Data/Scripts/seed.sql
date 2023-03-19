@@ -93,19 +93,19 @@ VALUES
 SET IDENTITY_INSERT [Movie] OFF;
 
 SET IDENTITY_INSERT [WatchList] ON;
-INSERT INTO [WatchList] (ID, UserID, ShowID, MovieID)
+INSERT INTO [WatchList] (ID, UserID, ListType)
 VALUES
-(1, 1, 1, null),
-(2, 1, 2, null),
-(3, 1, null, 1),
-(4, 1, null, 2)
+(1, 1, 0),
+(2, 2, 0),
+(3, 3, 0),
+(4, 4, 0)
 SET IDENTITY_INSERT [WatchList] OFF;
 
 SET IDENTITY_INSERT [WatchListItems] ON;
 INSERT INTO [WatchListItems] (ID, WatchListID, ShowID, MovieID)
 VALUES
 (1, 1, 1, null),
-(2, 2, 2, null),
-(3, 3, null, 1),
-(4, 4, null, 2)
+(2, 1, 2, null),
+(3, 1, null, 1),
+(4, 1, null, 2)
 SET IDENTITY_INSERT [WatchListItems] OFF;

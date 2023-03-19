@@ -52,11 +52,14 @@ namespace WatchParty.Controllers
                 return View("user/Notfound");
             }
 
-            //Find the watchlist by userID
+            //Find the watchlists by userID
+            //watchListVM.watchLists = _watchListRepo.FindAllByUserID(watcher.Id);
             watchListVM.watchList = _watchListRepo.FindByUserID(watcher.Id);
 
-            // Get shows/movies by the ShowId/MovieId
+            // Get shows/movies by the users watchlist
+            //watchListVM.shows = _showRepo.GetShows(watchListVM.watchLists);
             watchListVM.shows = _showRepo.GetShows(watchListVM.watchList);
+
 
             return View(watchListVM);
         }

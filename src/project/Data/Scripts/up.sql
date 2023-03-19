@@ -43,8 +43,7 @@ CREATE TABLE [WatchList]
 (
     [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
     [UserID]                INT                 NOT NULL,
-    [ShowID]                INT,
-    [MovieID]               INT
+    [ListType]                  INT
 );
 
 
@@ -83,8 +82,6 @@ ALTER TABLE [LikePost]              ADD CONSTRAINT [Fk_LikePost_PostID]         
 ALTER TABLE [LikePost]              ADD CONSTRAINT [Fk_LikePost_UserID]             FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [WatchList]             ADD CONSTRAINT [Fk_WatchList_UserID]            FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE [WatchList]             ADD CONSTRAINT [Fk_WatchList_ShowID]            FOREIGN KEY([ShowID])                   REFERENCES[Show]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE [WatchList]             ADD CONSTRAINT [Fk_WatchList_MovieID]           FOREIGN KEY([MovieID])                  REFERENCES[Movie]([ID])             ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_WatchList]    FOREIGN KEY([WatchListID])              REFERENCES[WatchList]([ID])         ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_Show]         FOREIGN KEY([ShowID])                   REFERENCES[Show]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;

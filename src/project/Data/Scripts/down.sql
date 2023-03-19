@@ -7,8 +7,6 @@ ALTER TABLE [LikePost]              DROP CONSTRAINT [Fk_LikePost_PostID]
 ALTER TABLE [LikePost]              DROP CONSTRAINT [Fk_LikePost_UserID]
 
 ALTER TABLE [WatchList]             DROP CONSTRAINT [Fk_WatchList_UserID]
-ALTER TABLE [WatchList]             DROP CONSTRAINT [Fk_WatchList_ShowID]
-ALTER TABLE [WatchList]             DROP CONSTRAINT [Fk_WatchList_MovieID]
 
 ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_WatchList]
 ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_Show]

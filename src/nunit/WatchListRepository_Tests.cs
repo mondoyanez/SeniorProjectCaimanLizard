@@ -10,16 +10,16 @@ namespace WatchPartyTest
     {
     }
 
-    [SetUp]
-    public void Setup()
-    {
+    //[SetUp]
+    //public void Setup()
+    //{
 
-    }
+    //}
 
-    [Test]
-    public void test1()
-    {
+    //[Test]
+    //public void test1()
+    //{
 
-    }
+    //}
 
 }
