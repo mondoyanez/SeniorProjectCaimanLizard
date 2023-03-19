@@ -58,7 +58,11 @@ namespace WatchParty.Controllers
             watchListVM.watchList = _watchListRepo.FindByUserID(watcher.Id);
 
             //Get the items in the watchlistItems
-            watchListVM.watchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.watchList.Id);
+            if (watchListVM.watchList != null)
+            {
+                watchListVM.watchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.watchList.Id);
+            }
+            
 
             // Get shows/movies by the users watchlistItems
             watchListVM.shows = _showRepo.GetShows(watchListVM.watchListItems);
