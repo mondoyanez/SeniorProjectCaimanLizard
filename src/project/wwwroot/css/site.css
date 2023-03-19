@@ -264,3 +264,18 @@ body {
     margin-left: 15%;
     width: 70%
 }
+
+a.user-profile-link:link, a.user-profile-link:visited {
+    color: #5D4A66;
+    text-decoration: none;
+}
+
+a.user-profile-link:active {
+    color: #D5A021;
+    text-decoration: none;
+}
+
+a.user-profile-link:hover {
+    color: #84AFE6;
+    text-decoration: none;
+}
