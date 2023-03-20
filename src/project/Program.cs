@@ -49,7 +49,7 @@ public class Program
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
-        builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(sendGridKey));
+        builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(builder.Configuration));
         var app = builder.Build();
 
         // After Build has been called, all services have been registered (by running Startup)

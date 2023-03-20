@@ -11,23 +11,25 @@ namespace WatchParty.Services.Concrete
 {
     public class SendGridService : IEmailSender
     {
+        private readonly IConfiguration _configuration;
         private readonly EmailAddress _fromEmail;
         public string? Key { get; set; }
 
-        public SendGridService(string? key)
+        public SendGridService(IConfiguration configuration)
         {
-            Key = key;
+            _configuration = configuration;
             _fromEmail = new EmailAddress("CaimanLizardDevelopment@pm.me", "The CLD Team");
         }
 
         public async Task SendEmailAsync(string toEmail, string subject, string jsonData)
         {
-            if (string.IsNullOrEmpty(Key))
+            var apiKey = _configuration["SendGrid:APIKey"];
+            if (string.IsNullOrEmpty(apiKey))
             {
                 throw new Exception("Null SendGridKey");
             }
 
-            await Execute(Key, subject, jsonData, toEmail);
+            await Execute(apiKey, subject, jsonData, toEmail);
         }
 
         public async Task Execute(string apiKey, string subject, string jsonData, string toEmail)
