@@ -300,10 +300,11 @@ namespace WatchParty.Services.Concrete
                 .ToList();
         }
 
-        public TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/?query=")
+        public TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/")
         {
+            Debug.WriteLine("title inside service: " + title);
             var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
-            Debug.WriteLine(jsonResponse);
+            Debug.WriteLine("jsonResponse" + jsonResponse);
 
             TMDBJsonDTO? tmdbJsonDTO = new();
             try

@@ -104,7 +104,8 @@ namespace WatchParty.Controllers
             {
                 //show = _showRepo.CreateShow();
                 Debug.WriteLine("Show is null");
-                TMDBTitle tmdbTitle = _tmdbService.GetShowDetails(showTitle);
+                //TMDBTitle tmdbTitle = _tmdbService.GetShowDetails(showId);
+                TMDBTitle tmdbTitle = _tmdbService.SearchShows(showTitle).First();
 
                 if (tmdbTitle == null)
                     Debug.WriteLine("tmdbtitle is null");
@@ -133,6 +134,64 @@ namespace WatchParty.Controllers
                 WatchListId = watchList.Id,
                 ShowId = show.Id,
                 MovieId = null
+            };
+
+            _watchListItemsRepo.AddOrUpdate(watchListItem);
+            _context.SaveChanges();
+
+            Debug.WriteLine("inside add to watch list in home controller");
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> addMovieToWatchList(string movieTitle)
+        {
+            // Get the current user and their watch list
+            var currentUser = await _userManager.GetUserAsync(User);
+            Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+
+            // If the watchlist is null, create one for the user
+            if (watchList == null)
+            {
+                watchList = new WatchList()
+                {
+                    UserId = watcher.Id,
+                    ListType = 0
+                };
+                _watchListRepo.AddOrUpdate(watchList);
+            }
+
+
+            // Create a show item if not already existing
+            Movie movie = _movieRepo.FindByTitle(movieTitle);
+            if (movie == null)
+            {
+                //show = _showRepo.CreateShow();
+                Debug.WriteLine("Show is null");
+                //TMDBTitle tmdbTitle = _tmdbService.GetShowDetails(showId);
+                TMDBTitle tmdbTitle = _tmdbService.SearchShows(movieTitle).First();
+
+                if (tmdbTitle == null)
+                    Debug.WriteLine("tmdbtitle is null");
+                movie = new Movie()
+                {
+                    Tmdbid = tmdbTitle.Id,
+                    Title = tmdbTitle.Title,
+                    Overview = tmdbTitle.PlotSummary,
+                    ReleaseDate = tmdbTitle.ReleaseDate
+                };
+                Debug.WriteLine("TMDBTitle: " + tmdbTitle.Title);
+            }
+
+            _movieRepo.AddOrUpdate(movie);
+
+            // Create the watchlistitem and add to db
+            WatchListItem watchListItem = new WatchListItem()
+            {
+                WatchListId = watchList.Id,
+                ShowId = null,
+                MovieId = movie.Id
             };
 
             _watchListItemsRepo.AddOrUpdate(watchListItem);

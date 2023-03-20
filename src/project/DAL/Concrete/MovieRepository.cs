@@ -14,6 +14,16 @@ public class MovieRepository : Repository<Movie>, IMovieRepository
     {
     }
 
+    public Movie? FindByTitle(string movieTitle)
+    {
+        if (movieTitle == null)
+            throw new ArgumentNullException(nameof(movieTitle));
+
+        Movie movie = GetAll().Where(m => m.Title == movieTitle).FirstOrDefault();
+
+        return movie;
+    }
+
     public IEnumerable<Movie> GetMovies(IEnumerable<WatchListItem> watchListItems)
     {
         if (watchListItems == null)
