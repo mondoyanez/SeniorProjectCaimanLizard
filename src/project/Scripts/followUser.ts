@@ -2,29 +2,18 @@
 
 submitButton.on("click", (e: JQuery.Event) => {
     e.preventDefault();
-    const values = getUserValues();
+    const followerId = $("#user-profile-id").val();
 
     $(() => {
         $.ajax({
             type: "POST",
             dataType: "json",
-            contentType: "application/json; charset=UTF-8",
-            url: `/followingList/addFollower`,
-            data: JSON.stringify(values),
+            url: `/followingList/addFollower/?followerId=${followerId}`,
             success: addFollower,
             error: errorOnAjax
         });
     });
 });
-
-function getUserValues() {
-    const userId = $("#user-profile-id").val();
-
-    return {
-        //status: true,
-        "UserId": Number(userId)
-    }
-}
 
 function addFollower(): void {
     $("#user-profile-btn-follow").hide();
