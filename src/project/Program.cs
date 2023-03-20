@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.Areas.Identity.Data;
 using WatchParty.DAL.Abstract;
@@ -19,12 +20,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         var tmdbKey = builder.Configuration["TMDB:APIKey"];
+        var sendGridKey = builder.Configuration["SendGrid:APIKey"];
 
         // Add services to the container.
 
         var watchPartyConnectionString = builder.Configuration.GetConnectionString("WatchPartyConnection") ?? throw new InvalidOperationException("Connection string 'WatchPartyConnection' not found.");
         var authConnectionString = builder.Configuration.GetConnectionString("AuthConnection") ?? throw new InvalidOperationException("Connection string 'AuthConnection' not found.");
-        
+
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(authConnectionString));
 
@@ -34,18 +36,20 @@ public class Program
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-        {
-            options.SignIn.RequireConfirmedAccount = false;
-        })
-        
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.User.RequireUniqueEmail = true;
+            })
+
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddScoped<DbContext, WatchPartyDbContext>();
-		builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient {BaseAddress = new Uri("https://api.themoviedb.org/3") }));
+        builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient { BaseAddress = new Uri("https://api.themoviedb.org/3") }));
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
+        builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(builder.Configuration));
         builder.Services.AddScoped<IWatchListRepository, WatchListRepository>();
         builder.Services.AddScoped<IShowRepository, ShowRepository>();
         builder.Services.AddScoped<IMovieRepository, MovieRepository>();
