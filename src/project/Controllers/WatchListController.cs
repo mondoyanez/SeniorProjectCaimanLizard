@@ -79,7 +79,7 @@ namespace WatchParty.Controllers
 
         [HttpPost]
         public async Task<IActionResult> addShowToWatchList(string showTitle)
-        {
+        {  
             // Get the current user and their watch list
             var currentUser = await _userManager.GetUserAsync(User);
             Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
@@ -119,6 +119,7 @@ namespace WatchParty.Controllers
                 Debug.WriteLine("TMDBTitle: " + tmdbTitle.Title);
             }
 
+
             _showRepo.AddOrUpdate(show);
 
             // Create the watchlistitem and add to db
@@ -135,6 +136,10 @@ namespace WatchParty.Controllers
                 ShowId = show.Id,
                 MovieId = null
             };
+
+            //Check to see if show already exists
+            //if (_watchListItemsRepo.ExistsWithDifferentId(watchList.Id, show.Id) == true)
+            //    return Ok();
 
             _watchListItemsRepo.AddOrUpdate(watchListItem);
             _context.SaveChanges();

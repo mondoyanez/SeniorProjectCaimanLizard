@@ -12,6 +12,15 @@ public class WatchListItemRepository : Repository<WatchListItem>, IWatchListItem
     {
     }
 
+    public bool ExistsWithDifferentId(int watchListId, int ShowId)
+    {
+        WatchListItem item = GetAll().Where(wli => wli.WatchListId == watchListId).Where(s => s.Id == ShowId).First();
+
+        if (item == null)
+            return false;
+        else return true;
+    }
+
     public IEnumerable<WatchListItem> FindAllByMovieId(int movieId)
     {
         if (movieId == null)
