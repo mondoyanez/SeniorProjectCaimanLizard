@@ -102,6 +102,11 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllerRoute(
+            name: "AddShowToWatchList",
+            pattern: "watchlist/addShowToWatchList",
+            defaults: new { controller = "WatchList", action = "addShowToWatchList" });
+
+        app.MapControllerRoute(
             name: "watchList",
             pattern: "watchlist/{username}",
             defaults: new { controller = "WatchList", action = "Index" });

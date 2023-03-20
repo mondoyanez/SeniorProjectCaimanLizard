@@ -289,7 +289,7 @@ function displayShows(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                            <button id="card-button" class="btn cld-btn-secondary text-light text-right" onclick="addShowToWatchList('${item.title}','${item.plotSummary}','${item.releaseDate}')">Add to Watch List</button>
+                          <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add to Watch List</button>
                           </div>
                         </div>
                       </div>
@@ -343,21 +343,15 @@ function errorOnAjax() {
     // ...
 }
 
-function addShowToWatchList(showTitle, overview, releaseDate) {
-    console.log("Title:", showTitle);
-    console.log("Overview:", overview);
-    console.log("Release date:", releaseDate);
-    // Call your repository pattern function here to add the item to the database
-
-    //What is Result
-
+function addShowToWatchList(showTitle) {
+    console.log("Title:", showTitle);    
     $.ajax({
-        url: "/api/addShowToWatchList",
+        url: "/WatchList/addShowToWatchList",
         method: "POST",
         data: {
-            title: showTitle
+            showTitle : showTitle
         },
-        sucess: function (result) {
+        success: function (result) {
             console.log("Added to watch list successfully");
         },
         error: function (error) {

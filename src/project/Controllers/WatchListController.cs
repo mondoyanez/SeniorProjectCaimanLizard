@@ -74,11 +74,51 @@ namespace WatchParty.Controllers
         }
 
         [HttpPost]
-        [Route("/addShowToWatchList")]
-        public IActionResult AddShowToWatchList(WatchList watchList, Show show)
+        public async Task<IActionResult> addShowToWatchList(string showTitle)
         {
-            _watchListRepo.AddOrUpdate(watchList);
+            // Get the current user and their watch list
+            var currentUser = await _userManager.GetUserAsync(User);
+            Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+
+            // If the watchlist is null, create one for the user
+            if (watchList == null)
+            {
+                watchList = new WatchList()
+                {
+                    UserId = watcher.Id,
+                    ListType = 0
+                };
+                _watchListRepo.AddOrUpdate(watchList);
+            }
+            
+
+            // Create a show item if not already existing
+            Show show = _showRepo.FindByTitle(showTitle);
+            if (show == null)
+            {
+                show = _showRepo.CreateShow();
+            }
+
             _showRepo.AddOrUpdate(show);
+
+            // Create the watchlistitem and add to db
+
+
+            Debug.WriteLine("showTitle: " + showTitle);
+            
+            Debug.WriteLine("watcher: " + watcher.ToString());
+            Debug.WriteLine("Watch List: " + watchList.ToString());
+
+            WatchListItem watchListItem = new WatchListItem()
+            {
+                WatchListId = watchList.Id,
+                ShowId = show.Id,
+                MovieId = null
+            };
+
+            _watchListItemsRepo.AddOrUpdate(watchListItem);
+            _context.SaveChanges();
 
             Debug.WriteLine("inside add to watch list in home controller");
             return Ok();
