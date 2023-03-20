@@ -50,6 +50,13 @@ public class Program
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
         builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(builder.Configuration));
+        builder.Services.AddScoped<IWatchListRepository, WatchListRepository>();
+        builder.Services.AddScoped<IShowRepository, ShowRepository>();
+        builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+        builder.Services.AddScoped<IWatchListItemRepository, WatchListItemRepository>();
+
+
+
         var app = builder.Build();
 
         // After Build has been called, all services have been registered (by running Startup)
@@ -97,6 +104,16 @@ public class Program
         app.UseRouting();
 
         app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "AddShowToWatchList",
+            pattern: "watchlist/addShowToWatchList",
+            defaults: new { controller = "WatchList", action = "addShowToWatchList" });
+
+        app.MapControllerRoute(
+            name: "watchList",
+            pattern: "watchlist/{username}",
+            defaults: new { controller = "WatchList", action = "Index" });
 
         app.MapControllerRoute(
            name: "editProfile",

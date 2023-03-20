@@ -39,6 +39,40 @@ CREATE TABLE [LikePost]
     [UserID]                INT                 NOT NULL
 );
 
+CREATE TABLE [WatchList]
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [UserID]                INT                 NOT NULL,
+    [ListType]                  INT
+);
+
+
+CREATE TABLE [Show]
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [TMDBID]                INT                 NOT NULL,
+    [Title]                 NVARCHAR(128)       NOT NULL,
+    [Overview]              NVARCHAR(2048),
+    [FirstAirDate]          NVARCHAR(32)
+);
+
+CREATE TABLE [Movie]
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [TMDBID]                INT                 NOT NULL,
+    [Title]                 NVARCHAR(128)       NOT NULL,
+    [Overview]              NVARCHAR(2048),
+    [ReleaseDate]           NVARCHAR(32)
+);
+
+CREATE TABLE [WatchListItems]
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [WatchListID]           INT                 NOT NULL,
+    [ShowID]                INT,
+    [MovieID]               INT
+);
+
 ALTER TABLE [Post]                  ADD CONSTRAINT [Fk_Post_UserID]                 FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [Reshare]               ADD CONSTRAINT [Fk_Reshare_PostID]              FOREIGN KEY([PostID])                   REFERENCES[Post]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -46,3 +80,9 @@ ALTER TABLE [Reshare]               ADD CONSTRAINT [Fk_Reshare_UserID]          
 
 ALTER TABLE [LikePost]              ADD CONSTRAINT [Fk_LikePost_PostID]             FOREIGN KEY([PostID])                   REFERENCES[Post]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE [LikePost]              ADD CONSTRAINT [Fk_LikePost_UserID]             FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE [WatchList]             ADD CONSTRAINT [Fk_WatchList_UserID]            FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_WatchList]    FOREIGN KEY([WatchListID])              REFERENCES[WatchList]([ID])         ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_Show]         FOREIGN KEY([ShowID])                   REFERENCES[Show]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_Movie]        FOREIGN KEY([MovieID])                  REFERENCES[Movie]([ID])             ON DELETE NO ACTION ON UPDATE NO ACTION;
