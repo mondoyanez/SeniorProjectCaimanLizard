@@ -21,8 +21,8 @@ public class FollowingListController : ControllerBase
     }
 
     [HttpPost("addFollower")]
-    [ValidateAntiForgeryToken]
-    public IActionResult AddFollower([FromBody] int userId)
+    //[ValidateAntiForgeryToken]
+    public IActionResult AddFollower([Bind("UserId")] Watcher watcher)
     {
         Watcher? loggedInWatcher = _watcherRepository.FindByUsername(User.Identity.Name);
         return Ok();
