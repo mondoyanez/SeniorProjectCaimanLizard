@@ -2,12 +2,12 @@
 const submitButton = $("#user-profile-btn-follow");
 submitButton.on("click", (e) => {
     e.preventDefault();
-    const followerId = Number($("#user-profile-id").val());
+    const followerUsername = $("#user-profile-username").val();
     $(() => {
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: `/followingList/addFollower/?followerId=${followerId}`,
+            url: `/followingList/addFollower/?followerUsername=${followerUsername}`,
             success: addFollower,
             error: errorOnAjax
         });

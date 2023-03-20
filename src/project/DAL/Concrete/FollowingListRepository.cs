@@ -23,4 +23,16 @@ public class FollowingListRepository: Repository<FollowingList>, IFollowingListR
     {
         return GetAll().FirstOrDefault(f => f.UserId == userId && f.FollowingId == followerId) != null;
     }
+
+    public void AddFollower(FollowingList newFollow)
+    {
+        try
+        {
+            AddOrUpdate(newFollow);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
+    }
 }

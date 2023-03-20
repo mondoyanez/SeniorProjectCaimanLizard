@@ -32,7 +32,7 @@
                                 <h6 class="card-subtitle mb-2 text-muted" id="user-amount-followers">@Model.Followers.Count</h6>
                             </div>
                         </div>
-                        <input type="hidden" id="user-profile-id" value="@Model.Watcher.Id"/>
+                        <input type="hidden" id="user-profile-username" value="@Model.Watcher.Username" />
                         @if (!Model.isCurrentUser)
                         {
                             @if (Convert.ToBoolean(Model.isFollowing))
