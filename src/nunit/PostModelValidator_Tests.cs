@@ -18,8 +18,6 @@ public class PostModelValidator_Tests
             FirstName = "Ja",
             LastName = "Morrant",
             Email = "MorrantJa@gmail.com",
-            FollowingCount = 1000000,
-            FollowerCount = 50,
             Bio = "This is my bio"
         };
 
