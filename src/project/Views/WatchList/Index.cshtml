@@ -29,21 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var show in Model.movies)
+                    @foreach (var movie in Model.movies)
                     {
-
-                        <tr>
-                            <th>@show.Title</th>
-                            <th>@show.Overview</th>
-                            <th>@show.ReleaseDate</th>
-@*                            @if (Model.isCurrentUser)
+                    <tr>
+                        <th>@movie.Title</th>
+                        <th>@movie.Overview</th>
+                        <th>@movie.ReleaseDate</th>
+                            @if (Model.isCurrentUser)
                             {
-                                <th>
-                                    <button class="btn btn-danger btn-sm delete-watchlist-item" data-show-id="@show.Id">Delete</button>
-                                </th>
-                            }*@ 
-                        </tr>
+                            <th>
+                                <button class="btn btn-danger btn-sm delete-watchlist-movie" data-movie-id="@movie.Id">Delete</button>
+                            </th>
+                            }
+                    </tr>
                     }
+                </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -69,7 +70,7 @@
                             @if (Model.isCurrentUser)
                             {
                                 <th>
-                                    <button class="btn btn-danger btn-sm delete-watchlist-item" data-show-id="@show.Id">Delete</button>
+                                    <button class="btn btn-danger btn-sm delete-watchlist-show" data-show-id="@show.Id">Delete</button>
                                 </th>
                             }
                         </tr> 

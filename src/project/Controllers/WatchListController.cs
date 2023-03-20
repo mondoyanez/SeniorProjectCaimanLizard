@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.Models.Concrete;
+using WatchParty.Services.Abstract;
 using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers
@@ -23,9 +25,10 @@ namespace WatchParty.Controllers
         private readonly IWatcherRepository _watcherRepository;
         private readonly IWatchListItemRepository _watchListItemsRepo;
         private readonly IMovieRepository _movieRepo;
+        private readonly ITMDBService _tmdbService;
 
 
-        public WatchListController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, IWatchListRepository watchListRepository, IShowRepository showRepo, IWatcherRepository watcherRepository, IWatchListItemRepository watchListItemsRepo, IMovieRepository movieRepo)
+        public WatchListController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, IWatchListRepository watchListRepository, IShowRepository showRepo, IWatcherRepository watcherRepository, IWatchListItemRepository watchListItemsRepo, IMovieRepository movieRepo, ITMDBService tMDBService)
         {
             _context = context;
             _userManager = userManager;
@@ -34,6 +37,7 @@ namespace WatchParty.Controllers
             _watcherRepository = watcherRepository;
             _watchListItemsRepo = watchListItemsRepo;
             _movieRepo = movieRepo;
+            _tmdbService = tMDBService;
         }
 
         // GET: WatchList/username
@@ -95,9 +99,23 @@ namespace WatchParty.Controllers
 
             // Create a show item if not already existing
             Show show = _showRepo.FindByTitle(showTitle);
+            Debug.WriteLine("showTitle: " + showTitle);
             if (show == null)
             {
-                show = _showRepo.CreateShow();
+                //show = _showRepo.CreateShow();
+                Debug.WriteLine("Show is null");
+                TMDBTitle tmdbTitle = _tmdbService.GetShowDetails(showTitle);
+
+                if (tmdbTitle == null)
+                    Debug.WriteLine("tmdbtitle is null");
+                show = new Show()
+                {
+                    Tmdbid = tmdbTitle.Id,
+                    Title = tmdbTitle.Title,
+                    Overview = tmdbTitle.PlotSummary,
+                    FirstAirDate = tmdbTitle.ReleaseDate
+                };
+                Debug.WriteLine("TMDBTitle: " + tmdbTitle.Title);
             }
 
             _showRepo.AddOrUpdate(show);
@@ -125,7 +143,7 @@ namespace WatchParty.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteWatchListItem(int showId)
+        public async Task<IActionResult> DeleteWatchListShow(int showId)
         {
             // Get all the watch list items that have the given show id, there can be more than one
             IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByShowId(showId);
@@ -145,6 +163,40 @@ namespace WatchParty.Controllers
             WatchListItem watchListItem = watchListItems.Where(wli => wli.WatchListId == watchList.Id).FirstOrDefault();
 
             Debug.WriteLine("Show id:" + showId);
+            Debug.WriteLine("Watch List Item: " + watchListItem.ToString());
+
+            // Delete the watchListItem from the database
+            if (watchListItem == null)
+            {
+                Debug.WriteLine("Watchlistitem is null");
+                return NotFound();
+            }
+
+            _watchListItemsRepo.Delete(watchListItem);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteWatchListMovie(int movieId)
+        {
+            // Get all the watch list items that have the given show id, there can be more than one
+            IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByMovieId(movieId);
+
+            // Get information about the current user
+            var currentUser = await _userManager.GetUserAsync(User);
+            Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
+
+
+            // Get the users watch list
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+
+
+            // Filter out the watch list items to find the one specific to the current user
+            WatchListItem watchListItem = watchListItems.Where(wli => wli.WatchListId == watchList.Id).FirstOrDefault();
+
+            Debug.WriteLine("Show id:" + movieId);
             Debug.WriteLine("Watch List Item: " + watchListItem.ToString());
 
             // Delete the watchListItem from the database

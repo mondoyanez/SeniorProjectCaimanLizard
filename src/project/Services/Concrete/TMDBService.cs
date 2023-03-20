@@ -300,7 +300,7 @@ namespace WatchParty.Services.Concrete
                 .ToList();
         }
 
-        public TMDBTitle GetShowDetails(string title, string relativePath = "/tv/?query=")
+        public TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/?query=")
         {
             var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
             Debug.WriteLine(jsonResponse);

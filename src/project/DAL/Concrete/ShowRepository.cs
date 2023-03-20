@@ -6,6 +6,7 @@ using System.Linq;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Models.Concrete;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WatchParty.DAL.Concrete;
 
@@ -22,10 +23,11 @@ public class ShowRepository : Repository<Show>, IShowRepository
 
 
 
+
         return show;
     }
 
-    public Show FindByTitle(string title)
+    public Show? FindByTitle(string title)
     {
         if (title == null)
             throw new ArgumentNullException(nameof(title));

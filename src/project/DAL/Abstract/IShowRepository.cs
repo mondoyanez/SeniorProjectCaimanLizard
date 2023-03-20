@@ -7,7 +7,7 @@ namespace WatchParty.DAL.Abstract
     {
         IEnumerable<Show> GetShows(IEnumerable<WatchListItem> watchListItems);
 
-        Show FindByTitle(string title);
+        Show? FindByTitle(string title);
         Show? CreateShow();
     }
 }
