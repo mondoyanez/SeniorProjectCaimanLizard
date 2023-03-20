@@ -2,7 +2,7 @@
 
 submitButton.on("click", (e: JQuery.Event) => {
     e.preventDefault();
-    const followerId = $("#user-profile-id").val();
+    const followerId = Number($("#user-profile-id").val());
 
     $(() => {
         $.ajax({

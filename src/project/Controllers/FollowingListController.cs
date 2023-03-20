@@ -21,10 +21,11 @@ public class FollowingListController : ControllerBase
     }
 
     [HttpPost("addFollower")]
-    public IActionResult AddFollower(string followerId)
+    public IActionResult AddFollower([FromBody] int followerId)
     {
         Watcher? loggedInWatcher = _watcherRepository.FindByUsername(User.Identity.Name);
-        return Ok();
+
+        return Ok(StatusCodes.Status201Created);
     }
 
 }
