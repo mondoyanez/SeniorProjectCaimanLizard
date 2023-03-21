@@ -80,6 +80,9 @@ CREATE TABLE [WatchListItems]
 
 ALTER TABLE [Post]                  ADD CONSTRAINT [Fk_Post_UserID]                 FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+ALTER TABLE [FollowingList]         ADD CONSTRAINT [Fk_FollowingList_UserID]        FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [FollowingList]         ADD CONSTRAINT [Fk_FollowingList_FollowingID]   FOREIGN KEY([FollowingID])              REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 ALTER TABLE [Reshare]               ADD CONSTRAINT [Fk_Reshare_PostID]              FOREIGN KEY([PostID])                   REFERENCES[Post]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE [Reshare]               ADD CONSTRAINT [Fk_Reshare_UserID]              FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
