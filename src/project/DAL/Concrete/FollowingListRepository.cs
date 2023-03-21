@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 
@@ -26,6 +27,12 @@ public class FollowingListRepository: Repository<FollowingList>, IFollowingListR
 
     public void AddFollower(FollowingList newFollow)
     {
+        if (IsFollowing(newFollow.UserId, newFollow.FollowingId))
+            throw new Exception("You are already following this user");
+
+        if (newFollow.UserId == newFollow.FollowingId)
+            throw new Exception("Cannot follow yourself");
+
         try
         {
             AddOrUpdate(newFollow);
