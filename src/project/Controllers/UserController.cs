@@ -111,7 +111,6 @@ public class UserController : Controller
         return View(vm);
     }
 
-
     private bool WatcherExists(int id)
     {
         return (_context.Watchers?.Any(e => e.Id == id)).GetValueOrDefault();

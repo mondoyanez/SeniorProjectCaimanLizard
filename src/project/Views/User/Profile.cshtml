@@ -53,10 +53,12 @@
             <div class="col-md-1">
                 @*Only show here if it is the current user*@
                 @if (Model.isCurrentUser == true)
-                {
-@*                    <a href=/User/Edit/@Model.Watcher.Username class="btn cld-btn-primary text-light">Edit Profile</a>
-*@                
+                {              
                     <button class="btn cld-btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
+                }
+                else
+                {
+                    <a class="btn cld-btn-secondary btn-sm" asp-area="" asp-controller="WatchList" asp-action="Index" asp-route-username="@Model.Watcher.Username">Watch List</a>
                 }
             </div>
         </div>

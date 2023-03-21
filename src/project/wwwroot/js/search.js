@@ -227,6 +227,7 @@ function displayTitles(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                            <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add to Watch List</button>
                           </div>
                         </div>
                       </div>
@@ -256,6 +257,7 @@ function displayMovies(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                            <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add to Watch List</button>
                           </div>
                         </div>
                       </div>
@@ -277,16 +279,17 @@ function displayShows(data) {
         function (index, item) {
             let result =
                 `<div class="col cld-bg-light">
-                    <div class="card mb-3">
+                    <div class="card mb-3" id="${index}">
                       <div class="row g-0">
                         <div class="col-sm-2 col-4 align-self-center">
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                         </div>
                         <div class="col">
                           <div class="card-body text-start">
-                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                          <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add to Watch List</button>
                           </div>
                         </div>
                       </div>
@@ -338,4 +341,21 @@ function errorOnAjax() {
     console.log("ERROR in ajax request");
     // take care of the error, maybe display a message to the user
     // ...
+}
+
+function addShowToWatchList(showTitle) {
+    console.log("Title:", showTitle);    
+    $.ajax({
+        url: "/WatchList/addShowToWatchList",
+        method: "POST",
+        data: {
+            showTitle : showTitle
+        },
+        success: function (result) {
+            console.log("Added to watch list successfully");
+        },
+        error: function (error) {
+            console.error("Error updating database:" + error.responseText);
+        }
+    });
 }
