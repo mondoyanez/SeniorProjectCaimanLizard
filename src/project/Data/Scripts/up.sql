@@ -8,9 +8,14 @@ CREATE TABLE [Watcher]
     [FirstName]             NVARCHAR(64),
     [LastName]              NVARCHAR(64),
     [Email]                 NVARCHAR(256),
-    [FollowingCount]        INT,
-    [FollowerCount]         INT,
     [Bio]                   NVARCHAR(256)
+);
+
+CREATE TABLE [FollowingList]
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [UserID]                INT                 NOT NULL,
+    [FollowingID]           INT                 NOT NULL
 );
 
 CREATE TABLE [Post]
@@ -74,6 +79,9 @@ CREATE TABLE [WatchListItems]
 );
 
 ALTER TABLE [Post]                  ADD CONSTRAINT [Fk_Post_UserID]                 FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE [FollowingList]         ADD CONSTRAINT [Fk_FollowingList_UserID]        FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [FollowingList]         ADD CONSTRAINT [Fk_FollowingList_FollowingID]   FOREIGN KEY([FollowingID])              REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [Reshare]               ADD CONSTRAINT [Fk_Reshare_PostID]              FOREIGN KEY([PostID])                   REFERENCES[Post]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE [Reshare]               ADD CONSTRAINT [Fk_Reshare_UserID]              FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;

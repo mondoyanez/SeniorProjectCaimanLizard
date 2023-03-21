@@ -215,8 +215,6 @@ public class PostRepository_Tests
             FirstName = "Tisha",
             LastName = "Otho",
             Email = "TishaOtho@gmail.com",
-            FollowingCount = 500,
-            FollowerCount = 10,
             Bio = "This bio contains information about myself"
         };
 

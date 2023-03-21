@@ -49,8 +49,6 @@ public class WatcherRepository : Repository<Watcher>, IWatcherRepository
                 Email = r.Email,
                 FirstName = r.FirstName,
                 LastName = r.LastName,
-                FollowingCount = r.FollowingCount,
-                FollowerCount = r.FollowerCount
             }).ToList();
 
         return watchers;

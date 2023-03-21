@@ -18,11 +18,34 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body profile-card">
-                        <h3 class="card-title">@Model.Watcher.Username</h3>
+                    <div class="card-body profile-card text-center">
+                        <h3 class="card-title">@@@Model.Watcher.Username</h3>
                         <h5 class="card-subtitle mb-2">@Model.Watcher.FirstName @Model.Watcher.LastName</h5>
                         <p></p>
-                        @*<h6 class="card-subtitle mb-2 text-muted">Following @Model.Watcher.FollowingCount    Followers @Model.Watcher.FollowerCount</h6>*@
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 text-muted">Following:</h6>
+                                <h6 class="card-subtitle mb-2 text-muted" id="user-amount-following">@Model.Following.Count</h6>
+                            </div>
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 text-muted">Followers:</h6>
+                                <h6 class="card-subtitle mb-2 text-muted" id="user-amount-followers">@Model.Followers.Count</h6>
+                            </div>
+                        </div>
+                        <input type="hidden" id="user-profile-username" value="@Model.Watcher.Username" />
+                        @if (!Model.isCurrentUser)
+                        {
+                            @if (Convert.ToBoolean(Model.isFollowing))
+                            {
+                                <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" style="display: none;" />
+                                <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User"/>
+                            }
+                            else
+                            {
+                                <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" />
+                                <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User" style="display: none;"/>
+                            }
+                        }
                         <p class="card-text">@Model.Watcher.Bio</p>
                     </div>
                 </div>
@@ -59,8 +82,6 @@
                         <input type="hidden" asp-for="Watcher.Id" />
                         <input type="hidden" asp-for="Watcher.AspNetIdentityId" />
                         <input type="hidden" asp-for="Watcher.Username" />
-                        <input type="hidden" asp-for="Watcher.FollowerCount" />
-                        <input type="hidden" asp-for="Watcher.FollowingCount" />
                         <input type="hidden" asp-for="Watcher.Email" />
                         <div class="form-group">
                             <label asp-for="Watcher.FirstName" class="control-label">First Name</label>
@@ -93,4 +114,7 @@
     <br />
 </section>
 
-
+@section Scripts
+{
+    <script type="text/javascript" src="~/dist/followUser.js"></script>
+}

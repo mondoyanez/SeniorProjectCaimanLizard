@@ -15,6 +15,8 @@ public partial class WatchPartyDbContext : DbContext
     {
     }
 
+    public virtual DbSet<FollowingList> FollowingLists { get; set; }
+
     public virtual DbSet<LikePost> LikePosts { get; set; }
 
     public virtual DbSet<Movie> Movies { get; set; }
@@ -32,10 +34,30 @@ public partial class WatchPartyDbContext : DbContext
     public virtual DbSet<Watcher> Watchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=WatchPartyConnection");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder
+                .UseLazyLoadingProxies()        // <-- add this line
+                .UseSqlServer("Name=WatchPartyConnection");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<FollowingList>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Followin__3214EC27968C245E");
+
+            entity.HasOne(d => d.Following).WithMany(p => p.FollowingListFollowings)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_FollowingList_FollowingID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.FollowingListUsers)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_FollowingList_UserID");
+        });
+
         modelBuilder.Entity<LikePost>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__LikePost__3214EC275476F342");
