@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WatchParty.Models;
+﻿using WatchParty.Models;
 
 namespace WatchPartyTest;
 public class PostModelValidator_Tests
@@ -18,8 +13,6 @@ public class PostModelValidator_Tests
             FirstName = "Ja",
             LastName = "Morrant",
             Email = "MorrantJa@gmail.com",
-            FollowingCount = 1000000,
-            FollowerCount = 50,
             Bio = "This is my bio"
         };
 

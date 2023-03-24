@@ -17,7 +17,7 @@ describe("testing functionality of manipulateDomUsers.js", () => {
   
     // Assert
     const expected = he.decode(usersTableElement.innerHTML.replace(/[\n\t\s]+/g, ""));
-    const actual = '<tr><th>Username</th><th>Email</th><th>FirstandLastName</th><th>AmountFollowing</th><th>AmountofFollowers</th></tr>';
+    const actual = '<tr><th>Username</th><th>Email</th><th>FirstandLastName</th></tr>';
   
     expect(expected).toBe(actual);
   });
@@ -25,7 +25,7 @@ describe("testing functionality of manipulateDomUsers.js", () => {
   test("generateTableBody should modify table and generate table body", () => {
       // Arrange
       // Create a new DOM environment
-      const dom = new JSDOM(`<!DOCTYPE html><html><head></head><body><table id="users-found"><tr><th>Username</th><th>Email</th><th>FirstandLastName</th><th>AmountFollowing</th><th>AmountofFollowers</th></tr></table></body></html>`);
+      const dom = new JSDOM(`<!DOCTYPE html><html><head></head><body><table id="users-found"><tr><th>Username</th><th>Email</th><th>FirstandLastName</th></tr></table></body></html>`);
   
       // Get the document and window objects from the DOM environment
       const { document } = dom.window;
@@ -36,7 +36,7 @@ describe("testing functionality of manipulateDomUsers.js", () => {
   
       // Assert
       const expected = he.decode(usersTableElement.innerHTML.replace(/[\n\t\s]+/g, ""));
-      const actual = '<tbody><tr><th>Username</th><th>Email</th><th>FirstandLastName</th><th>AmountFollowing</th><th>AmountofFollowers</th></tr></tbody><tbodyid=\"user-tbody\"></tbody>';
+      const actual = '<tbody><tr><th>Username</th><th>Email</th><th>FirstandLastName</th></tr></tbody><tbodyid=\"user-tbody\"></tbody>';
   
       expect(expected).toBe(actual);
   });

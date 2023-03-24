@@ -19,7 +19,7 @@ public partial class Post
     [StringLength(2048)]
     public string? PostDescription { get; set; }
 
-    [Column(TypeName = "datetime")] 
+    [Column(TypeName = "datetime")]
     public DateTime DatePosted { get; set; }
 
     [Column("UserID")]

@@ -5,8 +5,6 @@
             <th>Username </th>
             <th> Email </th>
             <th> First and Last Name </th>
-            <th> Amount Following </th>
-            <th> Amount of Followers </th>
         </tr>
     `;
     usersTableBody.append(headers);
