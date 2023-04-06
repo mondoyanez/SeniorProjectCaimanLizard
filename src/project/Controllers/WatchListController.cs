@@ -122,26 +122,26 @@ namespace WatchParty.Controllers
 
             _showRepo.AddOrUpdate(show);
 
-            // Create the watchlistitem and add to db
-
 
             Debug.WriteLine("showTitle: " + showTitle);
             
             Debug.WriteLine("watcher: " + watcher.ToString());
             Debug.WriteLine("Watch List: " + watchList.ToString());
 
-            WatchListItem watchListItem = new WatchListItem()
+
+
+            if (_watchListItemsRepo.ExistsWithDifferentId(watchList.Id, show.Id) == false)
             {
-                WatchListId = watchList.Id,
-                ShowId = show.Id,
-                MovieId = null
-            };
+                WatchListItem watchListItem = new WatchListItem()
+                {
+                    WatchListId = watchList.Id,
+                    ShowId = show.Id,
+                    MovieId = null
+                };
 
-            //Check to see if show already exists
-            //if (_watchListItemsRepo.ExistsWithDifferentId(watchList.Id, show.Id) == true)
-            //    return Ok();
+                _watchListItemsRepo.AddOrUpdate(watchListItem);
+            }
 
-            _watchListItemsRepo.AddOrUpdate(watchListItem);
             _context.SaveChanges();
 
             Debug.WriteLine("inside add to watch list in home controller");
@@ -191,15 +191,17 @@ namespace WatchParty.Controllers
 
             _movieRepo.AddOrUpdate(movie);
 
-            // Create the watchlistitem and add to db
-            WatchListItem watchListItem = new WatchListItem()
+            if (_watchListItemsRepo.ExistsWithDifferentId(watchList.Id, movie.Id) == false)
             {
-                WatchListId = watchList.Id,
-                ShowId = null,
-                MovieId = movie.Id
-            };
+                WatchListItem watchListItem = new WatchListItem()
+                {
+                    WatchListId = watchList.Id,
+                    ShowId = null,
+                    MovieId = movie.Id
+                };
 
-            _watchListItemsRepo.AddOrUpdate(watchListItem);
+                _watchListItemsRepo.AddOrUpdate(watchListItem);
+            }
             _context.SaveChanges();
 
             Debug.WriteLine("inside add to watch list in home controller");

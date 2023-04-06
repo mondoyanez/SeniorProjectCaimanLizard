@@ -9,6 +9,6 @@ namespace WatchParty.DAL.Abstract
 
         IEnumerable<WatchListItem> FindAllByShowId(int showId);
         IEnumerable<WatchListItem> FindAllByMovieId(int movieId);
-        bool ExistsWithDifferentId(int id1, int id2);
+        bool ExistsWithDifferentId(int WatchListID, int showID);
     }
 }

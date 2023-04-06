@@ -14,7 +14,7 @@ public class WatchListItemRepository : Repository<WatchListItem>, IWatchListItem
 
     public bool ExistsWithDifferentId(int watchListId, int ShowId)
     {
-        WatchListItem item = GetAll().Where(wli => wli.WatchListId == watchListId).Where(s => s.Id == ShowId).First();
+        WatchListItem item = GetAll().Where(wli => wli.WatchListId == watchListId).Where(wli => wli.ShowId == ShowId).FirstOrDefault();
 
         if (item == null)
             return false;
