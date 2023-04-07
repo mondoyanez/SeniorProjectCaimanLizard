@@ -3,6 +3,8 @@ ALTER TABLE [FollowingList]         DROP CONSTRAINT [Fk_FollowingList_FollowingI
 
 ALTER TABLE [Post]                  DROP CONSTRAINT [Fk_Post_UserID]
 
+ALTER TABLE [Comment]               DROP CONSTRAINT [Fk_Comment_UserID]
+
 ALTER TABLE [Reshare]               DROP CONSTRAINT [Fk_Reshare_PostID]
 ALTER TABLE [Reshare]               DROP CONSTRAINT [Fk_Reshare_UserID]
 
@@ -18,6 +20,7 @@ ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_Movie]
 DROP TABLE [Watcher];
 DROP TABLE [FollowingList];
 DROP TABLE [Post];
+DROP TABLE [Comment];
 DROP TABLE [Reshare];
 DROP TABLE [LikePost];
 DROP TABLE [WatchList];
