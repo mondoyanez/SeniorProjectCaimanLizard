@@ -22,6 +22,13 @@ public partial class Comment
     [Column("UserID")]
     public int UserId { get; set; }
 
+    [Column("PostID")]
+    public int PostId { get; set; }
+
+    [ForeignKey("PostId")]
+    [InverseProperty("Comments")]
+    public virtual Post Post { get; set; } = null!;
+
     [ForeignKey("UserId")]
     [InverseProperty("Comments")]
     public virtual Watcher User { get; set; } = null!;

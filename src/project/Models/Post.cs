@@ -26,6 +26,9 @@ public partial class Post
     public int UserId { get; set; }
 
     [InverseProperty("Post")]
+    public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+
+    [InverseProperty("Post")]
     public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();
 
     [InverseProperty("Post")]

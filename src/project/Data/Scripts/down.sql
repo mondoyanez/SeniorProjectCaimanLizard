@@ -2,6 +2,7 @@ ALTER TABLE [FollowingList]         DROP CONSTRAINT [Fk_FollowingList_UserID]
 ALTER TABLE [FollowingList]         DROP CONSTRAINT [Fk_FollowingList_FollowingID]
 
 ALTER TABLE [Post]                  DROP CONSTRAINT [Fk_Post_UserID]
+ALTER TABLE [Comment]               DROP CONSTRAINT [Fk_Comment_PostID]
 
 ALTER TABLE [Comment]               DROP CONSTRAINT [Fk_Comment_UserID]
 
