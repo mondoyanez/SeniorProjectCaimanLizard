@@ -294,8 +294,8 @@ function displayShows(data) {
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                             <div class="dropdown">
-                                <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add To Currently Watching</button>
-                                <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWantToWatchList('${item.title}')">Add To Want To Watch</button>
+                                <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${0}')">Add To Currently Watching</button>
+                                <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${1}')">Add To Want To Watch</button>
 
                                 </div>
                             </div>
@@ -352,13 +352,15 @@ function errorOnAjax() {
     // ...
 }
 
-function addShowToWatchList(showTitle) {
-    console.log("Title:", showTitle);    
+function addShowToWatchList(showTitle, listType) {
+    console.log("Title:", showTitle);  
+    console.log("listType:", listType);
     $.ajax({
         url: "/WatchList/addShowToWatchList",
         method: "POST",
         data: {
-            showTitle : showTitle
+            showTitle: showTitle,
+            listType: listType
         },
         success: function (result) {
             console.log("Added to watch list successfully");
@@ -369,19 +371,19 @@ function addShowToWatchList(showTitle) {
     });
 }
 
-function addShowToWantToWatchList(showTitle) {
-    console.log("Title:", showTitle);
-    $.ajax({
-        url: "/WatchList/addShowToWantToWatchList",
-        method: "POST",
-        data: {
-            showTitle: showTitle
-        },
-        success: function (result) {
-            console.log("Added to watch list successfully");
-        },
-        error: function (error) {
-            console.error("Error updating database:" + error.responseText);
-        }
-    });
-}
+//function addShowToWantToWatchList(showTitle) {
+//    console.log("Title:", showTitle);
+//    $.ajax({
+//        url: "/WatchList/addShowToWantToWatchList",
+//        method: "POST",
+//        data: {
+//            showTitle: showTitle
+//        },
+//        success: function (result) {
+//            console.log("Added to watch list successfully");
+//        },
+//        error: function (error) {
+//            console.error("Error updating database:" + error.responseText);
+//        }
+//    });
+//}

@@ -22,7 +22,7 @@ public class WatchListRepository_Tests
         IWatchListRepository repo = new WatchListRepository(context);
 
         // Act
-        WatchList watchList = repo.FindByUserID(1);
+        WatchList watchList = repo.FindByUserID(1, 0);
 
         // Assert
         Assert.That(watchList, Is.Not.Null);
@@ -36,7 +36,7 @@ public class WatchListRepository_Tests
         IWatchListRepository repo = new WatchListRepository(context);
 
         // Act
-        WatchList watchList = repo.FindByUserID(7);
+        WatchList watchList = repo.FindByUserID(7, 0);
 
         // Assert
         Assert.That(watchList, Is.Null);

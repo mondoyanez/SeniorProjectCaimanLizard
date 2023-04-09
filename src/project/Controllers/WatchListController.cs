@@ -60,7 +60,8 @@ namespace WatchParty.Controllers
             }
 
             //Find the watchlists by userID
-            watchListVM.currentlyWatchList = _watchListRepo.FindByUserID(watcher.Id);
+            watchListVM.currentlyWatchList = _watchListRepo.FindByUserID(watcher.Id, 0);
+            watchListVM.wantToWatchList = _watchListRepo.FindByUserID(watcher.Id, 1);
 
             //Get the items in the watchlistItems
             if (watchListVM.currentlyWatchList != null)
@@ -68,22 +69,84 @@ namespace WatchParty.Controllers
                 watchListVM.watchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.currentlyWatchList.Id);
             }
 
+            if (watchListVM.wantToWatchList != null)
+            {
+                watchListVM.wantToWatchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.wantToWatchList.Id);
+            }
 
 
             // Get shows/movies by the users watchlistItems
             watchListVM.shows = _showRepo.GetShows(watchListVM.watchListItems);
             watchListVM.movies = _movieRepo.GetMovies(watchListVM.watchListItems);
 
+            watchListVM.shows1 = _showRepo.GetShows(watchListVM.wantToWatchListItems);
+            watchListVM.movies1 = _movieRepo.GetMovies(watchListVM.wantToWatchListItems);
+
+
             return View(watchListVM);
         }
 
+        // Want To Watch List Functions:
+        //[HttpPost]
+        //public async Task<IActionResult> addShowToWantToWatchList(string showTitle)
+        //{
+        //    // Get the current user and their watch list
+        //    var currentUser = await _userManager.GetUserAsync(User);
+        //    Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
+        //    WatchList watchList = _watchListRepo.FindByUserID(watcher.Id, 0);
+
+        //    // If the watchlist is null, create one for the user
+        //    if (watchList == null)
+        //    {
+        //        watchList = new WatchList()
+        //        {
+        //            UserId = watcher.Id,
+        //            ListType = 0
+        //        };
+        //        _watchListRepo.AddOrUpdate(watchList);
+        //    }
+
+        //    // Create a show item if not already existing
+        //    Show show = _showRepo.FindByTitle(showTitle);
+        //    if (show == null)
+        //    {
+        //        TMDBTitle tmdbTitle = _tmdbService.SearchShows(showTitle).First();
+
+        //        show = new Show()
+        //        {
+        //            Tmdbid = tmdbTitle.Id,
+        //            Title = tmdbTitle.Title,
+        //            Overview = tmdbTitle.PlotSummary,
+        //            FirstAirDate = tmdbTitle.ReleaseDate
+        //        };
+        //    }
+
+        //    _showRepo.AddOrUpdate(show);
+
+        //    if (_watchListItemsRepo.ExistsWithDifferentId(watchList.Id, show.Id) == false)
+        //    {
+        //        WatchListItem watchListItem = new WatchListItem()
+        //        {
+        //            WatchListId = watchList.Id,
+        //            ShowId = show.Id,
+        //            MovieId = null
+        //        };
+
+        //        _watchListItemsRepo.AddOrUpdate(watchListItem);
+        //    }
+
+        //    _context.SaveChanges();
+        //    return Ok();
+        //}
+
+
         [HttpPost]
-        public async Task<IActionResult> addShowToWatchList(string showTitle)
+        public async Task<IActionResult> addShowToWatchList(string showTitle, int listType)
         {  
             // Get the current user and their watch list
             var currentUser = await _userManager.GetUserAsync(User);
             Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
-            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id, listType);
 
             // If the watchlist is null, create one for the user
             if (watchList == null)
@@ -91,7 +154,7 @@ namespace WatchParty.Controllers
                 watchList = new WatchList()
                 {
                     UserId = watcher.Id,
-                    ListType = 0
+                    ListType = listType
                 };
                 _watchListRepo.AddOrUpdate(watchList);
             }
@@ -149,12 +212,12 @@ namespace WatchParty.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> addMovieToWatchList(string movieTitle)
+        public async Task<IActionResult> addMovieToWatchList(string movieTitle, int listType)
         {
             // Get the current user and their watch list
             var currentUser = await _userManager.GetUserAsync(User);
             Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
-            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id, listType);
 
             // If the watchlist is null, create one for the user
             if (watchList == null)
@@ -162,7 +225,7 @@ namespace WatchParty.Controllers
                 watchList = new WatchList()
                 {
                     UserId = watcher.Id,
-                    ListType = 0
+                    ListType = listType
                 };
                 _watchListRepo.AddOrUpdate(watchList);
             }
@@ -209,7 +272,7 @@ namespace WatchParty.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteWatchListShow(int showId)
+        public async Task<IActionResult> DeleteWatchListShow(int showId, int listType)
         {
             // Get all the watch list items that have the given show id, there can be more than one
             IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByShowId(showId);
@@ -221,7 +284,7 @@ namespace WatchParty.Controllers
             Debug.WriteLine("Current user: " + currentUser.ToString());
 
             // Get the users watch list
-            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id, listType);
 
             Debug.WriteLine("Watch list: " + watchList.ToString());
 
@@ -245,7 +308,7 @@ namespace WatchParty.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteWatchListMovie(int movieId)
+        public async Task<IActionResult> DeleteWatchListMovie(int movieId, int listType)
         {
             // Get all the watch list items that have the given show id, there can be more than one
             IEnumerable<WatchListItem> watchListItems = _watchListItemsRepo.FindAllByMovieId(movieId);
@@ -256,7 +319,7 @@ namespace WatchParty.Controllers
 
 
             // Get the users watch list
-            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id);
+            WatchList watchList = _watchListRepo.FindByUserID(watcher.Id, listType);
 
 
             // Filter out the watch list items to find the one specific to the current user
