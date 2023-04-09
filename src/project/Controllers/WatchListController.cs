@@ -60,12 +60,12 @@ namespace WatchParty.Controllers
             }
 
             //Find the watchlists by userID
-            watchListVM.watchList = _watchListRepo.FindByUserID(watcher.Id);
+            watchListVM.currentlyWatchList = _watchListRepo.FindByUserID(watcher.Id);
 
             //Get the items in the watchlistItems
-            if (watchListVM.watchList != null)
+            if (watchListVM.currentlyWatchList != null)
             {
-                watchListVM.watchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.watchList.Id);
+                watchListVM.watchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.currentlyWatchList.Id);
             }
 
 
