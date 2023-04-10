@@ -45,7 +45,7 @@ public class CommentsModelValidator_Tests
             UserId = 2,
             PostId = 1,
             Post = post,
-            User = poster
+            User = commenter
         };
 
         return comment;
@@ -155,6 +155,132 @@ public class CommentsModelValidator_Tests
         {
             Assert.That(mv.Valid, Is.False);
             Assert.That(mv.ContainsFailureFor("CommentTitle"), Is.True);
+        });
+    }
+
+    [Test]
+    public void Comment_WithMissingTitleAsEmptyString_IsNotValid()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+        comment.CommentTitle = String.Empty;
+
+        //Act
+        ModelValidator mv = new ModelValidator(comment);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.False);
+            Assert.That(mv.ContainsFailureFor("CommentTitle"), Is.True);
+        });
+    }
+
+    [Test]
+    public void Comment_WithValidDatePosted_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        DateTime actual = comment.DatePosted;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("DatePosted"), Is.False);
+            Assert.That(actual, Is.EqualTo(new DateTime(2023, 2, 28, 15, 10, 20)));
+        });
+    }
+
+    [Test]
+    public void Comment_WithValidUserId_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        int actual = comment.UserId;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("UserId"), Is.False);
+            Assert.That(actual, Is.EqualTo(2));
+        });
+    }
+
+    [Test]
+    public void Comment_WithValidPostId_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        int actual = comment.PostId;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("PostId"), Is.False);
+            Assert.That(actual, Is.EqualTo(1));
+        });
+    }
+
+    [Test]
+    public void Comment_WithValidPost_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        Post actual = comment.Post;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("Post"), Is.False);
+            Assert.That(actual.Id, Is.EqualTo(1));
+            Assert.That(actual.PostTitle, Is.EqualTo("My very first post!"));
+            Assert.That(actual.PostDescription, Is.EqualTo("Enter a description"));
+            Assert.That(actual.DatePosted, Is.EqualTo(new DateTime(2023, 2, 28, 15, 0, 0)));
+            Assert.That(actual.UserId, Is.EqualTo(1));
+            Assert.That(actual.User.Id, Is.EqualTo(1));
+            Assert.That(actual.User.Username, Is.EqualTo("Ja"));
+            Assert.That(actual.User.AspNetIdentityId, Is.EqualTo("b2f96999-701e-4ad6-8ab7-e0825b49387c"));
+        });
+    }
+
+    [Test]
+    public void Comment_WithValidUser_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        Watcher actual = comment.User;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("User"), Is.False);
+            Assert.That(actual.Id, Is.EqualTo(2));
+            Assert.That(actual.AspNetIdentityId, Is.EqualTo("d5f96973-601e-4ac6-8cb7-k0825b49387r"));
+            Assert.That(actual.Username, Is.EqualTo("ShannenBrion"));
+            Assert.That(actual.FirstName, Is.EqualTo("Brion"));
+            Assert.That(actual.LastName, Is.EqualTo("Shannen"));
+            Assert.That(actual.Email, Is.EqualTo("ShannenBrion@gmail.com"));
+            Assert.That(actual.Bio, Is.EqualTo("Comedy's are my favorite genre"));
         });
     }
 }
