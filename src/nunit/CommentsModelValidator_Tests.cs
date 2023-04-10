@@ -139,4 +139,22 @@ public class CommentsModelValidator_Tests
             Assert.That(mv.ContainsFailureFor("CommentTitle"), Is.True);
         });
     }
+
+    [Test]
+    public void Comment_WithMissingTitleAsNull_IsNotValid()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+        comment.CommentTitle = null!;
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.False);
+            Assert.That(mv.ContainsFailureFor("CommentTitle"), Is.True);
+        });
+    }
 }
