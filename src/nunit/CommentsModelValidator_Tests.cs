@@ -82,4 +82,23 @@ public class CommentsModelValidator_Tests
             Assert.That(actual, Is.EqualTo(1));
         });
     }
+
+    [Test]
+    public void Comment_WithValidTitle_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        string actual = comment.CommentTitle;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("CommentTitle"), Is.False);
+            Assert.That(actual, Is.EqualTo("This text contains a comment"));
+        });
+    }
 }
