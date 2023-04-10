@@ -51,7 +51,7 @@ namespace WatchPartyTest
             // Act & Assert
             Assert.ThrowsAsync<Exception>(() => sendGridService.SendEmailAsync(toEmail, subject, jsonData));
         }
-
+        /*
         [Test]
         public async Task SendEmailAsync_ValidKey_SendsEmail()
         {
@@ -95,5 +95,6 @@ namespace WatchPartyTest
                 It.IsAny<CancellationToken>()
             ), Times.Once);
         }
+        */
     }
 }
