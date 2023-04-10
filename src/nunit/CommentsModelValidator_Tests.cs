@@ -63,4 +63,23 @@ public class CommentsModelValidator_Tests
         // Assert
         Assert.That(mv.Valid, Is.True);
     }
+
+    [Test]
+    public void Comment_WithValidId_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        int actual = comment.Id;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("Id"), Is.False);
+            Assert.That(actual, Is.EqualTo(1));
+        });
+    }
 }
