@@ -171,6 +171,28 @@ body {
     background-color: #f2efe9;
 }
 
+
+.comment-text, #comment-label {
+    color: var(--cld-off-white);
+}
+
+.comment-date {
+    color: var(--cld-off-white);
+    margin-left: 90%;
+}
+
+.comment-username {
+    color: var(--cld-blue);
+}
+
+#comment-submit {
+    color: var(--cld-black-purple);
+    background-color: var(--cld-yellow);
+    border-color: var(--cld-yellow);
+    margin-left: 20%;
+    margin-top: 40%;
+}
+
 .post {
     width: 50%;
     border: 1px ridge var(--cld-yellow);
