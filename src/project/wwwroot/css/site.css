@@ -223,7 +223,11 @@ body {
 
 .post-username {
     color: var(--cld-blue);
-    margin-left: 50%
+    margin-left: 50%;
+}
+
+.post-username-link {
+    text-decoration: none;
 }
 
 .empty-page {
