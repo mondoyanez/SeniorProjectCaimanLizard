@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WatchParty.DAL.Abstract;
+﻿using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.Utilities;
 
 namespace WatchParty.DAL.Concrete;
 public class CommentRepository: Repository<Comment>, ICommentRepository
@@ -22,5 +22,11 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
     public void AddComment(Comment comment)
     {
         throw new NotImplementedException();
+    }
+
+    public string GetTimeFromString(Comment comment, DateTime currentDate)
+    {
+        DateFromConversion convert = new DateFromConversion();
+        return convert.ConvertDate(comment.DatePosted, currentDate);
     }
 }
