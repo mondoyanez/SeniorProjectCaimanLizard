@@ -23,10 +23,4 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
     {
         throw new NotImplementedException();
     }
-
-    public string GetTimeFromString(Comment comment, DateTime currentDate)
-    {
-        DateFromConversion convert = new DateFromConversion();
-        return convert.ConvertDate(comment.DatePosted, currentDate);
-    }
 }

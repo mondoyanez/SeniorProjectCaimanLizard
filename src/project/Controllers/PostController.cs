@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Services.Abstract;
+using WatchParty.Utilities;
 using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;

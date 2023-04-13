@@ -242,36 +242,4 @@ public class PostRepository_Tests
         // Act/Assert
         Assert.Throws<ArgumentNullException>(() => repo.AddPost(null!));
     }
-
-    [Test]
-    public void GetTimeString_ForFirstPostDateIsDatePosted_ShouldReturnJustNow()
-    {
-        // Arrange
-        using WatchPartyDbContext context = _dbHelper.GetContext();
-        IPostRepository repo = new PostRepository(context);
-        DateTime currentDateTime = new DateTime(2023, 1, 15, 17, 0, 0);
-        // The db has been seeded
-
-        // Act
-        string actual = repo.GetTimeFromString(context.Posts.First(), currentDateTime);
-
-        // Assert
-        Assert.That(actual, Is.EqualTo("just now"));
-    }
-
-    [Test]
-    public void GetTimeString_ForFirstPostDateIsAFewYearsLater_ShouldReturnSevenYearsAgo()
-    {
-        // Arrange
-        using WatchPartyDbContext context = _dbHelper.GetContext();
-        IPostRepository repo = new PostRepository(context);
-        DateTime currentDateTime = new DateTime(2030, 6, 23, 4, 42, 56);
-        // The db has been seeded
-
-        // Act
-        string actual = repo.GetTimeFromString(context.Posts.First(), currentDateTime);
-
-        // Assert
-        Assert.That(actual, Is.EqualTo("7 years ago"));
-    }
 }

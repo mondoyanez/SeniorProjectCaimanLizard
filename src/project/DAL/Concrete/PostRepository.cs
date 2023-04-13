@@ -35,10 +35,4 @@ public class PostRepository: Repository<Post>, IPostRepository
             throw new Exception("Invalid information was given while trying to update database");
         }
     }
-
-    public string GetTimeFromString(Post post, DateTime currentDate)
-    {
-        DateFromConversion convert = new DateFromConversion();
-        return convert.ConvertDate(post.DatePosted, currentDate);
-    }
 }

@@ -1,5 +1,7 @@
 @model WatchParty.ViewModels.FeedVM
 
+@using WatchParty.Utilities;
+
 @{
     ViewData["Title"] = "Feed";
 }
@@ -94,7 +96,7 @@
                                 <a class="post-username-link" href="/user/@post.User.Username"><h6 class="card-subtitle mb-2 post-username">@@@post.User.Username</h6></a>
                             </div>
                             <div class="col">
-                                <h6 class="card-subtitle mb-2 post-date">@post.DatePosted.ToString("MM/dd/yy")</h6>
+                                <h6 class="card-subtitle mb-2 post-date">@Model.Convert.ConvertDate(post.DatePosted, DateTime.Now)</h6>
                             </div>
                         </div>
                         <div class="row">
@@ -119,7 +121,7 @@
                                             <p class="card-text comment-text mb-2">@comment.CommentTitle</p>
                                         </div>
                                         <div class="row mt-3">
-                                            <h6 class="card-subtitle comment-date">@comment.DatePosted.ToString("MM/dd/yy")</h6>
+                                            <h6 class="card-subtitle comment-date">@Model.Convert.ConvertDate(comment.DatePosted, DateTime.Now)</h6>
                                         </div>
                                     </div>
                                 }
