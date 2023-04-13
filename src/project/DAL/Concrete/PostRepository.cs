@@ -1,5 +1,6 @@
 ﻿using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.Utilities;
 
 namespace WatchParty.DAL.Concrete;
 public class PostRepository: Repository<Post>, IPostRepository
@@ -33,5 +34,11 @@ public class PostRepository: Repository<Post>, IPostRepository
         {
             throw new Exception("Invalid information was given while trying to update database");
         }
+    }
+
+    public string GetTimeFromString(Post post, DateTime currentDate)
+    {
+        DateFromConversion convert = new DateFromConversion();
+        return convert.ConvertDate(post.DatePosted, currentDate);
     }
 }
