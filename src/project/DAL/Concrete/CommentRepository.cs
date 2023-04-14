@@ -21,6 +21,13 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
 
     public void AddComment(Comment comment)
     {
-        AddOrUpdate(comment);
+        try
+        {
+            AddOrUpdate(comment);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
     }
 }

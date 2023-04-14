@@ -134,4 +134,26 @@ public class CommentsRepository_Tests
         Assert.That(comments.Last().PostId, Is.EqualTo(2));
         Assert.That(comments.Last().Post.PostTitle, Is.EqualTo("Spider-man"));
     }
+
+    [Test]
+    public void AddCommentMissingCommentTitleAsNull_ForFourExistingComments_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+        // The db has been seeded
+
+        Comment comment = new Comment
+        {
+            CommentTitle = null!,
+            DatePosted = new DateTime(2023, 4, 13, 18, 0, 0),
+            UserId = 8,
+            User = context.Watchers.FirstOrDefault(u => u.Id == 8),
+            PostId = 2,
+            Post = context.Posts.FirstOrDefault(p => p.Id == 2)
+        };
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.AddComment(comment));
+    }
 }
