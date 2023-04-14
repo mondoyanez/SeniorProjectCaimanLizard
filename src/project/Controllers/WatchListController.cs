@@ -96,7 +96,12 @@ namespace WatchParty.Controllers
             // check to see if the user is logged in, if so continure, if not create a pop up that tells them to log in
             if (currentUser == null)
             {
-                return View("../Areas/Identity/Pages/Account/Manage/Login");
+                //return View("~/Areas/Identity/Pages/Account/Manage/Login.cshtml");
+                //return Redirect("Identity/Account/Login");
+                //return View("Identity/Account/Login");
+                //return RedirectToPage("/Account/Login", new { area = "Identity" });
+                //return View("/Identity/Account/Login");
+
             }
 
             Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
