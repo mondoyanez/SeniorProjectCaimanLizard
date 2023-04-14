@@ -156,4 +156,18 @@ public class CommentsRepository_Tests
         // Act/Assert
         Assert.Throws<Exception>(() => repo.AddComment(comment));
     }
+
+    [Test]
+    public void AddCommentThatIsNull_ForFourExistingComments_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+        // The db has been seeded
+
+        Comment comment = null!;
+
+        // Act/Assert
+        Assert.Throws<ArgumentNullException>(() => repo.AddComment(comment));
+    }
 }

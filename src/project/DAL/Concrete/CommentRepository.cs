@@ -19,8 +19,13 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
         return comments;
     }
 
-    public void AddComment(Comment comment)
+    public void AddComment(Comment? comment)
     {
+        if (comment == null)
+        {
+            throw new ArgumentNullException(nameof(comment));
+        }
+
         try
         {
             AddOrUpdate(comment);
