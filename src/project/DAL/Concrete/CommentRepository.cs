@@ -21,6 +21,6 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
 
     public void AddComment(Comment comment)
     {
-        throw new NotImplementedException();
+        AddOrUpdate(comment);
     }
 }
