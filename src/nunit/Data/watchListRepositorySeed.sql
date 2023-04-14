@@ -27,10 +27,12 @@ VALUES
 INSERT INTO [WatchList] (ID, UserID, ListType)
 VALUES
 (1, 1, 0),
+(7, 1, 1),
 (2, 2, 0),
 (3, 3, 0),
-(4, 4, 0);
-
+(4, 4, 0),
+(5, 5, 0),
+(6, 5, 1);
 
 INSERT INTO [WatchListItems] (ID, WatchListID, ShowID, MovieID)
 VALUES
@@ -38,4 +40,6 @@ VALUES
 (2, 1, 2, null),
 (3, 1, null, 1),
 (4, 1, null, 2),
-(5, 2, null, 1);
+(5, 2, null, 1),
+(6, 2, 1, null),
+(7, 7, 1, null);

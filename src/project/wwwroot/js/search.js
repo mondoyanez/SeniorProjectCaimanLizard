@@ -293,10 +293,9 @@ function displayShows(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                            <div class="dropdown">
-                                <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${0}')">Add To Currently Watching</button>
-                                <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${1}')">Add To Want To Watch</button>
-
+                                <div class="dropdown">
+                                    <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${0}')">Add To Currently Watching</button>
+                                    <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${1}')">Add To Want To Watch</button>
                                 </div>
                             </div>
                           </div>
@@ -370,20 +369,3 @@ function addShowToWatchList(showTitle, listType) {
         }
     });
 }
-
-//function addShowToWantToWatchList(showTitle) {
-//    console.log("Title:", showTitle);
-//    $.ajax({
-//        url: "/WatchList/addShowToWantToWatchList",
-//        method: "POST",
-//        data: {
-//            showTitle: showTitle
-//        },
-//        success: function (result) {
-//            console.log("Added to watch list successfully");
-//        },
-//        error: function (error) {
-//            console.error("Error updating database:" + error.responseText);
-//        }
-//    });
-//}
