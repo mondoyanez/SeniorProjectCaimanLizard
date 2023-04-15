@@ -9,9 +9,14 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
     {
     }
 
-    public IEnumerable<Comment> GetComments()
+    public IEnumerable<Comment> GetComments(int number = 0)
     {
         IEnumerable<Comment> comments = GetAll().OrderBy(c => c.DatePosted).ToList();
+
+        if (number != 0)
+        {
+            comments = comments.Take(number);
+        }
 
         if (!comments.Any())
             throw new Exception("No comments were found");
