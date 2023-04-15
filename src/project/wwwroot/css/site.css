@@ -172,7 +172,24 @@ body {
 }
 
 
-.comment-text, #comment-label {
+.all-comments-date {
+    color: var(--cld-off-white);
+    margin-left: 49%;
+}
+
+.all-comments-text {
+    color: var(--cld-off-white);
+}
+
+.comment {
+    width: 50%;
+    border: 1px ridge var(--cld-yellow);
+    border-radius: 5px;
+    margin-bottom: 5%;
+    margin-left: 25%
+}
+
+.comment-text {
     color: var(--cld-off-white);
 }
 
@@ -190,12 +207,15 @@ body {
     color: var(--cld-blue);
 }
 
+#comment-entered {
+    margin-left: -30%;
+}
+
 #comment-submit {
     color: var(--cld-black-purple);
     background-color: var(--cld-yellow);
     border-color: var(--cld-yellow);
-    margin-left: 20%;
-    margin-top: 40%;
+    margin-left: 25%;
 }
 
 .post {
@@ -237,6 +257,11 @@ body {
 
 .empty-page {
     padding-bottom: 40%;
+}
+
+.enter-comment-section {
+    margin-left: 24%;
+    margin-bottom: 1%;
 }
 
 .create-post-submit-btn {

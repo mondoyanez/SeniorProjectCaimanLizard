@@ -1,7 +1,5 @@
 @model WatchParty.ViewModels.FeedVM
 
-@using WatchParty.Utilities;
-
 @{
     ViewData["Title"] = "Feed";
 }
@@ -134,7 +132,7 @@
                             </div>
                         }
                         <div class="row mt-5">
-                            <a class="comment-link" href="#">View All Comments</a>
+                            <a asp-controller="Comment" asp-action="Index" asp-route-id="@post.Id" class="comment-link">View All Comments</a>
                         </div>
                     </div>
                 </div>
