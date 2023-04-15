@@ -32,15 +32,13 @@ function findUsers(data) {
         const usersTableBody = $("#user-tbody");
         generateHeaders(usersTableBody);
         $.each(data, (index, item) => {
-            var _a, _b, _c, _d, _e;
+            var _a, _b, _c;
             if (currentUser !== item.username) {
                 const result = `
                 <tr>
-                    <td>${item.username}</td>
+                    <td><a class="user-profile-link" href="/user/${item.username}">${item.username}</a></td>
                     <td>${(_a = item.email) !== null && _a !== void 0 ? _a : ""}</td>
                     <td>${(_b = item.firstName) !== null && _b !== void 0 ? _b : ""} ${(_c = item.lastName) !== null && _c !== void 0 ? _c : ""}</td>
-                    <td>${(_d = item.followingCount) !== null && _d !== void 0 ? _d : 0}</td>
-                    <td>${(_e = item.followerCount) !== null && _e !== void 0 ? _e : 0}</td>
                 </tr>
                 `;
                 usersTableBody.append(result);

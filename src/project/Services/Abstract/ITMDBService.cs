@@ -15,5 +15,8 @@ namespace WatchParty.Services.Abstract
         IEnumerable<TMDBTitle> SearchYear(string year, string relativePath = "/search/multi?query=");
         IEnumerable<TMDBTitle> GetPopularMovies(string relativePath = "/movie/popular");
         IEnumerable<TMDBTitle> GetPopularShows(string relativePath = "/tv/popular");
+
+		TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/?query=");
+		TMDBTitle GetMovieDetails(string relativepath = "/movie/?query=");
     }
 }

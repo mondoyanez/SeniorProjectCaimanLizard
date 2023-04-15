@@ -38,11 +38,9 @@ function findUsers(data: any[]) {
                 const result: string =
                     `
                 <tr>
-                    <td>${item.username}</td>
+                    <td><a class="user-profile-link" href="/user/${item.username}">${item.username}</a></td>
                     <td>${item.email ?? ""}</td>
                     <td>${item.firstName ?? ""} ${item.lastName ?? ""}</td>
-                    <td>${item.followingCount ?? 0}</td>
-                    <td>${item.followerCount ?? 0}</td>
                 </tr>
                 `;
                 usersTableBody.append(result);
