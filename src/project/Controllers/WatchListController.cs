@@ -101,6 +101,7 @@ namespace WatchParty.Controllers
                 //return View("Identity/Account/Login");
                 //return RedirectToPage("/Account/Login", new { area = "Identity" });
                 //return View("/Identity/Account/Login");
+                return View();
 
             }
 
@@ -230,8 +231,7 @@ namespace WatchParty.Controllers
             return Ok();
         }
 
-        //[Route("Watchlist/DeleteWatchlistShow/{showId}/{listType})")]
-        //Watchlist/DeleteWatchlistShow/1
+
         [HttpPost]
         [Route("WatchList/DeleteWatchListShow")]
         public async Task<IActionResult> DeleteWatchListShow(int showId, int listType)

@@ -226,12 +226,7 @@ function displayTitles(data) {
                           <div class="card-body text-start">
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
-                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                            <label for="watchList-type">Add to Watch List</label>
-                            <select name="list-types" id="list-names">
-                              <option value="0">Currently Watching</option>
-                              <option value="1">Want To Watch</option>
-                            </select>                         
+                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>       
                         </div>
                         </div>
                       </div>
@@ -261,8 +256,8 @@ function displayMovies(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                            <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList("${item.title}")">Add to Watch List</button>
-                          </div>
+                                    <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addMovieToWatchList('${item.title}', '${0}')">Add To Currently Watching</button>
+                                    <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addMovieToWatchList('${item.title}', '${1}')">Add To Want To Watch</button>
                         </div>
                       </div>
                     </div>
@@ -281,8 +276,8 @@ function displayShows(data) {
     $("#resultCards").empty();
     $.each(data,
         function (index, item) {
-            let result =
-                `<div class="col cld-bg-light">
+                let result =
+                    `<div class="col cld-bg-light">
                     <div class="card mb-3" id="${index}">
                       <div class="row g-0">
                         <div class="col-sm-2 col-4 align-self-center">
@@ -294,7 +289,7 @@ function displayShows(data) {
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                                 <div class="dropdown">
-                                    <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${0}')">Add To Currently Watching</button>
+                                    <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addShowToWatchList("${item.title}", "${0}")'>Add To Currently Watching</button>
                                     <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}', '${1}')">Add To Want To Watch</button>
                                 </div>
                             </div>
@@ -302,7 +297,7 @@ function displayShows(data) {
                         </div>
                       </div>
                     </div>
-			    </div>`;
+			    </div>`;            
             if (item.mediaType == "tv") {
                 $("#resultCards").append($(result));
             }
@@ -359,6 +354,23 @@ function addShowToWatchList(showTitle, listType) {
         method: "POST",
         data: {
             showTitle: showTitle,
+            listType: listType
+        },
+        success: function (result) {
+            console.log("Added to watch list successfully");
+        },
+        error: function (error) {
+            console.error("Error updating database:" + error.responseText);
+        }
+    });
+}
+
+function addMovieToWatchList(movieTitle, listType) {
+    $.ajax({
+        url: "/WatchList/addMovieToWatchList",
+        method: "POST",
+        data: {
+            movieTitle: movieTitle,
             listType: listType
         },
         success: function (result) {
