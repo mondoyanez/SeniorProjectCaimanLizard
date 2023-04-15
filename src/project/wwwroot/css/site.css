@@ -181,6 +181,11 @@ body {
     margin-left: 90%;
 }
 
+.comment-link {
+    margin-left: 40%;
+    color: var(--cld-yellow);
+}
+
 .comment-username {
     color: var(--cld-blue);
 }
