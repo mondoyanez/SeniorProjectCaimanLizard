@@ -174,7 +174,7 @@ body {
 
 .all-comments-date {
     color: var(--cld-off-white);
-    margin-left: 49%;
+    margin-left: 45%;
 }
 
 .all-comments-text {
@@ -195,7 +195,7 @@ body {
 
 .comment-date {
     color: var(--cld-off-white);
-    margin-left: 90%;
+    margin-left: 85%;
 }
 
 .comment-link {
