@@ -42,11 +42,11 @@
                 <label>Enter your comment:</label>
             </div>
             <div class="col-3">
-                <textarea id="comment-entered" placeholder="Enter comment" rows="10" cols="70" name="commentString" required></textarea>
+                <textarea id="comment-entered" placeholder="Enter comment" rows="10" cols="70" asp-for="newComment.CommentTitle" required></textarea>
             </div>
             <div class="col-2">
                 <input class="btn" id="comment-submit" type="submit" value="SUBMIT" />
-                <input type="hidden" name="postId" value="@Model.PostId"/>
+                <input type="hidden" asp-for="newComment.PostId" value="@Model.PostId" />
             </div>
         </div>
     </form>

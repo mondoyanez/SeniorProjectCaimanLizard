@@ -44,27 +44,28 @@ public class CommentController : Controller
     }
 
     [HttpPost]
-    public IActionResult Index(string commentString, int postId)
+    public IActionResult Index([Bind("CommentTitle, PostId")] Comment newComment)
     {
         Watcher? currentUser = _watcherRepository.FindByUsername(User.Identity.Name);
-        Post post = _postRepository.FindById(postId);
+        Post post = _postRepository.FindById(newComment.PostId);
 
-        Comment comment = new()
+        if (currentUser == null)
         {
-            CommentTitle = commentString,
-            DatePosted = DateTime.Now,
-            UserId = currentUser.Id,
-            User = currentUser,
-            PostId = postId,
-            Post = post
-        };
+            throw new ArgumentException(nameof(currentUser));
+        }
 
-        _commentRepository.AddComment(comment);
+        newComment.DatePosted = DateTime.Now;
+        newComment.Post = post;
+        newComment.UserId = currentUser.Id;
+        newComment.User = currentUser;
+
+        ModelState.Clear();
+        TryValidateModel(newComment);
 
         CommentVM vm = new()
         {
-            Comments = _commentRepository.GetComments().Where(c => c.PostId == postId).ToList(),
-            PostId = postId
+            Comments = _commentRepository.GetComments().Where(c => c.PostId == newComment.PostId).ToList(),
+            PostId = newComment.PostId
         };
 
         if (ModelState.IsValid)
@@ -76,6 +77,8 @@ public class CommentController : Controller
             ViewBag.IsValid = false;
             var errors = ModelState.Values.SelectMany(v => v.Errors);
         }
+
+        _commentRepository.AddComment(newComment);
 
         return View(vm);
     }
