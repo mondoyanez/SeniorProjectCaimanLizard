@@ -28,7 +28,7 @@ public class CommentsRepository_Tests
         // The db has been seeded
 
         // Act
-        IEnumerable<Comment> comments = repo.GetComments(0);
+        IEnumerable<Comment> comments = repo.GetComments();
 
         int count = comments.Count();
 
@@ -56,7 +56,7 @@ public class CommentsRepository_Tests
         // The db has been seeded
 
         // Act
-        IEnumerable<Comment> comments = repo.GetComments(0).Where(c => c.PostId == 3).ToList();
+        IEnumerable<Comment> comments = repo.GetComments().Where(c => c.PostId == 3).ToList();
 
         int count = comments.Count();
 
@@ -76,33 +76,6 @@ public class CommentsRepository_Tests
     }
 
     [Test]
-    public void GetComments_OnlyGetTwoCommentsOutOfPostWithThreeComments_ShouldGetAListWithTwoComments()
-    {
-        // Arrange
-        using WatchPartyDbContext context = _dbHelper.GetContext();
-        ICommentRepository repo = new CommentRepository(context);
-        // The db has been seeded
-
-        // Act
-        IEnumerable<Comment> comments = repo.GetComments(2).Where(c => c.PostId == 3).ToList();
-        int count = comments.Count();
-
-        // Assert
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(count, Is.EqualTo(2));
-            Assert.That(comments.First().Id, Is.EqualTo(1));
-            Assert.That(comments.First().CommentTitle, Is.EqualTo("I also thought that Friends was a great show"));
-            Assert.That(comments.First().DatePosted.ToString("yyyy-MM-dd hh:mm:ss"), Is.EqualTo("2023-04-02 01:25:00"));
-            Assert.That(comments.First().UserId, Is.EqualTo(2));
-            Assert.That(comments.First().User.Username, Is.EqualTo("CarsonDaniel"));
-            Assert.That(comments.First().PostId, Is.EqualTo(3));
-            Assert.That(comments.First().Post.PostTitle, Is.EqualTo("Friends"));
-        });
-    }
-
-    [Test]
     public void GetComments_ForNotCommentsExisting_ShouldThrowException()
     {
         // Arrange
@@ -111,7 +84,7 @@ public class CommentsRepository_Tests
         // The db has been seeded
 
         // Act/Assert
-        Assert.Throws<Exception>(() => repo.GetComments(0));
+        Assert.Throws<Exception>(() => repo.GetComments());
     }
 
     [Test]
@@ -134,7 +107,7 @@ public class CommentsRepository_Tests
 
         // Act
         repo.AddComment(comment);
-        IEnumerable<Comment> comments = repo.GetComments(0);
+        IEnumerable<Comment> comments = repo.GetComments();
 
         int totalCommentsCount = comments.Count();
         int secondPostCommentsCount = comments.Count(c => c.PostId == 2);

@@ -26,7 +26,7 @@ public class CommentController : Controller
     {
         CommentVM vm = new()
         {
-            Comments = _commentRepository.GetComments(0).Where(c => c.PostId == postId).ToList(),
+            Comments = _commentRepository.GetComments().Where(c => c.PostId == postId).ToList(),
             PostId = postId
         };
 
@@ -63,7 +63,7 @@ public class CommentController : Controller
 
         CommentVM vm = new()
         {
-            Comments = _commentRepository.GetComments(0).Where(c => c.PostId == postId).ToList(),
+            Comments = _commentRepository.GetComments().Where(c => c.PostId == postId).ToList(),
             PostId = postId
         };
 
