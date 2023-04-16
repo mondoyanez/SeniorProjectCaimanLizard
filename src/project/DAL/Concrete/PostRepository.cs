@@ -1,5 +1,6 @@
 ﻿using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.Utilities;
 
 namespace WatchParty.DAL.Concrete;
 public class PostRepository: Repository<Post>, IPostRepository

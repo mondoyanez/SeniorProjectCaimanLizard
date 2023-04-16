@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Services.Abstract;
+using WatchParty.Utilities;
 using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
@@ -19,13 +20,15 @@ namespace WatchParty.Controllers;
 public class PostController : Controller
 {
     private readonly IPostRepository _postRepository;
+    private readonly ICommentRepository _commentRepository;
     private readonly IWatcherRepository _watcherRepository;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly ITMDBService _tmdbService;
 
-    public PostController(IPostRepository postRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager, ITMDBService tmdbService)
+    public PostController(IPostRepository postRepository, ICommentRepository commentRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager, ITMDBService tmdbService)
     {
         _postRepository = postRepository;
+        _commentRepository = commentRepository;
         _watcherRepository = watcherRepository;
         _userManager = userManager;
         _tmdbService = tmdbService;
@@ -37,6 +40,7 @@ public class PostController : Controller
 	    FeedVM vm = new()
 	    {
 		    Posts = _postRepository.GetAllPostsDescending(),
+            Comments = _commentRepository.GetComments(),
 		    PopularMovies = _tmdbService.GetPopularMovies(),
             PopularShows = _tmdbService.GetPopularShows(),
 		    ImageConfig = _tmdbService.SetImageConfig()

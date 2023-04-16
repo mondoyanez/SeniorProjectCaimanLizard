@@ -30,6 +30,9 @@ public partial class Watcher
     [StringLength(256)]
     public string? Bio { get; set; }
 
+    [InverseProperty("User")]
+    public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+
     [InverseProperty("Following")]
     public virtual ICollection<FollowingList> FollowingListFollowings { get; } = new List<FollowingList>();
 

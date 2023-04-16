@@ -6,18 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WatchParty.Models;
 
-[Table("Post")]
-public partial class Post
+[Table("Comment")]
+public partial class Comment
 {
     [Key]
     [Column("ID")]
     public int Id { get; set; }
 
     [StringLength(2048), Required(AllowEmptyStrings = false, ErrorMessage = "Title is a required field")]
-    public string PostTitle { get; set; } = null!;
-
-    [StringLength(2048)]
-    public string? PostDescription { get; set; }
+    public string CommentTitle { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
     public DateTime DatePosted { get; set; }
@@ -25,16 +22,14 @@ public partial class Post
     [Column("UserID")]
     public int UserId { get; set; }
 
-    [InverseProperty("Post")]
-    public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+    [Column("PostID")]
+    public int PostId { get; set; }
 
-    [InverseProperty("Post")]
-    public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();
-
-    [InverseProperty("Post")]
-    public virtual ICollection<Reshare> Reshares { get; } = new List<Reshare>();
+    [ForeignKey("PostId")]
+    [InverseProperty("Comments")]
+    public virtual Post Post { get; set; } = null!;
 
     [ForeignKey("UserId")]
-    [InverseProperty("Posts")]
+    [InverseProperty("Comments")]
     public virtual Watcher User { get; set; } = null!;
 }
