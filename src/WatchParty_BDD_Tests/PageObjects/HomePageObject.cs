@@ -12,6 +12,7 @@ namespace WatchParty_BDD_Tests.PageObjects
             // using a named page (in Common.cs)
             _pageName = "Home";
         }
+        public IWebElement ProfileButton => _webDriver.FindElement(By.Id("profile-link"));
 
         public IWebElement RegisterButton => _webDriver.FindElement(By.Id("register-link"));
         public IWebElement NavBarHelloLink => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Manage\"]"));

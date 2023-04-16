@@ -8,14 +8,14 @@ Scenario: Home page has title Watch Party
 	Then the page title contains "Watch"
 
 
-#Scenario: Home page has link to login
-#	Given I'm on the "Home" page
-#	Then I should see a link to the "login" page
+Scenario: Home page has link to login
+	Given I'm on the "Home" page
+	Then I should see a link to the Register page
 
-#Scenario: Home page contains link to logged in user's profile
-#	Given I'm on the "Home" page
-#		And I am logged in
-#	Then I can see a link to the "Profile" page
+Scenario: Home page contains link to logged in user's profile
+	Given I'm on the "Home" page
+		And I am logged in
+	Then I can see a link to the "Profile" page
 #
 #Scenario: Profile page should contain button to edit profile
 #	Given I'm on the "Profile" page

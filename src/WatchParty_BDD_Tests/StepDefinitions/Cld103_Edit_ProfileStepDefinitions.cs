@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using TechTalk.SpecFlow;
 using WatchParty_BDD_Tests.Drivers;
@@ -28,12 +29,26 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _homePage.GetTitle().Should().ContainEquivalentOf(p0, AtLeast.Once());
         }
 
+        [Then(@"I should see a link to the Register page")]
+        public void ThenIShouldSeeALinkToTheRegisterPage()
+        {
+            _homePage.RegisterButton.Should().NotBeNull();
+            _homePage.RegisterButton.Displayed.Should().BeTrue();
+        }
 
-        //[Then(@"I should see a link to the ""([^""]*)"" page")]
-        //public void ThenIShouldSeeALinkToThePage(string login)
-        //{
-        //    throw new PendingStepException();
-        //}
+        [Given(@"I am logged in")]
+        public void GivenIAmLoggedIn()
+        {
+            throw new PendingStepException();
+        }
+
+        [Then(@"I can see a link to the ""([^""]*)"" page")]
+        public void ThenICanSeeALinkToThePage(string profile)
+        {
+            _homePage.ProfileButton.Should().NotBeNull();
+            _homePage.ProfileButton.Displayed.Should().BeTrue();
+        }
+
 
     }
 }
