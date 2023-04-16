@@ -36,13 +36,14 @@
         </div>
     }
     <form asp-controller="Comment" asp-action="Index" method="post">
-        <div asp-validation-summary="All"></div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row enter-comment-section">
             <div class="col-2">
                 <label>Enter your comment:</label>
             </div>
             <div class="col-3">
                 <textarea id="comment-entered" placeholder="Enter comment" rows="10" cols="70" asp-for="newComment.CommentTitle" required></textarea>
+                <span asp-validation-for="newComment.CommentTitle" class="text-danger"></span>
             </div>
             <div class="col-2">
                 <input class="btn" id="comment-submit" type="submit" value="SUBMIT" />

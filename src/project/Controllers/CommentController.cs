@@ -59,8 +59,7 @@ public class CommentController : Controller
         newComment.UserId = currentUser.Id;
         newComment.User = currentUser;
 
-        ModelState.Clear();
-        TryValidateModel(newComment);
+        _commentRepository.AddComment(newComment);
 
         CommentVM vm = new()
         {
@@ -77,8 +76,6 @@ public class CommentController : Controller
             ViewBag.IsValid = false;
             var errors = ModelState.Values.SelectMany(v => v.Errors);
         }
-
-        _commentRepository.AddComment(newComment);
 
         return View(vm);
     }
