@@ -148,9 +148,12 @@ SET IDENTITY_INSERT [WatchList] ON;
 INSERT INTO [WatchList] (ID, UserID, ListType)
 VALUES
 (1, 1, 0),
+(7, 1, 1),
 (2, 2, 0),
 (3, 3, 0),
-(4, 4, 0)
+(4, 4, 0),
+(5, 5, 0),
+(6, 5, 1)
 SET IDENTITY_INSERT [WatchList] OFF;
 
 SET IDENTITY_INSERT [WatchListItems] ON;
@@ -159,5 +162,7 @@ VALUES
 (1, 1, 1, null),
 (2, 1, 2, null),
 (3, 1, null, 1),
-(4, 1, null, 2)
+(4, 1, null, 2),
+(5, 2, null, 1),
+(6, 2, 1, null)
 SET IDENTITY_INSERT [WatchListItems] OFF;
