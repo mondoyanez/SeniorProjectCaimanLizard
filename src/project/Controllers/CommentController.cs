@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WatchParty.DAL.Abstract;
+using WatchParty.Models;
 using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
@@ -10,17 +11,29 @@ namespace WatchParty.Controllers;
 public class CommentController : Controller
 {
     private readonly ICommentRepository _commentRepository;
+    private readonly IPostRepository _postRepository;
 
-    public CommentController(ICommentRepository commentRepository)
+    public CommentController(ICommentRepository commentRepository, IPostRepository postRepository)
     {
         _commentRepository = commentRepository;
+        _postRepository = postRepository;
     }
 
-    public IActionResult Index(int id)
+    [HttpGet]
+    public IActionResult Index(int postId)
     {
+        Post post = _postRepository.FindById(postId);
+
+        if (post == null)
+        {
+            throw new ArgumentException(nameof(post));
+        }
+
         CommentVM vm = new()
         {
-            Comments = _commentRepository.GetComments(0).Where(c => c.PostId == id).ToList()
+            Comments = _commentRepository.GetComments(0).Where(c => c.PostId == post.Id).ToList(),
+            PostId = post.Id,
+            UserId = post.User.Id
         };
 
         if (ModelState.IsValid)
@@ -34,5 +47,11 @@ public class CommentController : Controller
         }
 
         return View(vm);
+    }
+
+    [HttpPost]
+    public IActionResult Index(string commentString, int userId)
+    {
+        return View();
     }
 }

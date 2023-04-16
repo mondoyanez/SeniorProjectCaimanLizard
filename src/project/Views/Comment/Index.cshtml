@@ -35,15 +35,19 @@
             <p>No comments</p>
         </div>
     }
-    <div class="row enter-comment-section">
-        <div class="col-2">
-            <label>Enter your comment:</label>
+    <form asp-controller="Comment" asp-action="Index" method="post">
+        <div asp-validation-summary="All"></div>
+        <div class="row enter-comment-section">
+            <div class="col-2">
+                <label>Enter your comment:</label>
+            </div>
+            <div class="col-3">
+                <textarea id="comment-entered" placeholder="Enter comment" rows="10" cols="70" name="commentString"></textarea>
+            </div>
+            <div class="col-2">
+                <input class="btn" id="comment-submit" type="submit" value="SUBMIT" />
+                <input type="hidden" name="userId" value="@Model.UserId"/>
+            </div>
         </div>
-        <div class="col-3">
-            <textarea id="comment-entered" placeholder="Enter comment" rows="10" cols="70"></textarea>
-        </div>
-        <div class="col-2">
-            <input class="btn" id="comment-submit" type="submit" value="SUBMIT" />
-        </div>
-    </div>
+    </form>
 </div>
