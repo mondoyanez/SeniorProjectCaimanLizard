@@ -40,7 +40,7 @@ public class PostController : Controller
 	    FeedVM vm = new()
 	    {
 		    Posts = _postRepository.GetAllPostsDescending(),
-            Comments = _commentRepository.GetComments(3),
+            Comments = _commentRepository.GetComments(0),
 		    PopularMovies = _tmdbService.GetPopularMovies(),
             PopularShows = _tmdbService.GetPopularShows(),
 		    ImageConfig = _tmdbService.SetImageConfig()

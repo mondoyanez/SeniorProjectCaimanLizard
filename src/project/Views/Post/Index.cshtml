@@ -107,9 +107,11 @@
                         </div>
                         @if (post.Comments.Count > 0)
                         {
+                            int count = 1;
+
                             foreach (var comment in Model.Comments)
                             {
-                                if (comment.PostId == post.Id)
+                                if (comment.PostId == post.Id && count <= 3)
                                 {
                                     <div class="row mt-3">
                                         <div class="col-2">
@@ -122,6 +124,7 @@
                                             <h6 class="card-subtitle comment-date">@Model.Convert.ConvertDate(comment.DatePosted, DateTime.Now)</h6>
                                         </div>
                                     </div>
+                                    count += 1;
                                 }
                             }
                         }
