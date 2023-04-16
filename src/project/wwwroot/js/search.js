@@ -351,41 +351,6 @@ function errorOnAjax() {
     // ...
 }
 
-//function addShowToWatchList(showTitle, listType) {
-//    console.log("Title:", showTitle);  
-//    console.log("listType:", listType);
-//    $.ajax({
-//        url: "/WatchList/addShowToWatchList",
-//        method: "POST",
-//        data: {
-//            showTitle: showTitle,
-//            listType: listType
-//        },
-//        success: function (result) {
-//            console.log("Added to watch list successfully");
-//        },
-//        error: function (error) {
-//            console.error("Error updating database:" + error.responseText);
-//        }
-//    });
-//}
-
-//function addMovieToWatchList(movieTitle, listType) {
-//    $.ajax({
-//        url: "/WatchList/addMovieToWatchList",
-//        method: "POST",
-//        data: {
-//            movieTitle: movieTitle,
-//            listType: listType
-//        },
-//        success: function (result) {
-//            console.log("Added to watch list successfully");
-//        },
-//        error: function (error) {
-//            console.error("Error updating database:" + error.responseText);
-//        }
-//    });
-//}
 
 function addTitleToWatchList(Title, listType, mediaType) {
     if (mediaType == "movie") {
