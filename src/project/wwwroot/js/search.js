@@ -226,9 +226,10 @@ function displayTitles(data) {
                           <div class="card-body text-start">
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
-                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                            <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add to Watch List</button>
-                          </div>
+                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>      
+                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -245,6 +246,7 @@ function displayMovies(data) {
     $("#resultCards").empty();
     $.each(data,
         function (index, item) {
+            const movieTitle = item.title.replace("'", "&apos;");
             let result =
                 `<div class="col cld-bg-light">
                     <div class="card mb-3">
@@ -257,8 +259,8 @@ function displayMovies(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                            <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add to Watch List</button>
-                          </div>
+                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
                         </div>
                       </div>
                     </div>
@@ -277,24 +279,30 @@ function displayShows(data) {
     $("#resultCards").empty();
     $.each(data,
         function (index, item) {
-            let result =
-                `<div class="col cld-bg-light">
-                    <div class="card mb-3" id="${index}">
-                      <div class="row g-0">
-                        <div class="col-sm-2 col-4 align-self-center">
-                          <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
-                        </div>
-                        <div class="col">
-                          <div class="card-body text-start">
-                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
-                            <p class="card-text truncate-overflow">${item.plotSummary}</p>
-                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                          <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick="addShowToWatchList('${item.title}')">Add to Watch List</button>
+            const title = item.title.replace("'", "&apos;");
+            console.log("mediatype: " + item.mediaType)
+                let result =
+                    `<div class="col cld-bg-light">
+                        <div class="card mb-3" id="${index}">
+                          <div class="row g-0">
+                            <div class="col-sm-2 col-4 align-self-center">
+                              <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
+                            </div>
+                            <div class="col">
+                              <div class="card-body text-start">
+                                <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
+                                <p class="card-text truncate-overflow">${item.plotSummary}</p>
+                                <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                                    <div class="dropdown">
+                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-			    </div>`;
+			        </div>`;            
             if (item.mediaType == "tv") {
                 $("#resultCards").append($(result));
             }
@@ -343,19 +351,48 @@ function errorOnAjax() {
     // ...
 }
 
-function addShowToWatchList(showTitle) {
-    console.log("Title:", showTitle);    
-    $.ajax({
-        url: "/WatchList/addShowToWatchList",
-        method: "POST",
-        data: {
-            showTitle : showTitle
-        },
-        success: function (result) {
-            console.log("Added to watch list successfully");
-        },
-        error: function (error) {
-            console.error("Error updating database:" + error.responseText);
-        }
-    });
+
+function addTitleToWatchList(Title, listType, mediaType) {
+    if (mediaType == "movie") {
+        $.ajax({
+            url: "/WatchList/addMovieToWatchList",
+            method: "POST",
+            data: {
+                movieTitle: Title,
+                listType: listType
+            },
+            success: function (result) {
+                console.log("Added to watch list successfully");
+            },
+            error: function (error) {
+                console.error("Error updating database:" + error.responseText);
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/WatchList/addShowToWatchList",
+            method: "POST",
+            data: {
+                showTitle: Title,
+                listType: listType
+            },
+            success: function (result) {
+                console.log("Added to watch list successfully");
+            },
+            error: function (error) {
+                console.error("Error updating database:" + error.responseText);
+            }
+        });
+    }
+    
 }
+
+
+const escapeHTML = str => str.replace(/[&<>'"]/g,
+    tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&apos;',
+        '"': '&quot;'
+    }[tag]));
