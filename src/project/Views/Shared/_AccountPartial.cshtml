@@ -17,9 +17,18 @@
     </li>
 
     <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">@User.Identity?.Name</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">@User.Identity?.Name</a>
     </li>
 
+    <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Theme
+        </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
+            <a class="dropdown-item" href="#" data-theme="light">Light</a>
+            <a class="dropdown-item" href="#" data-theme="dark">Dark</a>
+        </div>
+    </div>
 
 }
 else
