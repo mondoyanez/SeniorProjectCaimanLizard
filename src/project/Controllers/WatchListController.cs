@@ -96,13 +96,7 @@ namespace WatchParty.Controllers
             // check to see if the user is logged in, if so continure, if not create a pop up that tells them to log in
             if (currentUser == null)
             {
-                //return View("~/Areas/Identity/Pages/Account/Manage/Login.cshtml");
-                //return Redirect("Identity/Account/Login");
-                //return View("Identity/Account/Login");
-                //return RedirectToPage("/Account/Login", new { area = "Identity" });
-                //return View("/Identity/Account/Login");
                 return View();
-
             }
 
             Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
@@ -176,6 +170,12 @@ namespace WatchParty.Controllers
         {
             // Get the current user and their watch list
             var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser == null)
+            {
+                return View();
+            }
+
             Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
             WatchList watchList = _watchListRepo.FindByUserID(watcher.Id, listType);
 
