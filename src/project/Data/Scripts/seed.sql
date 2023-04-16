@@ -80,6 +80,14 @@ VALUES
 (10, 'Avatar', 'Excited to watch the new Avatar movie that came out', '2023-01-15 17:00:00', 4)
 SET IDENTITY_INSERT [Post] OFF;
 
+SET IDENTITY_INSERT [Comment] ON;
+INSERT INTO [Comment](ID, CommentTitle, DatePosted, UserID, PostID)
+VALUES
+(1, 'I also thought that Friends was a great show', '2023-04-02 13:25:00', 2, 3),
+(2, 'I thought it was ok', '2023-04-02 14:00:00', 3, 3),
+(3, 'I respect your opinion @PagieCole', '2023-04-02 14:10:00', 1, 3)
+SET IDENTITY_INSERT [Comment] OFF;
+
 SET IDENTITY_INSERT [Reshare] ON;
 INSERT INTO [Reshare] (ID, PostID, UserID)
 VALUES
