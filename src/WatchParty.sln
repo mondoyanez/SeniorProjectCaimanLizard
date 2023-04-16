@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchPartyTest", "nunit\Wat
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "WatchPartyJest", "jest\WatchPartyJest\WatchPartyJest.esproj", "{5CF82B1A-F49C-4218-A2F6-854CB828418F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchParty_BDD_Tests", "WatchParty_BDD_Tests\WatchParty_BDD_Tests.csproj", "{BE7A93B9-7047-4E4F-8AFA-FDF5A8D9865A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{5CF82B1A-F49C-4218-A2F6-854CB828418F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CF82B1A-F49C-4218-A2F6-854CB828418F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5CF82B1A-F49C-4218-A2F6-854CB828418F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BE7A93B9-7047-4E4F-8AFA-FDF5A8D9865A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7A93B9-7047-4E4F-8AFA-FDF5A8D9865A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7A93B9-7047-4E4F-8AFA-FDF5A8D9865A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7A93B9-7047-4E4F-8AFA-FDF5A8D9865A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
