@@ -10,30 +10,24 @@ namespace WatchParty.Controllers;
 [Authorize]
 public class CommentController : Controller
 {
-    private readonly ICommentRepository _commentRepository;
     private readonly IPostRepository _postRepository;
+    private readonly ICommentRepository _commentRepository;
+    private readonly IWatcherRepository _watcherRepository;
 
-    public CommentController(ICommentRepository commentRepository, IPostRepository postRepository)
+    public CommentController(IPostRepository postRepository, ICommentRepository commentRepository, IWatcherRepository watcherRepository)
     {
-        _commentRepository = commentRepository;
         _postRepository = postRepository;
+        _commentRepository = commentRepository;
+        _watcherRepository = watcherRepository;
     }
 
     [HttpGet]
     public IActionResult Index(int postId)
     {
-        Post post = _postRepository.FindById(postId);
-
-        if (post == null)
-        {
-            throw new ArgumentException(nameof(post));
-        }
-
         CommentVM vm = new()
         {
-            Comments = _commentRepository.GetComments(0).Where(c => c.PostId == post.Id).ToList(),
-            PostId = post.Id,
-            UserId = post.User.Id
+            Comments = _commentRepository.GetComments(0).Where(c => c.PostId == postId).ToList(),
+            PostId = postId
         };
 
         if (ModelState.IsValid)
@@ -50,8 +44,39 @@ public class CommentController : Controller
     }
 
     [HttpPost]
-    public IActionResult Index(string commentString, int userId)
+    public IActionResult Index(string commentString, int postId)
     {
-        return View();
+        Watcher? currentUser = _watcherRepository.FindByUsername(User.Identity.Name);
+        Post post = _postRepository.FindById(postId);
+
+        Comment comment = new()
+        {
+            CommentTitle = commentString,
+            DatePosted = DateTime.Now,
+            UserId = currentUser.Id,
+            User = currentUser,
+            PostId = postId,
+            Post = post
+        };
+
+        _commentRepository.AddComment(comment);
+
+        CommentVM vm = new()
+        {
+            Comments = _commentRepository.GetComments(0).Where(c => c.PostId == postId).ToList(),
+            PostId = postId
+        };
+
+        if (ModelState.IsValid)
+        {
+            ViewBag.IsValid = true;
+        }
+        else
+        {
+            ViewBag.IsValid = false;
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+        }
+
+        return View(vm);
     }
 }

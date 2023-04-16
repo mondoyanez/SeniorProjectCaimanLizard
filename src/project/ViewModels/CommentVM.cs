@@ -6,6 +6,5 @@ public class CommentVM
 {
     public IEnumerable<Comment> Comments { get; set; }
     public int? PostId { get; set; }
-    public int? UserId { get; set; }
     public DateFromConversion Convert { get; set; } = new();
 }
