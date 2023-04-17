@@ -9,7 +9,7 @@ CREATE TABLE [Watcher]
     [LastName]              NVARCHAR(64),
     [Email]                 NVARCHAR(256),
     [Bio]                   NVARCHAR(256),
-    [WatchListPrivacy]      BIT,                NOT NULL
+    [WatchListPrivacy]      BIT                 NOT NULL,
 );
 
 CREATE TABLE [FollowingList]
