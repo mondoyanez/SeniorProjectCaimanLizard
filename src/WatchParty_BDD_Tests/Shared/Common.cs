@@ -9,11 +9,11 @@ namespace WatchParty_BDD_Tests.Shared
     // Sitewide definitions and useful methods
     public class Common
     {
-        public const string BaseUrl = "https://localhost:7283";     // copied from launchSettings.json
+        public const string BaseUrl = "http://localhost:5053";     // copied from launchSettings.json
 
 
         // File to store browser cookies in
-        //public const string CookieFile = "..\\..\\..\\..\\..\\..\\..\\StandupsCookies.txt";
+        public const string CookieFile = "..\\..\\..\\..\\..\\..\\..\\StandupsCookies.txt";
 
         // Page names that everyone should use
         // A handy way to look these up
@@ -21,9 +21,7 @@ namespace WatchParty_BDD_Tests.Shared
         {
             { "Home" , "/" },
             { "Login", "/Identity/Account/Login" },
-            { "SelectGroup", "/MyAccount/SelectGroup" },
-            { "AdminQuestions", "/Admin/Questions" },
-            { "AdminQuestionsCreate", "/Admin/Questions/Create" }
+            { "Register", "/Identity/Account/Register" }
         };
 
         public static string PathFor(string pathName) => Paths[pathName];
