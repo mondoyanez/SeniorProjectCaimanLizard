@@ -12,6 +12,7 @@ Scenario: Home page has link to login
 	Given I'm on the "Home" page
 	Then I should see a link to the Register page
 
+
 Scenario: Home page contains link to logged in user's profile
 	Given I'm on the "Home" page
 		And I am logged in

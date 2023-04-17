@@ -20,6 +20,7 @@ namespace WatchParty_BDD_Tests.StepDefinitions
         [Given(@"I'm on the ""([^""]*)"" page")]
         public void GivenImOnThePage(string pageName)
         {
+            
             _homePage.GoTo(pageName);
         }
 
@@ -39,6 +40,7 @@ namespace WatchParty_BDD_Tests.StepDefinitions
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
+            
             throw new PendingStepException();
         }
 
