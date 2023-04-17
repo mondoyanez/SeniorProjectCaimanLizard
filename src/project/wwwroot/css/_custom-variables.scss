@@ -1,0 +1,311 @@
+﻿// replacing the default bootstrap variables with our own
+$blue: #84AFE6;
+$purple: #5D4A66;
+$yellow: #D5A021;
+$primary: $purple;
+$secondary: $blue;
+$light: #EDE7D9;
+
+@import "../lib/bootstrap/scss/bootstrap.scss";
+
+/* css-based multiline text truncation based on: 
+    https://css-tricks.com/multi-line-truncation-with-pure-css/ */
+.truncate-overflow::before {
+    position: absolute;
+    content: "...";
+    /* tempting... but shows when lines == content */
+    /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+    /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+    bottom: 0;
+    right: 0;
+}
+
+.truncate-overflow::after {
+    content: "";
+    position: absolute;
+    /*
+  inset-inline-end: 0;
+  */
+    right: 0;
+    /* missing bottom on purpose*/
+    width: 1rem;
+    height: 1rem;
+    background: white;
+}
+
+.cld-nav {
+    transition: 0.5s ease-in;
+}
+
+.form-control, .form-check-input {
+    background-color: #f2efe9;
+    border-color: $blue;
+}
+
+.form-control:hover, .form-check-input:hover {
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    border-color: $blue;
+}
+
+.form-control:focus {
+    background-color: #f2efe9;
+    outline-color: $blue;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:focus {
+    outline-color: $blue;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:checked {
+    background-color: $blue;
+    outline-color: $blue;
+    border-color: $blue;
+}
+
+.shake-img:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%
+}
+
+.profile-card {
+    background-color: #f2efe9;
+}
+
+
+.all-comments-date {
+    color: $light;
+    margin-left: 45%;
+}
+
+.all-comments-text {
+    color: $light;
+}
+
+.comment {
+    width: 50%;
+    border: 1px ridge $yellow;
+    border-radius: 5px;
+    margin-bottom: 5%;
+    margin-left: 25%
+}
+
+.comment-text {
+    color: $light;
+}
+
+.comment-date {
+    color: $light;
+    margin-left: 85%;
+}
+
+.comment-link {
+    margin-left: 40%;
+    color: $yellow;
+}
+
+.comment-username {
+    color: $blue;
+}
+
+#comment-entered {
+    margin-left: -20%;
+}
+
+#comment-submit {
+    color: var(--cld-black-purple);
+    background-color: $yellow;
+    border-color: $yellow;
+    margin-left: 125%;
+}
+
+.post {
+    width: 50%;
+    border: 1px ridge $yellow;
+    border-radius: 5px;
+    margin-top: -2%;
+    margin-bottom: 5%;
+    margin-left: 25%
+}
+
+.create-post-link {
+    margin-top: 1%;
+    margin-left: 90%;
+}
+
+.create-post-image {
+    width: 50px;
+    height: 50px;
+}
+
+.post-title, .post-text {
+    color: $light;
+}
+
+.post-date {
+    color: $light;
+    margin-right: 50%;
+}
+
+.post-username {
+    color: $blue;
+    margin-left: 50%;
+}
+
+.post-username-link {
+    text-decoration: none;
+}
+
+.empty-page {
+    padding-bottom: 40%;
+}
+
+.enter-comment-section {
+    margin-left: 24%;
+    margin-bottom: 1%;
+}
+
+.create-post-submit-btn {
+    margin-left: 88%;
+    margin-top: 17%;
+    margin-bottom: 5%;
+}
+
+.carousel {
+    overflow: hidden;
+    padding-bottom: 5rem;
+}
+
+.carousel-caption {
+    top: 100%;
+}
+
+.carousel-inner {
+    overflow: visible;
+}
+
+.carousel-control-next, .carousel-control-prev, .carousel-indicators {
+    bottom: 5rem;
+}
+
+.carousel-hidden-text {
+    position: absolute;
+    top: 0;
+    left: 18%;
+    width: 64%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+}
+
+.carousel-item > img:hover {
+    transition: filter 0.3s ease-out;
+    filter: brightness(30%);
+}
+
+.carousel-item:hover .carousel-hidden-text {
+    opacity: 1;
+}
+
+.user-search-error-rq {
+    margin-left: 8%;
+    color: red;
+    font-size: 16px;
+}
+
+.user-search-table {
+    margin-top: 5%;
+    margin-left: 15%;
+    width: 70%
+}
+
+a.user-profile-link:link, a.user-profile-link:visited {
+    color: $purple;
+    text-decoration: none;
+}
+
+a.user-profile-link:active {
+    color: $yellow;
+    text-decoration: none;
+}
+
+a.user-profile-link:hover {
+    color: $blue;
+    text-decoration: none;
+}
+
+#user-profile-btn-follow {
+    width: 30%;
+    height: 30%;
+    background-color: $purple;
+}
+
+#user-profile-btn-follow:hover {
+    width: 30%;
+    height: 30%;
+    background-color: $yellow;
+}
+
+#user-profile-following-icon {
+    width: 7%;
+}
