@@ -12,11 +12,12 @@ namespace WatchParty_BDD_Tests.PageObjects
             // using a named page (in Common.cs)
             _pageName = "Home";
         }
-        public IWebElement ProfileButton => _webDriver.FindElement(By.Id("profile-link"));
 
-        public IWebElement RegisterButton => _webDriver.FindElement(By.Id("register-link"));
+        public IWebElement ProfileButton => _webDriver.FindElement(By.Id("profile-link"));
+        public IWebElement SearchBar => _webDriver.FindElement(By.Id("search-form"));
+        public IWebElement RegisterButton => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Register\"]"));
+        public IWebElement LoginButton => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Login\"]"));
         public IWebElement NavBarHelloLink => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Manage\"]"));
-        private ReadOnlyCollection<IWebElement> Questions => _webDriver.FindElements(By.CssSelector("li.question a"));
 
         public string NavbarWelcomeText()
         {
@@ -27,12 +28,6 @@ namespace WatchParty_BDD_Tests.PageObjects
         {
             IWebElement navbarLogoutButton = _webDriver.FindElement(By.Id("logout-button"));
             navbarLogoutButton.Click();
-        }
-
-        public bool HasQuestionText(string text)
-        {
-            // Look through all the questions and see if text is present
-            return Questions.Any(q => q.Text.Contains(text));
         }
     }
 }
