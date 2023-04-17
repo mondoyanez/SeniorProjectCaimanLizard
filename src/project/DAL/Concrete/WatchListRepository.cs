@@ -12,22 +12,23 @@ public class WatchListRepository : Repository<WatchList>, IWatchListRepository
     {
     }
 
-    public WatchList? FindByUserID(int userID)
+    public WatchList? FindByUserID(int userID, int listType)
     {
-        if (userID == null)
+        if (userID == null || listType == null)
             throw new ArgumentNullException(nameof(userID));
 
-        WatchList? watchList = GetAll().FirstOrDefault(w => w.UserId == userID);
+        //WatchList? watchList = GetAll().FirstOrDefault(w => w.UserId == userID);
+        WatchList? watchList = GetAll().Where(w => w.UserId == userID).Where(wli => wli.ListType == listType).FirstOrDefault();
 
         return watchList;
     }
 
-    public IEnumerable<WatchList> FindAllByUserID(int userID)
+    public IEnumerable<WatchList> FindAllByUserID(int userID, int listType)
     {
-        if (userID == null)
+        if (userID == null || listType == null)
             throw new ArgumentNullException(nameof(userID));
 
-        IEnumerable<WatchList>? watchLists = GetAll().Where(w => w.UserId == userID);
+        IEnumerable<WatchList>? watchLists = GetAll().Where(w => w.UserId == userID).Where(wli => wli.ListType == listType);
 
         if (watchLists == null)
             return Enumerable.Empty<WatchList>();
