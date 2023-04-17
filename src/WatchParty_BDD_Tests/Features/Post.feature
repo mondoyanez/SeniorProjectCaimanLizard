@@ -84,3 +84,19 @@ Scenario Outline: Existing user can successfully create post with valid title an
 	| Zayden    | Home |
 	| Hareem    | Home |
 	| Krzysztof | Home |
+
+@FailsCreatePost
+Scenario Outline: Existing user does not enter title or description
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I navigate to the "CreatePost" page
+		And I leave the title input blank
+		And I leave the desciption input blank
+		And I click the submit button
+	Then The page title contains "Create Post - WatchParty"
+	Examples:
+	| FirstName | Page |
+	| Talia     | Home |
+	| Zayden    | Home |
+	| Hareem    | Home |
+	| Krzysztof | Home |
