@@ -113,11 +113,25 @@ public class CreatePostsStepDefinitions
         _createPostPage.EnterTitle(title);
     }
 
+    [Given(@"I leave the title input blank"), When(@"I leave the title input blank")]
+    public void WhenILeaveTheTitleInputBlank()
+    {
+        _createPostPage.EnterBlankTitle();
+    }
+
+
     [Given(@"I enter ""([^""]*)"" in the description input"), When(@"I enter ""([^""]*)"" in the description input")]
     public void WhenIEnterInTheDescriptionInput(string description)
     {
         _createPostPage.EnterDescription(description);
     }
+
+    [Given(@"I leave the desciption input blank"), When(@"I leave the desciption input blank")]
+    public void WhenILeaveTheDesciptionInputBlank()
+    {
+        _createPostPage.EnterBlankDescription();
+    }
+
 
     [Given(@"I click the submit button"), When(@"I click the submit button")]
     public void WhenIClickTheSubmitButton()
