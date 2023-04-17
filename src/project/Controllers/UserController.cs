@@ -92,7 +92,7 @@ public class UserController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ProfileAsync([Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio")] Watcher watcher)
+    public async Task<IActionResult> ProfileAsync([Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio,WatchListPrivacy")] Watcher watcher)
     {
         ModelState.ClearValidationState("watcher.AspNetIdentityId");
         ModelState.ClearValidationState("watcher.Id");
@@ -101,12 +101,16 @@ public class UserController : Controller
         //}
         _watcherRepository.AddOrUpdate(watcher);
 
+        Watcher? loggedInUser = _watcherRepository.FindByUsername(User.Identity.Name);
+
         ProfileVM vm = new ProfileVM();
         vm.Watcher = watcher;
 
         var currentUser = await _userManager.GetUserAsync(User);
         vm.isCurrentUser = _watcherRepository.IsCurrentUser(watcher.Username, currentUser);
-
+        vm.Followers = _followingListRepository.GetFollowerList(watcher.Id);
+        vm.Following = _followingListRepository.GetFollowingList(watcher.Id);
+        vm.isFollowing = watcher.Id != loggedInUser?.Id ? _followingListRepository.IsFollowing(loggedInUser.Id, watcher.Id) : null;
 
         return View(vm);
     }

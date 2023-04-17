@@ -7,8 +7,10 @@ namespace WatchParty.DAL.Abstract
     {
         IEnumerable<WatchListItem> GetAllWatchListItemsByID(int watchListId);
 
-        IEnumerable<WatchListItem> FindAllByShowId(int showId);
-        IEnumerable<WatchListItem> FindAllByMovieId(int movieId);
-        bool ExistsWithDifferentId(int id1, int id2);
+        IEnumerable<WatchListItem> FindAllByShowId(int showId, int watchListID);
+        IEnumerable<WatchListItem> FindAllByMovieId(int movieId, int watchListID);
+        bool ExistsWithDifferentId(int WatchListID, int showID);
+
+        WatchListItem FilterForCurrentWatchList(IEnumerable<WatchListItem> watchListItems, int watchListID);
     }
 }

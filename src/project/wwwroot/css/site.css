@@ -171,6 +171,53 @@ body {
     background-color: #f2efe9;
 }
 
+
+.all-comments-date {
+    color: var(--cld-off-white);
+    margin-left: 45%;
+}
+
+.all-comments-text {
+    color: var(--cld-off-white);
+}
+
+.comment {
+    width: 50%;
+    border: 1px ridge var(--cld-yellow);
+    border-radius: 5px;
+    margin-bottom: 5%;
+    margin-left: 25%
+}
+
+.comment-text {
+    color: var(--cld-off-white);
+}
+
+.comment-date {
+    color: var(--cld-off-white);
+    margin-left: 85%;
+}
+
+.comment-link {
+    margin-left: 40%;
+    color: var(--cld-yellow);
+}
+
+.comment-username {
+    color: var(--cld-blue);
+}
+
+#comment-entered {
+    margin-left: -20%;
+}
+
+#comment-submit {
+    color: var(--cld-black-purple);
+    background-color: var(--cld-yellow);
+    border-color: var(--cld-yellow);
+    margin-left: 125%;
+}
+
 .post {
     width: 50%;
     border: 1px ridge var(--cld-yellow);
@@ -201,11 +248,20 @@ body {
 
 .post-username {
     color: var(--cld-blue);
-    margin-left: 50%
+    margin-left: 50%;
+}
+
+.post-username-link {
+    text-decoration: none;
 }
 
 .empty-page {
     padding-bottom: 40%;
+}
+
+.enter-comment-section {
+    margin-left: 24%;
+    margin-bottom: 1%;
 }
 
 .create-post-submit-btn {
