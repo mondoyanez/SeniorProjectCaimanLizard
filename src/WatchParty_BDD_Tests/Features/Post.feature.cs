@@ -84,59 +84,59 @@ any given tv show or movie.", ProgrammingLanguage.CSharp, new string[] {
         {
 #line 9
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "UserName",
                         "Email",
                         "FirstName",
                         "LastName",
                         "Password"});
-            table1.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "TaliaK",
                         "knott@example.com",
                         "Talia",
                         "Knott",
                         "ScotIs#1"});
-            table1.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "ZaydenC",
                         "clark@example.com",
                         "Zayden",
                         "Clark",
                         "ScotIs#1"});
-            table1.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "DavilaH",
                         "hareem@example.com",
                         "Hareem",
                         "Davila",
                         "ScotIs#1"});
-            table1.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "KrzysztofP",
                         "krzysztof@example.com",
                         "Krzysztof",
                         "Ponce",
                         "ScotIs#1"});
 #line 10
- testRunner.Given("the following users exist", ((string)(null)), table1, "Given ");
+ testRunner.Given("the following users exist", ((string)(null)), table3, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "UserName",
                         "Email",
                         "FirstName",
                         "LastName",
                         "Password"});
-            table2.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "AndreC",
                         "colea@example.com",
                         "Andre",
                         "Cole",
                         "0a9dfi3.a"});
-            table2.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "JoannaV",
                         "valdezJ@example.com",
                         "Joanna",
                         "Valdez",
                         "d9u(*dsF4"});
 #line 16
- testRunner.And("the following users do not exist", ((string)(null)), table2, "And ");
+ testRunner.And("the following users do not exist", ((string)(null)), table4, "And ");
 #line hidden
         }
         
