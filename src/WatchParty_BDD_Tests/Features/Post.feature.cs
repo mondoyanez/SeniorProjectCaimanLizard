@@ -141,25 +141,14 @@ any given tv show or movie.", ProgrammingLanguage.CSharp, new string[] {
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Existing user can navigate to create post page")]
-        [NUnit.Framework.CategoryAttribute("SucessfullyAtPostPage")]
-        [NUnit.Framework.TestCaseAttribute("Talia", "Home", null)]
-        [NUnit.Framework.TestCaseAttribute("Zayden", "Home", null)]
-        [NUnit.Framework.TestCaseAttribute("Hareem", "Home", null)]
-        [NUnit.Framework.TestCaseAttribute("Krzysztof", "Home", null)]
-        public virtual void ExistingUserCanNavigateToCreatePostPage(string firstName, string page, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Visitor cannot navigate to the create post page")]
+        [NUnit.Framework.CategoryAttribute("CannotCreatePostVisitor")]
+        public virtual void VisitorCannotNavigateToTheCreatePostPage()
         {
-            string[] @__tags = new string[] {
-                    "SucessfullyAtPostPage"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
+            string[] tagsOfScenario = new string[] {
+                    "CannotCreatePostVisitor"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("FirstName", firstName);
-            argumentsOfScenario.Add("Page", page);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Existing user can navigate to create post page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Visitor cannot navigate to the create post page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -184,15 +173,71 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 23
- testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am a visitor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 24
- testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I navigate to the \"CreatePost\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 25
+ testRunner.Then("The page title contains \"Log in\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Existing user can navigate to create post page")]
+        [NUnit.Framework.CategoryAttribute("SucessfullyAtPostPage")]
+        [NUnit.Framework.TestCaseAttribute("Talia", "Home", null)]
+        [NUnit.Framework.TestCaseAttribute("Zayden", "Home", null)]
+        [NUnit.Framework.TestCaseAttribute("Hareem", "Home", null)]
+        [NUnit.Framework.TestCaseAttribute("Krzysztof", "Home", null)]
+        public virtual void ExistingUserCanNavigateToCreatePostPage(string firstName, string page, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "SucessfullyAtPostPage"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("FirstName", firstName);
+            argumentsOfScenario.Add("Page", page);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Existing user can navigate to create post page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 28
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 9
+this.FeatureBackground();
+#line hidden
+#line 29
+ testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 30
+ testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 31
   testRunner.And("I navigate to the \"CreatePost\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 26
+#line 32
  testRunner.Then("The page title contains \"Create Post - WatchParty\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

@@ -18,6 +18,12 @@ Background:
 	  | AndreC   | colea@example.com   | Andre     | Cole     | 0a9dfi3.a |
 	  | JoannaV  | valdezJ@example.com | Joanna    | Valdez   | d9u(*dsF4 |
 
+@CannotCreatePostVisitor
+Scenario: Visitor cannot navigate to the create post page
+	Given I am a visitor
+	When I navigate to the "CreatePost" page
+	Then The page title contains "Log in"
+
 @SucessfullyAtPostPage
 Scenario Outline: Existing user can navigate to create post page
 	Given I am a user with first name '<FirstName>'
