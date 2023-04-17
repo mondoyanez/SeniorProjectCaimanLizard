@@ -107,6 +107,25 @@ public class CreatePostsStepDefinitions
         _loginPage.GoTo(pageName);
     }
 
+    [Given(@"I enter ""([^""]*)"" in the title input"), When(@"I enter ""([^""]*)"" in the title input")]
+    public void WhenIEnterInTheTitleInput(string title)
+    {
+        _createPostPage.EnterTitle(title);
+    }
+
+    [Given(@"I enter ""([^""]*)"" in the description input"), When(@"I enter ""([^""]*)"" in the description input")]
+    public void WhenIEnterInTheDescriptionInput(string description)
+    {
+        _createPostPage.EnterDescription(description);
+    }
+
+    [Given(@"I click the submit button"), When(@"I click the submit button")]
+    public void WhenIClickTheSubmitButton()
+    {
+        _createPostPage.CreatePost();
+    }
+
+
     [Then(@"The page title contains ""([^""]*)""")]
     public void ThenThePageTitleContains(string p0)
     {

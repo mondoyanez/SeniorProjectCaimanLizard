@@ -36,3 +36,19 @@ Scenario Outline: Existing user can navigate to create post page
 	| Zayden    | Home |
 	| Hareem    | Home |
 	| Krzysztof | Home |
+
+@SuccessfullyCreatePost
+Scenario Outline: Existing user can successfully create post with valid title and description
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I navigate to the "CreatePost" page
+		And I enter "Title" in the title input
+		And I enter "Description" in the description input
+		And I click the submit button
+	Then The page title contains "Feed"
+	Examples:
+	| FirstName | Page |
+	| Talia     | Home |
+	| Zayden    | Home |
+	| Hareem    | Home |
+	| Krzysztof | Home |
