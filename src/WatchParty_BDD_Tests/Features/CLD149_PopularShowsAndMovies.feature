@@ -17,24 +17,56 @@ Background:
 	  | AndreC   | colea@example.com   | Andre     | Cole     | 0a9dfi3.a |
 	  | JoannaV  | valdezJ@example.com | Joanna    | Valdez   | d9u(*dsF4 |
 
+@LoggedIn
 Scenario Outline: Existing user can see carousel of popular shows
 	Given I am a user with first name '<FirstName>'
 	When I login
-	Then I can see the "PopularShowsCarousel"
+		And I navigate to the "Post" page
+	Then I can see the PopularShowsCarousel element
+	Examples:
+	| FirstName | Page |
+	| Talia     | Home |
+	| Zayden    | Home |
+	| Hareem    | Home |
+	| Krzysztof | Home |
 
+@LoggedIn
 Scenario Outline: Existing user can see carousel of popular movies
 	Given I am a user with first name '<FirstName>'
 	When I login
-	Then I can see the "PopularMoviesCarousel"
+		And I navigate to the "Post" page
+	Then I can see the PopularMoviesCarousel element
+	Examples:
+	| FirstName | Page |
+	| Talia     | Home |
+	| Zayden    | Home |
+	| Hareem    | Home |
+	| Krzysztof | Home |
 
+@LoggedIn
 Scenario Outline: Existing user can see additional informaton on mouse hover for popular shows
 	Given I am a user with first name '<FirstName>'
-		And I login
-	When I hover over the "PopularShowsCarousel"
+	When I login
+		And I navigate to the "Post" page
+	When I hover over the PopularShowsCarousel element
 	Then I can see the show description
+	Examples:
+	| FirstName | Page |
+	| Talia     | Home |
+	| Zayden    | Home |
+	| Hareem    | Home |
+	| Krzysztof | Home |
 
+@LoggedIn
 Scenario Outline: Existing user can see additional informaton on mouse hover for popular movies
 	Given I am a user with first name '<FirstName>'
-		And I login
-	When I hover over the "PopularMoviesCarousel"
+	When I login
+		And I navigate to the "Post" page
+	When I hover over the PopularMoviesCarousel element
 	Then I can see the movie description
+	Examples:
+	| FirstName | Page |
+	| Talia     | Home |
+	| Zayden    | Home |
+	| Hareem    | Home |
+	| Krzysztof | Home |
