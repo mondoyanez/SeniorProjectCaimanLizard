@@ -30,6 +30,8 @@ public partial class Watcher
     [StringLength(256)]
     public string? Bio { get; set; }
 
+    public bool? WatchListPrivacy { get; set; }
+
     [InverseProperty("User")]
     public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
 
