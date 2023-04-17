@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WatchParty_BDD_Tests.Shared;
 
 namespace WatchParty_BDD_Tests.PageObjects
 {
@@ -31,7 +30,7 @@ namespace WatchParty_BDD_Tests.PageObjects
         // Go to the previously set page name (convenience method for using derived classes)
         public void GoTo()
         {
-            if (_pageName != null)
+            if(_pageName != null)
             {
                 GoTo(_pageName);
             }
@@ -50,31 +49,31 @@ namespace WatchParty_BDD_Tests.PageObjects
         public string GetTitle() => _webDriver.Title;
         public string GetURL() => _webDriver.Url;
 
-        //public bool SaveAllCookies()
-        //{
-        //    ReadOnlyCollection<Cookie> cookies = _webDriver.Manage().Cookies.AllCookies;
-        //    bool success = FileUtils.SerializeCookiesToFile(Common.CookieFile, cookies);
-        //    return success;
-        //}
+        public bool SaveAllCookies()
+        {
+            ReadOnlyCollection<Cookie> cookies = _webDriver.Manage().Cookies.AllCookies;
+            bool success = FileUtils.SerializeCookiesToFile(Common.CookieFile, cookies);
+            return success;
+        }
 
-        //public bool LoadAllCookies()
-        //{
-        //    List<Cookie> cookies;
-        //    try
-        //    {
-        //        cookies = FileUtils.DeserializeCookiesFromFile(Common.CookieFile);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //    foreach (Cookie cookie in cookies)
-        //    {
-        //        _webDriver.Manage().Cookies.AddCookie(cookie);
-        //    }
-        //    _webDriver.Navigate().Refresh();
-        //    return true;
-        //}
+        public bool LoadAllCookies()
+        {
+            List<Cookie> cookies;
+            try
+            {
+                cookies = FileUtils.DeserializeCookiesFromFile(Common.CookieFile);
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            foreach (Cookie cookie in cookies)
+            {
+                _webDriver.Manage().Cookies.AddCookie(cookie);
+            }
+            _webDriver.Navigate().Refresh();
+            return true;
+        }
 
         public void DeleteCookies()
         {

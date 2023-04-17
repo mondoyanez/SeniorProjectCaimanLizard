@@ -27,7 +27,7 @@ namespace WatchParty_BDD_Tests.Shared
             {
                 File.WriteAllLines(filePath, vals);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return false;
             }
@@ -39,7 +39,7 @@ namespace WatchParty_BDD_Tests.Shared
             List<Cookie> cookies = new List<Cookie>();
             string[] lines = File.ReadAllLines(filePath);       // throws an exception if it fails, can test for that
             int numCookies = lines.Length / 2;
-            for (int i = 0; i < numCookies; ++i)
+            for(int i = 0; i < numCookies; ++i)
             {
                 string name = lines[2 * i];
                 string value = lines[2 * i + 1];

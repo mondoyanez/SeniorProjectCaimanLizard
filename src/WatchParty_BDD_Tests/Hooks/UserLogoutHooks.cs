@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WatchParty_BDD_Tests.Drivers;
 
 namespace WatchParty_BDD_Tests.Hooks
 {

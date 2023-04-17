@@ -15,23 +15,15 @@ namespace WatchParty_BDD_Tests.PageObjects
             _pageName = "Login";
         }
 
-        public IWebElement UsernameInput => _webDriver.FindElement(By.Id("Input_UserName"));
-
-        public IWebElement EmailInput => _webDriver.FindElement(By.Id("Input_Email"));
+        public IWebElement UserNameInput => _webDriver.FindElement(By.Id("Input_UserName"));
         public IWebElement PasswordInput => _webDriver.FindElement(By.Id("Input_Password"));
         public IWebElement RememberMeCheck => _webDriver.FindElement(By.Id("Input_RememberMe"));
         public IWebElement SubmitButton => _webDriver.FindElement(By.Id("login-submit"));
 
-        public void EnterEmail(string email)
+        public void EnterUserName(string username)
         {
-            EmailInput.Clear();
-            EmailInput.SendKeys(email);
-        }
-
-        public void EnterUsername(string username)
-        {
-            UsernameInput.Clear();
-            UsernameInput.SendKeys(username);
+            UserNameInput.Clear();
+            UserNameInput.SendKeys(username);
         }
 
         public void EnterPassword(string password)
@@ -42,16 +34,16 @@ namespace WatchParty_BDD_Tests.PageObjects
 
         public void SetRememberMe(bool rememberMe)
         {
-            if (rememberMe)
+            if(rememberMe)
             {
-                if (!RememberMeCheck.Selected)
+                if(!RememberMeCheck.Selected)
                 {
                     RememberMeCheck.Click();
                 }
             }
             else
             {
-                if (RememberMeCheck.Selected)
+                if(RememberMeCheck.Selected)
                 {
                     RememberMeCheck.Click();
                 }
@@ -65,8 +57,8 @@ namespace WatchParty_BDD_Tests.PageObjects
 
         public bool HasLoginErrors()
         {
-            ReadOnlyCollection<IWebElement> elements = _webDriver.FindElements(By.CssSelector(".validation-summary-errors"));
-            return elements.Count() > 0;
+           ReadOnlyCollection<IWebElement> elements = _webDriver.FindElements(By.CssSelector(".validation-summary-errors"));
+           return elements.Count() > 0;
         }
     }
 }
