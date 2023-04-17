@@ -59,6 +59,12 @@ namespace WatchParty.Controllers
                 return View("user/Notfound");
             }
 
+            // Check to see watchlist privacy
+            if (watcher.WatchListPrivacy == true && watchListVM.isCurrentUser == false)
+            {
+                return View("PrivatePage");
+            }
+
             //Find the watchlists by userID
             watchListVM.currentlyWatchList = _watchListRepo.FindByUserID(watcher.Id, 0);
             watchListVM.wantToWatchList = _watchListRepo.FindByUserID(watcher.Id, 1);
