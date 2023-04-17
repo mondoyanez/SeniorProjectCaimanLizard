@@ -13,6 +13,7 @@ namespace WatchParty_BDD_Tests.PageObjects
             _pageName = "Home";
         }
 
+        public IWebElement ProfileButton => _webDriver.FindElement(By.Id("profile-link"));
         public IWebElement SearchBar => _webDriver.FindElement(By.Id("search-form"));
         public IWebElement RegisterButton => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Register\"]"));
         public IWebElement LoginButton => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Login\"]"));
