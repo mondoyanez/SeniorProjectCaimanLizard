@@ -60,7 +60,7 @@ namespace WatchParty.Controllers
             }
 
             // Check to see watchlist privacy
-            if (watcher.WatchListPrivacy == true)
+            if (watcher.WatchListPrivacy == true && watchListVM.isCurrentUser == false)
             {
                 return View("PrivatePage");
             }
