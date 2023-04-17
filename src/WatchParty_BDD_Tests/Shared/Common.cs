@@ -19,8 +19,10 @@ namespace WatchParty_BDD_Tests.Shared
         // A handy way to look these up
         public static readonly Dictionary<string, string> Paths = new()
         {
+            { "CreatePost", "/Post/Create" },
             { "Home" , "/" },
             { "Login", "/Identity/Account/Login" },
+            { "Post", "/Post/Index" },
             { "Register", "/Identity/Account/Register" }
         };
 
