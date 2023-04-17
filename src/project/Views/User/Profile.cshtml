@@ -58,7 +58,10 @@
                 }
                 else
                 {
-                    <a class="btn cld-btn-secondary btn-sm" asp-area="" asp-controller="WatchList" asp-action="Index" asp-route-username="@Model.Watcher.Username">Watch List</a>
+                    @if (Model.Watcher.WatchListPrivacy == false)
+                    {
+                        <a class="btn cld-btn-secondary btn-sm" asp-area="" asp-controller="WatchList" asp-action="Index" asp-route-username="@Model.Watcher.Username">Watch List</a>
+                    }
                 }
             </div>
         </div>
@@ -99,6 +102,19 @@
                             <label asp-for="Watcher.Bio" class="control-label">Bio</label>
                             <input asp-for="Watcher.Bio" class="form-control" class="input-group-lg" />
                             <span asp-validation-for="Watcher.Bio" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="form-group form-check form-switch">
+                            @if (Model.Watcher.WatchListPrivacy == true)
+                            {
+                                <label asp-for="Watcher.WatchListPrivacy" class="form-check-label control-label">Watch List is private</label>
+                            }
+                            else
+                            {
+                                <label asp-for="Watcher.WatchListPrivacy" class="form-check-label control-label">Watch List is public</label>                                
+                            }
+                            <input asp-for="Watcher.WatchListPrivacy" class="form-check-input form-control" type="checkbox" />
+                            <span asp-validation-for="Watcher.WatchListPrivacy" class="text-danger"></span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" style="outline:none" data-bs-dismiss="modal">Cancel</button>
