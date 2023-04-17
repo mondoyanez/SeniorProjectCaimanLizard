@@ -58,7 +58,10 @@
                 }
                 else
                 {
-                    <a class="btn cld-btn-secondary btn-sm" asp-area="" asp-controller="WatchList" asp-action="Index" asp-route-username="@Model.Watcher.Username">Watch List</a>
+                    @if (Model.Watcher.WatchListPrivacy == false)
+                    {
+                        <a class="btn cld-btn-secondary btn-sm" asp-area="" asp-controller="WatchList" asp-action="Index" asp-route-username="@Model.Watcher.Username">Watch List</a>
+                    }
                 }
             </div>
         </div>
