@@ -199,4 +199,47 @@ public class FollowingListRepository_Tests
         // Act/Assert
         Assert.Throws<Exception>(() => repo.AddFollower(newFollow));
     }
+
+    [Test]
+    public void GetFollowerById_ForUserWhoIsFollowingTheOtherUser_ShouldReturnCorrectFollowingList()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IFollowingListRepository repo = new FollowingListRepository(context);
+
+        // Act
+        FollowingList? follow = repo.GetFollowerById(1, 2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(follow.Id, Is.EqualTo(1));
+            Assert.That(follow.UserId, Is.EqualTo(1));
+            Assert.That(follow.User.Username, Is.EqualTo("SandraHart"));
+            Assert.That(follow.FollowingId, Is.EqualTo(2));
+            Assert.That(follow.Following.Username, Is.EqualTo("CarsonDaniel"));
+        });
+    }
+
+    [Test]
+    public void GetFollowerById_ForUserWhoIsNotFollowingTheOtherUser_ShouldThrowAnException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IFollowingListRepository repo = new FollowingListRepository(context);
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.GetFollowerById(10, 1));
+    }
+
+    [Test]
+    public void GetFollowerById_ForUserWhoIsFollowingThemselves_ShouldThrowAnException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IFollowingListRepository repo = new FollowingListRepository(context);
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.GetFollowerById(1, 1));
+    }
 }
