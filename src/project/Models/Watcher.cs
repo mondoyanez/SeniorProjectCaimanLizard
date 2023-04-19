@@ -27,12 +27,19 @@ public partial class Watcher
     [StringLength(256)]
     public string? Email { get; set; }
 
-    public int? FollowingCount { get; set; }
-
-    public int? FollowerCount { get; set; }
-
     [StringLength(256)]
     public string? Bio { get; set; }
+
+    public bool WatchListPrivacy { get; set; }
+
+    [InverseProperty("User")]
+    public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+
+    [InverseProperty("Following")]
+    public virtual ICollection<FollowingList> FollowingListFollowings { get; } = new List<FollowingList>();
+
+    [InverseProperty("User")]
+    public virtual ICollection<FollowingList> FollowingListUsers { get; } = new List<FollowingList>();
 
     [InverseProperty("User")]
     public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();
@@ -42,4 +49,7 @@ public partial class Watcher
 
     [InverseProperty("User")]
     public virtual ICollection<Reshare> Reshares { get; } = new List<Reshare>();
+
+    [InverseProperty("User")]
+    public virtual ICollection<WatchList> WatchLists { get; } = new List<WatchList>();
 }

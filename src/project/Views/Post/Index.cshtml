@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-4">
             <h4 class="text-center">Popular Movies</h4>
-            <div id="carouselPopularMoviesAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div id="PopularMoviesCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @{
                         var i = 0;
@@ -40,7 +40,7 @@
         </div>
         <div class="col-4">
             <h4 class="text-center">Popular Shows</h4>
-            <div id="carouselPopularShowsAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div id="PopularShowsCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @{
                         var j = 0;
@@ -91,14 +91,51 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h6 class="card-subtitle mb-2 post-username">@@@post.User.Username</h6>
+                                <a class="post-username-link" href="/user/@post.User.Username"><h6 class="card-subtitle mb-2 post-username">@@@post.User.Username</h6></a>
                             </div>
                             <div class="col">
-                                <h6 class="card-subtitle mb-2 post-date">@post.DatePosted.ToString("MM/dd/yy")</h6>
+                                <h6 class="card-subtitle mb-2 post-date">@Model.Convert.ConvertDate(post.DatePosted, DateTime.Now)</h6>
                             </div>
                         </div>
                         <div class="row">
                             <p class="card-text post-text">@post.PostDescription</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <h4 class="card-title post-title mb-2 text-center">Comments</h4>
+                        </div>
+                        @if (post.Comments.Count > 0)
+                        {
+                            int count = 1;
+
+                            foreach (var comment in Model.Comments)
+                            {
+                                if (comment.PostId == post.Id && count <= 3)
+                                {
+                                    <div class="row mt-3">
+                                        <div class="col-2">
+                                            <a class="post-username-link" href="/user/@comment.User.Username"><h6 class="card-subtitle comment-username">@@@comment.User.Username</h6></a>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <p class="card-text comment-text mb-2">@comment.CommentTitle</p>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <h6 class="card-subtitle comment-date">@Model.Convert.ConvertDate(comment.DatePosted, DateTime.Now)</h6>
+                                        </div>
+                                    </div>
+                                    count += 1;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <p class="card-text post-text">No comments on this post</p>
+                            </div>
+                        }
+                        <div class="row mt-5">
+                            <a asp-controller="Comment" asp-action="Index" asp-route-postId="@post.Id" class="comment-link">View All Comments</a>
                         </div>
                     </div>
                 </div>

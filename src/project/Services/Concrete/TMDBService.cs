@@ -299,5 +299,53 @@ namespace WatchParty.Services.Concrete
                 })
                 .ToList();
         }
+
+        public TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/")
+        {
+            Debug.WriteLine("title inside service: " + title);
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
+            Debug.WriteLine("jsonResponse" + jsonResponse);
+
+            TMDBJsonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO.results == null) return new TMDBTitle();
+
+            return tmdbJsonDTO.results.Select(r => new TMDBTitle()
+            {
+                Id = r.id,
+                Title = r.title ?? r.name,
+                MediaType = r.media_type,
+                ImagePath = r.poster_path ?? "",
+                Popularity = r.popularity,
+                ReleaseDate = r.release_date ?? r.first_air_date,
+                PlotSummary = r.overview
+            }).First();
+
+            //return tmdbJsonDTO.results.Where(results => results.title.Equals(title)).Select(r => new TMDBTitle()
+            //{
+            //    Id = r.id,
+            //    Title = r.title ?? r.name,
+            //    MediaType = r.media_type,
+            //    ImagePath = r.poster_path ?? "",
+            //    Popularity = r.popularity,
+            //    ReleaseDate = r.release_date ?? r.first_air_date,
+            //    PlotSummary = r.overview
+            //})
+            //.FirstOrDefault();
+        }
+
+        public TMDBTitle GetMovieDetails(string relativepath = "/movie/?query=")
+        {
+            throw new NotImplementedException();
+        }
     }
 }
