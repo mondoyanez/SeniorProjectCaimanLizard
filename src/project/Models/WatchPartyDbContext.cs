@@ -36,7 +36,14 @@ public partial class WatchPartyDbContext : DbContext
     public virtual DbSet<Watcher> Watchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=WatchPartyConnection");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder
+                .UseLazyLoadingProxies()        // <-- add this line
+                .UseSqlServer("Name=WatchPartyConnection");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
