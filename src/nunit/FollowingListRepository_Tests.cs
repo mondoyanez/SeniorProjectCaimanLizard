@@ -222,24 +222,76 @@ public class FollowingListRepository_Tests
     }
 
     [Test]
-    public void GetFollowerById_ForUserWhoIsNotFollowingTheOtherUser_ShouldThrowAnException()
+    public void GetFollowerById_ForUserWhoIsNotFollowingTheOtherUser_ShouldReturnNull()
     {
         // Arrange
         using WatchPartyDbContext context = _dbHelper.GetContext();
         IFollowingListRepository repo = new FollowingListRepository(context);
 
-        // Act/Assert
-        Assert.Throws<Exception>(() => repo.GetFollowerById(10, 1));
+        // Act
+        FollowingList? follow = repo.GetFollowerById(10, 2);
+
+        // Assert
+        Assert.That(follow, Is.Null);
     }
 
     [Test]
-    public void GetFollowerById_ForUserWhoIsFollowingThemselves_ShouldThrowAnException()
+    public void GetFollowerById_ForUserWhoIsNotFollowingThemselves_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IFollowingListRepository repo = new FollowingListRepository(context);
+
+        // Act
+        FollowingList? follow = repo.GetFollowerById(1, 1);
+
+        // Assert
+        Assert.That(follow, Is.Null);
+    }
+
+    [Test]
+    public void RemoveFollower_ForUserWhoIsFollowingTheOtherUser_ShouldSuccessfullyUnfollowUser()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IFollowingListRepository repo = new FollowingListRepository(context);
+
+        // Act
+        FollowingList? follow = repo.GetFollowerById(1, 2);
+        repo.RemoveFollower(follow);
+        follow = repo.GetFollowerById(1, 2);
+
+        // Assert
+        Assert.That(follow, Is.Null);
+    }
+
+    [Test]
+    public void RemoveFollower_ForUserWhoIsNotFollowingTheOtherUser_ShouldThrowException()
     {
         // Arrange
         using WatchPartyDbContext context = _dbHelper.GetContext();
         IFollowingListRepository repo = new FollowingListRepository(context);
 
         // Act/Assert
-        Assert.Throws<Exception>(() => repo.GetFollowerById(1, 1));
+        FollowingList? follow = repo.GetFollowerById(1, 2);
+        repo.RemoveFollower(follow);
+        Assert.Throws<Exception>(() => repo.RemoveFollower(follow));
+    }
+
+    [Test]
+    public void RemoveFollower_ForMissingDateInFollowingList_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IFollowingListRepository repo = new FollowingListRepository(context);
+
+        FollowingList newFollow = new FollowingList
+        {
+            UserId = 1,
+            User = context.Watchers.First(w => w.Id == 1)
+        };
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.RemoveFollower(newFollow));
     }
 }
