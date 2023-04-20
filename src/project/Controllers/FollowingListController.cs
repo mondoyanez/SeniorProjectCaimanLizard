@@ -47,4 +47,32 @@ public class FollowingListController : ControllerBase
         return Ok(StatusCodes.Status201Created);
     }
 
+    [HttpPost("removeFollower")]
+    public IActionResult RemoveFollower(string followerUsername)
+    {
+        if (User?.Identity?.Name == null)
+        {
+            throw new ArgumentNullException(nameof(User));
+        }
+
+        Watcher? loggedInWatcher = _watcherRepository.FindByUsername(User.Identity.Name);
+        Watcher? followerWatcher = _watcherRepository.FindByUsername(followerUsername);
+
+        if (loggedInWatcher == null || followerWatcher == null)
+        {
+            throw new NullReferenceException("signed in user was not found");
+        }
+
+        FollowingList? follow = _followingListRepository.GetFollowerById(loggedInWatcher.Id, followerWatcher.Id);
+
+        if (follow == null)
+        {
+            throw new NullReferenceException($"{loggedInWatcher.Username} is not following {followerWatcher.Username}");
+        }
+
+        _followingListRepository.RemoveFollower(follow);
+
+        return Ok(StatusCodes.Status201Created);
+    }
+
 }
