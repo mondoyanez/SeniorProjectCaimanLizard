@@ -25,6 +25,7 @@ Scenario: Visitor cannot navigate to the create post page
 	Then The page title contains "Log in"
 
 @SucessfullyAtPostPage
+@LoggedIn
 Scenario Outline: Existing user can navigate to create post page
 	Given I am a user with first name '<FirstName>'
 	When I login
@@ -38,6 +39,7 @@ Scenario Outline: Existing user can navigate to create post page
 	| Krzysztof | Home |
 
 @SuccessfullyCreatePost
+@LoggedIn
 Scenario Outline: Existing user can successfully create post with valid title and description
 	Given I am a user with first name '<FirstName>'
 	When I login
@@ -54,6 +56,7 @@ Scenario Outline: Existing user can successfully create post with valid title an
 	| Krzysztof | Home |
 
 @FailsCreatePost
+@LoggedIn
 Scenario Outline: Existing user does not enter title but enters desciption so post is not created
 	Given I am a user with first name '<FirstName>'
 	When I login
@@ -70,6 +73,7 @@ Scenario Outline: Existing user does not enter title but enters desciption so po
 	| Krzysztof | Home |
 
 @SuccessfullyCreatePostMissingDescription
+@LoggedIn
 Scenario Outline: Existing user can successfully create post with valid title and but missing description
 	Given I am a user with first name '<FirstName>'
 	When I login
@@ -86,6 +90,7 @@ Scenario Outline: Existing user can successfully create post with valid title an
 	| Krzysztof | Home |
 
 @FailsCreatePost
+@LoggedIn
 Scenario Outline: Existing user does not enter title or description
 	Given I am a user with first name '<FirstName>'
 	When I login
