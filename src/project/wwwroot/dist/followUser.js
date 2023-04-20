@@ -16,7 +16,6 @@ followButton.on("click", (e) => {
 });
 unfollowButton.on("click", (e) => {
     e.preventDefault();
-    console.log("unfollow button pressed");
     const followerUsername = $("#user-profile-username").val();
     $(() => {
         $.ajax({
