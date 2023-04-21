@@ -114,10 +114,6 @@ body {
     background-color: #76a8e8;
 }
 
-.delete-post-button:focus {
-    outline: 0 !important;
-}
-
 .form-control, .form-check-input {
     background-color: #f2efe9;
     border-color: var(--cld-blue);
@@ -220,6 +216,15 @@ body {
     background-color: var(--cld-yellow);
     border-color: var(--cld-yellow);
     margin-left: 125%;
+}
+
+.comment-title {
+    margin-left: 45%;
+}
+
+.dropdown-section {
+    margin-top: 15px;
+    margin-left: 19%;
 }
 
 .post {
