@@ -246,4 +246,45 @@ public class PostRepository_Tests
         // Act/Assert
         Assert.Throws<ArgumentNullException>(() => repo.AddPost(null!));
     }
+
+    [Test]
+    public void FindPostById_ForExistingPost_ShouldReturnCorrectPost()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        // Act
+        Post? post = repo.FindPostById(1);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(post.Id, Is.EqualTo(1));
+            Assert.That(post.PostTitle, Is.EqualTo("That new Ant-man movie was incredible!"));
+            Assert.That(post.PostDescription, Is.Null);
+            Assert.That(post.DatePosted, Is.EqualTo(new DateTime(2023, 1, 15, 17, 0, 0)));
+            Assert.That(post.IsVisible, Is.True);
+            Assert.That(post.User.Username, Is.EqualTo("SandraHart"));
+        });
+    }
+
+    [Test]
+    public void FindPostById_ForNonExistingPost_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        // Act
+        Post? post = repo.FindPostById(9001);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(post, Is.Null);
+        });
+    }
 }

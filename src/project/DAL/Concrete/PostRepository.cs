@@ -39,6 +39,11 @@ public class PostRepository: Repository<Post>, IPostRepository
         }
     }
 
+    public Post? FindPostById(int id)
+    {
+        return GetAll().FirstOrDefault(p => p.Id == id);
+    }
+
     public void HidePost(Post post)
     {
         throw new NotImplementedException();
