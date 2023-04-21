@@ -11,7 +11,10 @@ public class PostRepository: Repository<Post>, IPostRepository
 
     public IEnumerable<Post> GetAllPostsDescending()
     {
-        IEnumerable<Post> posts = GetAll().OrderByDescending(p => p.DatePosted).ToList();
+        IEnumerable<Post> posts = GetAll()
+            .Where(p => p.IsVisible == true)
+            .OrderByDescending(p => p.DatePosted)
+            .ToList();
 
         if (!posts.Any())
             throw new Exception("No posts were found");

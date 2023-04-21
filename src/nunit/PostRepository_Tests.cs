@@ -62,7 +62,7 @@ public class PostRepository_Tests
         // The db has been seeded
 
         // Act
-        IEnumerable<Post> posts = repo.GetAll();
+        IEnumerable<Post> posts = repo.GetAll().Where(p => p.IsVisible == true);
 
         int count = posts.Count();
 
