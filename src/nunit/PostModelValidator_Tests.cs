@@ -328,6 +328,44 @@ public class PostModelValidator_Tests
     }
 
     [Test]
+    public void Post_WithValidIsVisible_IsCorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        bool actual = post.IsVisible;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("IsVisible"), Is.False);
+            Assert.That(actual, Is.True);
+        });
+    }
+
+    [Test]
+    public void Post_WithValidIsVisible_IsIncorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        bool actual = post.IsVisible;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("IsVisible"), Is.False);
+            Assert.That(actual, Is.Not.EqualTo(false));
+        });
+    }
+
+    [Test]
     public void Post_WithValidUserId_IsIncorrect()
     {
         // Arrange
