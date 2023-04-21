@@ -287,4 +287,80 @@ public class PostRepository_Tests
             Assert.That(post, Is.Null);
         });
     }
+
+    [Test]
+    public void HidePost_ForExistingPost_ShouldReturnFalseForIsVisible()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        // Act
+        Post? post = repo.FindPostById(1);
+        repo.HidePost(post);
+        post = repo.FindPostById(1);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(post.Id, Is.EqualTo(1));
+            Assert.That(post.PostTitle, Is.EqualTo("That new Ant-man movie was incredible!"));
+            Assert.That(post.PostDescription, Is.Null);
+            Assert.That(post.DatePosted, Is.EqualTo(new DateTime(2023, 1, 15, 17, 0, 0)));
+            Assert.That(post.IsVisible, Is.False);
+            Assert.That(post.User.Username, Is.EqualTo("SandraHart"));
+        });
+    }
+
+    [Test]
+    public void HidePost_ForNonExistingPost_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        Post post = new Post
+        {
+            PostTitle = "My very first post!",
+            PostDescription = "Enter a description",
+            DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            IsVisible = true,
+            UserId = 10,
+            User = context.Watchers.First(w => w.Id == 10)
+        };
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.HidePost(post));
+    }
+
+    [Test]
+    public void HidePost_ForExistingPostButInvalidProperty_ThrowsException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        // Act
+        Post? post = repo.FindPostById(1);
+        post.PostTitle = null!;
+
+        // Assert
+        Assert.Throws<Exception>(() => repo.HidePost(post));
+    }
+
+    [Test]
+    public void HidePost_ForExistingPostAlreadyHidden()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IPostRepository repo = new PostRepository(context);
+        // The db has been seeded
+
+        // Act/Assert
+        Post? post = repo.FindPostById(6);
+        Assert.Throws<Exception>(() => repo.HidePost(post));
+    }
 }

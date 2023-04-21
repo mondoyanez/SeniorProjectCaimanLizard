@@ -46,6 +46,20 @@ public class PostRepository: Repository<Post>, IPostRepository
 
     public void HidePost(Post post)
     {
-        throw new NotImplementedException();
+        if (FindPostById(post.Id) == null)
+            throw new Exception("Post does not exist");
+        
+        if (!post.IsVisible)
+            throw new Exception("Post is already hidden");
+
+        try
+        {
+            post.IsVisible = false;
+            AddOrUpdate(post);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
     }
 }
