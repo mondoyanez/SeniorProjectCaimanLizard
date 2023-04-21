@@ -114,6 +114,10 @@ body {
     background-color: #76a8e8;
 }
 
+.delete-post-button:focus {
+    outline: 0 !important;
+}
+
 .form-control, .form-check-input {
     background-color: #f2efe9;
     border-color: var(--cld-blue);
