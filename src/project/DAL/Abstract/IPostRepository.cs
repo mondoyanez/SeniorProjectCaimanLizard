@@ -5,4 +5,5 @@ public interface IPostRepository: IRepository<Post>
 {
     IEnumerable<Post> GetAllPostsDescending();
     void AddPost(Post post);
+    void HidePost(Post post);
 }

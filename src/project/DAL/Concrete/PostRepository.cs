@@ -35,4 +35,9 @@ public class PostRepository: Repository<Post>, IPostRepository
             throw new Exception("Invalid information was given while trying to update database");
         }
     }
+
+    public void HidePost(Post post)
+    {
+        throw new NotImplementedException();
+    }
 }

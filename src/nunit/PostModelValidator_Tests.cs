@@ -22,6 +22,7 @@ public class PostModelValidator_Tests
             PostTitle = "My very first post!",
             PostDescription = "Enter a description",
             DatePosted = new DateTime(2023, 2, 28, 15, 0, 0),
+            IsVisible = true,
             UserId = 1,
             User = watcher
         };

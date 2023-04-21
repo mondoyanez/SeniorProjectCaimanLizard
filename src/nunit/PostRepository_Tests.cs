@@ -44,7 +44,7 @@ public class PostRepository_Tests
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(count, Is.EqualTo(10));
+            Assert.That(count, Is.EqualTo(8));
             Assert.That(title, Is.EqualTo("Friends"));
             Assert.That(description, Is.EqualTo("By far one of my favorite shows"));
             Assert.That(date, Is.EqualTo("2023-02-08 08:00:00"));
@@ -76,7 +76,7 @@ public class PostRepository_Tests
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(count, Is.EqualTo(10));
+            Assert.That(count, Is.EqualTo(8));
             Assert.That(title, Is.Not.EqualTo("Friends"));
             Assert.That(description, Is.Not.EqualTo("By far one of my favorite shows"));
             Assert.That(date, Is.Not.EqualTo("2023-02-08 08:00:00"));
@@ -111,6 +111,7 @@ public class PostRepository_Tests
             PostTitle = "My very first post!",
             PostDescription = "Enter a description",
             DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            IsVisible = true,
             UserId = 10,
             User = context.Watchers.First(w => w.Id == 10)
         };
@@ -122,7 +123,7 @@ public class PostRepository_Tests
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(posts.Count(), Is.EqualTo(11));
+            Assert.That(posts.Count(), Is.EqualTo(9));
 
             Assert.That(posts?.FirstOrDefault()?.PostTitle, Is.EqualTo(post.PostTitle));
             Assert.That(posts?.FirstOrDefault()?.PostDescription, Is.EqualTo(post.PostDescription));
@@ -151,6 +152,7 @@ public class PostRepository_Tests
             PostTitle = "My very first post!",
             PostDescription = null!,
             DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            IsVisible = true,
             UserId = 10,
             User = context.Watchers.First(w => w.Id == 10)
         };
@@ -162,7 +164,7 @@ public class PostRepository_Tests
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(posts.Count(), Is.EqualTo(11));
+            Assert.That(posts.Count(), Is.EqualTo(9));
 
             Assert.That(posts?.FirstOrDefault()?.PostTitle, Is.EqualTo(post.PostTitle));
             Assert.That(posts?.FirstOrDefault()?.PostDescription, Is.Null);
@@ -191,6 +193,7 @@ public class PostRepository_Tests
             PostTitle = null!,
             PostDescription = "Oops forgot to include title should get an exception though",
             DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            IsVisible = true,
             UserId = 7,
             User = context.Watchers.First(w => w.Id == 7)
         };
@@ -223,6 +226,7 @@ public class PostRepository_Tests
             PostTitle = "That was an amazing movie",
             PostDescription = "So that new movie was amazing so lets talk about it",
             DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            IsVisible = true,
             UserId = 11,
             User = watcher
         };
