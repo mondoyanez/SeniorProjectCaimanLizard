@@ -112,12 +112,6 @@ public class PostController : Controller
         post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
         post.IsVisible = true;
 
-        ModelState.Clear();
-        TryValidateModel(post);
-
-        if (!ModelState.IsValid)
-            return View(post);
-
         try
         {
             _postRepository.AddPost(post);

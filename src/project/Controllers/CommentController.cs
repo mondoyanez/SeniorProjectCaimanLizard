@@ -77,6 +77,9 @@ public class CommentController : Controller
             PostId = newComment.PostId
         };
 
+        ViewBag.IsOwner = User?.Identity?.Name == post?.User.Username;
+        ViewBag.IsVisible = post.IsVisible;
+
         if (ModelState.IsValid)
         {
             ViewBag.IsValid = true;
