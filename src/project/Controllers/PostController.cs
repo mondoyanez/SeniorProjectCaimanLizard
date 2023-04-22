@@ -35,6 +35,7 @@ public class PostController : Controller
     }
 
     // GET: Post
+    [HttpGet]
     public IActionResult Index()
     {
 	    FeedVM vm = new()
@@ -57,7 +58,42 @@ public class PostController : Controller
 	    }
         return View(vm);
     }
-    
+
+    [HttpPost]
+    public IActionResult Index(int postId)
+    {
+        Post? post = _postRepository.FindPostById(postId);
+
+        if (post == null)
+        {
+            throw new NullReferenceException($"{post} is null");
+        }
+
+        _postRepository.HidePost(post);
+
+        FeedVM vm = new()
+        {
+            Posts = _postRepository.GetAllPostsDescending(),
+            Comments = _commentRepository.GetComments(),
+            PopularMovies = _tmdbService.GetPopularMovies(),
+            PopularShows = _tmdbService.GetPopularShows(),
+            ImageConfig = _tmdbService.SetImageConfig()
+
+        };
+
+        if (ModelState.IsValid)
+        {
+            ViewBag.IsValid = true;
+        }
+        else
+        {
+            ViewBag.IsValid = false;
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+        }
+
+        return View("Index", vm);
+    }
+
     // GET: Post/Create
     public IActionResult Create()
     {
