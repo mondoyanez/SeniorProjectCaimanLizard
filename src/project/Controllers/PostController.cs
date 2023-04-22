@@ -110,6 +110,7 @@ public class PostController : Controller
         post.DatePosted = DateTime.Now;
         post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
         post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
+        post.IsVisible = true;
 
         ModelState.Clear();
         TryValidateModel(post);

@@ -24,11 +24,21 @@ public class CommentController : Controller
     [HttpGet]
     public IActionResult Index(int postId)
     {
+        Post? post = _postRepository.FindPostById(postId);
+
         CommentVM vm = new()
         {
             Comments = _commentRepository.GetComments().Where(c => c.PostId == postId).ToList(),
             PostId = postId
         };
+
+        if (post == null)
+        {
+            throw new NullReferenceException($"{post} is null");
+        }
+
+        ViewBag.IsOwner = User?.Identity?.Name == post?.User.Username;
+        ViewBag.IsVisible = post.IsVisible;
 
         if (ModelState.IsValid)
         {
