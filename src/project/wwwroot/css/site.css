@@ -218,6 +218,15 @@ body {
     margin-left: 125%;
 }
 
+.comment-title {
+    margin-left: 45%;
+}
+
+.dropdown-section {
+    margin-top: 15px;
+    margin-left: 19%;
+}
+
 .post {
     width: 50%;
     border: 1px ridge var(--cld-yellow);

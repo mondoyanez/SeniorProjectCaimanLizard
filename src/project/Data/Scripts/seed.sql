@@ -66,18 +66,18 @@ VALUES
 SET IDENTITY_INSERT [FollowingList] OFF;
 
 SET IDENTITY_INSERT [Post] ON;
-INSERT INTO [Post](ID, PostTitle, PostDescription, DatePosted, UserID)
+INSERT INTO [Post](ID, PostTitle, PostDescription, DatePosted, IsVisible, UserID)
 VALUES
-(1, 'That new Ant-man movie was incredible!', null, '2023-01-15 17:00:00', 1),
-(2, 'Spider-man', 'So excited for the new spider man movies!', '2023-02-01 15:00:00', 3),
-(3, 'Friends', 'By far one of my favorite shows', '2023-02-08 08:00:00', 5),
-(4, 'Best comedy of 2023?', null, '2022-12-25 12:00:00', 7),
-(5, 'Might have been the best movie released in a while', null, '2023-02-03 13:00:00', 2),
-(6, 'Who wants to watch a movie later', null, '2023-01-15 17:00:00', 6),
-(7, 'The office was a good show', 'It was increible unlike anything else I''ve seen before', '2023-01-15 17:00:00', 9),
-(8, 'Friends with friends', null, '2023-01-15 17:00:00', 10),
-(9, 'MCU marathon', 'Who is down to have a MCU marathon sometime next week?', '2023-01-15 17:00:00', 8),
-(10, 'Avatar', 'Excited to watch the new Avatar movie that came out', '2023-01-15 17:00:00', 4)
+(1, 'That new Ant-man movie was incredible!', null, '2023-01-15 17:00:00', 1, 1),
+(2, 'Spider-man', 'So excited for the new spider man movies!', '2023-02-01 15:00:00', 1, 3),
+(3, 'Friends', 'By far one of my favorite shows', '2023-02-08 08:00:00', 1, 5),
+(4, 'Best comedy of 2023?', null, '2022-12-25 12:00:00', 1, 7),
+(5, 'Might have been the best movie released in a while', null, '2023-02-03 13:00:00', 1, 2),
+(6, 'Who wants to watch a movie later', null, '2023-01-15 17:00:00', 0, 6),
+(7, 'The office was a good show', 'It was increible unlike anything else I''ve seen before', '2023-01-15 17:00:00', 0, 9),
+(8, 'Friends with friends', null, '2023-01-15 17:00:00', 1, 10),
+(9, 'MCU marathon', 'Who is down to have a MCU marathon sometime next week?', '2023-01-15 17:00:00', 1, 8),
+(10, 'Avatar', 'Excited to watch the new Avatar movie that came out', '2023-01-15 17:00:00', 1, 4)
 SET IDENTITY_INSERT [Post] OFF;
 
 SET IDENTITY_INSERT [Comment] ON;
