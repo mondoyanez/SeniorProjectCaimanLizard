@@ -174,3 +174,22 @@ VALUES
 (5, 2, null, 1),
 (6, 2, 1, null)
 SET IDENTITY_INSERT [WatchListItems] OFF;
+
+SET IDENTITY_INSERT [NotificationType] ON;
+INSERT INTO [NotificationType] (ID, NType)
+VALUES
+(1, 'Follow Request'),
+(2, 'Group Join Request'),
+(3, 'Comment'),
+(4, 'Like'),
+(5, 'Watch Party Reminder'),
+(6, 'Misc')
+SET IDENTITY_INSERT [NotificationType] OFF;
+
+SET IDENTITY_INSERT [Notification] ON;
+INSERT INTO [Notification] (ID, NotifierID, NotifTypeID, Content, IsRead, CreatedAt)
+VALUES
+(1, 1, 5, 'Your watch party is scheduled for 4/25/13 at 6:00 pm', 0, '2023-04-22 12:00:00'),
+(2, 1, 3, 'CarsonDaniel left a comment on your post', 0, '2023-04-22 12:05:00')
+SET IDENTITY_INSERT [Notification] OFF;
+
