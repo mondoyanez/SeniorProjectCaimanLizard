@@ -690,7 +690,7 @@ progress {
   color: #6c757d;
 }
 .blockquote-footer::before {
-  content: "— ";
+  content: "��";
 }
 
 .img-fluid {
@@ -11762,6 +11762,15 @@ textarea.form-control-lg {
   background-color: #D5A021;
   border-color: #D5A021;
   margin-left: 125%;
+}
+
+.comment-title {
+    margin-left: 45%;
+}
+
+.dropdown-section {
+    margin-top: 15px;
+    margin-left: 19%;
 }
 
 .post {

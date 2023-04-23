@@ -22,6 +22,8 @@ public partial class Post
     [Column(TypeName = "datetime")]
     public DateTime DatePosted { get; set; }
 
+    public bool IsVisible { get; set; }
+
     [Column("UserID")]
     public int UserId { get; set; }
 

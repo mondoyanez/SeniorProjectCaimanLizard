@@ -25,6 +25,7 @@ CREATE TABLE [Post]
     [PostTitle]             NVARCHAR(2048)      NOT NULL,
     [PostDescription]       NVARCHAR(2048),
     [DatePosted]            DATETIME            NOT NULL,
+    [IsVisible]             BIT                 NOT NULL,
 
     [UserID]                INT                 NOT NULL
 );
