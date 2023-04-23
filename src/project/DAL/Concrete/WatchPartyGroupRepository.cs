@@ -12,10 +12,5 @@ public class WatchPartyGroupRepository : Repository<WatchPartyGroup>, IWatchPart
     {
         throw new NotImplementedException();
     }
-
-    public WatchPartyGroup? FindGroupById(int id)
-    {
-        throw new NotImplementedException();
-    }
 }
 
