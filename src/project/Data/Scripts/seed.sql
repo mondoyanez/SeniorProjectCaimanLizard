@@ -174,3 +174,25 @@ VALUES
 (5, 2, null, 1),
 (6, 2, 1, null)
 SET IDENTITY_INSERT [WatchListItems] OFF;
+
+SET IDENTITY_INSERT [WatchPartyGroup] ON;
+INSERT INTO [WatchPartyGroup] (ID, GroupTitle, GroupDescription, StartDate, HostID)
+VALUES
+(1, 'Marvel marathon movie night', null, '2023-05-05 20:00:00', 1),
+(2, 'Harry Potter marathon', 'Going to watch all the Harry Potter movies in order all day', '2023-05-05 08:00:00', 5),
+(3, 'Sports movies', 'Going to be watching sports movies such as More than a Game, The Last Dance, etc', '2023-05-05 14:00:00', 9)
+SET IDENTITY_INSERT [WatchPartyGroup] OFF;
+
+SET IDENTITY_INSERT [WatchPartyGroupAssignment] ON;
+INSERT INTO [WatchPartyGroupAssignment] (ID, GroupID, WatcherID)
+VALUES
+(1, 1, 2),
+(2, 1, 3),
+(3, 2, 4),
+(4, 2, 1),
+(5, 2, 6),
+(6, 2, 7),
+(7, 3, 1),
+(8, 3, 8),
+(9, 3, 10)
+SET IDENTITY_INSERT [WatchPartyGroupAssignment] OFF;
