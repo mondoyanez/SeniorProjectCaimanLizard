@@ -14,6 +14,13 @@ public class NotificationRepository : Repository<Notification>, INotificationRep
 
     public IEnumerable<Notification> FindAllByUserID(int userID)
     {
-        throw new NotImplementedException();
+        if (userID == null)
+        {
+            throw new ArgumentNullException(nameof(userID));
+        }
+
+        IEnumerable<Notification> notifications = GetAll().Where(n => n.NotifierId == userID);
+
+        return notifications;
     }
 }
