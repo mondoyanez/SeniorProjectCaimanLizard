@@ -12,11 +12,15 @@ namespace WatchParty.Controllers
     public class NotificationController : Controller
     {
         private readonly WatchPartyDbContext _context;
+        //private readonly NotificationRepo _notificationRepo;
 
         public NotificationController(WatchPartyDbContext context)
         {
             _context = context;
         }
+
+
+
 
         // GET: Notification
         public async Task<IActionResult> Index()
@@ -160,7 +164,7 @@ namespace WatchParty.Controllers
         //    {
         //        _context.Notifications.Remove(notification);
         //    }
-            
+
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
