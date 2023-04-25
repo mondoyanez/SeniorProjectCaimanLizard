@@ -10,6 +10,6 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
 
     public void AddToGroup(WatchPartyGroupAssignment assignment)
     {
-        throw new NotImplementedException();
+        AddOrUpdate(assignment);
     }
 }
