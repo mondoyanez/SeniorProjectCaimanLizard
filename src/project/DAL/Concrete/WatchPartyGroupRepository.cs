@@ -8,9 +8,9 @@ public class WatchPartyGroupRepository : Repository<WatchPartyGroup>, IWatchPart
     {
     }
 
-    public void CreateWatchPartyGroup(WatchPartyGroup @group)
+    public void CreateWatchPartyGroup(WatchPartyGroup group)
     {
-        throw new NotImplementedException();
+        AddOrUpdate(group);
     }
 }
 
