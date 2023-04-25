@@ -10,7 +10,20 @@ public class WatchPartyGroupRepository : Repository<WatchPartyGroup>, IWatchPart
 
     public void CreateWatchPartyGroup(WatchPartyGroup group)
     {
-        AddOrUpdate(group);
+        if (group == null) 
+            throw new ArgumentNullException(nameof(group));
+
+        if (group.StartDate.CompareTo(DateTime.Now) < 0)
+            throw new ArgumentException($"Date must be after {DateTime.Now}");
+
+        try
+        {
+            AddOrUpdate(group);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
     }
 }
 

@@ -45,4 +45,60 @@ public class WatchPartyGroupRepository_Tests
         // Assert
         Assert.That(count, Is.EqualTo(4));
     }
+
+    [Test]
+    public void CreateWatchPartyGroup_WithDateBeforeTodaysDate_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        // The db has been seeded
+
+        Watcher? watcher = context.Watchers.FirstOrDefault(w => w.Id == 5);
+
+        WatchPartyGroup group = new WatchPartyGroup
+        {
+            GroupTitle = "Anime watch party",
+            GroupDescription = "Going to be watching random anime together",
+            StartDate = new DateTime(2000, 5, 25, 15, 30, 0),
+            HostId = watcher.Id,
+            Host = watcher
+        };
+
+        // Act/Assert
+        Assert.Throws<ArgumentException>(() => repo.CreateWatchPartyGroup(group));
+    }
+
+    [Test]
+    public void CreateWatchPartyGroup_WithInvalidData_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        // The db has been seeded
+
+        WatchPartyGroup group = new WatchPartyGroup
+        {
+            GroupTitle = "Anime watch party",
+            GroupDescription = "Going to be watching random anime together",
+            StartDate = new DateTime(2030, 5, 25, 15, 30, 0)
+        };
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.CreateWatchPartyGroup(group));
+    }
+
+    [Test]
+    public void CreateWatchPartyGroup_WithDataAsNull_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        // The db has been seeded
+
+        WatchPartyGroup group = null!;
+
+        // Act/Assert
+        Assert.Throws<ArgumentNullException>(() => repo.CreateWatchPartyGroup(group));
+    }
 }
