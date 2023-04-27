@@ -16,6 +16,12 @@
             <div class="col-md-3">
                 <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="120" height="96" class="center">
             </div>
+            <div class="col-md-1">
+                @if (Model.isCurrentUser)
+                {
+                    <a class="btn cld-btn-secondary btn-sm" asp-controller="WatchPartyGroup" asp-action="Index">Create Watch Party</a>
+                }
+            </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body profile-card text-center">
