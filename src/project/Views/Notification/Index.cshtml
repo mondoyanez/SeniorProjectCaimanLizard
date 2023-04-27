@@ -13,6 +13,40 @@
     <h1>@(Model.watcher.Username)'s Notifications</h1>
     <br>
 
+    @if (Model.notifications.Count() == 0)
+    {
+        <h4>No Notifications</h4>
+    }
+    else
+    {
+        <table class="table table-hover" id="movieTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    @*<th>Type</th>*@
+                    <th>Content</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var notification in Model.notifications)
+                {
+                    <tr>
+                        @*If it is not read, then put a red dot or something*@
+                        <th>@notification.IsRead</th>
+                        <th>@notification.CreatedAt</th>
+                        @*<th>@notification.NotifType.Ntype</th>*@
+                        <th>@notification.Content</th>
+                        <th>
+                            @*<button class="btn btn-danger">Delete</button>*@
+                            <button class="btn btn-danger btn-sm delete-notification" data-notif-id="@notification.Id">Delete</button>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
     <div class="row">
     </div>

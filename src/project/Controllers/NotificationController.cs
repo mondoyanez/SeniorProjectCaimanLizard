@@ -6,28 +6,59 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.Models;
+using WatchParty.DAL.Concrete;
+using WatchParty.DAL.Abstract;
+using WatchParty.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WatchParty.Controllers
 {
     public class NotificationController : Controller
     {
         private readonly WatchPartyDbContext _context;
-        //private readonly NotificationRepo _notificationRepo;
+        private readonly INotificationRepository _notificationRepo;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IWatcherRepository _watcherRepository;
 
-        public NotificationController(WatchPartyDbContext context)
+
+        public NotificationController(WatchPartyDbContext context, UserManager<IdentityUser> userManager, INotificationRepository notificationRepo, IWatcherRepository watcherRepository)
         {
             _context = context;
+            _notificationRepo = notificationRepo;
+            _userManager = userManager;
+            _watcherRepository = watcherRepository;
         }
 
-
-
-
-        // GET: Notification
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var watchPartyDbContext = _context.Notifications.Include(n => n.NotifType).Include(n => n.Notifier);
-            return View(await watchPartyDbContext.ToListAsync());
+            NotificationVM vm = new();
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            vm.watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
+
+            vm.notifications = _notificationRepo.FindAllByUserID(vm.watcher.Id);
+            return View(vm);
         }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult DeleteNotification()
+        {
+            NotificationVM vm = new();
+            vm.watcher.Username = "Delete";
+            return View(vm);
+        }
+
+
+
+        //// GET: Notification
+        //public async Task<IActionResult> Index()
+        //{
+        //    var watchPartyDbContext = _context.Notifications.Include(n => n.NotifType).Include(n => n.Notifier);
+        //    return View(await watchPartyDbContext.ToListAsync());
+        //}
 
         //// GET: Notification/Details/5
         //public async Task<IActionResult> Details(int? id)
