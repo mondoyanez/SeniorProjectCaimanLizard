@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using WatchParty.Areas.Identity.Data;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
 
