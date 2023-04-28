@@ -35,4 +35,9 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
             throw new Exception("Invalid information was given while trying to update database");
         }
     }
+
+    public void HideComment(Comment comment)
+    {
+        throw new NotImplementedException();
+    }
 }
