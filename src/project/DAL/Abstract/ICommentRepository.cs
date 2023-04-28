@@ -3,7 +3,7 @@
 namespace WatchParty.DAL.Abstract;
 public interface ICommentRepository: IRepository<Comment>
 {
-    IEnumerable<Comment> GetComments();
+    IEnumerable<Comment> GetVisibleComments();
     void AddComment(Comment comment);
     void HideComment(Comment comment);
 }

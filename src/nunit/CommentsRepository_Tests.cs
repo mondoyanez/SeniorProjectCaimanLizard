@@ -28,35 +28,7 @@ public class CommentsRepository_Tests
         // The db has been seeded
 
         // Act
-        IEnumerable<Comment> comments = repo.GetComments();
-
-        int count = comments.Count();
-
-        // Assert
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(count, Is.EqualTo(4));
-            Assert.That(comments.First().Id, Is.EqualTo(1));
-            Assert.That(comments.First().CommentTitle, Is.EqualTo("I also thought that Friends was a great show"));
-            Assert.That(comments.First().DatePosted.ToString("yyyy-MM-dd hh:mm:ss"), Is.EqualTo("2023-04-02 01:25:00"));
-            Assert.That(comments.First().UserId, Is.EqualTo(2));
-            Assert.That(comments.First().User.Username, Is.EqualTo("CarsonDaniel"));
-            Assert.That(comments.First().PostId, Is.EqualTo(3));
-            Assert.That(comments.First().Post.PostTitle, Is.EqualTo("Friends"));
-        });
-    }
-
-    [Test]
-    public void GetComments_ForThirdPostWithThreeComments_ReturnsCommentsAscendingOrder()
-    {
-        // Arrange
-        using WatchPartyDbContext context = _dbHelper.GetContext();
-        ICommentRepository repo = new CommentRepository(context);
-        // The db has been seeded
-
-        // Act
-        IEnumerable<Comment> comments = repo.GetComments().Where(c => c.PostId == 3).ToList();
+        IEnumerable<Comment> comments = repo.GetVisibleComments();
 
         int count = comments.Count();
 
@@ -76,6 +48,34 @@ public class CommentsRepository_Tests
     }
 
     [Test]
+    public void GetComments_ForThirdPostWithThreeComments_ReturnsCommentsAscendingOrder()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+        // The db has been seeded
+
+        // Act
+        IEnumerable<Comment> comments = repo.GetVisibleComments().Where(c => c.PostId == 3).ToList();
+
+        int count = comments.Count();
+
+        // Assert
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(count, Is.EqualTo(2));
+            Assert.That(comments.First().Id, Is.EqualTo(1));
+            Assert.That(comments.First().CommentTitle, Is.EqualTo("I also thought that Friends was a great show"));
+            Assert.That(comments.First().DatePosted.ToString("yyyy-MM-dd hh:mm:ss"), Is.EqualTo("2023-04-02 01:25:00"));
+            Assert.That(comments.First().UserId, Is.EqualTo(2));
+            Assert.That(comments.First().User.Username, Is.EqualTo("CarsonDaniel"));
+            Assert.That(comments.First().PostId, Is.EqualTo(3));
+            Assert.That(comments.First().Post.PostTitle, Is.EqualTo("Friends"));
+        });
+    }
+
+    [Test]
     public void GetComments_ForNotCommentsExisting_ShouldThrowException()
     {
         // Arrange
@@ -84,7 +84,7 @@ public class CommentsRepository_Tests
         // The db has been seeded
 
         // Act/Assert
-        Assert.Throws<Exception>(() => repo.GetComments());
+        Assert.Throws<Exception>(() => repo.GetVisibleComments());
     }
 
     [Test]
@@ -99,6 +99,7 @@ public class CommentsRepository_Tests
         {
             CommentTitle = "The new spider-man movie was cool but I still preferred the original trilogy",
             DatePosted = new DateTime(2023, 4, 13, 18, 0, 0),
+            IsVisible = true,
             UserId = 8,
             User = context.Watchers.FirstOrDefault(u => u.Id == 8),
             PostId = 2,
@@ -107,15 +108,15 @@ public class CommentsRepository_Tests
 
         // Act
         repo.AddComment(comment);
-        IEnumerable<Comment> comments = repo.GetComments();
+        IEnumerable<Comment> comments = repo.GetVisibleComments();
 
         int totalCommentsCount = comments.Count();
         int secondPostCommentsCount = comments.Count(c => c.PostId == 2);
         int thirdPostCommentsCount = comments.Count(c => c.PostId == 3);
 
         // Assert
-        Assert.That(totalCommentsCount, Is.EqualTo(5));
-        Assert.That(thirdPostCommentsCount, Is.EqualTo(3));
+        Assert.That(totalCommentsCount, Is.EqualTo(4));
+        Assert.That(thirdPostCommentsCount, Is.EqualTo(2));
         Assert.That(secondPostCommentsCount, Is.EqualTo(2));
 
         Assert.That(comments.First().Id, Is.EqualTo(1));
