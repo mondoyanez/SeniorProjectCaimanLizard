@@ -53,7 +53,7 @@ public partial class WatchPartyDbContext : DbContext
     {
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comment__3214EC27141A6E4F");
+            entity.HasKey(e => e.Id).HasName("PK__Comment__3214EC274D7DBD35");
 
             entity.HasOne(d => d.Post).WithMany(p => p.Comments)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -66,7 +66,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<FollowingList>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Followin__3214EC279DB580CB");
+            entity.HasKey(e => e.Id).HasName("PK__Followin__3214EC27599BCF1A");
 
             entity.HasOne(d => d.Following).WithMany(p => p.FollowingListFollowings)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -79,7 +79,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<LikePost>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__LikePost__3214EC278B2DEC73");
+            entity.HasKey(e => e.Id).HasName("PK__LikePost__3214EC277FB18DBE");
 
             entity.HasOne(d => d.Post).WithMany(p => p.LikePosts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -92,12 +92,12 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<Movie>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Movie__3214EC2787841682");
+            entity.HasKey(e => e.Id).HasName("PK__Movie__3214EC275D29A57F");
         });
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC273E72AA12");
+            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC27C7C9ACCF");
 
             entity.HasOne(d => d.User).WithMany(p => p.Posts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -106,7 +106,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<Reshare>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Reshare__3214EC2789482B41");
+            entity.HasKey(e => e.Id).HasName("PK__Reshare__3214EC27FB72FD8C");
 
             entity.HasOne(d => d.Post).WithMany(p => p.Reshares)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -119,12 +119,12 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<Show>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Show__3214EC27E910B112");
+            entity.HasKey(e => e.Id).HasName("PK__Show__3214EC27D7ADB06E");
         });
 
         modelBuilder.Entity<WatchList>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__WatchLis__3214EC27EC097055");
+            entity.HasKey(e => e.Id).HasName("PK__WatchLis__3214EC27315A20EF");
 
             entity.HasOne(d => d.User).WithMany(p => p.WatchLists)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -133,7 +133,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<WatchListItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__WatchLis__3214EC27865B46C8");
+            entity.HasKey(e => e.Id).HasName("PK__WatchLis__3214EC276B07C373");
 
             entity.HasOne(d => d.Movie).WithMany(p => p.WatchListItems).HasConstraintName("Fk_WatchListItems_Movie");
 
@@ -146,7 +146,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<WatchPartyGroup>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__WatchPar__3214EC2767B93870");
+            entity.HasKey(e => e.Id).HasName("PK__WatchPar__3214EC278DFF3BF0");
 
             entity.HasOne(d => d.Host).WithMany(p => p.WatchPartyGroups)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -155,7 +155,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<WatchPartyGroupAssignment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__WatchPar__3214EC271FE374CE");
+            entity.HasKey(e => e.Id).HasName("PK__WatchPar__3214EC2722B9D495");
 
             entity.HasOne(d => d.Group).WithMany(p => p.WatchPartyGroupAssignments)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -168,7 +168,7 @@ public partial class WatchPartyDbContext : DbContext
 
         modelBuilder.Entity<Watcher>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Watcher__3214EC0762465AC3");
+            entity.HasKey(e => e.Id).HasName("PK__Watcher__3214EC07400C9C42");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -1,8 +1,7 @@
-﻿@    using Microsoft.AspNetCore.Identity;
-    using WatchParty.ViewModels;
-@inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model ProfileVM
+@using Microsoft.AspNetCore.Identity
+@model WatchParty.ViewModels.ProfileVM
 @{
     ViewData["Title"] = "Profile Page";
 }
