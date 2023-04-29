@@ -54,7 +54,18 @@ public class CommentController : Controller
     }
 
     [HttpPost]
-    public IActionResult Index([Bind("CommentTitle, PostId")] Comment newComment)
+    public IActionResult Index([Bind("CommentTitle, PostId")] Comment newComment, string ActionMethod)
+    {
+        switch (ActionMethod)
+        {
+            case "CreateComment":
+                return CreateComment(newComment);
+            default:
+                return View();
+        }
+    }
+
+    private IActionResult CreateComment(Comment newComment)
     {
         Watcher? currentUser = _watcherRepository.FindByUsername(User.Identity.Name);
         Post post = _postRepository.FindById(newComment.PostId);
@@ -65,6 +76,7 @@ public class CommentController : Controller
         }
 
         newComment.DatePosted = DateTime.Now;
+        newComment.IsVisible = true;
         newComment.Post = post;
         newComment.UserId = currentUser.Id;
         newComment.User = currentUser;
