@@ -5,14 +5,14 @@
 }
 
 <div class="row cld-bg-light">
-    @if (ViewBag.IsVisible)
+    @if (ViewBag.IsPostVisible)
     {
         <div class="row mb-5">
             <div class="col-2 comment-title">
                 <h1>Comments</h1>
             </div>
 
-            @if (ViewBag.IsOwner)
+            @if (ViewBag.IsPostOwner)
             {
                 <div class="col-1 dropdown-section">
                     <div class="dropdown">

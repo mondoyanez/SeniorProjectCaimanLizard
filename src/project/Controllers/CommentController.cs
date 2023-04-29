@@ -38,8 +38,8 @@ public class CommentController : Controller
             throw new NullReferenceException($"{post} is null");
         }
 
-        ViewBag.IsOwner = User?.Identity?.Name == post?.User.Username;
-        ViewBag.IsVisible = post.IsVisible;
+        ViewBag.IsPostOwner = User?.Identity?.Name == post?.User.Username;
+        ViewBag.IsPostVisible = post.IsVisible;
 
         if (ModelState.IsValid)
         {
@@ -92,8 +92,8 @@ public class CommentController : Controller
             PostId = newComment.PostId
         };
 
-        ViewBag.IsOwner = User?.Identity?.Name == post?.User.Username;
-        ViewBag.IsVisible = post.IsVisible;
+        ViewBag.IsPostOwner = User?.Identity?.Name == post?.User.Username;
+        ViewBag.IsPostVisible = post.IsVisible;
 
         if (ModelState.IsValid)
         {
@@ -117,8 +117,8 @@ public class CommentController : Controller
 
         _commentRepository.HideComment(comment);
 
-        ViewBag.IsOwner = User?.Identity?.Name == comment?.Post?.User.Username;
-        ViewBag.IsVisible = comment?.Post?.IsVisible;
+        ViewBag.IsPostOwner = User?.Identity?.Name == comment?.Post?.User.Username;
+        ViewBag.IsPostVisible = comment?.Post?.IsVisible;
 
         if (ModelState.IsValid)
         {
