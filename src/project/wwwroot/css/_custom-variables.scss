@@ -52,7 +52,7 @@ $dark-text: #000;
 @import "../lib/bootstrap/scss/bootstrap.scss";
 
 
-// insert new css below this line
+// insert new custom cld-specific css below this line
 /* css-based multiline text truncation based on: 
     https://css-tricks.com/multi-line-truncation-with-pure-css/ */
 .truncate-overflow::before {
@@ -219,6 +219,16 @@ $dark-text: #000;
     background-color: $yellow;
     border-color: $yellow;
     margin-left: 125%;
+}
+
+.dropdown-section {
+    margin-top: 15px;
+    margin-left: 19%;
+}
+
+.dropdown-section-comment {
+    margin-top: -2%;
+    margin-left: 75%;
 }
 
 .post {

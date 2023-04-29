@@ -9,13 +9,9 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
     {
     }
 
-    public IEnumerable<Comment> GetComments()
+    public IEnumerable<Comment> GetVisibleComments()
     {
-        IEnumerable<Comment> comments = GetAll().OrderBy(c => c.DatePosted).ToList();
-
-        if (!comments.Any())
-            throw new Exception("No comments were found");
-
+        IEnumerable<Comment> comments = GetAll().Where(c => c.IsVisible).OrderBy(c => c.DatePosted).ToList();
         return comments;
     }
 
@@ -28,6 +24,30 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
 
         try
         {
+            AddOrUpdate(comment);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
+    }
+
+    public Comment? FindCommentById(int id)
+    {
+        return GetAll().FirstOrDefault(c => c.Id == id);
+    }
+
+    public void HideComment(Comment comment)
+    {
+        if (FindCommentById(comment.Id) == null)
+            throw new Exception("Comment does not exist");
+
+        if (!comment.IsVisible)
+            throw new Exception("Comment is already hidden");
+
+        try
+        {
+            comment.IsVisible = false;
             AddOrUpdate(comment);
         }
         catch
