@@ -5,5 +5,5 @@
 
 // navbar behavior
 $(window).scroll(function () {
-    $('nav').toggleClass('scrolled box-shadow', $(this).scrollTop() > 0);
+    $('nav').toggleClass('shadow', $(this).scrollTop() > 0);
 });

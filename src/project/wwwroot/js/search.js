@@ -216,7 +216,7 @@ function displayTitles(data) {
     $.each(data,
         function (index, item) {
             let result =
-                `<div class="col cld-bg-light">
+                `<div class="col bg-light-subtle">
                     <div class="card mb-3">
                       <div class="row g-0">
                         <div class="col-sm-2 col-4 align-self-center">
@@ -248,7 +248,7 @@ function displayMovies(data) {
         function (index, item) {
             const movieTitle = item.title.replace("'", "&apos;");
             let result =
-                `<div class="col cld-bg-light">
+                `<div class="col bg-light-subtle">
                     <div class="card mb-3">
                       <div class="row g-0">
                         <div class="col-sm-2 col-4 align-self-center">
@@ -282,7 +282,7 @@ function displayShows(data) {
             const title = item.title.replace("'", "&apos;");
             console.log("mediatype: " + item.mediaType)
                 let result =
-                    `<div class="col cld-bg-light">
+                    `<div class="col bg-light-subtle">
                         <div class="card mb-3" id="${index}">
                           <div class="row g-0">
                             <div class="col-sm-2 col-4 align-self-center">
