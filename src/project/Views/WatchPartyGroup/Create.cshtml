@@ -19,9 +19,7 @@
             <span asp-validation-for="GroupDescription" class="text-danger"></span>
         </div>
         <div class="form-group mt-2">
-            <input asp-for="StartDate" type="datetime-local" class="form-control" 
-                   min="@DateTime.Now.ToString("s")"
-                   value="@DateTime.Now"/>
+            <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
     </form>
