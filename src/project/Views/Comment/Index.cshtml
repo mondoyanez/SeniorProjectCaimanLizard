@@ -54,6 +54,7 @@
                                                 <li>
                                                     <input class="btn dropdown-item" type="submit" value="Delete Comment" />
                                                     <input type="hidden" asp-for="newComment.Id" value="@comment.Id" />
+                                                    <input type="hidden" asp-for="ActionMethod" value="HideComment" />
                                                 </li>
                                             </form>
                                         </ul>

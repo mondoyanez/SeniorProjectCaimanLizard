@@ -12,10 +12,6 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
     public IEnumerable<Comment> GetVisibleComments()
     {
         IEnumerable<Comment> comments = GetAll().Where(c => c.IsVisible).OrderBy(c => c.DatePosted).ToList();
-
-        if (!comments.Any())
-            throw new Exception("No comments were found");
-
         return comments;
     }
 

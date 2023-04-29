@@ -76,18 +76,6 @@ public class CommentsRepository_Tests
     }
 
     [Test]
-    public void GetComments_ForNotCommentsExisting_ShouldThrowException()
-    {
-        // Arrange
-        using WatchPartyDbContext context = _dbHelperPostEmpty.GetContext();
-        ICommentRepository repo = new CommentRepository(context);
-        // The db has been seeded
-
-        // Act/Assert
-        Assert.Throws<Exception>(() => repo.GetVisibleComments());
-    }
-
-    [Test]
     public void AddComment_ForFourExistingComments_ShouldSuccessfullyAddComment()
     {
         // Arrange

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.ViewModels;
@@ -54,12 +55,14 @@ public class CommentController : Controller
     }
 
     [HttpPost]
-    public IActionResult Index([Bind("CommentTitle, PostId")] Comment newComment, string ActionMethod)
+    public IActionResult Index([Bind("Id, CommentTitle, PostId")] Comment newComment, string ActionMethod)
     {
         switch (ActionMethod)
         {
             case "CreateComment":
                 return CreateComment(newComment);
+            case "HideComment":
+                return HideComment(newComment);
             default:
                 return View();
         }
@@ -101,6 +104,37 @@ public class CommentController : Controller
             ViewBag.IsValid = false;
             var errors = ModelState.Values.SelectMany(v => v.Errors);
         }
+
+        return View(vm);
+    }
+
+    private IActionResult HideComment(Comment newComment)
+    {
+        Comment? comment = _commentRepository.FindCommentById(newComment.Id);
+
+        if (comment == null)
+            throw new ArgumentException(nameof(comment));
+
+        _commentRepository.HideComment(comment);
+
+        ViewBag.IsOwner = User?.Identity?.Name == comment?.Post?.User.Username;
+        ViewBag.IsVisible = comment?.Post?.IsVisible;
+
+        if (ModelState.IsValid)
+        {
+            ViewBag.IsValid = true;
+        }
+        else
+        {
+            ViewBag.IsValid = false;
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+        }
+
+        CommentVM vm = new()
+        {
+            Comments = _commentRepository.GetVisibleComments().Where(c => c.PostId == comment?.PostId).ToList(),
+            PostId = comment?.PostId
+        };
 
         return View(vm);
     }
