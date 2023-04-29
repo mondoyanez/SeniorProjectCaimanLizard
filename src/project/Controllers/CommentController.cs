@@ -86,26 +86,7 @@ public class CommentController : Controller
 
         _commentRepository.AddComment(newComment);
 
-        CommentVM vm = new()
-        {
-            Comments = _commentRepository.GetVisibleComments().Where(c => c.PostId == newComment.PostId).ToList(),
-            PostId = newComment.PostId
-        };
-
-        ViewBag.IsPostOwner = User?.Identity?.Name == post?.User.Username;
-        ViewBag.IsPostVisible = post.IsVisible;
-
-        if (ModelState.IsValid)
-        {
-            ViewBag.IsValid = true;
-        }
-        else
-        {
-            ViewBag.IsValid = false;
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-        }
-
-        return View(vm);
+        return RedirectToAction("Index", new { postId = newComment.PostId });
     }
 
     private IActionResult HideComment(Comment newComment)
