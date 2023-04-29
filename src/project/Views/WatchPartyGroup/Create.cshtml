@@ -4,13 +4,13 @@
     ViewData["Title"] = "Create Group";
 }
 
-<div class="text-center cld-bg-light row">
-    <div class="row">
+<div class="row text-center cld-bg-light watch-party-container">
+    <div class="row mt-5">
         <h1>Create Watch Party Group</h1>
     </div>
     <form asp-controller="WatchPartyGroup" asp-action="Create" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="row mt-2">
+        <div class="row mt-5">
             <div class="col-4">
                 <label class="watch-party-title-label">Enter title:</label>
             </div>
@@ -36,6 +36,9 @@
                 <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"/>
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
+        </div>
+        <div class="row mt-2">
+            <input type="submit" value="Create" class="btn btn-primary watch-party-btn" />
         </div>
     </form>
 </div>

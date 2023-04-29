@@ -18,6 +18,7 @@ html {
 }
 
 body {
+    overflow-x: hidden;
     margin-bottom: 0;
 }
 
@@ -269,12 +270,22 @@ body {
     text-decoration: none;
 }
 
+.watch-party-container {
+    padding-bottom: 428px;
+}
+
 .watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
     width: 47%;
 }
 
 .watch-party-title-label, .watch-party-description-label, .watch-party-date-label {
     margin-left: 70%;
+}
+
+.watch-party-btn {
+    width: 5%;
+    margin-top: 2%;
+    margin-left: 60%;
 }
 
 .empty-page {
