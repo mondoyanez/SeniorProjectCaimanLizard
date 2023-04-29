@@ -101,22 +101,6 @@ public class CommentController : Controller
         ViewBag.IsPostOwner = User?.Identity?.Name == comment?.Post?.User.Username;
         ViewBag.IsPostVisible = comment?.Post?.IsVisible;
 
-        if (ModelState.IsValid)
-        {
-            ViewBag.IsValid = true;
-        }
-        else
-        {
-            ViewBag.IsValid = false;
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-        }
-
-        CommentVM vm = new()
-        {
-            Comments = _commentRepository.GetVisibleComments().Where(c => c.PostId == comment?.PostId).ToList(),
-            PostId = comment?.PostId
-        };
-
-        return View(vm);
+        return RedirectToAction("Index", new { postId = comment?.PostId });
     }
 }
