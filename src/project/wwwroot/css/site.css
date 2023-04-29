@@ -271,14 +271,22 @@ body {
 }
 
 .watch-party-container {
-    padding-bottom: 428px;
+    padding-bottom: 197px;
+}
+
+.watch-party-form {
+    margin-top: 2%;
 }
 
 .watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
     width: 47%;
 }
 
-.watch-party-title-label, .watch-party-description-label, .watch-party-date-label {
+.watch-party-title-label {
+    margin-left: 79%;
+}
+
+.watch-party-description-label, .watch-party-date-label {
     margin-left: 70%;
 }
 
