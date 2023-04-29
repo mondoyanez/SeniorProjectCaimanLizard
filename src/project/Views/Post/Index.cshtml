@@ -4,7 +4,7 @@
     ViewData["Title"] = "Feed";
 }
 
-<div class="container-fluid cld-bg-light pt-4">
+<div class="container-fluid bg-light-subtle pt-4">
     <div class="row justify-content-center">
         <div class="col-4">
             <h4 class="text-center">Popular Movies</h4>
@@ -75,7 +75,7 @@
 
 @if (Model.Posts.Any())
 {
-    <div class="row cld-bg-light">
+    <div class="row bg-light-subtle">
 
         <a asp-controller="Post" asp-action="Create" class="create-post-link">
             <img class="create-post-image" src="~/img/clipboard2-plus.svg" alt="clipboard" />
@@ -146,7 +146,7 @@
 }
 else
 {
-    <div class="row cld-bg-light text-center empty-page">
+    <div class="row bg-light-subtle text-center empty-page">
         <h1>No Posts</h1>
     </div>
 }
