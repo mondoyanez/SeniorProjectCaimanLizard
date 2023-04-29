@@ -44,22 +44,25 @@
                                 <div class="col-2">
                                     <a class="post-username-link" href="/user/@comment.User.Username"><h6 class="card-subtitle comment-username">@@@comment.User.Username</h6></a>
                                 </div>
-                                <div class="col-1 dropdown-section-comment">
-                                    <div class="dropdown">
-                                        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="~/img/three-dots-vertical.svg" alt="Dropdown Menu"/>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <form asp-controller="Comment" asp-action="Index" method="post">
-                                                <li>
-                                                    <input class="btn dropdown-item" type="submit" value="Delete Comment" />
-                                                    <input type="hidden" asp-for="newComment.Id" value="@comment.Id" />
-                                                    <input type="hidden" asp-for="ActionMethod" value="HideComment" />
-                                                </li>
-                                            </form>
-                                        </ul>
+                                @if (User?.Identity?.Name == comment.User.Username)
+                                {
+                                    <div class="col-1 dropdown-section-comment">
+                                        <div class="dropdown">
+                                            <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="~/img/three-dots-vertical.svg" alt="Dropdown Menu"/>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <form asp-controller="Comment" asp-action="Index" method="post">
+                                                    <li>
+                                                        <input class="btn dropdown-item" type="submit" value="Delete Comment"/>
+                                                        <input type="hidden" asp-for="newComment.Id" value="@comment.Id"/>
+                                                        <input type="hidden" asp-for="ActionMethod" value="HideComment"/>
+                                                    </li>
+                                                </form>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                             <div class="row mt-3">
                                 <p class="card-text all-comments-text mb-2">@comment.CommentTitle</p>
