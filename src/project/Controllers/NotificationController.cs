@@ -44,11 +44,24 @@ namespace WatchParty.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult DeleteNotification()
+        public IActionResult DeleteNotification(int notificationId)
         {
-            NotificationVM vm = new();
-            vm.watcher.Username = "Delete";
-            return View(vm);
+            _notificationRepo.DeleteById(notificationId);
+            _context.SaveChanges();
+
+            return Ok();
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult ReadItem(int notificationId)
+        {
+            Notification notification = _notificationRepo.FindById(notificationId);
+            notification.IsRead = true;
+
+            _context.SaveChanges();
+            return Ok();
         }
 
 

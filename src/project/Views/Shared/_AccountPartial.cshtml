@@ -17,8 +17,35 @@
     </li>
 
     <li class="nav-item">
-            <a class="nav-link text-dark" id="profile-link" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">@User.Identity?.Name</a>
+        <a class="nav-link" asp-area="" asp-controller="Notification" asp-action="Index">
+            <i class="bi bi-bell-fill"></i>
+            @*if the user has any notifications*@
+            @*<span class="badge rounded-pill badge-notification bg-danger">1</span>*@
+        </a>
     </li>
+
+@*    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="notificationDropdown" role="button"
+        data-mdb-toggle="dropdown" aria-expanded="false"><i class="bi bi-bell-fill"></i></a>
+        <!-- Dropdown menu -->
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+            <li>
+                <a class="dropdown-item" href="#">Notification 1</a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" asp-area="" asp-controller="Notification" asp-action="Index">See all notifications</a>
+            </li>
+        </ul>
+    </li>*@
+
+        
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" id="profile-link" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">@User.Identity?.Name</a>
+    </li>
+
+
 
 
 }
