@@ -43,6 +43,20 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
 
     public void HideComment(Comment comment)
     {
-        throw new NotImplementedException();
+        if (FindCommentById(comment.Id) == null)
+            throw new Exception("Comment does not exist");
+
+        if (!comment.IsVisible)
+            throw new Exception("Comment is already hidden");
+
+        try
+        {
+            comment.IsVisible = false;
+            AddOrUpdate(comment);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
     }
 }

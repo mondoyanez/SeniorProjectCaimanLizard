@@ -209,4 +209,77 @@ public class CommentsRepository_Tests
         // Assert
         Assert.That(comment, Is.Null);
     }
+
+    [Test]
+    public void HideComment_ForExistingComment_ShouldReturnFalseForIsVisible()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+
+        // Act
+        Comment? comment = repo.FindCommentById(2);
+        repo.HideComment(comment);
+        comment = repo.FindCommentById(2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(comment?.Id, Is.EqualTo(2));
+            Assert.That(comment?.CommentTitle, Is.EqualTo("I thought it was ok"));
+            Assert.That(comment?.DatePosted, Is.EqualTo(new DateTime(2023, 4, 2, 14, 0, 0)));
+            Assert.That(comment?.IsVisible, Is.False);
+            Assert.That(comment?.UserId, Is.EqualTo(3));
+            Assert.That(comment?.User.AspNetIdentityId, Is.EqualTo("681e79b0-24be-4f8b-96dd-056b493cd7c5"));
+            Assert.That(comment?.PostId, Is.EqualTo(3));
+            Assert.That(comment?.Post.Id, Is.EqualTo(3));
+        });
+    }
+
+    [Test]
+    public void HideComment_ForExistingCommentButInvalidProperty_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+        Comment? comment = repo.FindCommentById(2);
+        comment.CommentTitle = null!;
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.HideComment(comment));
+    }
+
+    [Test]
+    public void HideComment_ForNonExistingComment_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+
+        Comment comment = new Comment
+        {
+            CommentTitle = "My very first comment!",
+            DatePosted = new DateTime(2023, 3, 1, 17, 25, 45),
+            IsVisible = true,
+            UserId = 10,
+            User = context.Watchers.First(w => w.Id == 10),
+            PostId = 7,
+            Post = context.Posts.First(p => p.Id == 7)
+        };
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.HideComment(comment));
+    }
+
+    [Test]
+    public void HideComment_ForExistingCommentAlreadyHidden_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+        Comment? comment = repo.FindCommentById(3);
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.HideComment(comment));
+    }
 }
