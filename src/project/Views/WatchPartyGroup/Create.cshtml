@@ -5,7 +5,24 @@
 }
 
 <div class="text-center cld-bg-light row">
-    <div class="col">
+    <div class="row">
         <h1>Create Watch Party Group</h1>
     </div>
+    <form asp-controller="WatchPartyGroup" asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group mt-2">
+            <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" placeholder="Enter group name here" />
+            <span asp-validation-for="GroupTitle" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-2">
+            <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" placeholder="Enter description here"></textarea>
+            <span asp-validation-for="GroupDescription" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-2">
+            <input asp-for="StartDate" type="datetime-local" class="form-control" 
+                   min="@DateTime.Now.ToString("s")"
+                   value="@DateTime.Now"/>
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+    </form>
 </div>
