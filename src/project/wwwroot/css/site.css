@@ -270,8 +270,11 @@ body {
 }
 
 .watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
-    width: 28%;
-    margin-left: 35%;
+    width: 47%;
+}
+
+.watch-party-title-label, .watch-party-description-label, .watch-party-date-label {
+    margin-left: 70%;
 }
 
 .empty-page {

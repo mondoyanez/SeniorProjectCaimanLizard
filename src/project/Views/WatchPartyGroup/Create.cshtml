@@ -10,17 +10,32 @@
     </div>
     <form asp-controller="WatchPartyGroup" asp-action="Create" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group mt-2">
-            <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" placeholder="Enter group name here" />
-            <span asp-validation-for="GroupTitle" class="text-danger"></span>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="watch-party-title-label">Enter title:</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" placeholder="Enter group name here" />
+                <span asp-validation-for="GroupTitle" class="text-danger"></span>
+            </div>
         </div>
-        <div class="form-group mt-2">
-            <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" placeholder="Enter description here"></textarea>
-            <span asp-validation-for="GroupDescription" class="text-danger"></span>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="watch-party-description-label">Enter description:</label>
+            </div>
+            <div class="col-8">
+                <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" placeholder="Enter description here"></textarea>
+                <span asp-validation-for="GroupDescription" class="text-danger"></span>
+            </div>
         </div>
-        <div class="form-group mt-2">
-            <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
-            <span asp-validation-for="StartDate" class="text-danger"></span>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="watch-party-date-label">Enter start date:</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"/>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
         </div>
     </form>
 </div>
