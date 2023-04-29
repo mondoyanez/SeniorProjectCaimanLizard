@@ -21,7 +21,8 @@ public class WatchPartyGroupController : Controller
         _userManager = userManager;
     }
 
-    public IActionResult Index()
+    [HttpGet]
+    public IActionResult Create()
     {
         return View();
     }
