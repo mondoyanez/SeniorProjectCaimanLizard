@@ -36,6 +36,11 @@ public class CommentRepository: Repository<Comment>, ICommentRepository
         }
     }
 
+    public Comment? FindCommentById(int id)
+    {
+        return GetAll().FirstOrDefault(c => c.Id == id);
+    }
+
     public void HideComment(Comment comment)
     {
         throw new NotImplementedException();

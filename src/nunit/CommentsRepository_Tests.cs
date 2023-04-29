@@ -171,4 +171,42 @@ public class CommentsRepository_Tests
         // Act/Assert
         Assert.Throws<ArgumentNullException>(() => repo.AddComment(comment));
     }
+
+    [Test]
+    public void FindCommentById_ForFourExistingComments_ShouldReturnCorrectComment()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+
+        // Act
+        Comment? comment = repo.FindCommentById(2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(comment?.Id, Is.EqualTo(2));
+            Assert.That(comment?.CommentTitle, Is.EqualTo("I thought it was ok"));
+            Assert.That(comment?.DatePosted, Is.EqualTo(new DateTime(2023, 4, 2, 14, 0, 0)));
+            Assert.That(comment?.IsVisible, Is.True);
+            Assert.That(comment?.UserId, Is.EqualTo(3));
+            Assert.That(comment?.User.AspNetIdentityId, Is.EqualTo("681e79b0-24be-4f8b-96dd-056b493cd7c5"));
+            Assert.That(comment?.PostId, Is.EqualTo(3));
+            Assert.That(comment?.Post.Id, Is.EqualTo(3));
+        });
+    }
+
+    [Test]
+    public void FindCommentById_ForNonExistingComment_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        ICommentRepository repo = new CommentRepository(context);
+
+        // Act
+        Comment? comment = repo.FindCommentById(8001);
+
+        // Assert
+        Assert.That(comment, Is.Null);
+    }
 }
