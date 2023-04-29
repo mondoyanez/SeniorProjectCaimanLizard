@@ -12,7 +12,7 @@ public class PostRepository: Repository<Post>, IPostRepository
     public IEnumerable<Post> GetAllPostsDescending()
     {
         IEnumerable<Post> posts = GetAll()
-            .Where(p => p.IsVisible == true)
+            .Where(p => p.IsVisible)
             .OrderByDescending(p => p.DatePosted)
             .ToList();
 

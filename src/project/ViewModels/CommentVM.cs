@@ -8,4 +8,5 @@ public class CommentVM
     public Comment newComment { get; set; }
     public int? PostId { get; set; }
     public DateFromConversion Convert { get; set; } = new();
+    public string ActionMethod { get; set; }
 }

@@ -19,6 +19,8 @@ public partial class Comment
     [Column(TypeName = "datetime")]
     public DateTime DatePosted { get; set; }
 
+    public bool IsVisible { get; set; }
+
     [Column("UserID")]
     public int UserId { get; set; }
 
