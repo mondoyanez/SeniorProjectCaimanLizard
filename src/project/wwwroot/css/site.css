@@ -227,6 +227,11 @@ body {
     margin-left: 19%;
 }
 
+.dropdown-section-comment {
+    margin-top: -2%;
+    margin-left: 75%;
+}
+
 .post {
     width: 50%;
     border: 1px ridge var(--cld-yellow);
