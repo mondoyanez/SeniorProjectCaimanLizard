@@ -24,9 +24,9 @@ VALUES
 (9, 'MCU marathon', 'Who is down to have a MCU marathon sometime next week?', '2023-01-15 17:00:00', 1, 8),
 (10, 'Avatar', 'Excited to watch the new Avatar movie that came out', '2023-01-15 17:00:00', 1, 4);
 
-INSERT INTO [Comment](ID, CommentTitle, DatePosted, UserID, PostID)
+INSERT INTO [Comment](ID, CommentTitle, DatePosted, IsVisible, UserID, PostID)
 VALUES
-(1, 'I also thought that Friends was a great show', '2023-04-02 13:25:00', 2, 3),
-(2, 'I thought it was ok', '2023-04-02 14:00:00', 3, 3),
-(3, 'I respect your opinion @PagieCole', '2023-04-02 14:10:00', 1, 3),
-(4, 'I wasn''t expecting that plot twist at the end of the movie', '2023-04-13 17:30:00', 5, 2);
+(1, 'I also thought that Friends was a great show', '2023-04-02 13:25:00', 1, 2, 3),
+(2, 'I thought it was ok', '2023-04-02 14:00:00', 1, 3, 3),
+(3, 'I respect your opinion @PagieCole', '2023-04-02 14:10:00', 0, 1, 3),
+(4, 'I wasn''t expecting that plot twist at the end of the movie', '2023-04-13 17:30:00', 1, 5, 2);

@@ -312,7 +312,7 @@ public class PostRepository_Tests
             Assert.That(post.User.Username, Is.EqualTo("SandraHart"));
         });
     }
-
+    
     [Test]
     public void HidePost_ForNonExistingPost_ShouldThrowException()
     {
@@ -334,7 +334,7 @@ public class PostRepository_Tests
         // Act/Assert
         Assert.Throws<Exception>(() => repo.HidePost(post));
     }
-
+    
     [Test]
     public void HidePost_ForExistingPostButInvalidProperty_ThrowsException()
     {

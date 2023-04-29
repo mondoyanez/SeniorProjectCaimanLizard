@@ -35,6 +35,7 @@ CREATE TABLE [Comment]
     [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
     [CommentTitle]          NVARCHAR(2048)      NOT NULL,
     [DatePosted]            DATETIME            NOT NULL,
+    [IsVisible]             BIT                 NOT NULL,
 
     [UserID]                INT                 NOT NULL,
     [PostID]                INT                 NOT NULL
