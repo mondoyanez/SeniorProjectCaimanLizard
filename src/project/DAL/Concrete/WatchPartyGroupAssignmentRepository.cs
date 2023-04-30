@@ -30,6 +30,8 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
 
     public List<int> GetGroupIds(int userId)
     {
-        throw new NotImplementedException();
+        return GetAll().Where(w => w.WatcherId == userId)
+            .Select(w => w.GroupId)
+            .ToList();
     }
 }

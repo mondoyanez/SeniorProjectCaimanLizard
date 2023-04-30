@@ -26,6 +26,11 @@ public class WatchPartyGroupRepository : Repository<WatchPartyGroup>, IWatchPart
         }
     }
 
+    public WatchPartyGroup FindGroup(string groupTitle, string groupDescription, DateTime startDate, Watcher host, int hostId)
+    {
+        throw new NotImplementedException();
+    }
+
     public WatchPartyGroup GetById(int id)
     {
         throw new NotImplementedException();

@@ -102,12 +102,81 @@ public class WatchPartyGroupAssignmentRepository_Tests
         using WatchPartyDbContext context = _dbHelper.GetContext();
         IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
         // The db has been seeded
-
-        WatchPartyGroup? group = context.WatchPartyGroups.FirstOrDefault(g => g.Id == 1);
-
         WatchPartyGroupAssignment assignment = null!;
 
         // Act/Assert
         Assert.Throws<ArgumentNullException>(() => repo.AddToGroup(assignment));
+    }
+
+    [Test]
+    public void GetGroupIds_UserInThreeGroups_ShouldReturnThreeGroupIds()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        List<int> actual = repo.GetGroupIds(1);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual.Count, Is.EqualTo(3));
+            Assert.That(actual.First(), Is.EqualTo(1));
+            Assert.That(actual.Last(), Is.EqualTo(3));
+        });
+    }
+
+    [Test]
+    public void GetGroupIds_UserInOneGroup_ShouldReturnOneGroupId()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        List<int> actual = repo.GetGroupIds(10);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual.Count, Is.EqualTo(1));
+            Assert.That(actual.First(), Is.EqualTo(3));
+            Assert.That(actual.Last(), Is.EqualTo(3));
+        });
+    }
+
+    [Test]
+    public void GetGroupIds_UserIsNotInAnyGroup_ShouldReturnEmptyList()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        List<int> actual = repo.GetGroupIds(11);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual, Is.Empty);
+        });
+    }
+
+    [Test]
+    public void GetGroupIds_UserIdDoesNotExist_ShouldReturnEmptyList()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        List<int> actual = repo.GetGroupIds(110);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual, Is.Empty);
+        });
     }
 }
