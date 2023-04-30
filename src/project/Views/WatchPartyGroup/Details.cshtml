@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Group Details";
+    int count = 0;
 }
 @if (Model.Group != null)
 {
@@ -39,7 +40,7 @@
                 <td>@Model?.Group?.GroupDescription</td>
                 <td>
                     <ul>
-                        @foreach (var person in Model?.Group?.WatchPartyGroupAssignments)
+                        @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
                         {
                             <li>@person.Watcher.Username</li>
                         }
@@ -60,14 +61,19 @@ else
 }
 
 <div class="modal fade" id="inviteUsers" tabindex="-1" aria-labelledby="inviteUsersLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="inviteUsersLabel">Invite Users</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                @foreach (var user in Model?.Watchers)
+                {
+                    <div class="col-2 watch-party-details-invite-btn">
+                        <button type="button" class="btn btn-primary">@user.Username</button>
+                    </div>
+                }
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
