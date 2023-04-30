@@ -301,6 +301,15 @@ body {
     margin-left: 60%;
 }
 
+.watch-party-details-header {
+    margin-left: 15%;
+}
+
+.watch-party-details-invite {
+    margin-top: 5%;
+    margin-left: 70%
+}
+
 .watch-party-table {
     margin-top: 5%;
 }
