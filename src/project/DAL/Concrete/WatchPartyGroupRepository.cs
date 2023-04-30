@@ -26,9 +26,12 @@ public class WatchPartyGroupRepository : Repository<WatchPartyGroup>, IWatchPart
         }
     }
 
-    public WatchPartyGroup FindGroup(string groupTitle, string groupDescription, DateTime startDate, Watcher host, int hostId)
+    public WatchPartyGroup? FindGroup(string groupTitle, string? groupDescription, DateTime startDate, Watcher host, int hostId)
     {
-        throw new NotImplementedException();
+        return GetAll()
+            .FirstOrDefault(g => g.GroupTitle == groupTitle && g.GroupDescription == groupDescription &&
+                                 g.StartDate == startDate && g.Host.AspNetIdentityId == host.AspNetIdentityId &&
+                                 g.HostId == hostId);
     }
 
     public WatchPartyGroup GetById(int id)
