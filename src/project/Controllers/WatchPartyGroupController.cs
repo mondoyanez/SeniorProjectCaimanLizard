@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
 
@@ -64,7 +65,15 @@ public class WatchPartyGroupController : Controller
     public IActionResult Details(int groupId)
     {
         WatchPartyGroup group = _groupRepository.FindById(groupId);
-        return View(group);
+        List<Watcher>? watchers = _watcherRepository.FindAllWatchers();
+
+        PartyGroupVM vm = new()
+        {
+            Group = group,
+            Watchers = watchers
+        };
+
+        return View(vm);
     }
 }
 

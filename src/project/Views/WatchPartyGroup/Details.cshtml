@@ -1,9 +1,9 @@
-﻿@model WatchParty.Models.WatchPartyGroup
+﻿@model WatchParty.ViewModels.PartyGroupVM
 
 @{
     ViewData["Title"] = "Group Details";
 }
-@if (Model != null)
+@if (Model.Group != null)
 {
     <div class="row text-center cld-bg-light watch-party-table-container">
         <div class="row">
@@ -35,18 +35,18 @@
             </thead>
             <tbody>
             <tr>
-                <td>@Model.GroupTitle</td>
-                <td>@Model.GroupDescription</td>
+                <td>@Model?.Group?.GroupTitle</td>
+                <td>@Model?.Group?.GroupDescription</td>
                 <td>
                     <ul>
-                        @foreach (var person in Model.WatchPartyGroupAssignments)
+                        @foreach (var person in Model?.Group?.WatchPartyGroupAssignments)
                         {
                             <li>@person.Watcher.Username</li>
                         }
                     </ul>
                 </td>
-                <td>@Model.Host.Username</td>
-                <td>@Model.StartDate</td>
+                <td>@Model?.Group?.Host.Username</td>
+                <td>@Model?.Group?.StartDate</td>
             </tr>
             </tbody>
         </table>
