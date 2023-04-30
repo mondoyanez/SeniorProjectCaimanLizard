@@ -11,7 +11,16 @@
                 <h1>Group Details</h1>
             </div>
             <div class="col-1">
-                <input type="submit" value="Invite Users" class="btn btn-primary watch-party-details-invite" />
+                <div class="dropdown">
+                    <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="~/img/three-dots-vertical.svg" alt="Dropdown Menu"/>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <input class="btn dropdown-item" type="submit" value="Invite Users"/>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <table class="table table-hover watch-party-table">
