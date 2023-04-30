@@ -270,6 +270,11 @@ body {
     text-decoration: none;
 }
 
+.profile-watch-parties {
+    margin-left: 40%;
+    width: 25%;
+}
+
 .watch-party-container {
     padding-bottom: 197px;
 }
