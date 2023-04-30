@@ -2,6 +2,7 @@
 @using WatchParty.Areas.Identity.Data;
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@*@model WatchParty.ViewModels.NavbarVM;*@
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
@@ -10,13 +11,8 @@
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>
 *@
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" id="logout-button" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
 
-    <li class="nav-item">
+    <li class="nav-item dropdown">
         <a class="nav-link" asp-area="" asp-controller="Notification" asp-action="Index">
             <i class="bi bi-bell-fill"></i>
             @*if the user has any notifications*@
@@ -24,26 +20,58 @@
         </a>
     </li>
 
-@*    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="notificationDropdown" role="button"
-        data-mdb-toggle="dropdown" aria-expanded="false"><i class="bi bi-bell-fill"></i></a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="profileDropdown" role="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+        </a>
+        <!-- Dropdown menu -->
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="profile-link" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">Profile</a>
+            </li>
+            <li>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" id="logout-button" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </li>
+
+
+
+
+@*    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" id="logout-button" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>*@
+
+@*        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="notificationDropdown" role="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bell-fill"></i>
+            <span class="badge bg-danger badge-dot" style="display:inline-block"></span>
+        </a>
         <!-- Dropdown menu -->
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
-            <li>
-                <a class="dropdown-item" href="#">Notification 1</a>
-            </li>
+            @foreach (Notification notification in Model.recentNotifications)
+            {
+                <li>
+                    <a class="dropdown-item">@notification.Content</a>
+                </li>
+            }
 
             <li>
-                <a class="dropdown-item" asp-area="" asp-controller="Notification" asp-action="Index">See all notifications</a>
+                <a class="dropdown-item" style="color:cornflowerblue" asp-area="" asp-controller="Notification" asp-action="Index">See all notifications</a>
             </li>
         </ul>
     </li>*@
-
         
 
-    <li class="nav-item">
+@*    <li class="nav-item">
         <a class="nav-link text-dark" id="profile-link" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">@User.Identity?.Name</a>
-    </li>
+    </li>*@
 
 
 
@@ -59,3 +87,8 @@ else
     </li>
 }
 </ul>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/navbar.js"></script>
+}
