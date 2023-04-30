@@ -9,11 +9,13 @@ namespace WatchParty.Controllers;
 public class WatchPartyGroupController : Controller
 {
     private readonly IWatchPartyGroupRepository _groupRepository;
+    private readonly IWatchPartyGroupAssignmentRepository _assignmentRepository;
     private readonly IWatcherRepository _watcherRepository;
 
-    public WatchPartyGroupController(IWatchPartyGroupRepository groupRepository, IWatcherRepository watcherRepository)
+    public WatchPartyGroupController(IWatchPartyGroupRepository groupRepository, IWatchPartyGroupAssignmentRepository assignmentRepository, IWatcherRepository watcherRepository)
     {
         _groupRepository = groupRepository;
+        _assignmentRepository = assignmentRepository;
         _watcherRepository = watcherRepository;
     }
 
@@ -45,6 +47,11 @@ public class WatchPartyGroupController : Controller
         if (ModelState.IsValid)
         {
             _groupRepository.CreateWatchPartyGroup(newGroup);
+            WatchPartyGroup group = _groupRepository.GetAll()
+                .FirstOrDefault(g => g.GroupTitle == newGroup.GroupTitle && g.GroupDescription == newGroup.GroupDescription &&
+                                     g.StartDate == newGroup.StartDate && g.Host.AspNetIdentityId == newGroup.Host.AspNetIdentityId &&
+                                     g.HostId == newGroup.HostId)!;
+            _assignmentRepository.AddToGroup(new WatchPartyGroupAssignment{ Group = group, GroupId = group.Id, Watcher = group.Host, WatcherId = group.HostId });
             return RedirectToAction("Profile", "User", new { username = User.Identity.Name });
         }
 

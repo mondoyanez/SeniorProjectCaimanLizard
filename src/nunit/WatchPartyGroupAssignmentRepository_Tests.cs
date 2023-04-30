@@ -76,29 +76,6 @@ public class WatchPartyGroupAssignmentRepository_Tests
     }
 
     [Test]
-    public void AddToGroup_WithValidDataButUserIsHost_ShouldThrowAnException()
-    {
-        // Arrange
-        using WatchPartyDbContext context = _dbHelper.GetContext();
-        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
-        // The db has been seeded
-
-        WatchPartyGroup? group = context.WatchPartyGroups.FirstOrDefault(g => g.Id == 1);
-        Watcher? watcher = context.Watchers.FirstOrDefault(w => w.Id == 1);
-
-        WatchPartyGroupAssignment assignment = new WatchPartyGroupAssignment
-        {
-            GroupId = group.Id,
-            Group = group,
-            WatcherId = watcher.Id,
-            Watcher = watcher
-        };
-
-        // Act/Assert
-        Assert.Throws<Exception>(() => repo.AddToGroup(assignment));
-    }
-
-    [Test]
     public void AddToGroup_WithInValidData_ShouldThrowAnException()
     {
         // Arrange

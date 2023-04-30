@@ -14,13 +14,9 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
             throw new ArgumentNullException(nameof(assignment));
 
         WatchPartyGroupAssignment? alreadyExists = GetAll().FirstOrDefault(a => a.WatcherId == assignment.WatcherId && a.GroupId == assignment.GroupId);
-        WatchPartyGroupAssignment? host = GetAll().FirstOrDefault(a => a.Group.HostId == assignment.WatcherId);
 
         if (alreadyExists != null)
             throw new Exception("User is already in group");
-
-        if (host != null)
-            throw new Exception("Host cannot be added to group");
 
         try
         {
