@@ -17,7 +17,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <input class="btn dropdown-item" type="submit" value="Invite Users"/>
+                            <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUsers">Invite Users</button>
                         </li>
                     </ul>
                 </div>
@@ -58,3 +58,20 @@ else
         <h1 class="mt-5" style="color: red">Group could not be found</h1>
     </div>
 }
+
+<div class="modal fade" id="inviteUsers" tabindex="-1" aria-labelledby="inviteUsersLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="inviteUsersLabel">Invite Users</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
