@@ -30,31 +30,32 @@
         </div>
         <table class="table table-hover watch-party-table">
             <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Participants</th>
-                <th>Host</th>
-                <th>Start Date</th>
-            </tr>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Participants</th>
+                    <th>Host</th>
+                    <th>Start Date</th>
+                </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>@Model?.Group?.GroupTitle</td>
-                <td>@Model?.Group?.GroupDescription</td>
-                <td>
-                    <ul>
-                        @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
-                        {
-                            <li>@person.Watcher.Username</li>
-                        }
-                    </ul>
-                </td>
-                <td>@Model?.Group?.Host.Username</td>
-                <td>@Model?.Group?.StartDate</td>
-            </tr>
+                <tr>
+                    <td>@Model?.Group?.GroupTitle</td>
+                    <td>@Model?.Group?.GroupDescription</td>
+                    <td>
+                        <ul>
+                            @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
+                            {
+                                <li>@person.Watcher.Username</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>@Model?.Group?.Host.Username</td>
+                    <td>@Model?.Group?.StartDate</td>
+                </tr>
             </tbody>
         </table>
+        <input type="hidden" id="watch-group-id" value="@Model?.Group?.Id" />
     </div>
 }
 else
@@ -85,7 +86,7 @@ else
                     if (!isInvited && user.Username != User?.Identity?.Name)
                     {
                         <div class="col-2 watch-party-details-invite-btn">
-                            <button type="button" class="btn btn-primary">@user.Username</button>
+                            <button type="button" class="btn btn-primary" id="invite-user-@user.Username" value="@user.Id">@user.Username</button>
                         </div>
                     }
                 }
