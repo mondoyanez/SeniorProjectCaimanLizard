@@ -55,7 +55,7 @@ public class UserController : Controller
         List<FollowingList> followerList = _followingListRepository.GetFollowerList(watcher.Id);
         List<WatchPartyGroup> watchPartyGroups = new List<WatchPartyGroup>();
 
-        List<int> groupIds = _assignmentRepository.GetGroupIds(loggedInUser.Id);
+        List<int> groupIds = _assignmentRepository.GetGroupIds(watcher.Id);
 
         if (groupIds.Any())
         {

@@ -1,0 +1,38 @@
+﻿@model WatchParty.Models.WatchPartyGroup
+
+@{
+    ViewData["Title"] = "Group Details";
+}
+
+<div class="row text-center cld-bg-light">
+    <div class="row">
+        <h1>Group Details</h1>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Participants</th>
+            <th>Host</th>
+            <th>Start Date</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.GroupTitle</td>
+                <td>@Model.GroupDescription</td>
+                <td>
+                    <ul>
+                        @foreach (var person in Model.WatchPartyGroupAssignments)
+                        {
+                            <li>@person.Watcher.Username</li>
+                        }
+                    </ul>
+                </td>
+                <td>@Model.Host.Username</td>
+                <td>@Model.StartDate</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

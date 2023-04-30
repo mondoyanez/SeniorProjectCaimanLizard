@@ -59,5 +59,12 @@ public class WatchPartyGroupController : Controller
 
         return View();
     }
+
+    [HttpGet]
+    public IActionResult Details(int groupId)
+    {
+        WatchPartyGroup group = _groupRepository.FindById(groupId);
+        return View(group);
+    }
 }
 
