@@ -70,9 +70,20 @@ else
             <div class="modal-body">
                 @foreach (var user in Model?.Watchers)
                 {
-                    <div class="col-2 watch-party-details-invite-btn">
-                        <button type="button" class="btn btn-primary">@user.Username</button>
-                    </div>
+                    bool isInvited = false;
+
+                    @foreach (var invitee in Model.Group.WatchPartyGroupAssignments)
+                    {
+                        if (user.AspNetIdentityId == invitee.Watcher.AspNetIdentityId)
+                            isInvited = true;
+                    }
+
+                    if (!isInvited)
+                    {
+                        <div class="col-2 watch-party-details-invite-btn">
+                            <button type="button" class="btn btn-primary">@user.Username</button>
+                        </div>
+                    }
                 }
             </div>
             <div class="modal-footer">
