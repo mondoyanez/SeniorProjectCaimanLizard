@@ -168,4 +168,40 @@ public class WatchPartyGroupRepository_Tests
         // Assert
         Assert.That(actual, Is.Null);
     }
+
+    [Test]
+    public void GetById_ForExistingGroup_ShouldReturnCorrectGroup()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+
+        // Act
+        WatchPartyGroup? actual = repo.GetById(2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual?.Id, Is.EqualTo(2));
+            Assert.That(actual?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
+            Assert.That(actual?.GroupDescription, Is.EqualTo("Going to watch all the Harry Potter movies in order all day"));
+            Assert.That(actual?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(actual?.Host.AspNetIdentityId, Is.EqualTo("561e79b0-24be-4f8b-96dd-056b493cd7e5"));
+            Assert.That(actual?.HostId, Is.EqualTo(5));
+        });
+    }
+
+    [Test]
+    public void GetById_ForNonExistingGroup_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+
+        // Act
+        WatchPartyGroup? actual = repo.GetById(20);
+
+        // Assert
+        Assert.That(actual, Is.Null);
+    }
 }

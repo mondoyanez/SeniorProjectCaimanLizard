@@ -34,9 +34,9 @@ public class WatchPartyGroupRepository : Repository<WatchPartyGroup>, IWatchPart
                                  g.HostId == hostId);
     }
 
-    public WatchPartyGroup GetById(int id)
+    public WatchPartyGroup? GetById(int id)
     {
-        throw new NotImplementedException();
+        return GetAll().FirstOrDefault(g => g.Id == id);
     }
 }
 
