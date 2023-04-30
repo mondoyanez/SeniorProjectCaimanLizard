@@ -47,10 +47,12 @@ public class WatchPartyGroupController : Controller
         if (ModelState.IsValid)
         {
             _groupRepository.CreateWatchPartyGroup(newGroup);
-            WatchPartyGroup group = _groupRepository.GetAll()
-                .FirstOrDefault(g => g.GroupTitle == newGroup.GroupTitle && g.GroupDescription == newGroup.GroupDescription &&
-                                     g.StartDate == newGroup.StartDate && g.Host.AspNetIdentityId == newGroup.Host.AspNetIdentityId &&
-                                     g.HostId == newGroup.HostId)!;
+            WatchPartyGroup? group = _groupRepository.FindGroup(newGroup.GroupTitle, newGroup.GroupDescription,
+                newGroup.StartDate, newGroup.Host, newGroup.HostId);
+
+            if (group == null)
+                throw new NullReferenceException(nameof(group));
+
             _assignmentRepository.AddToGroup(new WatchPartyGroupAssignment{ Group = group, GroupId = group.Id, Watcher = group.Host, WatcherId = group.HostId });
             return RedirectToAction("Profile", "User", new { username = User.Identity.Name });
         }
