@@ -78,7 +78,7 @@ else
                             isInvited = true;
                     }
 
-                    if (!isInvited)
+                    if (!isInvited && user.Username != User?.Identity?.Name)
                     {
                         <div class="col-2 watch-party-details-invite-btn">
                             <button type="button" class="btn btn-primary">@user.Username</button>
