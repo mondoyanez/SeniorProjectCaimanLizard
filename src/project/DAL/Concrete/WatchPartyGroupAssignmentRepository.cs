@@ -31,4 +31,9 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
             throw new Exception("Invalid information was given while trying to update database");
         }
     }
+
+    public List<int> GetGroupIds(int userId)
+    {
+        throw new NotImplementedException();
+    }
 }

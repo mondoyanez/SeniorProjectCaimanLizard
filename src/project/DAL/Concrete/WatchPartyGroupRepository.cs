@@ -25,5 +25,10 @@ public class WatchPartyGroupRepository : Repository<WatchPartyGroup>, IWatchPart
             throw new Exception("Invalid information was given while trying to update database");
         }
     }
+
+    public WatchPartyGroup GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
 }
 
