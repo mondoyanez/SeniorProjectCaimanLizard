@@ -115,6 +115,22 @@ public class UserController : Controller
         return View(vm);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> SwitchTheme(string theme)
+    {
+        try
+        {
+            await Task.Delay(1000); // simulate changing theme preference in db
+            Console.WriteLine("Theme Switched" + theme);
+            return Ok(new { theme });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error switching theme: " + ex.Message);
+            return StatusCode(500, "An error occurred while switching theme.");
+        }
+    }
+
     private bool WatcherExists(int id)
     {
         return (_context.Watchers?.Any(e => e.Id == id)).GetValueOrDefault();
