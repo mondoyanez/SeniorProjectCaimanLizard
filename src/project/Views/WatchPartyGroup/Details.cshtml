@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Group Details";
-    int count = 0;
 }
 @if (Model.Group != null)
 {
@@ -11,18 +10,24 @@
             <div class="col-8 watch-party-details-header">
                 <h1>Group Details</h1>
             </div>
+
+        @if (User?.Identity?.Name == Model.Group.Host.Username)
+        {
             <div class="col-1">
                 <div class="dropdown">
                     <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="~/img/three-dots-vertical.svg" alt="Dropdown Menu"/>
                     </button>
                     <ul class="dropdown-menu">
+
                         <li>
                             <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUsers">Invite Users</button>
                         </li>
                     </ul>
                 </div>
             </div>
+        }
+
         </div>
         <table class="table table-hover watch-party-table">
             <thead>
