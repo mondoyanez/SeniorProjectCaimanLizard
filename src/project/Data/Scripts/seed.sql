@@ -186,13 +186,16 @@ SET IDENTITY_INSERT [WatchPartyGroup] OFF;
 SET IDENTITY_INSERT [WatchPartyGroupAssignment] ON;
 INSERT INTO [WatchPartyGroupAssignment] (ID, GroupID, WatcherID)
 VALUES
-(1, 1, 2),
-(2, 1, 3),
-(3, 2, 4),
-(4, 2, 1),
-(5, 2, 6),
-(6, 2, 7),
-(7, 3, 1),
-(8, 3, 8),
-(9, 3, 10)
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 2, 4),
+(5, 2, 1),
+(6, 2, 5),
+(7, 2, 6),
+(8, 2, 7),
+(9, 3, 1),
+(10, 3, 8),
+(11, 3, 9),
+(12, 3, 10)
 SET IDENTITY_INSERT [WatchPartyGroupAssignment] OFF;

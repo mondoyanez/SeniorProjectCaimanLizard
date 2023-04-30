@@ -49,7 +49,7 @@ public class WatchPartyGroupAssignmentRepository_Tests
         int count = repo.GetAll().Count();
 
         // Assert
-        Assert.That(count, Is.EqualTo(10));
+        Assert.That(count, Is.EqualTo(13));
     }
 
     [Test]
