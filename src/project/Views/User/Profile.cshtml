@@ -71,22 +71,52 @@
                 }
             </div>
         </div>
-        <div class="row text-center my-5">
-            <h2>Future Watch Parties</h2>
-        </div>
-        <div class="row mx-5">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Participants</th>
-                        <th>Host</th>
-                        <th>Start Date</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+        @if (Model.isCurrentUser)
+        {
+            <div class="row text-center my-5">
+                <h2>Future Watch Parties</h2>
+            </div>
+        
+            <div class="row mx-5">
+                @if (Model.Groups.Any())
+                {
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Participants</th>
+                            <th>Host</th>
+                            <th>Start Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var group in Model.Groups)
+                        {
+                            <tr>
+                                <td>@group.GroupTitle</td>
+                                <td>@group.GroupDescription</td>
+                                <td>
+                                    <ul>
+                                        @foreach (var person in group.WatchPartyGroupAssignments)
+                                        {
+                                            <li>@person.Watcher.Username</li>
+                                        }
+                                    </ul>
+                                </td>
+                                <td>@group.Host.Username</td>
+                                <td>@group.StartDate</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h4>No watch parties currently</h4>
+                }
+            </div>
+        }
     }
     else
     {
