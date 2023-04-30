@@ -42,13 +42,11 @@
                 <tr>
                     <td>@Model?.Group?.GroupTitle</td>
                     <td>@Model?.Group?.GroupDescription</td>
-                    <td>
-                        <ul>
-                            @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
-                            {
-                                <li>@person.Watcher.Username</li>
-                            }
-                        </ul>
+                    <td id="watch-group-users">
+                        @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
+                        {
+                            <p>@person.Watcher.Username</p>
+                        }
                     </td>
                     <td>@Model?.Group?.Host.Username</td>
                     <td>@Model?.Group?.StartDate</td>
@@ -86,7 +84,7 @@ else
                     if (!isInvited && user.Username != User?.Identity?.Name)
                     {
                         <div class="col-2 watch-party-details-invite-btn">
-                            <button type="button" class="btn btn-primary" id="invite-user-@user.Username" value="@user.Id">@user.Username</button>
+                            <button type="button" class="btn btn-primary add-user" id="invite-user-@user.Username" value="@user.Id">@user.Username</button>
                         </div>
                     }
                 }
@@ -97,3 +95,8 @@ else
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+     <script src="~/js/watchParty.js"></script>                       
+}
