@@ -36,6 +36,15 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Show()
+    {
+        Debug.WriteLine("Inside controller for show");
+        //Debug.WriteLine("Show title: " + title);
+
+
+        return View(); 
+    }
+
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

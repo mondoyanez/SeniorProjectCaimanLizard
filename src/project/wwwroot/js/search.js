@@ -290,7 +290,8 @@ function displayShows(data) {
                             </div>
                             <div class="col">
                               <div class="card-body text-start">
-                                <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
+                                <h4 class="card-title" onclick='getDetailedPage()'>${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
+                                <a class="btn" onclick='getDetailedPage()'>See Detailed Page</a>
                                 <p class="card-text truncate-overflow">${item.plotSummary}</p>
                                 <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                                     <div class="dropdown">
@@ -349,6 +350,19 @@ function errorOnAjax() {
     console.log("ERROR in ajax request");
     // take care of the error, maybe display a message to the user
     // ...
+}
+
+function getDetailedPage() {
+    $.ajax({
+        type: "GET",
+        url: '/Home/Show',
+        success: function (result) {
+            console.log("Going to detailed show page");
+        },
+        error: function (error) {
+            console.error("Error updating database:" + error.responseText);
+        }
+    });
 }
 
 
