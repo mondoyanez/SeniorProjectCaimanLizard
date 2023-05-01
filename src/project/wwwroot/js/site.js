@@ -9,6 +9,7 @@ $(window).scroll(function () {
 });
 
 // theme selection
+// in site.js
 $(document).ready(function () {
     $("#themeList a").on("click", function (e) {
         e.preventDefault();
@@ -17,23 +18,18 @@ $(document).ready(function () {
         console.log("changed to "+ chosenTheme);
         $.ajax({
             type: "POST",
-            url: "/User/SwitchTheme",
-            data: { theme: chosenTheme },
+            url: `/api/theme/SwitchTheme?theme=${chosenTheme}`,
             dataType: "json",
             success: function (response) {
                 var theme = response.theme;
                 $("#selectedTheme").text(theme);
                 $("html").attr("data-bs-theme", theme);
                 console.log("Theme changed to " + theme);
+                localStorage.setItem('theme', theme);
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log(xhr.status + ': ' + errorThrown);
             }
         });
-
-        setTimeout(function() {
-            console.log("manually changing theme");
-            $("html").attr("data-bs-theme", chosenTheme);
-        }, 3000);
     });
 });
