@@ -4,13 +4,11 @@ const listUsers = $("#watch-group-users")[0];
 $(".add-user").on("click", function (e) {
     e.preventDefault();
     const userId = e.target.value;
-    const data = { groupId: groupId, userId: userId };
 
     $.ajax({
         type: "POST",
-        url: "/partyGroup/AddUser",
-        data: JSON.stringify(data),
         dataType: "json",
+        url: `/partyGroup/AddUser/?groupId=${groupId}&userId=${userId}`,
         success: addUserToTable(e),
         error: errorOnAjax
     });
