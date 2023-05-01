@@ -50,7 +50,7 @@ function displayTitles(data) {
             $.each(actorItem.knownFor, function (knownForIndex, knownForItem) {
                 if (knownForItem.releaseDate != null) {
                     let result = 
-                        `<div class="col cld-bg-light">
+                        `<div class="col bg-light-subtle">
                             <div class="card mb-3">
                               <div class="row g-0">
                                 <div class="col-sm-2 col-4 align-self-center">
