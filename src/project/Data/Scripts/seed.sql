@@ -218,4 +218,3 @@ VALUES
 (2, 1, 3, 'CarsonDaniel left a comment on your post', 0, '2023-04-22 12:05:00'),
 (3, 11, 3, 'CarsonDaniel left a comment on your post', 0, '2023-04-22 12:05:00')
 SET IDENTITY_INSERT [Notification] OFF;
-

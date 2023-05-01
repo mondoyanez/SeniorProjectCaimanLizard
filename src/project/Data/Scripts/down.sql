@@ -36,9 +36,9 @@ DROP TABLE [WatchList];
 DROP TABLE [Show];
 DROP TABLE [Movie];
 DROP TABLE [WatchListItems];
-DROP TABLE [Notification];
-DROP TABLE [NotificationType];
 DROP TABLE [WatchPartyGroup];
 DROP TABLE [WatchPartyGroupAssignment];
+DROP TABLE [Notification];
+DROP TABLE [NotificationType];
 
 -- DROP DATABASE WatchParty;
