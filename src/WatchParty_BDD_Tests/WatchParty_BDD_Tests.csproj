@@ -23,4 +23,20 @@
     <Folder Include="Support\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Features\cld181_notifications.feature.cs">
+      <Visible>true</Visible>
+      <DependentUpon>cld181_notifications.feature</DependentUpon>
+      <DesignTime>true</DesignTime>
+      <AutoGen>true</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Features\cld181_notifications.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+
 </Project>

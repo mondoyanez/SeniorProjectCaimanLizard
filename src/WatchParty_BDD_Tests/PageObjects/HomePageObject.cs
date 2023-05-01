@@ -18,6 +18,8 @@ namespace WatchParty_BDD_Tests.PageObjects
         public IWebElement RegisterButton => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Register\"]"));
         public IWebElement LoginButton => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Login\"]"));
         public IWebElement NavBarHelloLink => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Manage\"]"));
+        public IWebElement NotificationButton => _webDriver.FindElement(By.Id("notification-bell"));
+
 
         public string NavbarWelcomeText()
         {
@@ -26,6 +28,9 @@ namespace WatchParty_BDD_Tests.PageObjects
 
         public void Logout()
         {
+            IWebElement profileDropdown = _webDriver.FindElement(By.Id("profileDropdown"));
+            profileDropdown.Click();
+
             IWebElement navbarLogoutButton = _webDriver.FindElement(By.Id("logout-button"));
             navbarLogoutButton.Click();
         }
