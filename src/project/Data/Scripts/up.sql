@@ -91,6 +91,24 @@ CREATE TABLE [WatchListItems]
     [MovieID]               INT
 );
 
+CREATE TABLE [Notification]
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [NotifierID]            INT                 NOT NULL,
+    [NotifTypeID]           INT                 NOT NULL,
+    [Content]               NVARCHAR(256)       NOT NULL,
+    [IsRead]                BIT                 NOT NULL,
+    [CreatedAt]             DATETIME            NOT NULL
+);
+
+CREATE TABLE [NotificationType] 
+(
+    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [Type]                  NVARCHAR(256)       NOT NULL
+);
+
+
+ALTER TABLE [Post]                  ADD CONSTRAINT [Fk_Post_UserID]                 FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 CREATE TABLE [WatchPartyGroup]
 (
     [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -130,6 +148,14 @@ ALTER TABLE [WatchListItems]                ADD CONSTRAINT [Fk_WatchListItems_Sh
 ALTER TABLE [WatchListItems]                ADD CONSTRAINT [Fk_WatchListItems_Movie]                            FOREIGN KEY([MovieID])                  REFERENCES[Movie]([ID])             ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [WatchPartyGroup]               ADD CONSTRAINT [Fk_WatchPartyGroup_Watcher]                         FOREIGN KEY([HostID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_WatchList]    FOREIGN KEY([WatchListID])              REFERENCES[WatchList]([ID])         ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_Show]         FOREIGN KEY([ShowID])                   REFERENCES[Show]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [WatchListItems]        ADD CONSTRAINT [Fk_WatchListItems_Movie]        FOREIGN KEY([MovieID])                  REFERENCES[Movie]([ID])             ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE [Notification]          ADD CONSTRAINT [Fk_Notification_NotifierID]     FOREIGN KEY([NotifierID])               REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [Notification]          ADD CONSTRAINT [Fk_Notification_NotifTypeID]    FOREIGN KEY([NotifTypeID])              REFERENCES[NotificationType]([ID])  ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 
 ALTER TABLE [WatchPartyGroupAssignment]     ADD CONSTRAINT [Fk_WatchPartyGroupAssignment_WatchPartyGroup]       FOREIGN KEY([GroupID])                  REFERENCES[WatchPartyGroup]([ID])   ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE [WatchPartyGroupAssignment]     ADD CONSTRAINT [Fk_WatchPartyGroupAssignment_Watcher]               FOREIGN KEY([WatcherID])                REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;

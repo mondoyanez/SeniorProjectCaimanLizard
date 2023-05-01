@@ -44,6 +44,9 @@ public partial class Watcher
     [InverseProperty("User")]
     public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();
 
+    [InverseProperty("Notifier")]
+    public virtual ICollection<Notification> Notifications { get; } = new List<Notification>();
+
     [InverseProperty("User")]
     public virtual ICollection<Post> Posts { get; } = new List<Post>();
 

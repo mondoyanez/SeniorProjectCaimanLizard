@@ -23,6 +23,9 @@ ALTER TABLE [WatchPartyGroup]               DROP CONSTRAINT [Fk_WatchPartyGroup_
 ALTER TABLE [WatchPartyGroupAssignment]     DROP CONSTRAINT [Fk_WatchPartyGroupAssignment_WatchPartyGroup]
 ALTER TABLE [WatchPartyGroupAssignment]     DROP CONSTRAINT [Fk_WatchPartyGroupAssignment_Watcher]
 
+ALTER TABLE [Notification]          DROP CONSTRAINT [Fk_Notification_NotifierID]
+ALTER TABLE [Notification]          DROP CONSTRAINT [Fk_Notification_NotifTypeID]
+
 DROP TABLE [Watcher];
 DROP TABLE [FollowingList];
 DROP TABLE [Post];
@@ -33,6 +36,8 @@ DROP TABLE [WatchList];
 DROP TABLE [Show];
 DROP TABLE [Movie];
 DROP TABLE [WatchListItems];
+DROP TABLE [Notification];
+DROP TABLE [NotificationType];
 DROP TABLE [WatchPartyGroup];
 DROP TABLE [WatchPartyGroupAssignment];
 
