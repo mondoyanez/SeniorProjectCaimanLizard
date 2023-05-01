@@ -88,6 +88,12 @@ else
                         </div>
                     }
                 }
+                @if (Model.Watchers.Count == Model.Group.WatchPartyGroupAssignments.Count)
+                {
+                    <div class="col-4">
+                        <p>No users to add</p>
+                    </div>
+                }
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
