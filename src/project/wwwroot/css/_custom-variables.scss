@@ -85,31 +85,59 @@ $dark-text: #000;
     transition: 0.5s ease-in;
 }
 
+.cld-description {
+    background-image: linear-gradient( $light, $primary-bg-subtle);
+}
+
+.cld-btn-light {
+    background: $light;
+}
+
+.cld-btn-primary {
+    background: $primary;
+}
+
+.cld-btn-primary:hover {
+    background-color: #4a3b52;
+}
+
+.cld-text-light {
+    background: $light;
+}
+
+.cld-btn-secondary {
+    background: $secondary;
+}
+
+.cld-btn-secondary:hover {
+    background-color: #76a8e8;
+}
+
 .form-control, .form-check-input {
     background-color: #f2efe9;
-    border-color: $blue;
+    border-color: $secondary;
 }
 
 .form-control:hover, .form-check-input:hover {
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
-    border-color: $blue;
+    border-color: $secondary;
 }
 
 .form-control:focus {
     background-color: #f2efe9;
-    outline-color: $blue;
+    outline-color: $secondary;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
 }
 
 .form-check-input:focus {
-    outline-color: $blue;
+    outline-color: $secondary;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
 }
 
 .form-check-input:checked {
-    background-color: $blue;
-    outline-color: $blue;
-    border-color: $blue;
+    background-color: $secondary;
+    outline-color: $secondary;
+    border-color: $secondary;
 }
 
 .shake-img:hover {
@@ -207,7 +235,7 @@ $dark-text: #000;
 }
 
 .comment-username {
-    color: $blue;
+    color: $secondary;
 }
 
 #comment-entered {
@@ -219,6 +247,10 @@ $dark-text: #000;
     background-color: $yellow;
     border-color: $yellow;
     margin-left: 125%;
+}
+
+.comment-title {
+    margin-left: 45%;
 }
 
 .dropdown-section {
@@ -260,7 +292,7 @@ $dark-text: #000;
 }
 
 .post-username {
-    color: $blue;
+    color: $secondary;
     margin-left: 50%;
 }
 

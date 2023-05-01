@@ -690,7 +690,7 @@ progress {
   color: #6c757d;
 }
 .blockquote-footer::before {
-  content: "��";
+  content: "— ";
 }
 
 .img-fluid {
@@ -11640,6 +11640,34 @@ textarea.form-control-lg {
   transition: 0.5s ease-in;
 }
 
+.cld-description {
+  background-image: linear-gradient(#EDE7D9, #5D4A66);
+}
+
+.cld-btn-light {
+  background: #EDE7D9;
+}
+
+.cld-btn-primary {
+  background: #5D4A66;
+}
+
+.cld-btn-primary:hover {
+  background-color: #4a3b52;
+}
+
+.cld-text-light {
+  background: #EDE7D9;
+}
+
+.cld-btn-secondary {
+  background: #84AFE6;
+}
+
+.cld-btn-secondary:hover {
+  background-color: #76a8e8;
+}
+
 .form-control, .form-check-input {
   background-color: #f2efe9;
   border-color: #84AFE6;
@@ -11765,17 +11793,17 @@ textarea.form-control-lg {
 }
 
 .comment-title {
-    margin-left: 45%;
+  margin-left: 45%;
 }
 
 .dropdown-section {
-    margin-top: 15px;
-    margin-left: 19%;
+  margin-top: 15px;
+  margin-left: 19%;
 }
 
 .dropdown-section-comment {
-    margin-top: -2%;
-    margin-left: 75%;
+  margin-top: -2%;
+  margin-left: 75%;
 }
 
 .post {
