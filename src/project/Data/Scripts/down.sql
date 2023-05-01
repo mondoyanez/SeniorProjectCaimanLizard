@@ -18,6 +18,9 @@ ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_WatchList
 ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_Show]
 ALTER TABLE [WatchListItems]        DROP CONSTRAINT [Fk_WatchListItems_Movie]
 
+ALTER TABLE [Notification]          DROP CONSTRAINT [Fk_Notification_NotifierID]
+ALTER TABLE [Notification]          DROP CONSTRAINT [Fk_Notification_NotifTypeID]
+
 DROP TABLE [Watcher];
 DROP TABLE [FollowingList];
 DROP TABLE [Post];
@@ -28,5 +31,7 @@ DROP TABLE [WatchList];
 DROP TABLE [Show];
 DROP TABLE [Movie];
 DROP TABLE [WatchListItems];
+DROP TABLE [Notification];
+DROP TABLE [NotificationType];
 
 -- DROP DATABASE WatchParty;
