@@ -43,7 +43,7 @@ public class WatchPartyGroupController : Controller
         newGroup.HostId = watcher.Id;
         newGroup.Host = watcher;
 
-        TryValidateModel(newGroup.GroupTitle);
+        TryValidateModel(newGroup);
 
         if (ModelState.IsValid)
         {

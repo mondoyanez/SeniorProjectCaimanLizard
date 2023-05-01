@@ -21,10 +21,6 @@ $(".add-user").on("click", function (e) {
     }
 });
 
-$("#test-btn").on("click", function (e) {
-    console.log(modalBody);
-});
-
 function addUserToTable(e) {
     const username = e.target.innerHTML;
 
@@ -58,6 +54,5 @@ function removeButton(e) {
 
 function errorOnAjax() {
     console.log("ERROR in ajax request");
-    // take care of the error, maybe display a message to the user
-    // ...
+    alert("error has occurred please try again, if issue persists contact on admin thank you.");
 }
