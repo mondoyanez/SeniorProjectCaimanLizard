@@ -11668,18 +11668,19 @@ textarea.form-control-lg {
   background-color: #76a8e8;
 }
 
-.form-control, .form-check-input {
-  background-color: #f2efe9;
+.form-control, .form-check-input, textarea {
+  background-color: rgba(128, 128, 128, 0.1);
   border-color: #84AFE6;
+  color: #000;
 }
 
 .form-control:hover, .form-check-input:hover {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 4px rgba(128, 128, 128, 0.1);
   border-color: #84AFE6;
 }
 
 .form-control:focus {
-  background-color: #f2efe9;
+  background-color: rgba(0, 0, 0, 0.2);
   outline-color: #84AFE6;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
@@ -11743,7 +11744,7 @@ textarea.form-control-lg {
 }
 
 .profile-card {
-  background-color: #f2efe9;
+  background-color: rgba(125, 125, 125, 0.2);
 }
 
 .all-comments-date {

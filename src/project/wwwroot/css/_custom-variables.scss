@@ -113,18 +113,19 @@ $dark-text: #000;
     background-color: #76a8e8;
 }
 
-.form-control, .form-check-input {
-    background-color: #f2efe9;
+.form-control, .form-check-input, textarea {
+    background-color: rgba(128, 128, 128, 0.1);
     border-color: $secondary;
+    color: $dark-text;
 }
 
 .form-control:hover, .form-check-input:hover {
-    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    box-shadow: 0 0 4px rgba(128, 128, 128, 0.1);
     border-color: $secondary;
 }
 
 .form-control:focus {
-    background-color: #f2efe9;
+    background-color: rgba(0, 0, 0, 0.2);
     outline-color: $secondary;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
 }
@@ -199,7 +200,7 @@ $dark-text: #000;
 }
 
 .profile-card {
-    background-color: #f2efe9;
+    background-color: rgba(125, 125, 125, 0.2);
 }
 
 
