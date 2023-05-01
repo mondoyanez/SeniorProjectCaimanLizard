@@ -1,0 +1,71 @@
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model WatchParty.ViewModels.NotificationVM;
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<section class="bg-light-subtle text-center">
+    <br />
+    <br />
+    <h1>@(Model.watcher.Username)'s Notifications</h1>
+    <br>
+
+    @if (Model.notifications.Count() == 0)
+    {
+        <br />
+        <h4 id="no-notifications">No Notifications</h4>
+        <br />
+        <br />
+    }
+    else
+    {
+        <table class="table table-hover" id="movieTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Content</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var notification in Model.notifications)
+                {
+                    <tr>
+                        @*If it is not read, then put a red dot*@
+                        @if (notification.IsRead == false)
+                        {
+                            <th>
+                                <a class="nav-link read-item" data-notif-id="@notification.Id">
+                                    <i class="bi bi-record-fill" style="color: crimson"></i>
+                                </a>
+                            </th>
+                        }
+                        else
+                        {
+                            <th></th>
+                        }
+                        <th>@notification.CreatedAt</th>
+                        <th>@notification.Content</th>
+                        <th>
+                            <button class="btn btn-danger btn-sm delete-notification" id="delete-notification" data-notif-id="@notification.Id">Delete</button>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <div class="row">
+    </div>
+
+</section>
+
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/notification.js"></script>
+}

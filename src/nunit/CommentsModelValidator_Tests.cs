@@ -33,6 +33,7 @@ public class CommentsModelValidator_Tests
             PostTitle = "My very first post!",
             PostDescription = "Enter a description",
             DatePosted = new DateTime(2023, 2, 28, 15, 0, 0),
+            IsVisible = true,
             UserId = 1,
             User = poster
         };
@@ -42,6 +43,7 @@ public class CommentsModelValidator_Tests
             Id = 1,
             CommentTitle = "This text contains a comment",
             DatePosted = new DateTime(2023, 2, 28, 15, 10, 20),
+            IsVisible = true,
             UserId = 2,
             PostId = 1,
             Post = post,
@@ -211,6 +213,25 @@ public class CommentsModelValidator_Tests
             Assert.That(mv.Valid, Is.True);
             Assert.That(mv.ContainsFailureFor("UserId"), Is.False);
             Assert.That(actual, Is.EqualTo(2));
+        });
+    }
+
+    [Test]
+    public void Comment_WithValidIsVisible_IsCorrect()
+    {
+        // Arrange
+        Comment comment = MakeValidComment();
+
+        // Act
+        ModelValidator mv = new ModelValidator(comment);
+        bool actual = comment.IsVisible;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("IsVisible"), Is.False);
+            Assert.That(actual, Is.True);
         });
     }
 

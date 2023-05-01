@@ -66,26 +66,26 @@ VALUES
 SET IDENTITY_INSERT [FollowingList] OFF;
 
 SET IDENTITY_INSERT [Post] ON;
-INSERT INTO [Post](ID, PostTitle, PostDescription, DatePosted, UserID)
+INSERT INTO [Post](ID, PostTitle, PostDescription, DatePosted, IsVisible, UserID)
 VALUES
-(1, 'That new Ant-man movie was incredible!', null, '2023-01-15 17:00:00', 1),
-(2, 'Spider-man', 'So excited for the new spider man movies!', '2023-02-01 15:00:00', 3),
-(3, 'Friends', 'By far one of my favorite shows', '2023-02-08 08:00:00', 5),
-(4, 'Best comedy of 2023?', null, '2022-12-25 12:00:00', 7),
-(5, 'Might have been the best movie released in a while', null, '2023-02-03 13:00:00', 2),
-(6, 'Who wants to watch a movie later', null, '2023-01-15 17:00:00', 6),
-(7, 'The office was a good show', 'It was increible unlike anything else I''ve seen before', '2023-01-15 17:00:00', 9),
-(8, 'Friends with friends', null, '2023-01-15 17:00:00', 10),
-(9, 'MCU marathon', 'Who is down to have a MCU marathon sometime next week?', '2023-01-15 17:00:00', 8),
-(10, 'Avatar', 'Excited to watch the new Avatar movie that came out', '2023-01-15 17:00:00', 4)
+(1, 'That new Ant-man movie was incredible!', null, '2023-01-15 17:00:00', 1, 1),
+(2, 'Spider-man', 'So excited for the new spider man movies!', '2023-02-01 15:00:00', 1, 3),
+(3, 'Friends', 'By far one of my favorite shows', '2023-02-08 08:00:00', 1, 5),
+(4, 'Best comedy of 2023?', null, '2022-12-25 12:00:00', 1, 7),
+(5, 'Might have been the best movie released in a while', null, '2023-02-03 13:00:00', 1, 2),
+(6, 'Who wants to watch a movie later', null, '2023-01-15 17:00:00', 0, 6),
+(7, 'The office was a good show', 'It was increible unlike anything else I''ve seen before', '2023-01-15 17:00:00', 0, 9),
+(8, 'Friends with friends', null, '2023-01-15 17:00:00', 1, 10),
+(9, 'MCU marathon', 'Who is down to have a MCU marathon sometime next week?', '2023-01-15 17:00:00', 1, 8),
+(10, 'Avatar', 'Excited to watch the new Avatar movie that came out', '2023-01-15 17:00:00', 1, 4)
 SET IDENTITY_INSERT [Post] OFF;
 
 SET IDENTITY_INSERT [Comment] ON;
-INSERT INTO [Comment](ID, CommentTitle, DatePosted, UserID, PostID)
+INSERT INTO [Comment](ID, CommentTitle, DatePosted, IsVisible, UserID, PostID)
 VALUES
-(1, 'I also thought that Friends was a great show', '2023-04-02 13:25:00', 2, 3),
-(2, 'I thought it was ok', '2023-04-02 14:00:00', 3, 3),
-(3, 'I respect your opinion @PagieCole', '2023-04-02 14:10:00', 1, 3)
+(1, 'I also thought that Friends was a great show', '2023-04-02 13:25:00', 1, 2, 3),
+(2, 'I thought it was ok', '2023-04-02 14:00:00', 1, 3, 3),
+(3, 'I respect your opinion @PagieCole', '2023-04-02 14:10:00', 0, 1, 3)
 SET IDENTITY_INSERT [Comment] OFF;
 
 SET IDENTITY_INSERT [Reshare] ON;
@@ -174,3 +174,46 @@ VALUES
 (5, 2, null, 1),
 (6, 2, 1, null)
 SET IDENTITY_INSERT [WatchListItems] OFF;
+
+SET IDENTITY_INSERT [WatchPartyGroup] ON;
+INSERT INTO [WatchPartyGroup] (ID, GroupTitle, GroupDescription, StartDate, HostID)
+VALUES
+(1, 'Marvel marathon movie night', null, '2023-05-05 20:00:00', 1),
+(2, 'Harry Potter marathon', 'Going to watch all the Harry Potter movies in order all day', '2023-05-05 08:00:00', 5),
+(3, 'Sports movies', 'Going to be watching sports movies such as More than a Game, The Last Dance, etc', '2023-05-05 14:00:00', 9)
+SET IDENTITY_INSERT [WatchPartyGroup] OFF;
+
+SET IDENTITY_INSERT [WatchPartyGroupAssignment] ON;
+INSERT INTO [WatchPartyGroupAssignment] (ID, GroupID, WatcherID)
+VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 2, 4),
+(5, 2, 1),
+(6, 2, 5),
+(7, 2, 6),
+(8, 2, 7),
+(9, 3, 1),
+(10, 3, 8),
+(11, 3, 9),
+(12, 3, 10)
+SET IDENTITY_INSERT [WatchPartyGroupAssignment] OFF;
+
+SET IDENTITY_INSERT [NotificationType] ON;
+INSERT INTO [NotificationType] (ID, NType)
+VALUES
+(1, 'Follow Request'),
+(2, 'Group Join Request'),
+(3, 'Comment'),
+(4, 'Like'),
+(5, 'Watch Party Reminder'),
+(6, 'Misc')
+SET IDENTITY_INSERT [NotificationType] OFF;
+
+SET IDENTITY_INSERT [Notification] ON;
+INSERT INTO [Notification] (ID, NotifierID, NotifTypeID, Content, IsRead, CreatedAt)
+VALUES
+(1, 1, 5, 'Your watch party is scheduled for 4/25/13 at 6:00 pm', 0, '2023-04-22 12:00:00'),
+(2, 1, 3, 'CarsonDaniel left a comment on your post', 0, '2023-04-22 12:05:00')
+SET IDENTITY_INSERT [Notification] OFF;

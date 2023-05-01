@@ -22,6 +22,7 @@ public class PostModelValidator_Tests
             PostTitle = "My very first post!",
             PostDescription = "Enter a description",
             DatePosted = new DateTime(2023, 2, 28, 15, 0, 0),
+            IsVisible = true,
             UserId = 1,
             User = watcher
         };
@@ -323,6 +324,44 @@ public class PostModelValidator_Tests
             Assert.That(mv.Valid, Is.True);
             Assert.That(mv.ContainsFailureFor("DatePosted"), Is.False);
             Assert.That(actual, Is.Not.EqualTo(new DateTime(2022, 5, 25, 8, 25, 45)));
+        });
+    }
+
+    [Test]
+    public void Post_WithValidIsVisible_IsCorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        bool actual = post.IsVisible;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("IsVisible"), Is.False);
+            Assert.That(actual, Is.True);
+        });
+    }
+
+    [Test]
+    public void Post_WithValidIsVisible_IsIncorrect()
+    {
+        // Arrange
+        Post post = MakeValidPost();
+
+        // Act
+        ModelValidator mv = new ModelValidator(post);
+        bool actual = post.IsVisible;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("IsVisible"), Is.False);
+            Assert.That(actual, Is.Not.EqualTo(false));
         });
     }
 

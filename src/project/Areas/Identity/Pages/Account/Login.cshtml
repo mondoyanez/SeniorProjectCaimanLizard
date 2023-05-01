@@ -5,7 +5,7 @@
     ViewData["Title"] = "Log in";
 }
 
-<section class="cld-bg-light">
+<section class="bg-light-subtle login-container">
 
     <br />
     <div class="row">
@@ -36,14 +36,14 @@
                         </label>
                     </div>
                     <div>
-                        <button id="login-submit" type="submit" class="w-100 btn btn-lg cld-btn-primary text-light">Log In</button>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary bg-primary-subtle text-light-emphasis">Log In</button>
                     </div>
                     <br />
                     <h5 class="text-center">or</h5>
                     <br />
                     <div>
                         <p>
-                            <a class="w-100 btn btn-lg cld-btn-secondary text-light" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register Here</a>
+                            <a class="w-100 btn btn-lg btn-secondary bg-secondary-subtle text-light-emphasis" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register Here</a>
                         </p>
                     </div>
                 </form>

@@ -84,59 +84,59 @@ any given tv show or movie.", ProgrammingLanguage.CSharp, new string[] {
         {
 #line 9
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "UserName",
                         "Email",
                         "FirstName",
                         "LastName",
                         "Password"});
-            table3.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "TaliaK",
                         "knott@example.com",
                         "Talia",
                         "Knott",
                         "ScotIs#1"});
-            table3.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "ZaydenC",
                         "clark@example.com",
                         "Zayden",
                         "Clark",
                         "ScotIs#1"});
-            table3.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "DavilaH",
                         "hareem@example.com",
                         "Hareem",
                         "Davila",
                         "ScotIs#1"});
-            table3.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "KrzysztofP",
                         "krzysztof@example.com",
                         "Krzysztof",
                         "Ponce",
                         "ScotIs#1"});
 #line 10
- testRunner.Given("the following users exist", ((string)(null)), table3, "Given ");
+ testRunner.Given("the following users exist", ((string)(null)), table7, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "UserName",
                         "Email",
                         "FirstName",
                         "LastName",
                         "Password"});
-            table4.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "AndreC",
                         "colea@example.com",
                         "Andre",
                         "Cole",
                         "0a9dfi3.a"});
-            table4.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "JoannaV",
                         "valdezJ@example.com",
                         "Joanna",
                         "Valdez",
                         "d9u(*dsF4"});
 #line 16
- testRunner.And("the following users do not exist", ((string)(null)), table4, "And ");
+ testRunner.And("the following users do not exist", ((string)(null)), table8, "And ");
 #line hidden
         }
         
@@ -188,6 +188,7 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Existing user can navigate to create post page")]
         [NUnit.Framework.CategoryAttribute("SucessfullyAtPostPage")]
+        [NUnit.Framework.CategoryAttribute("LoggedIn")]
         [NUnit.Framework.TestCaseAttribute("Talia", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Zayden", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Hareem", "Home", null)]
@@ -195,7 +196,8 @@ this.FeatureBackground();
         public virtual void ExistingUserCanNavigateToCreatePostPage(string firstName, string page, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "SucessfullyAtPostPage"};
+                    "SucessfullyAtPostPage",
+                    "LoggedIn"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -205,7 +207,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("FirstName", firstName);
             argumentsOfScenario.Add("Page", page);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Existing user can navigate to create post page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 28
+#line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -228,16 +230,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-#line 29
+#line 30
  testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 30
+#line 31
  testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 31
+#line 32
   testRunner.And("I navigate to the \"CreatePost\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 32
+#line 33
  testRunner.Then("The page title contains \"Create Post - WatchParty\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -247,6 +249,7 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Existing user can successfully create post with valid title and description")]
         [NUnit.Framework.CategoryAttribute("SuccessfullyCreatePost")]
+        [NUnit.Framework.CategoryAttribute("LoggedIn")]
         [NUnit.Framework.TestCaseAttribute("Talia", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Zayden", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Hareem", "Home", null)]
@@ -254,7 +257,8 @@ this.FeatureBackground();
         public virtual void ExistingUserCanSuccessfullyCreatePostWithValidTitleAndDescription(string firstName, string page, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "SuccessfullyCreatePost"};
+                    "SuccessfullyCreatePost",
+                    "LoggedIn"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -264,7 +268,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("FirstName", firstName);
             argumentsOfScenario.Add("Page", page);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Existing user can successfully create post with valid title and description", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 41
+#line 43
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -287,25 +291,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-#line 42
+#line 44
  testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 43
+#line 45
  testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 44
+#line 46
   testRunner.And("I navigate to the \"CreatePost\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 45
+#line 47
   testRunner.And("I enter \"Title\" in the title input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 46
+#line 48
   testRunner.And("I enter \"Description\" in the description input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 47
+#line 49
   testRunner.And("I click the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 48
+#line 50
  testRunner.Then("The page title contains \"Feed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -315,6 +319,7 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Existing user does not enter title but enters desciption so post is not created")]
         [NUnit.Framework.CategoryAttribute("FailsCreatePost")]
+        [NUnit.Framework.CategoryAttribute("LoggedIn")]
         [NUnit.Framework.TestCaseAttribute("Talia", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Zayden", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Hareem", "Home", null)]
@@ -322,7 +327,8 @@ this.FeatureBackground();
         public virtual void ExistingUserDoesNotEnterTitleButEntersDesciptionSoPostIsNotCreated(string firstName, string page, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "FailsCreatePost"};
+                    "FailsCreatePost",
+                    "LoggedIn"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -332,7 +338,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("FirstName", firstName);
             argumentsOfScenario.Add("Page", page);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Existing user does not enter title but enters desciption so post is not created", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 57
+#line 60
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -355,25 +361,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-#line 58
+#line 61
  testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 59
+#line 62
  testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 60
+#line 63
   testRunner.And("I navigate to the \"CreatePost\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 61
+#line 64
   testRunner.And("I leave the title input blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 62
+#line 65
   testRunner.And("I enter \"Description\" in the description input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 63
+#line 66
   testRunner.And("I click the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 64
+#line 67
  testRunner.Then("The page title contains \"Create Post - WatchParty\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -384,6 +390,7 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("Existing user can successfully create post with valid title and but missing descr" +
             "iption")]
         [NUnit.Framework.CategoryAttribute("SuccessfullyCreatePostMissingDescription")]
+        [NUnit.Framework.CategoryAttribute("LoggedIn")]
         [NUnit.Framework.TestCaseAttribute("Talia", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Zayden", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Hareem", "Home", null)]
@@ -391,7 +398,8 @@ this.FeatureBackground();
         public virtual void ExistingUserCanSuccessfullyCreatePostWithValidTitleAndButMissingDescription(string firstName, string page, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "SuccessfullyCreatePostMissingDescription"};
+                    "SuccessfullyCreatePostMissingDescription",
+                    "LoggedIn"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -402,7 +410,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("Page", page);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Existing user can successfully create post with valid title and but missing descr" +
                     "iption", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 73
+#line 77
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -425,25 +433,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-#line 74
+#line 78
  testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 75
+#line 79
  testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 76
+#line 80
   testRunner.And("I navigate to the \"CreatePost\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 77
+#line 81
   testRunner.And("I enter \"Title\" in the title input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 78
+#line 82
   testRunner.And("I leave the desciption input blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 79
+#line 83
   testRunner.And("I click the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 80
+#line 84
  testRunner.Then("The page title contains \"Feed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -453,6 +461,7 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Existing user does not enter title or description")]
         [NUnit.Framework.CategoryAttribute("FailsCreatePost")]
+        [NUnit.Framework.CategoryAttribute("LoggedIn")]
         [NUnit.Framework.TestCaseAttribute("Talia", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Zayden", "Home", null)]
         [NUnit.Framework.TestCaseAttribute("Hareem", "Home", null)]
@@ -460,7 +469,8 @@ this.FeatureBackground();
         public virtual void ExistingUserDoesNotEnterTitleOrDescription(string firstName, string page, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "FailsCreatePost"};
+                    "FailsCreatePost",
+                    "LoggedIn"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -470,7 +480,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("FirstName", firstName);
             argumentsOfScenario.Add("Page", page);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Existing user does not enter title or description", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 89
+#line 94
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -493,25 +503,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-#line 90
+#line 95
  testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 91
+#line 96
  testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 92
+#line 97
   testRunner.And("I navigate to the \"CreatePost\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 93
+#line 98
   testRunner.And("I leave the title input blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 94
+#line 99
   testRunner.And("I leave the desciption input blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 95
+#line 100
   testRunner.And("I click the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 96
+#line 101
  testRunner.Then("The page title contains \"Create Post - WatchParty\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

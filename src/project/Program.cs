@@ -56,6 +56,9 @@ public class Program
         builder.Services.AddScoped<IShowRepository, ShowRepository>();
         builder.Services.AddScoped<IMovieRepository, MovieRepository>();
         builder.Services.AddScoped<IWatchListItemRepository, WatchListItemRepository>();
+        builder.Services.AddScoped<IWatchPartyGroupRepository, WatchPartyGroupRepository>();
+        builder.Services.AddScoped<IWatchPartyGroupAssignmentRepository, WatchPartyGroupAssignmentRepository>();
+        builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 
 

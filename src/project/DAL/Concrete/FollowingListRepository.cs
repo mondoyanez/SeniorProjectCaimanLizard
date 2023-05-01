@@ -42,4 +42,21 @@ public class FollowingListRepository: Repository<FollowingList>, IFollowingListR
             throw new Exception("Invalid information was given while trying to update database");
         }
     }
+
+    public void RemoveFollower(FollowingList follower)
+    {
+        try
+        {
+            Delete(follower);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
+    }
+
+    public FollowingList? GetFollowerById(int userId, int followerId)
+    {
+        return GetAll().FirstOrDefault(f => f.UserId == userId && f.FollowingId == followerId);
+    }
 }

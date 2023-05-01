@@ -1,12 +1,12 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model ProfileVM
+@using Microsoft.AspNetCore.Identity
+@model WatchParty.ViewModels.ProfileVM
 @{
     ViewData["Title"] = "Profile Page";
 }
 
-<section class="cld-bg-light">
+<section class="bg-light-subtle profile-container">
     <br />
     <br />
 
@@ -15,6 +15,12 @@
         <div class="row">
             <div class="col-md-3">
                 <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="120" height="96" class="center">
+            </div>
+            <div class="col-md-1">
+                @if (Model.isCurrentUser)
+                {
+                    <a class="btn cld-btn-secondary btn-sm" asp-controller="WatchPartyGroup" asp-action="Create">Create Watch Party</a>
+                }
             </div>
             <div class="col-md-4">
                 <div class="card">
@@ -65,6 +71,38 @@
                 }
             </div>
         </div>
+        
+        <div class="row text-center my-5">
+            <h2>Future Watch Parties</h2>
+        </div>
+        
+        <div class="row profile-watch-parties">
+            @if (Model.Groups.Any())
+            {
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Start Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var group in Model.Groups)
+                    {
+                        <tr>
+                            <td><a asp-controller="WatchPartyGroup" asp-action="Details" asp-route-groupId="@group.Id">@group.GroupTitle</a></td>
+                            <td>@group.StartDate</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h4>No watch parties currently</h4>
+            }
+        </div>
+        
     }
     else
     {

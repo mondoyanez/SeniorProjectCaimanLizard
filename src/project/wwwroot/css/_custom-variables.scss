@@ -1,0 +1,483 @@
+﻿// overriding the default bootstrap theme colors and colors map with our own
+$blue: #84AFE6;
+$indigo: #6610f2;
+$purple: #5D4A66;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #D5A021;
+$green: #198754;
+$teal: #20c997;
+$cyan: #0dcaf0;
+
+$primary: $purple;
+$secondary: $blue;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: #EDE7D9;
+$dark: #212529;
+
+// background colors
+$primary-bg-subtle: $primary;
+$secondary-bg-subtle: $secondary;
+$success-bg-subtle: $green;
+$info-bg-subtle: $cyan;
+$warning-bg-subtle: $yellow;
+$danger-bg-subtle: $red;
+$light-bg-subtle: $light;
+$dark-bg-subtle: $dark;
+
+$primary-bg-subtle-dark: #372549;
+$secondary-bg-subtle-dark: #725AC1;
+//$success-bg-subtle-dark: $green-900;
+//$info-bg-subtle-dark: $cyan-900;
+$warning-bg-subtle-dark: #7A542E;
+//$danger-bg-subtle-dark: $red-900;
+//$light-bg-subtle-dark: $gray-800;
+$dark-bg-subtle-dark: #1A1423;
+
+// text colors
+$primary-text: $primary;
+$secondary-text: $secondary;
+$success-text: $success;
+$info-text: $info;
+$warning-text: $warning;
+$danger-text: $danger;
+$light-text: #fff;
+$dark-text: #000;
+
+// button hover and active colors
+@import "../lib/bootstrap/scss/bootstrap.scss";
+
+body {
+    overflow-x: hidden;
+}
+
+// insert new custom cld-specific css below this line
+/* css-based multiline text truncation based on: 
+    https://css-tricks.com/multi-line-truncation-with-pure-css/ */
+.truncate-overflow::before {
+    position: absolute;
+    content: "...";
+    /* tempting... but shows when lines == content */
+    /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+    /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+    bottom: 0;
+    right: 0;
+}
+
+.truncate-overflow::after {
+    content: "";
+    position: absolute;
+    /*
+  inset-inline-end: 0;
+  */
+    right: 0;
+    /* missing bottom on purpose*/
+    width: 1rem;
+    height: 1rem;
+    background: white;
+}
+
+.cld-nav {
+    transition: 0.5s ease-in;
+}
+
+.cld-description {
+    background-image: linear-gradient( $light, $primary-bg-subtle);
+}
+
+.cld-btn-light {
+    background: $light;
+}
+
+.cld-btn-primary {
+    background: $primary;
+}
+
+.cld-btn-primary:hover {
+    background-color: #4a3b52;
+}
+
+.cld-text-light {
+    background: $light;
+}
+
+.cld-btn-secondary {
+    background: $secondary;
+}
+
+.cld-btn-secondary:hover {
+    background-color: #76a8e8;
+}
+
+.form-control, .form-check-input, textarea {
+    background-color: rgba(128, 128, 128, 0.1);
+    border-color: $secondary;
+    color: $dark-text;
+}
+
+.form-control:hover, .form-check-input:hover {
+    box-shadow: 0 0 4px rgba(128, 128, 128, 0.1);
+    border-color: $secondary;
+}
+
+.form-control:focus {
+    background-color: rgba(0, 0, 0, 0.2);
+    outline-color: $secondary;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:focus {
+    outline-color: $secondary;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.form-check-input:checked {
+    background-color: $secondary;
+    outline-color: $secondary;
+    border-color: $secondary;
+}
+
+.shake-img:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%
+}
+
+.profile-card {
+    background-color: rgba(125, 125, 125, 0.2);
+}
+
+.profile-container {
+    padding-bottom: 21%;
+}
+
+.all-comments-date {
+    color: $light;
+    margin-left: 45%;
+}
+
+.all-comments-text {
+    color: $light;
+}
+
+.confirm-email-container {
+    padding-bottom: 206px;
+}
+
+.comment {
+    width: 50%;
+    border: 1px ridge $yellow;
+    border-radius: 5px;
+    margin-bottom: 5%;
+    margin-left: 25%
+}
+
+.comment-text {
+    color: $light;
+}
+
+.comment-date {
+    color: $light;
+    margin-left: 85%;
+}
+
+.comment-link {
+    margin-left: 40%;
+    color: $yellow;
+}
+
+.comment-username {
+    color: $secondary;
+}
+
+#comment-entered {
+    margin-left: -20%;
+}
+
+#comment-submit {
+    color: $purple;
+    background-color: $yellow;
+    border-color: $yellow;
+    margin-left: 125%;
+}
+
+.comment-title {
+    margin-left: 45%;
+}
+
+.dropdown-section {
+    margin-top: 15px;
+    margin-left: 19%;
+}
+
+.dropdown-section-comment {
+    margin-top: -2%;
+    margin-left: 75%;
+}
+
+.login-container {
+    padding-bottom: 240px;
+}
+
+.post {
+    width: 50%;
+    border: 1px ridge $yellow;
+    border-radius: 5px;
+    margin-top: -2%;
+    margin-bottom: 5%;
+    margin-left: 25%
+}
+
+.register-confirmation-container {
+    padding-bottom: 206px;
+}
+
+.register-container {
+    padding-bottom: 140px;
+}
+
+.create-post-link {
+    margin-top: 1%;
+    margin-left: 90%;
+}
+
+.create-post-image {
+    width: 50px;
+    height: 50px;
+}
+
+.post-title, .post-text {
+    color: $light;
+}
+
+.post-date {
+    color: $light;
+    margin-right: 50%;
+}
+
+.post-username {
+    color: $secondary;
+    margin-left: 50%;
+}
+
+.post-username-link {
+    text-decoration: none;
+}
+
+.empty-page {
+    padding-bottom: 40%;
+}
+
+.enter-comment-section {
+    margin-left: 24%;
+    margin-bottom: 1%;
+}
+
+.profile-watch-parties {
+    margin-left: 40%;
+    width: 25%;
+}
+
+.watch-party-container {
+    padding-bottom: 197px;
+}
+
+.watch-party-form {
+    margin-top: 2%;
+}
+
+.watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
+    width: 47%;
+}
+
+.watch-party-title-label {
+    margin-left: 79%;
+}
+
+.watch-party-description-label, .watch-party-date-label {
+    margin-left: 70%;
+}
+
+.watch-party-btn {
+    width: 5%;
+    margin-top: 2%;
+    margin-left: 60%;
+}
+
+.watch-party-details-header {
+    margin-left: 15%;
+}
+
+.watch-party-details-invite {
+    margin-top: 5%;
+    margin-left: 70%
+}
+
+.watch-party-details-invite-btn {
+    margin-left: 35%;
+    margin-top: 2%;
+}
+
+.watch-party-table {
+    margin-top: 5%;
+}
+
+.watch-party-title-input-validation {
+    margin-left: -87%;
+}
+
+.watch-party-table-container {
+    padding-top: 3%;
+    padding-bottom: 26%;
+}
+
+.watchlist-container {
+    padding-bottom: 34%;
+}
+
+.create-post-submit-btn {
+    margin-left: 88%;
+    margin-top: 17%;
+    margin-bottom: 5%;
+}
+
+.carousel {
+    overflow: hidden;
+    padding-bottom: 5rem;
+}
+
+.carousel-caption {
+    top: 100%;
+}
+
+.carousel-inner {
+    overflow: visible;
+}
+
+.carousel-control-next, .carousel-control-prev, .carousel-indicators {
+    bottom: 5rem;
+}
+
+.carousel-hidden-text {
+    position: absolute;
+    top: 0;
+    left: 18%;
+    width: 64%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+}
+
+.carousel-item > img:hover {
+    transition: filter 0.3s ease-out;
+    filter: brightness(30%);
+}
+
+.carousel-item:hover .carousel-hidden-text {
+    opacity: 1;
+}
+
+.user-search-error-rq {
+    margin-left: 8%;
+    color: red;
+    font-size: 16px;
+}
+
+.user-search-table {
+    margin-top: 5%;
+    margin-left: 15%;
+    width: 70%
+}
+
+a.user-profile-link:link, a.user-profile-link:visited {
+    color: $purple;
+    text-decoration: none;
+}
+
+a.user-profile-link:active {
+    color: $yellow;
+    text-decoration: none;
+}
+
+a.user-profile-link:hover {
+    color: $blue;
+    text-decoration: none;
+}
+
+#user-profile-btn-follow {
+    width: 30%;
+    height: 30%;
+    background-color: $purple;
+}
+
+#user-profile-btn-follow:hover {
+    width: 30%;
+    height: 30%;
+    background-color: $yellow;
+}
+
+#user-profile-following-icon {
+    width: 7%;
+}

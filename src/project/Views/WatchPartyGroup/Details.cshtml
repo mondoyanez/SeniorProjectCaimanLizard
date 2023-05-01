@@ -1,0 +1,110 @@
+﻿@model WatchParty.ViewModels.PartyGroupVM
+
+@{
+    ViewData["Title"] = "Group Details";
+}
+@if (Model.Group != null)
+{
+    <div class="row text-center bg-light-subtle watch-party-table-container">
+        <div class="row">
+            <div class="col-8 watch-party-details-header">
+                <h1>Group Details</h1>
+            </div>
+
+            @if (User?.Identity?.Name == Model.Group.Host.Username)
+            {
+                <div class="col-1">
+                    <div class="dropdown">
+                        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="~/img/three-dots-vertical.svg" alt="Dropdown Menu"/>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUsers">Invite Users</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <table class="table table-hover watch-party-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Participants</th>
+                    <th>Host</th>
+                    <th>Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model?.Group?.GroupTitle</td>
+                    <td>@Model?.Group?.GroupDescription</td>
+                    <td id="watch-group-users">
+                        @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
+                        {
+                            <p>@person.Watcher.Username</p>
+                        }
+                    </td>
+                    <td>@Model?.Group?.Host.Username</td>
+                    <td>@Model?.Group?.StartDate</td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="hidden" id="watch-group-id" value="@Model?.Group?.Id" />
+        <input type="hidden" id="watch-group-total-users" value="@Model?.Watchers?.Count" />
+        <input type="hidden" id="watch-group-current-users" value="@Model?.Group?.WatchPartyGroupAssignments.Count" />
+    </div>
+
+    <div class="modal fade" id="inviteUsers" tabindex="-1" aria-labelledby="inviteUsersLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inviteUsersLabel">Invite Users</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @foreach (var user in Model?.Watchers)
+                    {
+                        bool isInvited = false;
+
+                        @foreach (var invitee in Model.Group.WatchPartyGroupAssignments)
+                        {
+                            if (user.AspNetIdentityId == invitee.Watcher.AspNetIdentityId)
+                                isInvited = true;
+                        }
+
+                        if (!isInvited && user.Username != User?.Identity?.Name)
+                        {
+                            <div class="col-2 watch-party-details-invite-btn">
+                                <button type="button" class="btn btn-primary add-user" id="invite-user-@user.Username" value="@user.Id">@user.Username</button>
+                            </div>
+                        }
+                    }
+                    @if (Model.Watchers.Count == Model.Group.WatchPartyGroupAssignments.Count)
+                    {
+                        <div class="col-4">
+                            <p>No users to add</p>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row text-center bg-light-subtle empty-page">
+        <h1 class="mt-5" style="color: red">Group could not be found</h1>
+    </div>
+}
+
+@section Scripts
+{
+     <script src="~/js/watchParty.js"></script>                       
+}
