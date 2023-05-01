@@ -100,21 +100,21 @@ public class PostController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create([Bind("PostTitle, PostDescription")] Post post)
     {
+        ModelState.Clear();
+
         post.DatePosted = DateTime.Now;
         post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
         post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
         post.IsVisible = true;
 
-        try
+        TryValidateModel(post);
+
+        if (ModelState.IsValid)
         {
             _postRepository.AddPost(post);
+            return RedirectToAction("Index");
         }
-        catch (DbUpdateConcurrencyException e)
-        {
-            ViewBag.Message = "A concurrency error occurred while trying to create the item.  Please try again.";
-            return View(post);
-        }
-
-        return RedirectToAction("Index");
+        
+        return View();
     }
 }
