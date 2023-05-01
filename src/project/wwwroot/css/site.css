@@ -11752,7 +11752,7 @@ body {
 }
 
 .profile-container {
-  padding-bottom: 17%;
+  padding-bottom: 21%;
 }
 
 .all-comments-date {
@@ -11762,6 +11762,10 @@ body {
 
 .all-comments-text {
   color: #EDE7D9;
+}
+
+.confirm-email-container {
+  padding-bottom: 206px;
 }
 
 .comment {
@@ -11815,6 +11819,10 @@ body {
   margin-left: 75%;
 }
 
+.login-container {
+  padding-bottom: 240px;
+}
+
 .post {
   width: 50%;
   border: 1px ridge #D5A021;
@@ -11822,6 +11830,14 @@ body {
   margin-top: -2%;
   margin-bottom: 5%;
   margin-left: 25%;
+}
+
+.register-confirmation-container {
+  padding-bottom: 206px;
+}
+
+.register-container {
+  padding-bottom: 140px;
 }
 
 .create-post-link {
