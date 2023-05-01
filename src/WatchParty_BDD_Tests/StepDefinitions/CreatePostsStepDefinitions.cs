@@ -29,6 +29,7 @@ public class CreatePostsStepDefinitions
     private readonly LoginPageObject _loginPage;
     private readonly HomePageObject _homePage;
     private readonly CreatePostPageObject _createPostPage;
+    private readonly NotificationPageObject _notificationPage;
 
     // So we can get user-secrets
     private IConfigurationRoot Configuration { get; }
@@ -39,6 +40,7 @@ public class CreatePostsStepDefinitions
         _homePage = new HomePageObject(browserDriver.Current);
         _createPostPage = new CreatePostPageObject(browserDriver.Current);
         _scenarioContext = context;
+        _notificationPage = new NotificationPageObject(browserDriver.Current);
 
         // we need to keep the admin password secret
         IConfigurationBuilder builder = new ConfigurationBuilder().AddUserSecrets<CreatePostsStepDefinitions>();
