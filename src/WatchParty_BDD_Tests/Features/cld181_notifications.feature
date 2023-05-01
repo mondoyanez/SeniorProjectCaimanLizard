@@ -48,14 +48,16 @@ Scenario: An existing user can navigate to the notification page
 	| Zayden    | Home |
 
 
-@LoggedIn
-Scenario: A user with notifications can delete a notification
-	Given I am a user with first name '<FirstName>'
-	When I login
-	And I click on the notification bell
-	And I click delete for the first notification
-	Then the notification is deleted
-	Examples:
-	| FirstName | Page |
-	| Talia     | Home |
+#Need to automatically add notifications to a user 
+
+#@LoggedIn
+#Scenario: A user with notifications can delete a notification
+#	Given I am a user with first name '<FirstName>'
+#	When I login
+#	And I click on the notification bell
+#	And I click delete for the first notification
+#	Then the notification is deleted
+#	Examples:
+#	| FirstName | Page |
+#	| Talia     | Home |
 

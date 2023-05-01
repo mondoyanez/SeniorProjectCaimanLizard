@@ -37,6 +37,11 @@ public class WatcherRepository : Repository<Watcher>, IWatcherRepository
         return watcher;
     }
 
+    public List<Watcher> FindAllWatchers()
+    {
+        return GetAll().ToList();
+    }
+
     public List<WatcherDTO> FindMatchingUsers(string username)
     {
         if (username == null)

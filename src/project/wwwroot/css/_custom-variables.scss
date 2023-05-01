@@ -51,6 +51,9 @@ $dark-text: #000;
 // button hover and active colors
 @import "../lib/bootstrap/scss/bootstrap.scss";
 
+body {
+    overflow-x: hidden;
+}
 
 // insert new custom cld-specific css below this line
 /* css-based multiline text truncation based on: 
@@ -203,6 +206,9 @@ $dark-text: #000;
     background-color: rgba(125, 125, 125, 0.2);
 }
 
+.profile-container {
+    padding-bottom: 21%;
+}
 
 .all-comments-date {
     color: $light;
@@ -211,6 +217,10 @@ $dark-text: #000;
 
 .all-comments-text {
     color: $light;
+}
+
+.confirm-email-container {
+    padding-bottom: 206px;
 }
 
 .comment {
@@ -264,6 +274,10 @@ $dark-text: #000;
     margin-left: 75%;
 }
 
+.login-container {
+    padding-bottom: 240px;
+}
+
 .post {
     width: 50%;
     border: 1px ridge $yellow;
@@ -271,6 +285,14 @@ $dark-text: #000;
     margin-top: -2%;
     margin-bottom: 5%;
     margin-left: 25%
+}
+
+.register-confirmation-container {
+    padding-bottom: 206px;
+}
+
+.register-container {
+    padding-bottom: 140px;
 }
 
 .create-post-link {
@@ -308,6 +330,68 @@ $dark-text: #000;
 .enter-comment-section {
     margin-left: 24%;
     margin-bottom: 1%;
+}
+
+.profile-watch-parties {
+    margin-left: 40%;
+    width: 25%;
+}
+
+.watch-party-container {
+    padding-bottom: 197px;
+}
+
+.watch-party-form {
+    margin-top: 2%;
+}
+
+.watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
+    width: 47%;
+}
+
+.watch-party-title-label {
+    margin-left: 79%;
+}
+
+.watch-party-description-label, .watch-party-date-label {
+    margin-left: 70%;
+}
+
+.watch-party-btn {
+    width: 5%;
+    margin-top: 2%;
+    margin-left: 60%;
+}
+
+.watch-party-details-header {
+    margin-left: 15%;
+}
+
+.watch-party-details-invite {
+    margin-top: 5%;
+    margin-left: 70%
+}
+
+.watch-party-details-invite-btn {
+    margin-left: 35%;
+    margin-top: 2%;
+}
+
+.watch-party-table {
+    margin-top: 5%;
+}
+
+.watch-party-title-input-validation {
+    margin-left: -87%;
+}
+
+.watch-party-table-container {
+    padding-top: 3%;
+    padding-bottom: 26%;
+}
+
+.watchlist-container {
+    padding-bottom: 34%;
 }
 
 .create-post-submit-btn {

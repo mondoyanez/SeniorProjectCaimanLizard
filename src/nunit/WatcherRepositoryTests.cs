@@ -132,5 +132,64 @@ namespace WatchPartyTest
             // Assert
             Assert.That(actual?.AspNetIdentityId, Is.Null);
         }
+
+        [Test]
+        public void FindAllWatchers_WithThreeExistingUsers_ShouldReturnThreeUsers()
+        {
+            // Arrange
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            // Act
+            List<Watcher>? actual = watcherRepository.FindAllWatchers();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.Count, Is.EqualTo(3));
+
+                Assert.That(actual.First().Id, Is.EqualTo(1));
+                Assert.That(actual.First().AspNetIdentityId, Is.EqualTo("one"));
+                Assert.That(actual.First().Username, Is.EqualTo("SandraHart"));
+                Assert.That(actual.First().FirstName, Is.EqualTo("Sandra"));
+                Assert.That(actual.First().LastName, Is.EqualTo("Hart"));
+                Assert.That(actual.First().Email, Is.Null);
+                Assert.That(actual.First().Bio, Is.Null);
+                Assert.That(actual.First().WatchListPrivacy, Is.False);
+
+                Assert.That(actual.Last().Id, Is.EqualTo(3));
+                Assert.That(actual.Last().AspNetIdentityId, Is.EqualTo("three"));
+                Assert.That(actual.Last().Username, Is.Null);
+                Assert.That(actual.Last().FirstName, Is.Null);
+                Assert.That(actual.Last().LastName, Is.Null);
+                Assert.That(actual.Last().Email, Is.Null);
+                Assert.That(actual.Last().Bio, Is.Null);
+                Assert.That(actual.Last().WatchListPrivacy, Is.False);
+            });
+        }
+
+        [Test]
+        public void FindAllWatchers_WithNoUsers_ReturnsZero()
+        {
+            // Arrange
+            _watchers.Clear();
+            _mockContext = new Mock<WatchPartyDbContext>();
+            _dbSet = MockHelpers.GetMockDbSet(_watchers.AsQueryable());
+            _mockContext.Setup(ctx => ctx.Watchers).Returns(_dbSet.Object);
+            _mockContext.Setup(ctx => ctx.Set<Watcher>()).Returns(_dbSet.Object);
+            IWatcherRepository watcherRepository = new WatcherRepository(_mockContext.Object);
+
+            // Act
+            List<Watcher>? actual = watcherRepository.FindAllWatchers();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual, Is.Empty);
+                Assert.That(actual.Count, Is.EqualTo(0));
+            });
+
+        }
     }
 }
