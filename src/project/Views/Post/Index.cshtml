@@ -105,7 +105,7 @@
                         <div class="row">
                             <h4 class="card-title post-title mb-2 text-center">Comments</h4>
                         </div>
-                        @if (post.Comments.Count > 0)
+                        @if (post.Comments.Any(c => c.IsVisible))
                         {
                             int count = 1;
 
