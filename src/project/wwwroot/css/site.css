@@ -172,6 +172,9 @@ body {
     background-color: #f2efe9;
 }
 
+.profile-container {
+    padding-bottom: 21%;
+}
 
 .all-comments-date {
     color: var(--cld-off-white);
