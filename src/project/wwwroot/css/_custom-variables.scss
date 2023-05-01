@@ -51,6 +51,9 @@ $dark-text: #000;
 // button hover and active colors
 @import "../lib/bootstrap/scss/bootstrap.scss";
 
+body {
+    overflow-x: hidden;
+}
 
 // insert new custom cld-specific css below this line
 /* css-based multiline text truncation based on: 
@@ -203,6 +206,9 @@ $dark-text: #000;
     background-color: rgba(125, 125, 125, 0.2);
 }
 
+.profile-container {
+    padding-bottom: 17%;
+}
 
 .all-comments-date {
     color: $light;

@@ -11608,6 +11608,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+body {
+  overflow-x: hidden;
+}
+
 /* css-based multiline text truncation based on: 
     https://css-tricks.com/multi-line-truncation-with-pure-css/ */
 .truncate-overflow::before {
@@ -11745,6 +11749,10 @@ textarea.form-control-lg {
 
 .profile-card {
   background-color: rgba(125, 125, 125, 0.2);
+}
+
+.profile-container {
+  padding-bottom: 17%;
 }
 
 .all-comments-date {
