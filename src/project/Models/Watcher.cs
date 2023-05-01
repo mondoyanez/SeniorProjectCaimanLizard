@@ -55,4 +55,10 @@ public partial class Watcher
 
     [InverseProperty("User")]
     public virtual ICollection<WatchList> WatchLists { get; } = new List<WatchList>();
+
+    [InverseProperty("Watcher")]
+    public virtual ICollection<WatchPartyGroupAssignment> WatchPartyGroupAssignments { get; } = new List<WatchPartyGroupAssignment>();
+
+    [InverseProperty("Host")]
+    public virtual ICollection<WatchPartyGroup> WatchPartyGroups { get; } = new List<WatchPartyGroup>();
 }
