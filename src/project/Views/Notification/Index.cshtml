@@ -4,7 +4,7 @@
 @model WatchParty.ViewModels.NotificationVM;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Notifications";
 }
 
 <section class="cld-bg-light" style="text-align:center">
@@ -16,7 +16,7 @@
     @if (Model.notifications.Count() == 0)
     {
         <br />
-        <h4>No Notifications</h4>
+        <h4 id="no-notifications">No Notifications</h4>
         <br />
         <br />
     }
@@ -51,7 +51,7 @@
                         <th>@notification.CreatedAt</th>
                         <th>@notification.Content</th>
                         <th>
-                            <button class="btn btn-danger btn-sm delete-notification" data-notif-id="@notification.Id">Delete</button>
+                            <button class="btn btn-danger btn-sm delete-notification" id="delete-notification" data-notif-id="@notification.Id">Delete</button>
                         </th>
                     </tr>
                 }
