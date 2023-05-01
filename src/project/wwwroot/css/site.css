@@ -6866,9 +6866,6 @@ textarea.form-control-lg {
 }
 .link-light:hover, .link-light:focus {
   color: #f1ece1 !important;
-body {
-    overflow-x: hidden;
-    margin-bottom: 0;
 }
 
 .link-dark {
@@ -11750,10 +11747,6 @@ body {
   background-color: rgba(125, 125, 125, 0.2);
 }
 
-.profile-container {
-    padding-bottom: 21%;
-}
-
 .all-comments-date {
   color: #EDE7D9;
   margin-left: 45%;
@@ -11851,68 +11844,6 @@ body {
   text-decoration: none;
 }
 
-.profile-watch-parties {
-    margin-left: 40%;
-    width: 25%;
-}
-
-.watch-party-container {
-    padding-bottom: 197px;
-}
-
-.watch-party-form {
-    margin-top: 2%;
-}
-
-.watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
-    width: 47%;
-}
-
-.watch-party-title-label {
-    margin-left: 79%;
-}
-
-.watch-party-description-label, .watch-party-date-label {
-    margin-left: 70%;
-}
-
-.watch-party-btn {
-    width: 5%;
-    margin-top: 2%;
-    margin-left: 60%;
-}
-
-.watch-party-details-header {
-    margin-left: 15%;
-}
-
-.watch-party-details-invite {
-    margin-top: 5%;
-    margin-left: 70%
-}
-
-.watch-party-details-invite-btn {
-    margin-left: 35%;
-    margin-top: 2%;
-}
-
-.watch-party-table {
-    margin-top: 5%;
-}
-
-.watch-party-title-input-validation {
-    margin-left: -87%;
-}
-
-.watch-party-table-container {
-    padding-top: 3%;
-    padding-bottom: 26%;
-}
-
-.watchlist-container {
-    padding-bottom: 34%;
-}
-
 .empty-page {
   padding-bottom: 40%;
 }
@@ -11920,6 +11851,68 @@ body {
 .enter-comment-section {
   margin-left: 24%;
   margin-bottom: 1%;
+}
+
+.profile-watch-parties {
+  margin-left: 40%;
+  width: 25%;
+}
+
+.watch-party-container {
+  padding-bottom: 197px;
+}
+
+.watch-party-form {
+  margin-top: 2%;
+}
+
+.watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
+  width: 47%;
+}
+
+.watch-party-title-label {
+  margin-left: 79%;
+}
+
+.watch-party-description-label, .watch-party-date-label {
+  margin-left: 70%;
+}
+
+.watch-party-btn {
+  width: 5%;
+  margin-top: 2%;
+  margin-left: 60%;
+}
+
+.watch-party-details-header {
+  margin-left: 15%;
+}
+
+.watch-party-details-invite {
+  margin-top: 5%;
+  margin-left: 70%;
+}
+
+.watch-party-details-invite-btn {
+  margin-left: 35%;
+  margin-top: 2%;
+}
+
+.watch-party-table {
+  margin-top: 5%;
+}
+
+.watch-party-title-input-validation {
+  margin-left: -87%;
+}
+
+.watch-party-table-container {
+  padding-top: 3%;
+  padding-bottom: 26%;
+}
+
+.watchlist-container {
+  padding-bottom: 34%;
 }
 
 .create-post-submit-btn {
