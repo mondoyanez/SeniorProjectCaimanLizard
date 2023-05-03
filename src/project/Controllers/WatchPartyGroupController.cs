@@ -41,7 +41,6 @@ public class WatchPartyGroupController : Controller
             throw new ArgumentException(nameof(watcher));
 
         newGroup.HostId = watcher.Id;
-        newGroup.Host = watcher;
 
         TryValidateModel(newGroup);
 

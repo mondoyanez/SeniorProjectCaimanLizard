@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WatchParty.Models;
 
@@ -27,6 +25,7 @@ public partial class WatchPartyGroup
 
     [ForeignKey("HostId")]
     [InverseProperty("WatchPartyGroups")]
+    [ValidateNever]
     public virtual Watcher Host { get; set; } = null!;
 
     [InverseProperty("Group")]
