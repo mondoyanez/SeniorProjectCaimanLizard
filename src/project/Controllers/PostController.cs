@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Services.Abstract;
@@ -104,7 +103,6 @@ public class PostController : Controller
 
         post.DatePosted = DateTime.Now;
         post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
-        post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
         post.IsVisible = true;
 
         TryValidateModel(post);

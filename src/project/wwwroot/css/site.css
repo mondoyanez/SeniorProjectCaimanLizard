@@ -11755,6 +11755,10 @@ body {
   padding-bottom: 21%;
 }
 
+.all-comments-container {
+  padding-bottom: 22%;
+}
+
 .all-comments-date {
   color: #EDE7D9;
   margin-left: 45%;
@@ -11807,6 +11811,10 @@ body {
 
 .comment-title {
   margin-left: 45%;
+}
+
+.comment-title-req {
+  margin-left: 33%;
 }
 
 .dropdown-section {

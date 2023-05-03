@@ -77,7 +77,7 @@
         </div>
         
         <div class="row profile-watch-parties">
-            @if (Model.Groups.Any())
+            @if (Model.Groups != null && Model.Groups.Any())
             {
                 <table class="table table-hover">
                     <thead>
@@ -120,12 +120,7 @@
                 <div class="modal-body">
                     <form asp-action="Profile" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Watcher.Id" />
-                        <input type="hidden" asp-for="Watcher.AspNetIdentityId" />
                         <input type="hidden" asp-for="Watcher.Username" />
-                        <input type="hidden" asp-for="Watcher.Email" />
-                        <input type="hidden" asp-for="Following.Count" />
-                        <input type="hidden" asp-for="Followers.Count" />
                         <div class="form-group">
                             <label asp-for="Watcher.FirstName" class="control-label">First Name</label>
                             <input asp-for="Watcher.FirstName" class="form-control" style="" />
@@ -157,7 +152,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" style="outline:none" data-bs-dismiss="modal">Cancel</button>
                             @*<button type="button" class="btn btn-outline-secondary">Update</button>*@
-                            <input type="submit" value="Update" class="btn cld-outline-secondary" />
+                            <input type="submit" value="Update" class="btn cld-btn-secondary" />
                         </div>
                     </form>
                 </div>

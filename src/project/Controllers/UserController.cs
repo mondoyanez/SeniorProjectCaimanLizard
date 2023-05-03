@@ -1,10 +1,6 @@
-﻿using System.Diagnostics;
-using Azure.Identity;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchParty.Areas.Identity.Data;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.ViewModels;
@@ -34,7 +30,7 @@ public class UserController : Controller
 
     // GET: user/ {username}
     [Authorize]
-    public async Task<ActionResult<Watcher>> Profile(string username)
+    public IActionResult Profile(string username)
     {
         if (_watcherRepository == null)
         {
@@ -70,7 +66,7 @@ public class UserController : Controller
 
         vm.isFollowing = watcher.Id != loggedInUser?.Id ? _followingListRepository.IsFollowing(loggedInUser.Id, watcher.Id) : null;
 
-        var currentUser = await _userManager.GetUserAsync(User);
+        var currentUser = _userManager.GetUserAsync(User).Result;
         vm.isCurrentUser = _watcherRepository.IsCurrentUser(username, currentUser);
 
         vm.Groups = watchPartyGroups;
@@ -114,27 +110,28 @@ public class UserController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ProfileAsync([Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio,WatchListPrivacy")] Watcher watcher)
+    public IActionResult ProfileAsync([Bind("Username, FirstName, LastName, Bio, WatchListPrivacy")] Watcher watcher)
     {
-        ModelState.ClearValidationState("watcher.AspNetIdentityId");
-        ModelState.ClearValidationState("watcher.Id");
-        //if (ModelState.IsValid)
-        //{
-        //}
-        _watcherRepository.AddOrUpdate(watcher);
+        ModelState.Clear();
 
-        Watcher? loggedInUser = _watcherRepository.FindByUsername(User.Identity.Name);
+        Watcher? updatedWatcher = _watcherRepository.FindByUsername(watcher.Username);
 
-        ProfileVM vm = new ProfileVM();
-        vm.Watcher = watcher;
+        if (updatedWatcher == null)
+            throw new NullReferenceException(nameof(updatedWatcher));
+        
+        updatedWatcher.Username = watcher.Username;
+        updatedWatcher.FirstName = watcher.FirstName;
+        updatedWatcher.LastName = watcher.LastName;
+        updatedWatcher.Bio = watcher.Bio;
+        updatedWatcher.WatchListPrivacy = watcher.WatchListPrivacy;
 
-        var currentUser = await _userManager.GetUserAsync(User);
-        vm.isCurrentUser = _watcherRepository.IsCurrentUser(watcher.Username, currentUser);
-        vm.Followers = _followingListRepository.GetFollowerList(watcher.Id);
-        vm.Following = _followingListRepository.GetFollowingList(watcher.Id);
-        vm.isFollowing = watcher.Id != loggedInUser?.Id ? _followingListRepository.IsFollowing(loggedInUser.Id, watcher.Id) : null;
+        TryValidateModel(updatedWatcher);
 
-        return View(vm);
+        if (!ModelState.IsValid)
+            return RedirectToAction("Profile", new { username = watcher.Username });
+
+        _watcherRepository.AddOrUpdate(updatedWatcher);
+        return RedirectToAction("Profile", new { username = watcher.Username });
     }
 
     private bool WatcherExists(int id)
