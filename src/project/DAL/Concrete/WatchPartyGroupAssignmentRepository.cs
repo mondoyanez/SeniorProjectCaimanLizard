@@ -8,6 +8,11 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
     {
     }
 
+    public WatchPartyGroupAssignment? FindGroupAssignment(int groupId, int userId)
+    {
+        return GetAll().FirstOrDefault(g => g.GroupId == groupId && g.WatcherId == userId);
+    }
+
     public void AddToGroup(WatchPartyGroupAssignment assignment)
     {
         if (assignment == null)
@@ -26,6 +31,11 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
         {
             throw new Exception("Invalid information was given while trying to update database");
         }
+    }
+
+    public void RemoveFromGroup(WatchPartyGroupAssignment assignment)
+    {
+        throw new NotImplementedException();
     }
 
     public List<int> GetGroupIds(int userId)

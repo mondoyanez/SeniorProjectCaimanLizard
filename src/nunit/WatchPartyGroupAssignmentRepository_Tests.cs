@@ -26,6 +26,58 @@ public class WatchPartyGroupAssignmentRepository_Tests
         new InMemoryDbHelper<WatchPartyDbContext>(_seedFilePostEmpty, DbPersistence.OneDbPerTest);
 
     [Test]
+    public void FindGroupAssignment_WithExistingAssignment_ShouldSuccessfullyReturnObject()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+        WatchPartyGroupAssignment? expected = repo.GetAll().FirstOrDefault(g => g.Id == 2);
+        WatchPartyGroup? group = context.WatchPartyGroups.FirstOrDefault(g => g.Id == 1);
+        Watcher? watcher = context.Watchers.FirstOrDefault(w => w.Id == 2);
+
+        // Act
+        WatchPartyGroupAssignment? actual = repo.FindGroupAssignment(group.Id, watcher.Id);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual?.Id, Is.EqualTo(expected?.Id));
+            Assert.That(actual?.Group.GroupTitle, Is.EqualTo(expected?.Group.GroupTitle));
+            Assert.That(actual?.GroupId, Is.EqualTo(expected?.GroupId));
+            Assert.That(actual?.Watcher.Username, Is.EqualTo(expected?.Watcher.Username));
+            Assert.That(actual?.WatcherId, Is.EqualTo(expected?.WatcherId));
+        });
+    }
+
+    [Test]
+    public void FindGroupAssignment_WithUserNotInGroup_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        WatchPartyGroupAssignment? actual = repo.FindGroupAssignment(1, 10);
+
+        // Assert
+        Assert.That(actual, Is.Null);
+    }
+
+    [Test]
+    public void FindGroupAssignment_WithGroupNotExisting_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        WatchPartyGroupAssignment? actual = repo.FindGroupAssignment(15, 1);
+
+        // Assert
+        Assert.That(actual, Is.Null);
+    }
+
+    [Test]
     public void AddToGroup_WithValidData_ShouldSuccessfullyAddObject()
     {
         // Arrange
