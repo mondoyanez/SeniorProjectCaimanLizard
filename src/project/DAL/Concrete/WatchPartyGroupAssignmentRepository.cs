@@ -33,9 +33,22 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
         }
     }
 
-    public void RemoveFromGroup(WatchPartyGroupAssignment assignment)
+    public void RemoveFromGroup(WatchPartyGroupAssignment? assignment)
     {
-        throw new NotImplementedException();
+        if (assignment == null)
+            throw new ArgumentNullException(nameof(assignment));
+
+        if (assignment?.Group?.HostId == assignment?.WatcherId)
+            throw new Exception("Host cannot be removed from group!");
+
+        try
+        {
+            Delete(assignment);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
     }
 
     public List<int> GetGroupIds(int userId)
