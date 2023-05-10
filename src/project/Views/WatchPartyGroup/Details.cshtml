@@ -15,12 +15,15 @@
             {
                 <div class="col-1">
                     <div class="dropdown">
-                        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="~/img/three-dots-vertical.svg" alt="Dropdown Menu"/>
+                        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Group Options
                         </button>
                         <ul class="dropdown-menu">
                             <li>
                                 <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUsers">Invite Users</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#removeUsers">Remove Users</button>
                             </li>
                         </ul>
                     </div>
@@ -80,6 +83,45 @@
                         {
                             <div class="col-2 watch-party-details-invite-btn">
                                 <button type="button" class="btn btn-primary add-user" id="invite-user-@user.Username" value="@user.Id">@user.Username</button>
+                            </div>
+                        }
+                    }
+                    @if (Model.Watchers.Count == Model.Group.WatchPartyGroupAssignments.Count)
+                    {
+                        <div class="col-4">
+                            <p>No users to add</p>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="removeUsers" tabindex="-1" aria-labelledby="removeUsersLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeUsersLabel">Remove Users</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @foreach (var user in Model?.Watchers)
+                    {
+                        bool isInvited = false;
+
+                        @foreach (var invitee in Model.Group.WatchPartyGroupAssignments)
+                        {
+                            if (user.AspNetIdentityId == invitee.Watcher.AspNetIdentityId)
+                                isInvited = true;
+                        }
+
+                        if (isInvited && user.Username != User?.Identity?.Name)
+                        {
+                            <div class="col-2 watch-party-details-invite-btn">
+                                <button type="button" class="btn btn-primary remove-user" id="remove-user-@user.Username" value="@user.Id">@user.Username</button>
                             </div>
                         }
                     }
