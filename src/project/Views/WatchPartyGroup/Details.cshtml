@@ -48,7 +48,7 @@
                     <td id="watch-group-users">
                         @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
                         {
-                            <p>@person.Watcher.Username</p>
+                            <p id="remove-user-@person.Watcher.Username">@person.Watcher.Username</p>
                         }
                     </td>
                     <td>@Model?.Group?.Host.Username</td>
@@ -82,7 +82,7 @@
                         if (!isInvited && user.Username != User?.Identity?.Name)
                         {
                             <div class="col-2 watch-party-details-invite-btn">
-                                <button type="button" class="btn btn-primary add-user" id="invite-user-@user.Username" value="@user.Id">@user.Username</button>
+                                <button type="button" class="btn btn-primary add-user" value="@user.Id">@user.Username</button>
                             </div>
                         }
                     }
@@ -121,7 +121,7 @@
                         if (isInvited && user.Username != User?.Identity?.Name)
                         {
                             <div class="col-2 watch-party-details-invite-btn">
-                                <button type="button" class="btn btn-primary remove-user" id="remove-user-@user.Username" value="@user.Id">@user.Username</button>
+                                <button type="button" class="btn btn-primary remove-user" value="@user.Id">@user.Username</button>
                             </div>
                         }
                     }
