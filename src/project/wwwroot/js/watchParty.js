@@ -3,7 +3,8 @@ const listUsers = $("#watch-group-users")[0];
 const maxUsers = $("#watch-group-total-users")[0];
 const minUsers = 1;
 const currentUsers = $("#watch-group-current-users")[0];
-const modalBody = $(".modal-body")[0];
+const modalAdd = $("#add-modal")[0];
+const modalRemove = $("#remove-modal")[0];
 
 $(".add-user").on("click", function (e) {
     e.preventDefault();
@@ -47,7 +48,16 @@ function addUserToTable(e) {
 
     listUsers.append(element);
     updateCurrentUsers("add");
+    addUserToModalAdd(e);
     removeButton(e);
+}
+
+function addUserToModalAdd(e) {
+    modalAdd.append(e.target.parentNode);
+}
+
+function addUserToModalRemove(e) {
+    modalRemove.append(e.target.parentNode);
 }
 
 function removeUserFromTable(e) {
@@ -56,6 +66,7 @@ function removeUserFromTable(e) {
 
     userInTable.remove();
     updateCurrentUsers("remove");
+    addUserToModalRemove(e);
     removeButton(e);
 }
 
@@ -81,14 +92,15 @@ function displayNoUsers(operation) {
     switch (operation) {
         case "add":
             element.innerHTML = "No users to add";
+            div.append(element);
+            modalAdd.append(div);
             break;
         case "remove":
             element.innerHTML = "No users to remove";
+            div.append(element);
+            modalRemove.append(div);
             break;
     }
-
-    div.append(element);
-    modalBody.append(div);
 
 }
 

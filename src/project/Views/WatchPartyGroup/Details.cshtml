@@ -68,7 +68,7 @@
                     <h5 class="modal-title" id="inviteUsersLabel">Invite Users</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="add-modal">
                     @foreach (var user in Model?.Watchers)
                     {
                         bool isInvited = false;
@@ -107,7 +107,7 @@
                     <h5 class="modal-title" id="removeUsersLabel">Remove Users</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="remove-modal">
                     @foreach (var user in Model?.Watchers)
                     {
                         bool isInvited = false;
