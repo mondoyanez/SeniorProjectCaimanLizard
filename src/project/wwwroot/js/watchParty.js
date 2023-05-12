@@ -48,16 +48,7 @@ function addUserToTable(e) {
 
     listUsers.append(element);
     updateCurrentUsers("add");
-    addUserToModalAdd(e);
     removeButton(e);
-}
-
-function addUserToModalAdd(e) {
-    modalAdd.append(e.target.parentNode);
-}
-
-function addUserToModalRemove(e) {
-    modalRemove.append(e.target.parentNode);
 }
 
 function removeUserFromTable(e) {
@@ -66,7 +57,6 @@ function removeUserFromTable(e) {
 
     userInTable.remove();
     updateCurrentUsers("remove");
-    addUserToModalRemove(e);
     removeButton(e);
 }
 
