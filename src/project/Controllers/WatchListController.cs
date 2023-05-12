@@ -68,6 +68,7 @@ namespace WatchParty.Controllers
             //Find the watchlists by userID
             watchListVM.currentlyWatchList = _watchListRepo.FindByUserID(watcher.Id, 0);
             watchListVM.wantToWatchList = _watchListRepo.FindByUserID(watcher.Id, 1);
+            watchListVM.haveWatched = _watchListRepo.FindByUserID(watcher.Id, 2);
 
             //Get the items in the watchlistItems
             if (watchListVM.currentlyWatchList != null)
@@ -80,6 +81,11 @@ namespace WatchParty.Controllers
                 watchListVM.wantToWatchListItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.wantToWatchList.Id);
             }
 
+            if (watchListVM.haveWatched != null)
+            {
+                watchListVM.haveWatchedItems = _watchListItemsRepo.GetAllWatchListItemsByID(watchListVM.haveWatched.Id);
+            }
+
 
             // Get shows/movies by the users watchlistItems
             watchListVM.shows = _showRepo.GetShows(watchListVM.watchListItems);
@@ -87,6 +93,9 @@ namespace WatchParty.Controllers
 
             watchListVM.shows1 = _showRepo.GetShows(watchListVM.wantToWatchListItems);
             watchListVM.movies1 = _movieRepo.GetMovies(watchListVM.wantToWatchListItems);
+
+            watchListVM.shows2 = _showRepo.GetShows(watchListVM.haveWatchedItems);
+            watchListVM.movies2 = _movieRepo.GetMovies(watchListVM.haveWatchedItems);
 
 
             return View(watchListVM);
