@@ -47,8 +47,24 @@ Scenario Outline: Users creates a watch party and can see the group options butt
 		And I enter "Join one join all" for the watch party description
 		And I enter the watch party start date
 		And I create the watch party
-		And I go the the details page of the newly created watch party
+		And I go to the details page of the newly created watch party
 	Then I should see the group options button
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |
+
+Scenario Outline: Users navigate to watch party details page and adds a user to the group
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I go to the details page of the newly created watch party
+		And I click on the group options button
+		And I click on the add users button
+		And I add "SandraHart" to the group
+		And I close the open modal
+	Then I should see that "SandraHart" was added to the group
 	Examples:
 	| FirstName |
 	| Talia     |

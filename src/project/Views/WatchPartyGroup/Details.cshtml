@@ -82,7 +82,7 @@
                         if (!isInvited && user.Username != User?.Identity?.Name)
                         {
                             <div class="col-2 watch-party-details-invite-btn">
-                                <button type="button" class="btn btn-primary add-user" value="@user.Id">@user.Username</button>
+                                <button type="button" class="btn btn-primary add-user" value="@user.Id" name="@user.Username">@user.Username</button>
                             </div>
                         }
                     }
@@ -94,7 +94,7 @@
                     }
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="watch-group-modal-close">Close</button>
                 </div>
             </div>
         </div>

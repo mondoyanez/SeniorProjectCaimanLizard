@@ -25,6 +25,30 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _profilePage.CreateWatchParty();
         }
 
+        [Given(@"I click on the add users button"), When(@"I click on the add users button")]
+        public void WhenIClickOnTheAddUsersButton()
+        {
+            _watchPartyPage.SelectInviteUsers();
+        }
+
+        [Given(@"I click on the group options button"), When(@"I click on the group options button")]
+        public void WhenIClickOnTheGroupOptionsButton()
+        {
+            _watchPartyPage.ExpandGroupGroupOptions();
+        }
+
+        [Given(@"I add ""([^""]*)"" to the group"), When(@"I add ""([^""]*)"" to the group")]
+        public void WhenIAddToTheGroup(string username)
+        {
+            _watchPartyPage.InviteSelectedUser(username);
+        }
+
+        [Given(@"I close the open modal"), When(@"I close the open modal")]
+        public void WhenICloseTheOpenModal()
+        {
+            _watchPartyPage.CloseOpenModal();
+        }
+
         [Given(@"I enter ""([^""]*)"" for the watch party title"), When(@"I enter ""([^""]*)"" for the watch party title")]
         public void WhenIEnterForTheWatchPartyTitle(string title)
         {
@@ -51,8 +75,8 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _createWatchPartyPageObject.CreateWatchParty();
         }
 
-        [Given(@"I go the the details page of the newly created watch party"), When(@"I go the the details page of the newly created watch party")]
-        public void WhenIGoTheTheDetailsPageOfTheNewlyCreatedWatchParty()
+        [Given(@"I go to the details page of the newly created watch party"), When(@"I go to the details page of the newly created watch party")]
+        public void WhenIGoToTheDetailsPageOfTheNewlyCreatedWatchParty()
         {
             _profilePage.GoToWatchPartyDetails();
         }
@@ -70,5 +94,14 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _watchPartyPage.GroupOptionsButton.Displayed.Should().BeTrue();
         }
 
+        [Then(@"I should see that ""([^""]*)"" was added to the group")]
+        public void ThenIShouldSeeThatWasAddedToTheGroup(string username)
+        {
+            _watchPartyPage.RefreshCurrentPage();
+            _watchPartyPage.UserInTable(username);
+
+            _watchPartyPage.CurrentUser.Should().NotBeNull();
+            _watchPartyPage.CurrentUser.Displayed.Should().BeTrue();
+        }
     }
 }
