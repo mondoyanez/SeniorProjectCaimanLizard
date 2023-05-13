@@ -38,3 +38,20 @@ Scenario Outline: Users cannot remove other users from Sandra Hart's Watch Party
 	| Zayden    |
 	| Hareem    |
 	| Krzysztof |
+
+Scenario Outline: Users creates a watch party and can see the group options button on the details page
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I go to click on the create new watch party button
+		And I enter "Movie night" for the watch party title
+		And I enter "Join one join all" for the watch party description
+		And I enter the watch party start date
+		And I create the watch party
+		And I go the the details page of the newly created watch party
+	Then I should see the group options button
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |

@@ -20,10 +20,12 @@ namespace WatchParty_BDD_Tests.Shared
         public static readonly Dictionary<string, string> Paths = new()
         {
             { "CreatePost", "/Post/Create" },
+            { "CreateWatchParty", "/WatchPartyGroup/Create"},
             { "ExistingWatchParty", "/WatchPartyGroup/Details?groupId=1" },
             { "Home" , "/" },
             { "Login", "/Identity/Account/Login" },
             { "Post", "/Post/Index" },
+            { "Profile", "/user/" },
             { "Register", "/Identity/Account/Register" }
         };
 
