@@ -1,6 +1,6 @@
 ﻿@Armando_Yanez
 @LoggedIn
-Feature: CLD199_RemoveWatchParty
+Feature: CLD199_RemoveUserWatchParty
 **As a user, I would like the ability to remove users' from my Watch Party Group if I add someone to my group by mistake of
 decide I don't want them attending the Watch Party.**
 
@@ -15,11 +15,23 @@ Background:
 	  | DavilaH    | hareem@example.com    | Hareem    | Davila   | ScotIs#1 |
 	  | KrzysztofP | krzysztof@example.com | Krzysztof | Ponce    | ScotIs#1 |
 
-Scenario Outline: Users cannot remove other users from watch party group
+Scenario Outline: Users can navigate to Sandra Hart's Watch Party Details page
 	Given I am a user with first name '<FirstName>'
 	When I login
 		And I navigate to the "ExistingWatchParty" page
 	Then The page title contains "Group Details"
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |
+
+Scenario Outline: Users cannot remove other users from Sandra Hart's Watch Party
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I navigate to the "ExistingWatchParty" page
+	Then I should not see the group options button
 	Examples:
 	| FirstName |
 	| Talia     |
