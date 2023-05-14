@@ -129,3 +129,30 @@ $(document).on('click', '.delete-watchlist-show-2', function () {
         }
     });
 });
+
+
+// Displaying the watchlists individually
+
+function changeCurrentlyList() {
+    console.log("Inside watchList.js, changing currently list");
+
+    document.getElementById("currentlyWatchingList").style.display = "initial";
+    document.getElementById("wantToWatchList").style.display = "none";
+    document.getElementById("haveWatchedList").style.display = "none";
+}
+
+function changeWantToList() {
+    console.log("Inside watchList.js, changing want to list");
+
+    document.getElementById("currentlyWatchingList").style.display = "none";
+    document.getElementById("wantToWatchList").style.display = "initial";
+    document.getElementById("haveWatchedList").style.display = "none";
+}
+
+function changeHaveList() {
+    console.log("Inside watchList.js, changing have list");
+
+    document.getElementById("currentlyWatchingList").style.display = "none";
+    document.getElementById("wantToWatchList").style.display = "none";
+    document.getElementById("haveWatchedList").style.display = "initial";
+}

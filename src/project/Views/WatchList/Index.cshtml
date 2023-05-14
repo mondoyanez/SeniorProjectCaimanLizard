@@ -14,71 +14,94 @@
     <br>
 
 
-    <div class="row">
+
+        
+        <li class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Change Watch List
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
+                <li>
+                <button onclick="changeCurrentlyList()" id="changeDisplayList" class="dropdown-item">Currently Watching</button>
+                </li>
+                <li>
+                <button onclick="changeWantToList()" id="dropdown-want" class="dropdown-item add-watchlist-item">Want To Watch</button>
+                </li>
+                <li>
+                <button onclick="changeHaveList()" id="dropdown-have" class="dropdown-item add-watchlist-item">Have Watched</button>
+                </li>
+            </ul>
+        </li>
+        <br />
+        <br />
 
         @if (Model.currentlyWatchList != null)
         {
-            <div class="col">
-                <h3>Currently Watching:</h3>
-                <br />
-                <div class="col">
-                    <h4>Movies</h4>
-                    <table class="table table-hover" id="movieTable">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Overview</th>
-                                <th>Release Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var movie in Model.movies)
-                            {
-                                <tr>
-                                    <th>@movie.Title</th>
-                                    <th>@movie.Overview</th>
-                                    <th>@movie.ReleaseDate</th>
-                                    @if (Model.isCurrentUser)
-                                    {
-                                        <th>
-                                            <button class="btn btn-danger btn-sm delete-watchlist-movie-0" data-movie-id="@movie.Id" data-list-type="0">Delete</button>
-                                        </th>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+            <div id="currentlyWatchingList">
+                    <br />
+                    <h3>Currently Watching:</h3>
+                    <br />
+                    <div class="row">
 
-                <div class="col">
-                    <h4>Shows</h4>
-                    <table class="table table-hover" id="showTable">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Overview</th>
-                                <th>Release Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var show in Model.shows)
-                            {
-                                <tr>
-                                    <th>@show.Title</th>
-                                    <th>@show.Overview</th>
-                                    <th>@show.FirstAirDate</th>
-                                    @if (Model.isCurrentUser)
+                        <div class="col">
+                            <h4>Movies</h4>
+                            <table class="table table-hover" id="movieTable">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Overview</th>
+                                        <th>Release Date</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var movie in Model.movies)
                                     {
-                                        <th>
-                                            <button class="btn btn-danger btn-sm delete-watchlist-show-0" data-show-id="@show.Id" data-list-type="0">Delete</button>
-                                        </th>
+                                        <tr>
+                                            <th>@movie.Title</th>
+                                            <th>@movie.Overview</th>
+                                            <th>@movie.ReleaseDate</th>
+                                            @if (Model.isCurrentUser)
+                                            {
+                                                <th>
+                                                    <button class="btn btn-danger btn-sm delete-watchlist-movie-0" data-movie-id="@movie.Id" data-list-type="0">Delete</button>
+                                                </th>
+                                            }
+                                        </tr>
                                     }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    <div class="col">
+                        <h4>Shows</h4>
+                        <table class="table table-hover" id="showTable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Overview</th>
+                                    <th>Release Date</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var show in Model.shows)
+                                {
+                                    <tr>
+                                        <th>@show.Title</th>
+                                        <th>@show.Overview</th>
+                                        <th>@show.FirstAirDate</th>
+                                        @if (Model.isCurrentUser)
+                                        {
+                                            <th>
+                                                <button class="btn btn-danger btn-sm delete-watchlist-show-0" data-show-id="@show.Id" data-list-type="0">Delete</button>
+                                            </th>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
@@ -87,68 +110,71 @@
 
         @if (Model.wantToWatchList != null)
         {
-            <div class="col">
+            <div id="wantToWatchList" style="display:none">
+                <br />
                 <h3>Want To Watch:</h3>
                 <br />
 
-                <div class="col">
-                    <h4>Movies</h4>
-                    <table class="table table-hover" id="movieTable1">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Overview</th>
-                                <th>Release Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var movie in Model.movies1)
-                            {
+                <div class="row">
+                    <div class="col">
+                        <h4>Movies</h4>
+                        <table class="table table-hover" id="movieTable1">
+                            <thead>
                                 <tr>
-                                    <th>@movie.Title</th>
-                                    <th>@movie.Overview</th>
-                                    <th>@movie.ReleaseDate</th>
-                                    @if (Model.isCurrentUser)
-                                    {
-                                        <th>
-                                            <button class="btn btn-danger btn-sm delete-watchlist-movie-1" data-movie-id="@movie.Id" data-list-type="1">Delete</button>
-                                        </th>
-                                    }
+                                    <th>Title</th>
+                                    <th>Overview</th>
+                                    <th>Release Date</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                @foreach (var movie in Model.movies1)
+                                {
+                                    <tr>
+                                        <th>@movie.Title</th>
+                                        <th>@movie.Overview</th>
+                                        <th>@movie.ReleaseDate</th>
+                                        @if (Model.isCurrentUser)
+                                        {
+                                            <th>
+                                                <button class="btn btn-danger btn-sm delete-watchlist-movie-1" data-movie-id="@movie.Id" data-list-type="1">Delete</button>
+                                            </th>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div class="col">
-                    <h4>Shows</h4>
-                    <table class="table table-hover" id="showTable1">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Overview</th>
-                                <th>Release Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var show in Model.shows1)
-                            {
+                    <div class="col">
+                        <h4>Shows</h4>
+                        <table class="table table-hover" id="showTable1">
+                            <thead>
                                 <tr>
-                                    <th>@show.Title</th>
-                                    <th>@show.Overview</th>
-                                    <th>@show.FirstAirDate</th>
-                                    @if (Model.isCurrentUser)
-                                    {
-                                        <th>
-                                            <button class="btn btn-danger btn-sm delete-watchlist-show-one" data-show-id="@show.Id">Delete</button>
-                                        </th>
-                                    }
+                                    <th>Title</th>
+                                    <th>Overview</th>
+                                    <th>Release Date</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var show in Model.shows1)
+                                {
+                                    <tr>
+                                        <th>@show.Title</th>
+                                        <th>@show.Overview</th>
+                                        <th>@show.FirstAirDate</th>
+                                        @if (Model.isCurrentUser)
+                                        {
+                                            <th>
+                                                <button class="btn btn-danger btn-sm delete-watchlist-show-one" data-show-id="@show.Id">Delete</button>
+                                            </th>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         }
@@ -156,74 +182,76 @@
 
         @if (Model.haveWatched != null)
         {
-            <div class="col">
-                <h3>Want To Watch:</h3>
+            <div class="col" id="haveWatchedList" style="display:none">
+                <br />
+                <h3>Have Watched:</h3>
                 <br />
 
-                <div class="col">
-                    <h4>Movies</h4>
-                    <table class="table table-hover" id="movieTable2">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Overview</th>
-                                <th>Release Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var movie in Model.movies2)
-                            {
+                <div class="row">
+                    <div class="col">
+                        <h4>Movies</h4>
+                        <table class="table table-hover" id="movieTable2">
+                            <thead>
                                 <tr>
-                                    <th>@movie.Title</th>
-                                    <th>@movie.Overview</th>
-                                    <th>@movie.ReleaseDate</th>
-                                    @if (Model.isCurrentUser)
-                                    {
-                                        <th>
-                                            <button class="btn btn-danger btn-sm delete-watchlist-movie-2" data-movie-id="@movie.Id" >Delete</button>
-                                        </th>
-                                    }
+                                    <th>Title</th>
+                                    <th>Overview</th>
+                                    <th>Release Date</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                @foreach (var movie in Model.movies2)
+                                {
+                                    <tr>
+                                        <th>@movie.Title</th>
+                                        <th>@movie.Overview</th>
+                                        <th>@movie.ReleaseDate</th>
+                                        @if (Model.isCurrentUser)
+                                        {
+                                            <th>
+                                                <button class="btn btn-danger btn-sm delete-watchlist-movie-2" data-movie-id="@movie.Id" >Delete</button>
+                                            </th>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div class="col">
-                    <h4>Shows</h4>
-                    <table class="table table-hover" id="showTable2">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Overview</th>
-                                <th>Release Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var show in Model.shows2)
-                            {
+                    <div class="col">
+                        <h4>Shows</h4>
+                        <table class="table table-hover" id="showTable2">
+                            <thead>
                                 <tr>
-                                    <th>@show.Title</th>
-                                    <th>@show.Overview</th>
-                                    <th>@show.FirstAirDate</th>
-                                    @if (Model.isCurrentUser)
-                                    {
-                                        <th>
-                                            <button class="btn btn-danger btn-sm delete-watchlist-show-2" data-show-id="@show.Id">Delete</button>
-                                        </th>
-                                    }
+                                    <th>Title</th>
+                                    <th>Overview</th>
+                                    <th>Release Date</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var show in Model.shows2)
+                                {
+                                    <tr>
+                                        <th>@show.Title</th>
+                                        <th>@show.Overview</th>
+                                        <th>@show.FirstAirDate</th>
+                                        @if (Model.isCurrentUser)
+                                        {
+                                            <th>
+                                                <button class="btn btn-danger btn-sm delete-watchlist-show-2" data-show-id="@show.Id">Delete</button>
+                                            </th>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         }
         
 
-    </div>
     <br />
     <br />
 

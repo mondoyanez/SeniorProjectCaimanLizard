@@ -227,10 +227,26 @@ function displayTitles(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>      
-                               <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
-                               <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
-                               <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
-                           </div>
+                               <div>
+                                    <li class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Add to Watch List
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
+                                            <li>
+                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                            </li>
+                                            <li>
+                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                            </li>
+                                            <li>
+                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </div>
+
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -260,10 +276,24 @@ function displayMovies(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
-                               <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
-
+                              <div>
+                                    <li class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Add to Watch List
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
+                                            <li>
+                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                            </li>
+                                            <li>
+                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                            </li>
+                                            <li>
+                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </div>
                         </div>
                       </div>
                     </div>
