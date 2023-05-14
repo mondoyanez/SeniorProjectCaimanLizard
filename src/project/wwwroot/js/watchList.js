@@ -133,6 +133,14 @@ $(document).on('click', '.delete-watchlist-show-2', function () {
 
 // Displaying the watchlists individually
 
+$(document).ready(function () {
+    console.log("setting all watchlists to display none");
+
+    //document.getElementById("currentlyWatchingList").style.display = "initial";
+    //document.getElementById("wantToWatchList").style.display = "none";
+    //document.getElementById("haveWatchedList").style.display = "none";
+});
+
 function changeCurrentlyList() {
     console.log("Inside watchList.js, changing currently list");
 

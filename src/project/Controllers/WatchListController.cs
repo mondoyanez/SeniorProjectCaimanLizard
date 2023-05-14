@@ -117,6 +117,28 @@ namespace WatchParty.Controllers
             Watcher watcher = _watcherRepository.FindByAspNetId(currentUser.Id);
             WatchList watchList = _watchListRepo.FindByUserID(watcher.Id, listType);
 
+            if (listType != 0)
+            {
+                WatchList currentlyWatchingList = _watchListRepo.FindByUserID(watcher.Id, 0);
+                if (currentlyWatchingList == null)
+                {
+                    currentlyWatchingList = new WatchList()
+                    {
+                        UserId = watcher.Id,
+                        ListType = listType
+                    };
+                    _watchListRepo.AddOrUpdate(watchList);
+
+                    WatchListItem item = new WatchListItem()
+                    {
+                        WatchListId = currentlyWatchingList.Id,
+                        ShowId = 1
+                    };
+                    _watchListItemsRepo.AddOrUpdate(item);
+                    _watchListItemsRepo.DeleteById(item.Id);
+                }
+            }
+
             // If the watchlist is null, create one for the user
             if (watchList == null)
             {

@@ -229,18 +229,18 @@ function displayTitles(data) {
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>      
                                <div>
                                     <li class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button id="watchlist-dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Add to Watch List
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                                <button id="addToCurrent" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
                                             </li>
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                                <button id="addToWant" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
                                             </li>
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                                <button id="addToHave" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
                                             </li>
                                         </ul>
                                     </li>
@@ -278,18 +278,18 @@ function displayMovies(data) {
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                               <div>
                                     <li class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button id="watchlist-dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Add to Watch List
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                                <button id="addToCurrent" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
                                             </li>
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                                <button id="addToWant" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
                                             </li>
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                                <button id="addToHave" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
                                             </li>
                                         </ul>
                                     </li>
@@ -328,18 +328,18 @@ function displayShows(data) {
                                 <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                                 <div>
                                     <li class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button id="watchlist-dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Add to Watch List
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                                <button id="addToCurrent" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
                                             </li>
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                                <button id="addToWant" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
                                             </li>
                                             <li>
-                                                <button id="card-button" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                                <button id="addToHave" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
                                             </li>
                                         </ul>
                                     </li>
