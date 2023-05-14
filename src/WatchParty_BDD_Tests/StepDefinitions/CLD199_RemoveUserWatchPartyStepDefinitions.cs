@@ -31,6 +31,12 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _watchPartyPage.SelectInviteUsers();
         }
 
+        [Given(@"I click on the remove users button"), When(@"I click on the remove users button")]
+        public void WhenIClickOnTheRemoveUsersButton()
+        {
+            _watchPartyPage.SelectRemoveUsers();
+        }
+
         [Given(@"I click on the group options button"), When(@"I click on the group options button")]
         public void WhenIClickOnTheGroupOptionsButton()
         {
@@ -43,10 +49,22 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _watchPartyPage.InviteSelectedUser(username);
         }
 
-        [Given(@"I close the open modal"), When(@"I close the open modal")]
-        public void WhenICloseTheOpenModal()
+        [Given(@"I remove ""([^""]*)"" from the group"), When(@"I remove ""([^""]*)"" from the group")]
+        public void WhenIRemoveFromTheGroup(string username)
         {
-            _watchPartyPage.CloseOpenModal();
+            _watchPartyPage.RemoveSelectedUser(username);
+        }
+
+        [Given(@"I close the open invite modal"), When(@"I close the open invite modal")]
+        public void WhenICloseTheOpenInviteModal()
+        {
+            _watchPartyPage.CloseOpenModalInvite();
+        }
+
+        [Given(@"I close the open remove modal"), When(@"I close the open remove modal")]
+        public void WhenICloseTheOpenRemoveModal()
+        {
+            _watchPartyPage.CloseCloseModalRemove();
         }
 
         [Given(@"I enter ""([^""]*)"" for the watch party title"), When(@"I enter ""([^""]*)"" for the watch party title")]
@@ -103,5 +121,14 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _watchPartyPage.CurrentUser.Should().NotBeNull();
             _watchPartyPage.CurrentUser.Displayed.Should().BeTrue();
         }
+
+        [Then(@"I should not see that ""([^""]*)"" is in the group")]
+        public void ThenIShouldNotSeeThatIsInTheGroup(string username)
+        {
+            _watchPartyPage.UserInTable(username);
+            _watchPartyPage.CurrentUser.Should().BeNull();
+            _watchPartyPage.RefreshCurrentPage();
+        }
+
     }
 }

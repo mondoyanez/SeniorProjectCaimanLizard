@@ -11,7 +11,8 @@ public class WatchPartyDetailsPageObject : PageObject
     public IWebElement GroupOptionsButton => _webDriver.FindElement(By.Id("watch-group-options-btn"));
     public IWebElement InviteUserButton => _webDriver.FindElement(By.Id("watch-group-invite"));
     public IWebElement RemoveUserButton => _webDriver.FindElement(By.Id("watch-group-remove"));
-    public IWebElement ModalCloseButton => _webDriver.FindElement(By.Id("watch-group-modal-close"));
+    public IWebElement ModalCloseButtonInvite => _webDriver.FindElement(By.Id("watch-group-modal-close-add"));
+    public IWebElement ModalCloseButtonRemove => _webDriver.FindElement(By.Id("watch-group-modal-close-remove"));
     public IWebElement CurrentUser;
 
     public void ExpandGroupGroupOptions()
@@ -24,12 +25,27 @@ public class WatchPartyDetailsPageObject : PageObject
         InviteUserButton.Click();
     }
 
-    public void CloseOpenModal()
+    public void SelectRemoveUsers()
     {
-        ModalCloseButton.Click();
+        RemoveUserButton.Click();
+    }
+
+    public void CloseOpenModalInvite()
+    {
+        ModalCloseButtonInvite.Click();
+    }
+
+    public void CloseCloseModalRemove()
+    {
+        ModalCloseButtonRemove.Click();
     }
 
     public void InviteSelectedUser(string userName)
+    {
+        _webDriver.FindElement(By.Name(userName)).Click();
+    }
+
+    public void RemoveSelectedUser(string userName)
     {
         _webDriver.FindElement(By.Name(userName)).Click();
     }
@@ -41,7 +57,14 @@ public class WatchPartyDetailsPageObject : PageObject
 
     public void UserInTable(string userName)
     {
-        CurrentUser = _webDriver.FindElement(By.Id($"remove-user-{userName}"));
+        try
+        {
+            CurrentUser = _webDriver.FindElement(By.Id($"remove-user-{userName}"));
+        }
+        catch (NoSuchElementException)
+        {
+            CurrentUser = null;
+        }
     }
 }
 

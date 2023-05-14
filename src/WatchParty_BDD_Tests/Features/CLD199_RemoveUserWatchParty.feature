@@ -63,8 +63,24 @@ Scenario Outline: Users navigate to watch party details page and adds a user to 
 		And I click on the group options button
 		And I click on the add users button
 		And I add "SandraHart" to the group
-		And I close the open modal
+		And I close the open invite modal
 	Then I should see that "SandraHart" was added to the group
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |
+
+Scenario Outline: Users navigate to watch party details page and removes a user from the group
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I go to the details page of the newly created watch party
+		And I click on the group options button
+		And I click on the remove users button
+		And I remove "SandraHart" from the group
+		And I close the open remove modal
+	Then I should not see that "SandraHart" is in the group
 	Examples:
 	| FirstName |
 	| Talia     |
