@@ -43,4 +43,17 @@ public class WatchPartyGroupApiController : ControllerBase
 
         return Ok(StatusCodes.Status201Created);
     }
+
+    [HttpDelete("RemoveUser")]
+    public IActionResult RemoveUser(int groupId, int userId)
+    {
+        WatchPartyGroupAssignment? assignment = _assignmentRepository.FindGroupAssignment(groupId, userId);
+
+        if (assignment == null)
+            throw new ArgumentNullException(nameof(assignment));
+
+        _assignmentRepository.RemoveFromGroup(assignment);
+
+        return Ok(StatusCodes.Status200OK);
+    }
 }
