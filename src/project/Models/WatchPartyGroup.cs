@@ -20,6 +20,10 @@ public partial class WatchPartyGroup
     [Column(TypeName = "datetime")]
     public DateTime StartDate { get; set; }
 
+    [Column("TelePartyURL")]
+    [StringLength(512)]
+    public string? TelePartyUrl { get; set; }
+
     [Column("HostID")]
     public int HostId { get; set; }
 
