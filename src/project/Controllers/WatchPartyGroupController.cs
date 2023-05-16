@@ -47,8 +47,9 @@ public class WatchPartyGroupController : Controller
         if (ModelState.IsValid)
         {
             _groupRepository.CreateWatchPartyGroup(newGroup);
-            WatchPartyGroup? group = _groupRepository.FindGroup(newGroup.GroupTitle, newGroup.GroupDescription,
-                newGroup.StartDate, newGroup.Host, newGroup.HostId);
+
+            int currentGroupIndex = _groupRepository.GetAll().Count();
+            WatchPartyGroup? group = _groupRepository.GetById(currentGroupIndex);
 
             if (group == null)
                 throw new NullReferenceException(nameof(group));
