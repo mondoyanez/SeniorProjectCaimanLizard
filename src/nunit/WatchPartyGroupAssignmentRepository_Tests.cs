@@ -26,6 +26,58 @@ public class WatchPartyGroupAssignmentRepository_Tests
         new InMemoryDbHelper<WatchPartyDbContext>(_seedFilePostEmpty, DbPersistence.OneDbPerTest);
 
     [Test]
+    public void FindGroupAssignment_WithExistingAssignment_ShouldSuccessfullyReturnObject()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+        WatchPartyGroupAssignment? expected = repo.GetAll().FirstOrDefault(g => g.Id == 2);
+        WatchPartyGroup? group = context.WatchPartyGroups.FirstOrDefault(g => g.Id == 1);
+        Watcher? watcher = context.Watchers.FirstOrDefault(w => w.Id == 2);
+
+        // Act
+        WatchPartyGroupAssignment? actual = repo.FindGroupAssignment(group.Id, watcher.Id);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual?.Id, Is.EqualTo(expected?.Id));
+            Assert.That(actual?.Group.GroupTitle, Is.EqualTo(expected?.Group.GroupTitle));
+            Assert.That(actual?.GroupId, Is.EqualTo(expected?.GroupId));
+            Assert.That(actual?.Watcher.Username, Is.EqualTo(expected?.Watcher.Username));
+            Assert.That(actual?.WatcherId, Is.EqualTo(expected?.WatcherId));
+        });
+    }
+
+    [Test]
+    public void FindGroupAssignment_WithUserNotInGroup_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        WatchPartyGroupAssignment? actual = repo.FindGroupAssignment(1, 10);
+
+        // Assert
+        Assert.That(actual, Is.Null);
+    }
+
+    [Test]
+    public void FindGroupAssignment_WithGroupNotExisting_ShouldReturnNull()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        WatchPartyGroupAssignment? actual = repo.FindGroupAssignment(15, 1);
+
+        // Assert
+        Assert.That(actual, Is.Null);
+    }
+
+    [Test]
     public void AddToGroup_WithValidData_ShouldSuccessfullyAddObject()
     {
         // Arrange
@@ -106,6 +158,69 @@ public class WatchPartyGroupAssignmentRepository_Tests
 
         // Act/Assert
         Assert.Throws<ArgumentNullException>(() => repo.AddToGroup(assignment));
+    }
+
+    [Test]
+    public void RemoveFromGroup_UserInGroup_ShouldRemoveUserFromGroup()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+        WatchPartyGroupAssignment? assignment = repo.FindGroupAssignment(1, 2);
+
+        // Act
+        repo.RemoveFromGroup(assignment);
+        int groupTotal = repo.GetAll().Count();
+        int firstTotal = repo.GetAll().Count(g => g.GroupId == 1);
+        int secondTotal = repo.GetAll().Count(g => g.GroupId == 2);
+        int thirdTotal = repo.GetAll().Count(g => g.GroupId == 3);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(groupTotal, Is.EqualTo(11));
+            Assert.That(firstTotal, Is.EqualTo(2));
+            Assert.That(secondTotal, Is.EqualTo(5));
+            Assert.That(thirdTotal, Is.EqualTo(4));
+        });
+    }
+
+    [Test]
+    public void RemoveFromGroup_InvalidObject_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+        WatchPartyGroupAssignment? assignment = new WatchPartyGroupAssignment()
+        {
+            GroupId = 1
+        };
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.RemoveFromGroup(assignment));
+    }
+
+    [Test]
+    public void RemoveFromGroup_UserIsHost_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+        WatchPartyGroupAssignment? assignment = repo.FindGroupAssignment(1, 1);
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.RemoveFromGroup(assignment));
+    }
+
+    [Test]
+    public void RemoveFromGroup_ObjectIsNull_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+        WatchPartyGroupAssignment? assignment = null!;
+
+        // Act/Assert
+        Assert.Throws<ArgumentNullException>(() => repo.RemoveFromGroup(assignment));
     }
 
     [Test]
