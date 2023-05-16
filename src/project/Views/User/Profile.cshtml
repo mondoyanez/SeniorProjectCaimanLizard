@@ -84,6 +84,10 @@
                     <tr>
                         <th>Title</th>
                         <th>Start Date</th>
+                        @if (Model.isCurrentUser)
+                        {
+                            <th>TeleParty URL</th>
+                        }
                     </tr>
                     </thead>
                     <tbody>
@@ -92,6 +96,10 @@
                         <tr>
                             <td><a asp-controller="WatchPartyGroup" asp-action="Details" asp-route-groupId="@group.Id" id="user-watch-party-details-link">@group.GroupTitle</a></td>
                             <td>@group.StartDate</td>
+                            @if (Model.isCurrentUser)
+                            {
+                                    <td>@(group.TelePartyUrl ?? "N/A")</td>
+                            }
                         </tr>
                     }
                     </tbody>
