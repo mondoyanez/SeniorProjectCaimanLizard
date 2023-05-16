@@ -35,9 +35,10 @@
         <br />
         <br />
 
-        @if (Model.currentlyWatchList != null)
-        {
-            <div id="currentlyWatchingList">
+        <div id="currentlyWatchingList">
+            @if (Model.currentlyWatchList != null)
+            {
+            @*<div id="currentlyWatchingList">*@
                     <br />
                     <h3>Currently Watching:</h3>
                     <br />
@@ -104,13 +105,13 @@
                     </div>
                 </div>
 
-            </div>
-        }
-        
+            @*</div>*@
+            }
+        </div>
 
-        @if (Model.wantToWatchList != null)
-        {
-            <div id="wantToWatchList" style="display:none">
+        <div id="wantToWatchList" style="display:none">
+            @if (Model.wantToWatchList != null)
+            {
                 <br />
                 <h3>Want To Watch:</h3>
                 <br />
@@ -176,13 +177,12 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
 
-
-        @if (Model.haveWatched != null)
-        {
-            <div class="col" id="haveWatchedList" style="display:none">
+        <div class="col" id="haveWatchedList" style="display:none">
+            @if (Model.haveWatched != null)
+            {
                 <br />
                 <h3>Have Watched:</h3>
                 <br />
@@ -248,8 +248,9 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
+
         
 
     <br />
