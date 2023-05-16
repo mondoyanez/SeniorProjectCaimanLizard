@@ -294,4 +294,74 @@ public class WatchPartyGroupAssignmentRepository_Tests
             Assert.That(actual, Is.Empty);
         });
     }
+
+    [Test]
+    public void UserInGroup_UserExistsInGroupIsHost_ShouldReturnTrue()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        bool actual = repo.UserInGroup(1, "SandraHart");
+
+        // Assert
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
+    public void UserInGroup_UserExistsInGroupIsParticipant_ShouldReturnTrue()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        bool actual = repo.UserInGroup(1, "CarsonDaniel");
+
+        // Assert
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
+    public void UserInGroup_UserNotInGroupForExistingGroup_ShouldReturnFalse()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        bool actual = repo.UserInGroup(1, "MondoYanez");
+
+        // Assert
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void UserInGroup_UserExistsButGroupDoesNotExist_ShouldReturnFalse()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        bool actual = repo.UserInGroup(100, "MondoYanez");
+
+        // Assert
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void UserInGroup_UserDoesNotExistsButGroupDoesExist_ShouldReturnFalse()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupAssignmentRepository repo = new WatchPartyGroupAssignmentRepository(context);
+
+        // Act
+        bool actual = repo.UserInGroup(1, "UknownUser");
+
+        // Assert
+        Assert.That(actual, Is.False);
+    }
 }

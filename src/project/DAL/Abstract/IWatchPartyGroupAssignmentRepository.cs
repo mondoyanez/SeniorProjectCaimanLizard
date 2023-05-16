@@ -7,4 +7,5 @@ public interface IWatchPartyGroupAssignmentRepository : IRepository<WatchPartyGr
     void AddToGroup(WatchPartyGroupAssignment assignment);
     void RemoveFromGroup(WatchPartyGroupAssignment? assignment);
     List<int> GetGroupIds(int userId);
+    bool UserInGroup(int groupId, string username);
 }
