@@ -85,5 +85,20 @@ public class WatchPartyGroupController : Controller
         ViewBag.IsVisible = group?.Host.Username == User?.Identity?.Name;
         return View(group);
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit([Bind("Id, GroupTitle, GroupDescription, StartDate, TelePartyUrl, HostId")] WatchPartyGroup updatedGroup)
+    {
+        ViewBag.IsVisible = true;
+
+        ModelState.Clear();
+        TryValidateModel(updatedGroup);
+
+        if (!ModelState.IsValid) return View(updatedGroup);
+
+        _groupRepository.UpdateGroup(updatedGroup);
+        return RedirectToAction("Details", new { groupId = updatedGroup.Id });
+    }
 }
 

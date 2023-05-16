@@ -53,6 +53,8 @@
                 <div class="row mt-2">
                     <input type="submit" value="Update" class="btn btn-primary watch-party-btn" id="watch-party-submit-button" />
                 </div>
+                <input type="hidden", asp-for="Id" value="@Model.Id" />
+                <input type="hidden" asp-for="HostId" value="@Model.HostId" />
             </form>
         </div>
     }
