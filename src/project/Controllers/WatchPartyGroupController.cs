@@ -65,11 +65,13 @@ public class WatchPartyGroupController : Controller
     {
         WatchPartyGroup group = _groupRepository.FindById(groupId);
         List<Watcher>? watchers = _watcherRepository.FindAllWatchers();
+        bool userInGroup = _assignmentRepository.UserInGroup(groupId, User.Identity.Name);
 
         PartyGroupVM vm = new()
         {
             Group = group,
-            Watchers = watchers
+            Watchers = watchers,
+            UserInGroup = userInGroup
         };
 
         return View(vm);

@@ -32,7 +32,19 @@
 
         </div>
         
-        
+        @if (Model.UserInGroup)
+        {
+            <div class="row">
+                <div class="col">
+                    <h4>TeleParty URL:</h4>
+                </div>
+                <div class="col">
+                    <a href="@Model.Group.TelePartyUrl">
+                        @(Model.Group.TelePartyUrl ?? "N/A")
+                    </a>
+                </div>
+            </div>
+        }
 
         <table class="table table-hover watch-party-table">
             <thead>
