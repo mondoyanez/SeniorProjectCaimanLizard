@@ -113,6 +113,7 @@ CREATE TABLE [WatchPartyGroup]
     [GroupTitle]            NVARCHAR(512)       NOT NULL,
     [GroupDescription]      NVARCHAR(1024),
     [StartDate]             DATETIME            NOT NULL,
+    [TelePartyURL]          NVARCHAR(512),
 
     [HostID]                INT                 NOT NULL
 );
