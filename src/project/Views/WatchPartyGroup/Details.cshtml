@@ -20,6 +20,9 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li>
+                                <a asp-controller="WatchPartyGroup" asp-action="Edit" asp-route-groupId="@Model.Group.Id" class="btn dropdown-item" type="button">Edit Group</a>
+                            </li>
+                            <li>
                                 <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUsers" id="watch-group-invite">Invite Users</button>
                             </li>
                             <li>

@@ -76,5 +76,13 @@ public class WatchPartyGroupController : Controller
 
         return View(vm);
     }
+
+    [HttpGet]
+    public IActionResult Edit(int groupId)
+    {
+        WatchPartyGroup? group = _groupRepository.GetById(groupId);
+        ViewBag.IsVisible = group?.Host.Username == User?.Identity?.Name;
+        return View(group);
+    }
 }
 
