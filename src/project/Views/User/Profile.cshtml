@@ -98,7 +98,7 @@
                             <td>@group.StartDate</td>
                             @if (Model.isCurrentUser)
                             {
-                                    <td>@(group.TelePartyUrl ?? "N/A")</td>
+                                    <td><a href="@group.TelePartyUrl" target="_blank">@(group.TelePartyUrl ?? "N/A")</a></td>
                             }
                         </tr>
                     }
