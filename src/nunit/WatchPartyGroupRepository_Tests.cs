@@ -168,4 +168,248 @@ public class WatchPartyGroupRepository_Tests
         // Assert
         Assert.That(actual, Is.Null);
     }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithNoChanges_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(1);
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(1);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(1));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Marvel marathon movie night"));
+            Assert.That(group?.GroupDescription, Is.Null);
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.Null);
+            Assert.That(group?.HostId, Is.EqualTo(1));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithTitleChanged_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(1);
+        group.GroupTitle = "Movie night";
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(1);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(1));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Movie night"));
+            Assert.That(group?.GroupDescription, Is.Null);
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.Null);
+            Assert.That(group?.HostId, Is.EqualTo(1));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithDescriptionChanged_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(1);
+        group.GroupDescription = "Watching them all tonight or die trying!!!";
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(1);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(1));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Marvel marathon movie night"));
+            Assert.That(group?.GroupDescription, Is.EqualTo("Watching them all tonight or die trying!!!"));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.Null);
+            Assert.That(group?.HostId, Is.EqualTo(1));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithDescriptionChangedToNull_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(2);
+        group.GroupDescription = null;
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(2));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
+            Assert.That(group?.GroupDescription, Is.Null);
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.EqualTo("https://redirect.teleparty.com/join/5ff6a69318b6a145"));
+            Assert.That(group?.HostId, Is.EqualTo(5));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithDescriptionChangedToEmptyString_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(2);
+        group.GroupDescription = "";
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(2));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
+            Assert.That(group?.GroupDescription, Is.EqualTo(String.Empty));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.EqualTo("https://redirect.teleparty.com/join/5ff6a69318b6a145"));
+            Assert.That(group?.HostId, Is.EqualTo(5));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithTelePartyUrlChanged_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(1);
+        group.TelePartyUrl = "https://redirect.teleparty.com/join/1cd99f76df1ab78e";
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(1);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(1));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Marvel marathon movie night"));
+            Assert.That(group?.GroupDescription, Is.Null);
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.EqualTo("https://redirect.teleparty.com/join/1cd99f76df1ab78e"));
+            Assert.That(group?.HostId, Is.EqualTo(1));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithTelePartyUrlChangedToNull_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(2);
+        group.TelePartyUrl = null;
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(2));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
+            Assert.That(group?.GroupDescription, Is.EqualTo("Going to watch all the Harry Potter movies in order all day"));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.Null);
+            Assert.That(group?.HostId, Is.EqualTo(5));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithTelePartyUrlChangedToEmptyString_ShouldSuccessfullyUpdate()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(2);
+        group.TelePartyUrl = "";
+
+        // Act
+        repo.UpdateGroup(group);
+        group = repo.GetById(2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(group, Is.Not.Null);
+            Assert.That(group?.Id, Is.EqualTo(2));
+            Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
+            Assert.That(group?.GroupDescription, Is.EqualTo("Going to watch all the Harry Potter movies in order all day"));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.TelePartyUrl, Is.EqualTo(String.Empty));
+            Assert.That(group?.HostId, Is.EqualTo(5));
+        });
+    }
+
+    [Test]
+    public void UpdateGroup_ForExistingGroupWithTitleMissing_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(2);
+        group.GroupTitle = null!;
+
+        // Act/Assert
+        Assert.Throws<Exception>(() => repo.UpdateGroup(group));
+    }
+
+    [Test]
+    public void UpdateGroup_ForNullGroup_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+
+        // Act/Assert
+        Assert.Throws<ArgumentNullException>(() => repo.UpdateGroup(null!));
+    }
+
+    [Test]
+    public void UpdateGroup_ForInvalidDate_ShouldThrowException()
+    {
+        // Arrange
+        using WatchPartyDbContext context = _dbHelper.GetContext();
+        IWatchPartyGroupRepository repo = new WatchPartyGroupRepository(context);
+        WatchPartyGroup? group = repo.GetById(2);
+        group.StartDate = new DateTime(2000, 5, 5, 10, 0, 0);
+
+        // Act/Assert
+        Assert.Throws<ArgumentException>(() => repo.UpdateGroup(group));
+    }
 }
