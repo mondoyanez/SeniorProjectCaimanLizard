@@ -8,6 +8,7 @@ namespace WatchParty.DAL.Abstract
     {
         Watcher? FindByUsername(string username);
         Watcher? FindByAspNetId(string aspId);
+        List<Watcher> FindAllWatchers();
         List<WatcherDTO> FindMatchingUsers(string username);
         bool IsCurrentUser(string username, IdentityUser watcher);
     }

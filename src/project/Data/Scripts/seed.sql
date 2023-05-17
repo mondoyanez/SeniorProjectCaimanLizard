@@ -175,6 +175,31 @@ VALUES
 (6, 2, 1, null)
 SET IDENTITY_INSERT [WatchListItems] OFF;
 
+SET IDENTITY_INSERT [WatchPartyGroup] ON;
+INSERT INTO [WatchPartyGroup] (ID, GroupTitle, GroupDescription, StartDate, HostID)
+VALUES
+(1, 'Marvel marathon movie night', null, '2023-05-05 20:00:00', 1),
+(2, 'Harry Potter marathon', 'Going to watch all the Harry Potter movies in order all day', '2023-05-05 08:00:00', 5),
+(3, 'Sports movies', 'Going to be watching sports movies such as More than a Game, The Last Dance, etc', '2023-05-05 14:00:00', 9)
+SET IDENTITY_INSERT [WatchPartyGroup] OFF;
+
+SET IDENTITY_INSERT [WatchPartyGroupAssignment] ON;
+INSERT INTO [WatchPartyGroupAssignment] (ID, GroupID, WatcherID)
+VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 2, 4),
+(5, 2, 1),
+(6, 2, 5),
+(7, 2, 6),
+(8, 2, 7),
+(9, 3, 1),
+(10, 3, 8),
+(11, 3, 9),
+(12, 3, 10)
+SET IDENTITY_INSERT [WatchPartyGroupAssignment] OFF;
+
 SET IDENTITY_INSERT [NotificationType] ON;
 INSERT INTO [NotificationType] (ID, NType)
 VALUES
@@ -190,7 +215,5 @@ SET IDENTITY_INSERT [Notification] ON;
 INSERT INTO [Notification] (ID, NotifierID, NotifTypeID, Content, IsRead, CreatedAt)
 VALUES
 (1, 1, 5, 'Your watch party is scheduled for 4/25/13 at 6:00 pm', 0, '2023-04-22 12:00:00'),
-(2, 1, 3, 'CarsonDaniel left a comment on your post', 0, '2023-04-22 12:05:00'),
-(3, 11, 3, 'CarsonDaniel left a comment on your post', 0, '2023-04-22 12:05:00')
+(2, 1, 3, 'CarsonDaniel left a comment on your post', 0, '2023-04-22 12:05:00')
 SET IDENTITY_INSERT [Notification] OFF;
-

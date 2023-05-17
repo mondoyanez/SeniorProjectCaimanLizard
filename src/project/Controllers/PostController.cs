@@ -1,17 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Services.Abstract;
-using WatchParty.Utilities;
 using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
@@ -107,21 +99,20 @@ public class PostController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create([Bind("PostTitle, PostDescription")] Post post)
     {
+        ModelState.Clear();
+
         post.DatePosted = DateTime.Now;
         post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
-        post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
         post.IsVisible = true;
 
-        try
+        TryValidateModel(post);
+
+        if (ModelState.IsValid)
         {
             _postRepository.AddPost(post);
+            return RedirectToAction("Index");
         }
-        catch (DbUpdateConcurrencyException e)
-        {
-            ViewBag.Message = "A concurrency error occurred while trying to create the item.  Please try again.";
-            return View(post);
-        }
-
-        return RedirectToAction("Index");
+        
+        return View();
     }
 }

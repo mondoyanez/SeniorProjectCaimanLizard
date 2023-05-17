@@ -27,5 +27,16 @@ namespace WatchParty.ViewModels
         public IEnumerable<Movie>? movies1 { get; set; }
 
 
+
+        // Have watched items
+        public IEnumerable<WatchListItem> haveWatchedItems { get; set; }
+
+        public WatchList? haveWatched { get; set; }
+
+        public IEnumerable<Show>? shows2 { get; set; }
+
+        public IEnumerable<Movie>? movies2 { get; set; }
+
+
     }
 }
