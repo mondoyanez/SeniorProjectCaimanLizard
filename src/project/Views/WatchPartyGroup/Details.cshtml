@@ -61,25 +61,25 @@
         <table class="table table-hover watch-party-table">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Participants</th>
-                    <th>Host</th>
-                    <th>Start Date</th>
+                    <th class="watch-party-table-title">Title</th>
+                    <th class="watch-party-table-description">Description</th>
+                    <th class="watch-party-table-participants">Participants</th>
+                    <th class="watch-party-table-host">Host</th>
+                    <th class="watch-party-table-date">Start Date</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>@Model?.Group?.GroupTitle</td>
-                    <td>@Model?.Group?.GroupDescription</td>
-                    <td id="watch-group-users">
+                    <td class="watch-party-table-title">@Model?.Group?.GroupTitle</td>
+                    <td class="watch-party-table-description">@Model?.Group?.GroupDescription</td>
+                    <td class="watch-party-table-participants" id="watch-group-users">
                         @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
                         {
                             <p id="remove-user-@person.Watcher.Username">@person.Watcher.Username</p>
                         }
                     </td>
-                    <td>@Model?.Group?.Host.Username</td>
-                    <td>@Model?.Group?.StartDate</td>
+                    <td class="watch-party-table-host">@Model?.Group?.Host.Username</td>
+                    <td class="watch-party-table-date">@Model?.Group?.StartDate</td>
                 </tr>
             </tbody>
         </table>

@@ -11960,6 +11960,28 @@ body {
 
 .watch-party-table {
   margin-top: 5%;
+  margin-left: 7%;
+  width: 80%;
+}
+
+.watch-party-table-title {
+  width: 20%;
+}
+
+.watch-party-table-description {
+  width: 20%;
+}
+
+.watch-party-table-participants {
+  width: 15%;
+}
+
+.watch-party-table-host {
+  width: 15%;
+}
+
+.watch-party-table-date {
+  width: 10%;
 }
 
 .watch-party-title-input-validation {
