@@ -148,7 +148,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(actual?.Id, Is.EqualTo(2));
             Assert.That(actual?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
             Assert.That(actual?.GroupDescription, Is.EqualTo("Going to watch all the Harry Potter movies in order all day"));
-            Assert.That(actual?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(actual?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 8, 0, 0)));
             Assert.That(actual?.TelePartyUrl, Is.EqualTo("https://redirect.teleparty.com/join/5ff6a69318b6a145"));
             Assert.That(actual?.Host.AspNetIdentityId, Is.EqualTo("561e79b0-24be-4f8b-96dd-056b493cd7e5"));
             Assert.That(actual?.HostId, Is.EqualTo(5));
@@ -188,7 +188,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(1));
             Assert.That(group?.GroupTitle, Is.EqualTo("Marvel marathon movie night"));
             Assert.That(group?.GroupDescription, Is.Null);
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 20, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.Null);
             Assert.That(group?.HostId, Is.EqualTo(1));
         });
@@ -214,7 +214,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(1));
             Assert.That(group?.GroupTitle, Is.EqualTo("Movie night"));
             Assert.That(group?.GroupDescription, Is.Null);
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 20, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.Null);
             Assert.That(group?.HostId, Is.EqualTo(1));
         });
@@ -240,7 +240,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(1));
             Assert.That(group?.GroupTitle, Is.EqualTo("Marvel marathon movie night"));
             Assert.That(group?.GroupDescription, Is.EqualTo("Watching them all tonight or die trying!!!"));
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 20, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.Null);
             Assert.That(group?.HostId, Is.EqualTo(1));
         });
@@ -266,7 +266,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(2));
             Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
             Assert.That(group?.GroupDescription, Is.Null);
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 8, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.EqualTo("https://redirect.teleparty.com/join/5ff6a69318b6a145"));
             Assert.That(group?.HostId, Is.EqualTo(5));
         });
@@ -292,7 +292,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(2));
             Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
             Assert.That(group?.GroupDescription, Is.EqualTo(String.Empty));
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 8, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.EqualTo("https://redirect.teleparty.com/join/5ff6a69318b6a145"));
             Assert.That(group?.HostId, Is.EqualTo(5));
         });
@@ -318,7 +318,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(1));
             Assert.That(group?.GroupTitle, Is.EqualTo("Marvel marathon movie night"));
             Assert.That(group?.GroupDescription, Is.Null);
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 20, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 20, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.EqualTo("https://redirect.teleparty.com/join/1cd99f76df1ab78e"));
             Assert.That(group?.HostId, Is.EqualTo(1));
         });
@@ -344,7 +344,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(2));
             Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
             Assert.That(group?.GroupDescription, Is.EqualTo("Going to watch all the Harry Potter movies in order all day"));
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 8, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.Null);
             Assert.That(group?.HostId, Is.EqualTo(5));
         });
@@ -370,7 +370,7 @@ public class WatchPartyGroupRepository_Tests
             Assert.That(group?.Id, Is.EqualTo(2));
             Assert.That(group?.GroupTitle, Is.EqualTo("Harry Potter marathon"));
             Assert.That(group?.GroupDescription, Is.EqualTo("Going to watch all the Harry Potter movies in order all day"));
-            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2023, 5, 5, 8, 0, 0)));
+            Assert.That(group?.StartDate, Is.EqualTo(new DateTime(2030, 5, 5, 8, 0, 0)));
             Assert.That(group?.TelePartyUrl, Is.EqualTo(String.Empty));
             Assert.That(group?.HostId, Is.EqualTo(5));
         });
