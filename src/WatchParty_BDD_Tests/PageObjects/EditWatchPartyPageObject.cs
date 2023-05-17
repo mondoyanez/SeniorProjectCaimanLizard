@@ -9,6 +9,12 @@ public class EditWatchPartyPageObject : PageObject
     }
 
     public IWebElement UnauthorizedHeaderElement => _webDriver.FindElement(By.ClassName("watch-party-edit-unauthorized-error"));
+    public IWebElement UpdateButton => _webDriver.FindElement(By.Id("watch-party-submit-button"));
+
+    public void UpdateGroup()
+    {
+        UpdateButton.Click();
+    }
 
     public string UnauthorizedHeaderText()
     {

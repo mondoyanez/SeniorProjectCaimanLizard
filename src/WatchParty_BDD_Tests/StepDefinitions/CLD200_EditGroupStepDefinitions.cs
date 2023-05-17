@@ -25,6 +25,28 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _watchPartyPage.SelectEditGroup();
         }
 
+        [Given(@"I click on update"), When(@"I click on update")]
+        public void WhenIClickOnUpdate()
+        {
+            _editWatchPartyPageObject.UpdateGroup();
+        }
+
+        [Then(@"I should be redirected to the details page with page title ""([^""]*)""")]
+        public void ThenIShouldBeRedirectedToTheDetailsPageWithPageTitle(string p0)
+        {
+            _watchPartyPage.GetTitle().Should().ContainEquivalentOf(p0, AtLeast.Once());
+        }
+
+        [Then(@"I should see header ""([^""]*)"", group title ""([^""]*)"", group description ""([^""]*)"", start date ""([^""]*)"", and TeleParty URL ""([^""]*)"" have all been updated")]
+        public void ThenIShouldSeeHeaderGroupTitleGroupDescriptionStartDateAndTelePartyURLHaveAllBeenUpdated(string headerTitle, string groupTitle, string groupDescription, string groupStartDate, string groupTelePartyUrl)
+        {
+            _watchPartyPage.DetailsHeaderElementText().Should().ContainEquivalentOf(headerTitle, AtLeast.Once());
+            _watchPartyPage.GroupTitleText().Should().ContainEquivalentOf(groupTitle, AtLeast.Once());
+            _watchPartyPage.GroupDescriptionText().Should().ContainEquivalentOf(groupDescription, AtLeast.Once());
+            _watchPartyPage.GroupDateText().Should().ContainEquivalentOf(groupStartDate, AtLeast.Once());
+            _watchPartyPage.TelePartyUrlText().Should().ContainEquivalentOf(groupTelePartyUrl, AtLeast.Once());
+        }
+
         [Then(@"I should see a header titled ""([^""]*)""")]
         public void ThenIShouldSeeAHeaderTitled(string p0)
         {

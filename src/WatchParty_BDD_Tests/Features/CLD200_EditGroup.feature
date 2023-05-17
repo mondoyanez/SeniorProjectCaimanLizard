@@ -42,3 +42,19 @@ Scenario Outline: Users can navigate to edit page that is not their own but are 
 	| Zayden    |
 	| Hareem    |
 	| Krzysztof |
+
+Scenario Outline: Users can navigate to the edit page and update watch party group even if nothing was updated
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I go to the details page of the newly created watch party
+		And I click on the group options button
+		And I click on the edit group button
+		And I click on update
+	Then I should be redirected to the details page with page title "Group Details"
+		And I should see header "Group Details", group title "Movie night", group description "Join one join all", start date "10/15/2024 8:00:00 PM", and TeleParty URL "N/A" have all been updated 
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |

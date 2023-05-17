@@ -12,7 +12,7 @@
         <div class="row text-center bg-light-subtle watch-party-table-container">
             <div class="row">
                 <div class="col-8 watch-party-details-header">
-                    <h1>Group Details</h1>
+                    <h1 id="watch-group-details-header">Group Details</h1>
                 </div>
 
                 @if (User?.Identity?.Name == Model.Group.Host.Username)
@@ -51,7 +51,7 @@
                     @if (Model.Group.TelePartyUrl != null)
                     {
                         <div class="col-4 watch-party-details-header-url-link">
-                            <a href="@Model.Group.TelePartyUrl" target="_blank">
+                            <a href="@Model.Group.TelePartyUrl" target="_blank" id="teleparty-url">
                                 @Model.Group.TelePartyUrl
                             </a>
                         </div>
@@ -59,7 +59,7 @@
                     else
                     {
                         <div class="col-4 watch-party-details-header-url-link-empty">
-                            <p>N/A</p>
+                            <p id="teleparty-url">N/A</p>
                         </div>
                     }
                 </div>
@@ -77,8 +77,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="watch-party-table-title">@Model?.Group?.GroupTitle</td>
-                    <td class="watch-party-table-description">@Model?.Group?.GroupDescription</td>
+                    <td class="watch-party-table-title" id="teleparty-title">@Model?.Group?.GroupTitle</td>
+                    <td class="watch-party-table-description" id="teleparty-description">@Model?.Group?.GroupDescription</td>
                     <td class="watch-party-table-participants" id="watch-group-users">
                         @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
                         {
@@ -86,7 +86,7 @@
                         }
                     </td>
                     <td class="watch-party-table-host">@Model?.Group?.Host.Username</td>
-                    <td class="watch-party-table-date">@Model?.Group?.StartDate</td>
+                    <td class="watch-party-table-date" id="teleparty-date">@Model?.Group?.StartDate</td>
                 </tr>
                 </tbody>
             </table>
