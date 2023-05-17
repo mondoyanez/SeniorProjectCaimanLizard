@@ -59,6 +59,7 @@ public class UserController : Controller
                 watchPartyGroups.Add(_groupRepository.GetById(group));
         }
         
+        watchPartyGroups = watchPartyGroups.Where(g => g.StartDate >= DateTime.Now).OrderBy(g => g.StartDate).ToList();
 
         vm.Watcher = watcher;
         vm.Following = followingList;
