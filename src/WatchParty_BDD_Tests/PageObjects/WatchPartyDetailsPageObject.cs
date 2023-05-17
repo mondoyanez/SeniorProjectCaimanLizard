@@ -9,6 +9,7 @@ public class WatchPartyDetailsPageObject : PageObject
     }
 
     public IWebElement GroupOptionsButton => _webDriver.FindElement(By.Id("watch-group-options-btn"));
+    public IWebElement EditGroupButton => _webDriver.FindElement(By.Id("watch-group-edit"));
     public IWebElement InviteUserButton => _webDriver.FindElement(By.Id("watch-group-invite"));
     public IWebElement RemoveUserButton => _webDriver.FindElement(By.Id("watch-group-remove"));
     public IWebElement ModalCloseButtonInvite => _webDriver.FindElement(By.Id("watch-group-modal-close-add"));
@@ -18,6 +19,11 @@ public class WatchPartyDetailsPageObject : PageObject
     public void ExpandGroupGroupOptions()
     {
         GroupOptionsButton.Click();
+    }
+
+    public void SelectEditGroup()
+    {
+        EditGroupButton.Click();
     }
 
     public void SelectInviteUsers()
