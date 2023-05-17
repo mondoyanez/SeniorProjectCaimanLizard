@@ -8,55 +8,64 @@
 {
     @if (ViewBag.IsVisible)
     {
-        <div class="row text-center bg-light-subtle watch-party-container">
-            <div class="row mt-5">
-                <h1>Edit Watch Party Group</h1>
-            </div>
-            <form asp-controller="WatchPartyGroup" class="watch-party-form" asp-action="Edit" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (!ViewBag.Occurred)
+        {
+            <div class="row text-center bg-light-subtle watch-party-container">
                 <div class="row mt-5">
-                    <div class="col-4">
-                        <label class="watch-party-title-label">Enter title:</label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" value="@Model.GroupTitle" />
-                        <span asp-validation-for="GroupTitle" class="text-danger watch-party-title-input-validation"></span>
-                    </div>
+                    <h1>Edit Watch Party Group</h1>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-4">
-                        <label class="watch-party-description-label">Enter description:</label>
+                <form asp-controller="WatchPartyGroup" class="watch-party-form" asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row mt-5">
+                        <div class="col-4">
+                            <label class="watch-party-title-label">Enter title:</label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" value="@Model.GroupTitle"/>
+                            <span asp-validation-for="GroupTitle" class="text-danger watch-party-title-input-validation"></span>
+                        </div>
                     </div>
-                    <div class="col-8">
-                        <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" rows="10">@Model.GroupDescription</textarea>
-                        <span asp-validation-for="GroupDescription" class="text-danger"></span>
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <label class="watch-party-description-label">Enter description:</label>
+                        </div>
+                        <div class="col-8">
+                            <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" rows="10">@Model.GroupDescription</textarea>
+                            <span asp-validation-for="GroupDescription" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-4">
-                        <label class="watch-party-date-label">Enter start date:</label>
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <label class="watch-party-date-label">Enter start date:</label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")"/>
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="col-8">
-                        <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")" />
-                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <label class="watch-party-date-label">TeleParty URL:</label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="TelePartyUrl" type="text" class="form-control watch-party-url-input" value="@Model.TelePartyUrl"/>
+                            <span asp-validation-for="TelePartyUrl" class="text-danger watch-party-url-input-validation"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-4">
-                        <label class="watch-party-date-label">TeleParty URL:</label>
+                    <div class="row mt-2">
+                        <input type="submit" value="Update" class="btn btn-primary watch-party-btn" id="watch-party-submit-button"/>
                     </div>
-                    <div class="col-8">
-                        <input asp-for="TelePartyUrl" type="text" class="form-control watch-party-url-input" value="@Model.TelePartyUrl" />
-                        <span asp-validation-for="TelePartyUrl" class="text-danger watch-party-url-input-validation"></span>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <input type="submit" value="Update" class="btn btn-primary watch-party-btn" id="watch-party-submit-button" />
-                </div>
-                <input type="hidden", asp-for="Id" value="@Model.Id" />
-                <input type="hidden" asp-for="HostId" value="@Model.HostId" />
-            </form>
-        </div>
+                    <input type="hidden", asp-for="Id" value="@Model.Id"/>
+                    <input type="hidden" asp-for="HostId" value="@Model.HostId"/>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="row text-center bg-light-subtle empty-page">
+                <h1 class="mt-5" style="color: red">This watch party has already happened please create a new one</h1>
+            </div>
+        }
     }
     else
     {

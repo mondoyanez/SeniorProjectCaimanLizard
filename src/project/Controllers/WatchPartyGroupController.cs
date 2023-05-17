@@ -85,6 +85,7 @@ public class WatchPartyGroupController : Controller
     {
         WatchPartyGroup? group = _groupRepository.GetById(groupId);
         ViewBag.IsVisible = group?.Host.Username == User?.Identity?.Name;
+        ViewBag.Occurred = group?.StartDate <= DateTime.Now;
         return View(group);
     }
 
@@ -93,6 +94,7 @@ public class WatchPartyGroupController : Controller
     public IActionResult Edit([Bind("Id, GroupTitle, GroupDescription, StartDate, TelePartyUrl, HostId")] WatchPartyGroup updatedGroup)
     {
         ViewBag.IsVisible = true;
+        ViewBag.Occurred = false;
 
         ModelState.Clear();
         TryValidateModel(updatedGroup);
