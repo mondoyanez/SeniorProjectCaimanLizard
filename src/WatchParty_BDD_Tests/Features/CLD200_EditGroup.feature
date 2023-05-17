@@ -30,3 +30,15 @@ Scenario Outline: Users can navigate to the edit page to make changes to their c
 	| Zayden    |
 	| Hareem    |
 	| Krzysztof |
+
+Scenario Outline: Users can navigate to edit page that is not their own but are unable to make changes
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I navigate to the "EditExistingWatchParty" page
+	Then I should see a header titled "Only the host can make modifications to the Watch Party Group"
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |

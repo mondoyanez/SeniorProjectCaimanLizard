@@ -24,5 +24,12 @@ namespace WatchParty_BDD_Tests.StepDefinitions
         {
             _watchPartyPage.SelectEditGroup();
         }
+
+        [Then(@"I should see a header titled ""([^""]*)""")]
+        public void ThenIShouldSeeAHeaderTitled(string p0)
+        {
+            _editWatchPartyPageObject.UnauthorizedHeaderText().Should().ContainEquivalentOf(p0, AtLeast.Once());
+        }
+
     }
 }

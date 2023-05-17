@@ -7,4 +7,11 @@ public class EditWatchPartyPageObject : PageObject
     {
         _pageName = "EditExistingWatchParty";
     }
+
+    public IWebElement UnauthorizedHeaderElement => _webDriver.FindElement(By.ClassName("watch-party-edit-unauthorized-error"));
+
+    public string UnauthorizedHeaderText()
+    {
+        return UnauthorizedHeaderElement.Text;
+    }
 }
