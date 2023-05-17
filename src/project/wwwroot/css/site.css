@@ -11975,6 +11975,18 @@ body {
   padding-bottom: 26%;
 }
 
+.watch-party-edit-error {
+  color: red;
+  margin-left: 45%;
+  padding-top: 2%;
+}
+
+.watch-party-edit-unauthorized-error {
+  color: red;
+  margin-left: 20%;
+  padding-top: 2%;
+}
+
 .watchlist-container {
   padding-bottom: 34%;
 }
