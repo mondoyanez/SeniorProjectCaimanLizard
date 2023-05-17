@@ -11886,8 +11886,20 @@ body {
 }
 
 .profile-watch-parties {
-  margin-left: 40%;
-  width: 25%;
+  margin-left: 15%;
+  width: 70%;
+}
+
+.profile-watch-party-table-title {
+  width: 20%;
+}
+
+.profile-watch-party-table-date {
+  width: 7%;
+}
+
+.profile-watch-party-table-url {
+  width: 10%;
 }
 
 .watch-party-container {
