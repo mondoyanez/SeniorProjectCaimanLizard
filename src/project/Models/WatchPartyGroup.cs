@@ -22,7 +22,7 @@ public partial class WatchPartyGroup
 
     [Column("TelePartyURL")]
     [StringLength(512)]
-    [RegularExpression("https://redirect\\.teleparty\\.com/join/[A-Za-z0-9]*")]
+    [RegularExpression("https://redirect\\.teleparty\\.com/join/[A-Za-z0-9]*", ErrorMessage = "Must be in format of: https://redirect/.teleparty/.com/join/")]
     public string? TelePartyUrl { get; set; }
 
     [Column("HostID")]

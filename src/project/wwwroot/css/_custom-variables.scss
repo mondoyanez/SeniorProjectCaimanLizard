@@ -353,7 +353,7 @@ body {
     margin-top: 2%;
 }
 
-.watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
+.watch-party-title-input, .watch-party-description-input, .watch-party-date-input, .watch-party-url-input {
     width: 47%;
 }
 
@@ -391,6 +391,10 @@ body {
 
 .watch-party-title-input-validation {
     margin-left: -87%;
+}
+
+.watch-party-url-input-validation {
+    margin-left: -67%;
 }
 
 .watch-party-table-container {
