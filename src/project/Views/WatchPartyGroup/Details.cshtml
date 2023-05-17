@@ -37,15 +37,24 @@
         
         @if (Model.UserInGroup)
         {
-            <div class="row">
-                <div class="col">
-                    <h4>TeleParty URL:</h4>
+            <div class="row mt-5">
+                <div class="col-2 watch-party-details-header-url">
+                    <h5>TeleParty URL:</h5>
                 </div>
-                <div class="col">
-                    <a href="@Model.Group.TelePartyUrl" target="_blank">
-                        @(Model.Group.TelePartyUrl ?? "N/A")
-                    </a>
-                </div>
+                @if (Model.Group.TelePartyUrl != null)
+                {
+                    <div class="col-4 watch-party-details-header-url-link">
+                        <a href="@Model.Group.TelePartyUrl" target="_blank">
+                            @Model.Group.TelePartyUrl
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-4 watch-party-details-header-url-link-empty">
+                        <p>N/A</p>
+                    </div>
+                }
             </div>
         }
 
