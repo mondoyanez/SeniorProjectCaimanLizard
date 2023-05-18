@@ -14,6 +14,7 @@ public class EditWatchPartyPageObject : PageObject
     public IWebElement StartDateInput => _webDriver.FindElement(By.ClassName("watch-party-date-input"));
     public IWebElement TelePartyUrlInput => _webDriver.FindElement(By.ClassName("watch-party-url-input"));
     public IWebElement UpdateButton => _webDriver.FindElement(By.Id("watch-party-submit-button"));
+    public IWebElement TitleErrorValidationElement => _webDriver.FindElement(By.ClassName("watch-party-title-input-validation"));
 
     public void EnterTitle(string title)
     {
@@ -44,6 +45,11 @@ public class EditWatchPartyPageObject : PageObject
     public void UpdateGroup()
     {
         UpdateButton.Click();
+    }
+
+    public string TitleErrorValidationText()
+    {
+        return TitleErrorValidationElement.Text;
     }
 
     public string UnauthorizedHeaderText()

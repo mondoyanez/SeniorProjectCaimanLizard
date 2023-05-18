@@ -88,5 +88,11 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _editWatchPartyPage.UnauthorizedHeaderText().Should().ContainEquivalentOf(p0, AtLeast.Once());
         }
 
+        [Then(@"I should receive an error message stating Title is a required field on the edit page")]
+        public void ThenIShouldReceiveAnErrorMessageStatingTitleIsARequiredFieldOnTheEditPage()
+        {
+            _editWatchPartyPage.GetTitle().Should().ContainEquivalentOf("Edit Group", AtLeast.Once());
+            _editWatchPartyPage.TitleErrorValidationText().Should().ContainEquivalentOf("Title is a required field", AtLeast.Once());
+        }
     }
 }
