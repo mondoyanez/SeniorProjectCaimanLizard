@@ -20,6 +20,11 @@ public partial class WatchPartyGroup
     [Column(TypeName = "datetime")]
     public DateTime StartDate { get; set; }
 
+    [Column("TelePartyURL")]
+    [StringLength(512)]
+    [RegularExpression("^https://redirect\\.teleparty\\.com/join/[a-z0-9]{16}$", ErrorMessage = "Must be in format of: https://redirect.teleparty.com/join/44c95d8fcf1fdbe1 with a length of 49 characters")]
+    public string? TelePartyUrl { get; set; }
+
     [Column("HostID")]
     public int HostId { get; set; }
 

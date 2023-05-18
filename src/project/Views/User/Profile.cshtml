@@ -82,16 +82,24 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Start Date</th>
+                        <th class="profile-watch-party-table-title">Title</th>
+                        <th class="profile-watch-party-table-date">Start Date</th>
+                        @if (Model.isCurrentUser)
+                        {
+                            <th class="profile-watch-party-table-url">TeleParty URL</th>
+                        }
                     </tr>
                     </thead>
                     <tbody>
                     @foreach (var group in Model.Groups)
                     {
                         <tr>
-                            <td><a asp-controller="WatchPartyGroup" asp-action="Details" asp-route-groupId="@group.Id" id="user-watch-party-details-link">@group.GroupTitle</a></td>
-                            <td>@group.StartDate</td>
+                            <td class="profile-watch-party-table-title"><a asp-controller="WatchPartyGroup" asp-action="Details" asp-route-groupId="@group.Id" id="user-watch-party-details-link">@group.GroupTitle</a></td>
+                            <td class="profile-watch-party-table-date">@group.StartDate</td>
+                            @if (Model.isCurrentUser)
+                            {
+                                <td class="profile-watch-party-table-url"><a href="@group.TelePartyUrl" target="_blank">@(group.TelePartyUrl ?? "N/A")</a></td>
+                            }
                         </tr>
                     }
                     </tbody>
@@ -99,7 +107,7 @@
             }
             else
             {
-                <h4>No watch parties currently</h4>
+                <h4 class="profile-watch-party-header-empty">No watch parties currently</h4>
             }
         </div>
         

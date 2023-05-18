@@ -47,8 +47,9 @@ public class WatchPartyGroupController : Controller
         if (ModelState.IsValid)
         {
             _groupRepository.CreateWatchPartyGroup(newGroup);
-            WatchPartyGroup? group = _groupRepository.FindGroup(newGroup.GroupTitle, newGroup.GroupDescription,
-                newGroup.StartDate, newGroup.Host, newGroup.HostId);
+
+            int currentGroupIndex = _groupRepository.GetAll().Count();
+            WatchPartyGroup? group = _groupRepository.GetById(currentGroupIndex);
 
             if (group == null)
                 throw new NullReferenceException(nameof(group));
@@ -65,14 +66,43 @@ public class WatchPartyGroupController : Controller
     {
         WatchPartyGroup group = _groupRepository.FindById(groupId);
         List<Watcher>? watchers = _watcherRepository.FindAllWatchers();
+        bool userInGroup = _assignmentRepository.UserInGroup(groupId, User.Identity.Name);
+        bool hasOccurred = group.StartDate <= DateTime.Now;
 
         PartyGroupVM vm = new()
         {
             Group = group,
-            Watchers = watchers
+            Watchers = watchers,
+            UserInGroup = userInGroup,
+            HasOccurred = hasOccurred
         };
 
         return View(vm);
+    }
+
+    [HttpGet]
+    public IActionResult Edit(int groupId)
+    {
+        WatchPartyGroup? group = _groupRepository.GetById(groupId);
+        ViewBag.IsVisible = group?.Host.Username == User?.Identity?.Name;
+        ViewBag.Occurred = group?.StartDate <= DateTime.Now;
+        return View(group);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit([Bind("Id, GroupTitle, GroupDescription, StartDate, TelePartyUrl, HostId")] WatchPartyGroup updatedGroup)
+    {
+        ViewBag.IsVisible = true;
+        ViewBag.Occurred = false;
+
+        ModelState.Clear();
+        TryValidateModel(updatedGroup);
+
+        if (!ModelState.IsValid) return View(updatedGroup);
+
+        _groupRepository.UpdateGroup(updatedGroup);
+        return RedirectToAction("Details", new { groupId = updatedGroup.Id });
     }
 }
 
