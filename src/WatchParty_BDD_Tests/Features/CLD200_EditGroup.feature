@@ -58,3 +58,23 @@ Scenario Outline: Users can navigate to the edit page and update watch party gro
 	| Zayden    |
 	| Hareem    |
 	| Krzysztof |
+
+Scenario Outline: Users can navigate to the edit page, change all pre-existing inputs, update the watch party and verify that it's been updated from the details page
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I go to the details page of the newly created watch party
+		And I click on the group options button
+		And I click on the edit group button
+		And I update the title to "Movie marathon night"
+		And I update the description to "All are welcome to join don't be shy"
+		And I update the start date to "02/08/2025" and start time to "10:00"
+		And I update the teleparty link to "https://redirect.teleparty.com/join/3d63d7434826d1e8"
+		And I click on update
+	Then I should be redirected to the details page with page title "Group Details"
+		And I should see header "Group Details", group title "Movie marathon night", group description "All are welcome to join don't be shy", start date "2/8/2025 10:00:00 AM", and TeleParty URL "https://redirect.teleparty.com/join/3d63d7434826d1e8" have all been updated
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |

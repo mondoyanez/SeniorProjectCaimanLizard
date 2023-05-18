@@ -25,6 +25,32 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _watchPartyPage.SelectEditGroup();
         }
 
+        [Given(@"I update the title to ""([^""]*)"""), When(@"I update the title to ""([^""]*)""")]
+        public void WhenIUpdateTheTitleTo(string title)
+        {
+            _editWatchPartyPageObject.EnterTitle(title);
+        }
+
+        [Given(@"I update the description to ""([^""]*)"""), When(@"I update the description to ""([^""]*)""")]
+        public void WhenIUpdateTheDescriptionTo(string description)
+        {
+            _editWatchPartyPageObject.EnterDescription(description);
+        }
+
+        [Given(@"I update the start date to ""([^""]*)"" and start time to ""([^""]*)"""), When(@"I update the start date to ""([^""]*)"" and start time to ""([^""]*)""")]
+        public void WhenIUpdateTheStartDateToAndStartTimeTo(string date, string time)
+        {
+            _editWatchPartyPageObject.EnterStartDate(date, time);
+        }
+
+
+        [Given(@"I update the teleparty link to ""([^""]*)"""), When(@"I update the teleparty link to ""([^""]*)""")]
+        public void WhenIUpdateTheTelepartyLinkTo(string url)
+        {
+            _editWatchPartyPageObject.EnterTelePartyUrl(url);
+        }
+
+
         [Given(@"I click on update"), When(@"I click on update")]
         public void WhenIClickOnUpdate()
         {
