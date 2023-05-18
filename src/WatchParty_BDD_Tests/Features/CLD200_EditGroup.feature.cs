@@ -235,19 +235,19 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Users can navigate to the edit page and update watch party group even if nothing " +
-            "was updated")]
+        [NUnit.Framework.DescriptionAttribute("Users can navigate to the edit page, change all pre-existing inputs, update the w" +
+            "atch party and verify that it\'s been updated from the details page")]
         [NUnit.Framework.TestCaseAttribute("Talia", null)]
         [NUnit.Framework.TestCaseAttribute("Zayden", null)]
         [NUnit.Framework.TestCaseAttribute("Hareem", null)]
         [NUnit.Framework.TestCaseAttribute("Krzysztof", null)]
-        public virtual void UsersCanNavigateToTheEditPageAndUpdateWatchPartyGroupEvenIfNothingWasUpdated(string firstName, string[] exampleTags)
+        public virtual void UsersCanNavigateToTheEditPageChangeAllPre_ExistingInputsUpdateTheWatchPartyAndVerifyThatItsBeenUpdatedFromTheDetailsPage(string firstName, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("FirstName", firstName);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Users can navigate to the edit page and update watch party group even if nothing " +
-                    "was updated", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Users can navigate to the edit page, change all pre-existing inputs, update the w" +
+                    "atch party and verify that it\'s been updated from the details page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 46
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -287,35 +287,46 @@ this.FeatureBackground();
   testRunner.And("I click on the edit group button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 52
-  testRunner.And("I click on update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I update the title to \"Movie marathon night\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 53
- testRunner.Then("I should be redirected to the details page with page title \"Group Details\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.And("I update the description to \"All are welcome to join don\'t be shy\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 54
-  testRunner.And("I should see header \"Group Details\", group title \"Movie night\", group description" +
-                        " \"Join one join all\", start date \"10/15/2024 8:00:00 PM\", and TeleParty URL \"N/A" +
-                        "\" have all been updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I update the start date to \"02/08/2025\" and start time to \"10:00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 55
+  testRunner.And("I update the teleparty link to \"https://redirect.teleparty.com/join/3d63d7434826d" +
+                        "1e8\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 56
+  testRunner.And("I click on update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 57
+ testRunner.Then("I should be redirected to the details page with page title \"Group Details\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 58
+  testRunner.And(@"I should see header ""Group Details"", group title ""Movie marathon night"", group description ""All are welcome to join don't be shy"", start date ""2/8/2025 10:00:00 AM"", and TeleParty URL ""https://redirect.teleparty.com/join/3d63d7434826d1e8"" have all been updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Users can navigate to the edit page, change all pre-existing inputs, update the w" +
-            "atch party and verify that it\'s been updated from the details page")]
+        [NUnit.Framework.DescriptionAttribute("Users can navigate to the edit page, leave the description empty, update the watc" +
+            "h party and verify that it\'s been updated from the details page")]
         [NUnit.Framework.TestCaseAttribute("Talia", null)]
         [NUnit.Framework.TestCaseAttribute("Zayden", null)]
         [NUnit.Framework.TestCaseAttribute("Hareem", null)]
         [NUnit.Framework.TestCaseAttribute("Krzysztof", null)]
-        public virtual void UsersCanNavigateToTheEditPageChangeAllPre_ExistingInputsUpdateTheWatchPartyAndVerifyThatItsBeenUpdatedFromTheDetailsPage(string firstName, string[] exampleTags)
+        public virtual void UsersCanNavigateToTheEditPageLeaveTheDescriptionEmptyUpdateTheWatchPartyAndVerifyThatItsBeenUpdatedFromTheDetailsPage(string firstName, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("FirstName", firstName);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Users can navigate to the edit page, change all pre-existing inputs, update the w" +
-                    "atch party and verify that it\'s been updated from the details page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 62
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Users can navigate to the edit page, leave the description empty, update the watc" +
+                    "h party and verify that it\'s been updated from the details page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 66
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -338,42 +349,44 @@ this.ScenarioInitialize(scenarioInfo);
 #line 12
 this.FeatureBackground();
 #line hidden
-#line 63
+#line 67
  testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 64
+#line 68
  testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 65
+#line 69
   testRunner.And("I go to the details page of the newly created watch party", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 66
+#line 70
   testRunner.And("I click on the group options button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 67
+#line 71
   testRunner.And("I click on the edit group button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 68
+#line 72
   testRunner.And("I update the title to \"Movie marathon night\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 69
-  testRunner.And("I update the description to \"All are welcome to join don\'t be shy\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 73
+  testRunner.And("I update the description to \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 70
+#line 74
   testRunner.And("I update the start date to \"02/08/2025\" and start time to \"10:00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 71
+#line 75
   testRunner.And("I update the teleparty link to \"https://redirect.teleparty.com/join/3d63d7434826d" +
                         "1e8\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 72
+#line 76
   testRunner.And("I click on update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 73
+#line 77
  testRunner.Then("I should be redirected to the details page with page title \"Group Details\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 74
-  testRunner.And(@"I should see header ""Group Details"", group title ""Movie marathon night"", group description ""All are welcome to join don't be shy"", start date ""2/8/2025 10:00:00 AM"", and TeleParty URL ""https://redirect.teleparty.com/join/3d63d7434826d1e8"" have all been updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
+  testRunner.And("I should see header \"Group Details\", group title \"Movie marathon night\", group de" +
+                        "scription empty, start date \"2/8/2025 10:00:00 AM\", and TeleParty URL \"https://r" +
+                        "edirect.teleparty.com/join/3d63d7434826d1e8\" have all been updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

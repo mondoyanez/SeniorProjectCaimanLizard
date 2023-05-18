@@ -8,13 +8,13 @@ namespace WatchParty_BDD_Tests.StepDefinitions
     [Binding]
     public class CLD200_EditGroupStepDefinitions
     {
-        private readonly EditWatchPartyPageObject _editWatchPartyPageObject;
+        private readonly EditWatchPartyPageObject _editWatchPartyPage;
         private readonly ProfilePageObject _profilePage;
         private readonly WatchPartyDetailsPageObject _watchPartyPage;
 
         public CLD200_EditGroupStepDefinitions(BrowserDriver browserDriver)
         {
-            _editWatchPartyPageObject = new EditWatchPartyPageObject(browserDriver.Current);
+            _editWatchPartyPage = new EditWatchPartyPageObject(browserDriver.Current);
             _profilePage = new ProfilePageObject(browserDriver.Current);
             _watchPartyPage = new WatchPartyDetailsPageObject(browserDriver.Current);
         }
@@ -28,33 +28,32 @@ namespace WatchParty_BDD_Tests.StepDefinitions
         [Given(@"I update the title to ""([^""]*)"""), When(@"I update the title to ""([^""]*)""")]
         public void WhenIUpdateTheTitleTo(string title)
         {
-            _editWatchPartyPageObject.EnterTitle(title);
+            _editWatchPartyPage.EnterTitle(title);
         }
 
         [Given(@"I update the description to ""([^""]*)"""), When(@"I update the description to ""([^""]*)""")]
         public void WhenIUpdateTheDescriptionTo(string description)
         {
-            _editWatchPartyPageObject.EnterDescription(description);
+            _editWatchPartyPage.EnterDescription(description);
         }
 
         [Given(@"I update the start date to ""([^""]*)"" and start time to ""([^""]*)"""), When(@"I update the start date to ""([^""]*)"" and start time to ""([^""]*)""")]
         public void WhenIUpdateTheStartDateToAndStartTimeTo(string date, string time)
         {
-            _editWatchPartyPageObject.EnterStartDate(date, time);
+            _editWatchPartyPage.EnterStartDate(date, time);
         }
 
 
         [Given(@"I update the teleparty link to ""([^""]*)"""), When(@"I update the teleparty link to ""([^""]*)""")]
         public void WhenIUpdateTheTelepartyLinkTo(string url)
         {
-            _editWatchPartyPageObject.EnterTelePartyUrl(url);
+            _editWatchPartyPage.EnterTelePartyUrl(url);
         }
-
 
         [Given(@"I click on update"), When(@"I click on update")]
         public void WhenIClickOnUpdate()
         {
-            _editWatchPartyPageObject.UpdateGroup();
+            _editWatchPartyPage.UpdateGroup();
         }
 
         [Then(@"I should be redirected to the details page with page title ""([^""]*)""")]
@@ -73,10 +72,20 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _watchPartyPage.TelePartyUrlText().Should().ContainEquivalentOf(groupTelePartyUrl, AtLeast.Once());
         }
 
+        [Then(@"I should see header ""([^""]*)"", group title ""([^""]*)"", group description empty, start date ""([^""]*)"", and TeleParty URL ""([^""]*)"" have all been updated")]
+        public void ThenIShouldSeeHeaderGroupTitleGroupDescriptionEmptyStartDateAndTelePartyURLHaveAllBeenUpdated(string headerTitle, string groupTitle, string groupStartDate, string groupTelePartyUrl)
+        {
+            _watchPartyPage.DetailsHeaderElementText().Should().ContainEquivalentOf(headerTitle, AtLeast.Once());
+            _watchPartyPage.GroupTitleText().Should().ContainEquivalentOf(groupTitle, AtLeast.Once());
+            _watchPartyPage.GroupDescriptionText().Should().BeNullOrWhiteSpace();
+            _watchPartyPage.GroupDateText().Should().ContainEquivalentOf(groupStartDate, AtLeast.Once());
+            _watchPartyPage.TelePartyUrlText().Should().ContainEquivalentOf(groupTelePartyUrl, AtLeast.Once());
+        }
+
         [Then(@"I should see a header titled ""([^""]*)""")]
         public void ThenIShouldSeeAHeaderTitled(string p0)
         {
-            _editWatchPartyPageObject.UnauthorizedHeaderText().Should().ContainEquivalentOf(p0, AtLeast.Once());
+            _editWatchPartyPage.UnauthorizedHeaderText().Should().ContainEquivalentOf(p0, AtLeast.Once());
         }
 
     }
