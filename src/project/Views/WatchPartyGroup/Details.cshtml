@@ -45,11 +45,11 @@
                     <h6>TeleParty third party extension required which can be installed <a href="https://www.teleparty.com" target="_blank">here</a></h6>
                 </div>
                 <div class="row mt-5">
-                    <div class="col-2 watch-party-details-header-url">
-                        <h5>TeleParty URL:</h5>
-                    </div>
                     @if (Model.Group.TelePartyUrl != null)
                     {
+                        <div class="col-2 watch-party-details-header-url">
+                            <h5>TeleParty URL:</h5>
+                        </div>
                         <div class="col-4 watch-party-details-header-url-link">
                             <a href="@Model.Group.TelePartyUrl" target="_blank" id="teleparty-url">
                                 @Model.Group.TelePartyUrl
@@ -58,6 +58,9 @@
                     }
                     else
                     {
+                        <div class="col-2 watch-party-details-header-url-empty">
+                            <h5>TeleParty URL:</h5>
+                        </div>
                         <div class="col-4 watch-party-details-header-url-link-empty">
                             <p id="teleparty-url">N/A</p>
                         </div>
