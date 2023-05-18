@@ -775,6 +775,82 @@ this.FeatureBackground();
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Users navigate to the edit page, update the teleparty url to a length that exceed" +
+            "s required length and on submission it does not let them update the group")]
+        [NUnit.Framework.TestCaseAttribute("Talia", null)]
+        [NUnit.Framework.TestCaseAttribute("Zayden", null)]
+        [NUnit.Framework.TestCaseAttribute("Hareem", null)]
+        [NUnit.Framework.TestCaseAttribute("Krzysztof", null)]
+        public virtual void UsersNavigateToTheEditPageUpdateTheTelepartyUrlToALengthThatExceedsRequiredLengthAndOnSubmissionItDoesNotLetThemUpdateTheGroup(string firstName, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("FirstName", firstName);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Users navigate to the edit page, update the teleparty url to a length that exceed" +
+                    "s required length and on submission it does not let them update the group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 182
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 12
+this.FeatureBackground();
+#line hidden
+#line 183
+ testRunner.Given(string.Format("I am a user with first name \'{0}\'", firstName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 184
+ testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 185
+  testRunner.And("I go to the details page of the newly created watch party", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 186
+  testRunner.And("I click on the group options button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 187
+  testRunner.And("I click on the edit group button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 188
+  testRunner.And("I update the title to \"Movie marathon night\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 189
+  testRunner.And("I update the description to \"All are welcome to join don\'t be shy\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 190
+  testRunner.And("I update the start date to \"02/08/2025\" and start time to \"10:00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 191
+  testRunner.And("I update the teleparty link to \"https://redirect.teleparty.com/join/59d5634147848" +
+                        "d8ef30799fc4c0067b4\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 192
+  testRunner.And("I click on update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 193
+ testRunner.Then("I should receive an error message telling me to enter the url in the correct form" +
+                        "at on the edit page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

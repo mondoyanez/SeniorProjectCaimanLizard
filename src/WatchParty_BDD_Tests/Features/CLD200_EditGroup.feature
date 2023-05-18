@@ -178,3 +178,22 @@ Scenario Outline: Users navigate to the edit page, update the teleparty url to a
 	| Zayden    |
 	| Hareem    |
 	| Krzysztof |
+
+Scenario Outline: Users navigate to the edit page, update the teleparty url to a length that exceeds required length and on submission it does not let them update the group
+	Given I am a user with first name '<FirstName>'
+	When I login
+		And I go to the details page of the newly created watch party
+		And I click on the group options button
+		And I click on the edit group button
+		And I update the title to "Movie marathon night"
+		And I update the description to "All are welcome to join don't be shy"
+		And I update the start date to "02/08/2025" and start time to "10:00"
+		And I update the teleparty link to "https://redirect.teleparty.com/join/59d5634147848d8ef30799fc4c0067b4"
+		And I click on update
+	Then I should receive an error message telling me to enter the url in the correct format on the edit page
+	Examples:
+	| FirstName |
+	| Talia     |
+	| Zayden    |
+	| Hareem    |
+	| Krzysztof |
