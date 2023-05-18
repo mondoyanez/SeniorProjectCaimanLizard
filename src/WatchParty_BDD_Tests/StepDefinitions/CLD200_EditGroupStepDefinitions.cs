@@ -94,5 +94,13 @@ namespace WatchParty_BDD_Tests.StepDefinitions
             _editWatchPartyPage.GetTitle().Should().ContainEquivalentOf("Edit Group", AtLeast.Once());
             _editWatchPartyPage.TitleErrorValidationText().Should().ContainEquivalentOf("Title is a required field", AtLeast.Once());
         }
+
+        [Then(@"I should receive an error message stating Must be in format of: https://redirect\.teleparty\.com/join/ on the edit page")]
+        public void ThenIShouldReceiveAnErrorMessageStatingMustBeInFormatOfHttpsRedirect_Teleparty_ComJoinOnTheEditPage()
+        {
+            _editWatchPartyPage.GetTitle().Should().ContainEquivalentOf("Edit Group", AtLeast.Once());
+            _editWatchPartyPage.TelePartyUrlValidationText().Should().ContainEquivalentOf("Must be in format of: https://redirect.teleparty.com/join/", AtLeast.Once());
+        }
+
     }
 }
