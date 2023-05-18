@@ -24,18 +24,8 @@ $(document).ready(function () {
             data: { title: query },
             dataType: "json",
             success: function (response) {
-                if (document.getElementById('multiCheck').checked) {
-                    displayTitles(response);
-                }
-                if (document.getElementById('moviesCheck').checked) {
-                    displayMovies(response);
-                }
-                if (document.getElementById('showsCheck').checked) {
-                    displayShows(response);
-                }
-                if (document.getElementById('actorsCheck').checked) {
-                    displayActors(response);
-                }
+                displayTitles(response);
+                window.ShowAndMovieData = response;
             },
             error: function() {
                 errorOnAjax();
@@ -56,6 +46,52 @@ $(document).ready(function () {
     });
 });
 
+// Function to handle radio button change event
+function handleFilterChange() {
+    // Get the selected value
+    var filterValue = document.querySelector('input[type="radio"][name="filter"]:checked').value;
+    console.log(filterValue);
+
+    // Get all items to be filtered
+    var items = window.ShowAndMovieData;
+    console.log(items.length);
+
+    // Iterate over the items and show/hide based on the selected value
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (filterValue === "all") {
+            $("#" + item.mediaType + "-" + i).show();
+        }
+        else if ("movie" === filterValue) {
+            $("#movie-" + i).show();
+            $("#tv-" + i).hide();
+            //item.style.display = 'block'; // Show the item
+            console.log("shows the item");
+            console.log(filterValue);
+        } else if ("tv" === filterValue) {
+            $("#tv-" + i).show();
+            $("#movie-" + i).hide();
+            //item.style.display = 'none'; // Hide the item
+            console.log("hides the item");
+            console.log(filterValue);
+        }
+    }
+}
+
+// Add event listener to the radio button group
+var filterRadios = document.querySelectorAll('input[type="radio"][name="filter"]');
+filterRadios.forEach(radio => radio.addEventListener('change', handleFilterChange));
+
+
+
+
+
+
+/*$(function () {
+    $('#showsCheck').on('change', () => {
+        alert('tvvvvvv;');
+    });
+});*/
 
 /* TODO: commented out for now, when below functionality is replaced by ability to search by filters then this can be removed
 // Once the DOM is ready, execute everything in this function to set up the UI
@@ -220,7 +256,7 @@ function displayTitles(data) {
     $.each(data,
         function (index, item) {
             let result =
-                `<div class="col cld-bg-light">
+                `<div class="col cld-bg-light" id="${item.mediaType}-${index}">
                     <div class="card mb-3">
                       <div class="row g-0">
                         <div class="col-sm-2 col-4 align-self-center">
@@ -231,6 +267,7 @@ function displayTitles(data) {
                             <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                            <p class="card-text"><small class="text-muted">Media Type: ${item.mediaType}</small></p>
                           </div>
                         </div>
                       </div>
