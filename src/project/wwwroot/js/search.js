@@ -323,8 +323,11 @@ function displayShows(data) {
                             </div>
                             <div class="col">
                               <div class="card-body text-start">
-                                <h4 class="card-title" onclick='getDetailedPage()'>${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
-                                <a class="btn" onclick='getDetailedPage()'>See Detailed Page</a>
+                                <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
+
+                                <a class="btn text-light" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")'>See Detailed Page</a>
+
+
                                 <p class="card-text truncate-overflow">${item.plotSummary}</p>
                                 <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                                 <div>
@@ -398,18 +401,35 @@ function errorOnAjax() {
     // ...
 }
 
-function getDetailedPage() {
-    $.ajax({
-        type: "GET",
-        url: '/Home/Show',
-        success: function (result) {
-            console.log("Going to detailed show page");
-        },
-        error: function (error) {
-            console.error("Error updating database:" + error.responseText);
-        }
-    });
+function searchDetails(title, releaseDate, mediaType) {
+    console.log("inside searchDetails");
+    console.log("title: " + title);
+    console.log("release date: " + releaseDate);
+    console.log("media type: " + mediaType);
+    //window.location.href = "/Home/SearchDetails/";
+
+    const newtitle = title.replace("'", "&apos;");
+    window.location.href = 'SearchDetails/' + '?title=' + newtitle + '&releaseDate=' + releaseDate;
+
+
+    //$.ajax({
+    //    type: "GET",
+    //    url: '/Home/SearchDetails/',
+    //    data: {
+    //        title: title,
+    //        releaseDate: releaseDate,
+    //        mediaType: mediaType
+    //    },
+    //    success: function (result) {
+    //        console.log("Going to detailed show page");
+    //    //    window.location.href = "/Home/SearchDetails/";
+    //    },
+    //    error: function (error) {
+    //        console.error("Error: " + error.responseText);
+    //    }
+    //});
 }
+
 
 
 function addTitleToWatchList(Title, listType, mediaType) {

@@ -111,6 +111,11 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllerRoute(
+            name: "SearchDetails",
+            pattern: "Home/SearchDetails/title={title}&releaseDate={releaseDate}",
+            defaults: new { controller = "Home", action = "SearchDetails" });
+
+        app.MapControllerRoute(
             name: "AddMovieToWatchList",
             pattern: "watchlist/addMovieToWatchList",
             defaults: new { controller = "WatchList", action = "addMovieToWatchList" });

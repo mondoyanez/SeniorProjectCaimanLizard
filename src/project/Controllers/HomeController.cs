@@ -36,13 +36,44 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Show()
+    //[Route("/SearchDetails/{title}")]
+    public IActionResult SearchDetails(string title, DateTime ReleaseDate)
     {
-        Debug.WriteLine("Inside controller for show");
-        //Debug.WriteLine("Show title: " + title);
+        Debug.WriteLine("Inside controller for search details");
+        Debug.WriteLine("Title: " + title);
+        Debug.WriteLine("Release Date: " + ReleaseDate);
+        //Debug.WriteLine("Media type: " + mediaType);
+
+        Show show = new Show()
+        {
+            Title = title,
+            FirstAirDate = ReleaseDate.ToString()
+        };
+        return View(show);
 
 
-        return View(); 
+        //if (mediaType == "tv")
+        //{
+        //    //make a call to the api
+        //    //for now just using basic data
+
+        //    Show show = new Show()
+        //    {
+        //        Title = title,
+        //        FirstAirDate = ReleaseDate.ToString()
+        //    };
+        //    return View(show);
+
+        //} else
+        //{
+        //    Movie movie = new Movie()
+        //    {
+        //        Title = title,
+        //        ReleaseDate = ReleaseDate.ToString()
+        //    };
+        //    return View(movie);
+        //}
+
     }
 
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

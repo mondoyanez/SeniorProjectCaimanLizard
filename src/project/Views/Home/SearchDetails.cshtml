@@ -1,0 +1,32 @@
+﻿@model Show
+@{
+    ViewData["Title"] = "Detailed Search";
+}
+
+<section class="cld-bg-light" style="text-align:center">
+    <br />
+
+    <h1>Detailed Show Page</h1>
+
+    @if (Model == null)
+    {
+        <p>model is null</p>
+
+    } else {
+
+        <h1 id="title-details">@Model.Title</h1>
+    }
+    
+    <p id="descriptions-details"></p>
+
+    <br />
+    <br />
+</section>
+
+@section Scripts
+{
+	<script type="text/javascript" src="~/js/searchDetails.js"></script>
+	<script>
+		console.log("loaded Scripts section");
+	</script>
+}
