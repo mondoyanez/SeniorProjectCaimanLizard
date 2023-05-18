@@ -99,7 +99,7 @@ namespace WatchParty_BDD_Tests.StepDefinitions
         public void ThenIShouldReceiveAnErrorMessageStatingMustBeInFormatOfHttpsRedirect_Teleparty_ComJoinOnTheEditPage()
         {
             _editWatchPartyPage.GetTitle().Should().ContainEquivalentOf("Edit Group", AtLeast.Once());
-            _editWatchPartyPage.TelePartyUrlValidationText().Should().ContainEquivalentOf("Must be in format of: https://redirect.teleparty.com/join/", AtLeast.Once());
+            _editWatchPartyPage.TelePartyUrlValidationText().Should().ContainEquivalentOf("Must be in format of: https://redirect.teleparty.com/join/44c95d8fcf1fdbe1 with a length of 49 characters", AtLeast.Once());
         }
 
     }
