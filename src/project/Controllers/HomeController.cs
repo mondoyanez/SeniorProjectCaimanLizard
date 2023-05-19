@@ -94,7 +94,14 @@ public class HomeController : Controller
         ShowDetailsVM vm = new ShowDetailsVM();
         //vm = _tmdbService.GetShowDetails(id);
 
-        vm = _tmdbService.GetShowDetails(title, ReleaseDate);
+        int showId = _tmdbService.GetShowId(title, ReleaseDate);
+
+        if (showId == 0)
+        {
+            return View();
+        }
+
+        vm = _tmdbService.GetShowDetails(showId);
 
         return View(vm);
 

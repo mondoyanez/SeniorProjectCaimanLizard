@@ -336,7 +336,7 @@ namespace WatchParty.Services.Concrete
 
 
 
-        public ShowDetailsVM? GetShowDetails(string title, DateOnly releaseDate, string relativepath = "/search/multi?query=")
+        public int GetShowId(string title, DateOnly releaseDate, string relativepath = "/search/multi?query=")
         {
             var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{title}");
             Debug.WriteLine(this.Key, $"{relativepath}{title}");
@@ -354,21 +354,24 @@ namespace WatchParty.Services.Concrete
                 Debug.WriteLine(e);
             }
 
-            if (tmdbJsonDTO == null) return new ShowDetailsVM();
+            if (tmdbJsonDTO == null) return 0;
             //Debug.WriteLine(tmdbJsonDTO.results.First().first_air_date);
             //Debug.WriteLine(releaseDate);
             //Debug.WriteLine(releaseDate.ToString());
 
             //DateOnly newReleaseDate = DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date);
 
+            int showId = tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date) == releaseDate).First().id;
 
-            return tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date) == releaseDate).Select(r => new ShowDetailsVM()
-            {
-                name = r.name, 
-                id = r.id,
-                releaseDate = r.first_air_date
-                
-            }).First();
+            return showId;
+
+            //return tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date) == releaseDate).Select(r => new ShowDetailsVM()
+            //{
+            //    name = r.name, 
+            //    id = r.id,
+            //    releaseDate = r.first_air_date
+
+            //}).First();
 
             //return tmdbJsonDTO.results.Where(results => results.first_air_date == releaseDate.ToString()).Select(r => new ShowDetailsVM()
             //{

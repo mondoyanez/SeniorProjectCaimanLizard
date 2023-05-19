@@ -8,6 +8,10 @@ public class ShowDetailsVM
 
     public string? releaseDate { get; set; }
 
+    public string overview { get; set; }
+
+    public int number_of_episodes { get; set; }
+
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     //public bool adult { get; set; }
     //public string backdrop_path { get; set; }
