@@ -207,7 +207,7 @@ $(document).ready(function () {
 function displayTitles(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
-
+    
     if (data.length == 0) {
         alert("Your search query returned no results");
     }
@@ -273,7 +273,7 @@ function displayMovies(data) {
                         </div>
                         <div class="col">
                           <div class="card-body text-start" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")'>
-                            <h4 class="card-title" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <h4 class="card-title" onclick='searchDetails("${item.title}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                               <div>

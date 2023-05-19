@@ -92,10 +92,15 @@ public class HomeController : Controller
         int id = 100088;
 
         ShowDetailsVM vm = new ShowDetailsVM();
-        vm = _tmdbService.GetShowDetails(id);
+        //vm = _tmdbService.GetShowDetails(id);
+
+        vm = _tmdbService.GetShowDetails(title, ReleaseDate);
 
         return View(vm);
 
+        // Should be getting an id and a mediaType
+        // hit different services for the different media types, and pass in the correct id
+        // This is all manually entered right now, need to change it once the id is figured out
 
     }
 
