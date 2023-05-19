@@ -1,8 +1,12 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.Services.Abstract;
+using WatchParty.Services.Concrete;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
 
@@ -10,9 +14,12 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    private readonly ITMDBService _tmdbService;
+
+    public HomeController(ILogger<HomeController> logger, ITMDBService tMDBService)
     {
         _logger = logger;
+        _tmdbService = tMDBService;
     }
 
     public IActionResult Index()
@@ -36,47 +43,63 @@ public class HomeController : Controller
         return View();
     }
 
-    //[Route("/SearchDetails/{title}")]
-    public IActionResult SearchDetails(string title, DateTime ReleaseDate)
+    //public IActionResult SearchDetails(string title, DateOnly ReleaseDate)
+    //{
+    //    Debug.WriteLine("Inside controller for search details");
+    //    Debug.WriteLine("Title: " + title);
+    //    Debug.WriteLine("Release Date: " + ReleaseDate);
+    //    //Debug.WriteLine("Media type: " + mediaType);
+
+    //    Show show = new Show()
+    //    {
+    //        Title = title,
+    //        FirstAirDate = ReleaseDate.ToString()
+    //    };
+    //    return View(show);
+
+
+    //    //if (mediaType == "tv")
+    //    //{
+    //    //    //make a call to the api
+    //    //    //for now just using basic data
+
+    //    //    Show show = new Show()
+    //    //    {
+    //    //        Title = title,
+    //    //        FirstAirDate = ReleaseDate.ToString()
+    //    //    };
+    //    //    return View(show);
+
+    //    //} else
+    //    //{
+    //    //    Movie movie = new Movie()
+    //    //    {
+    //    //        Title = title,
+    //    //        ReleaseDate = ReleaseDate.ToString()
+    //    //    };
+    //    //    return View(movie);
+    //    //}
+
+    //}
+
+    public IActionResult SearchDetails(string title, DateOnly ReleaseDate)
     {
         Debug.WriteLine("Inside controller for search details");
         Debug.WriteLine("Title: " + title);
         Debug.WriteLine("Release Date: " + ReleaseDate);
         //Debug.WriteLine("Media type: " + mediaType);
 
-        Show show = new Show()
-        {
-            Title = title,
-            FirstAirDate = ReleaseDate.ToString()
-        };
-        return View(show);
+        int id = 100088;
 
+        ShowDetailsVM vm = new ShowDetailsVM();
+        vm = _tmdbService.GetShowDetails(id);
 
-        //if (mediaType == "tv")
-        //{
-        //    //make a call to the api
-        //    //for now just using basic data
+        return View(vm);
 
-        //    Show show = new Show()
-        //    {
-        //        Title = title,
-        //        FirstAirDate = ReleaseDate.ToString()
-        //    };
-        //    return View(show);
-
-        //} else
-        //{
-        //    Movie movie = new Movie()
-        //    {
-        //        Title = title,
-        //        ReleaseDate = ReleaseDate.ToString()
-        //    };
-        //    return View(movie);
-        //}
 
     }
 
-	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

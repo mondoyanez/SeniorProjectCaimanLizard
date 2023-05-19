@@ -1,4 +1,5 @@
 ﻿using WatchParty.Models.Concrete;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Services.Abstract
 {
@@ -16,7 +17,7 @@ namespace WatchParty.Services.Abstract
         IEnumerable<TMDBTitle> GetPopularMovies(string relativePath = "/movie/popular");
         IEnumerable<TMDBTitle> GetPopularShows(string relativePath = "/tv/popular");
 
-		TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/?query=");
-		TMDBTitle GetMovieDetails(string relativepath = "/movie/?query=");
+		ShowDetailsVM? GetShowDetails(int id, string relativePath = "/tv/");
+		MovieDetailsVM? GetMovieDetails(int id, string relativepath = "/movie/?query=");
     }
 }

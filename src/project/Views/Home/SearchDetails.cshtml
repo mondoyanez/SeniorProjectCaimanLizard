@@ -1,4 +1,5 @@
-﻿@model Show
+﻿@using WatchParty.ViewModels;
+@model ShowDetailsVM
 @{
     ViewData["Title"] = "Detailed Search";
 }
@@ -6,15 +7,16 @@
 <section class="cld-bg-light" style="text-align:center">
     <br />
 
-    <h1>Detailed Show Page</h1>
-
     @if (Model == null)
     {
         <p>model is null</p>
 
     } else {
 
-        <h1 id="title-details">@Model.Title</h1>
+        <h1 id="title-details">@Model.name</h1>
+
+
+
     }
     
     <p id="descriptions-details"></p>

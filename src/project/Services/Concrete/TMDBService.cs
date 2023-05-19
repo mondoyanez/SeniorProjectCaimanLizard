@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Net;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using WatchParty.Models;
 using WatchParty.Models.Abstract;
 using WatchParty.Models.Concrete;
 using WatchParty.Models.DTO;
 using WatchParty.Services.Abstract;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Services.Concrete
 {
@@ -132,6 +134,7 @@ namespace WatchParty.Services.Concrete
         public IEnumerable<TMDBTitle> SearchTitles(string title, string relativePath = "/search/multi?query=")
         {
             var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
+            Debug.WriteLine(this.Key, $"{relativePath}{title}");
             Debug.WriteLine(jsonResponse);
 
             TMDBJsonDTO? tmdbJsonDTO = new();
@@ -300,16 +303,48 @@ namespace WatchParty.Services.Concrete
                 .ToList();
         }
 
-        public TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/")
-        {
-            Debug.WriteLine("title inside service: " + title);
-            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
-            Debug.WriteLine("jsonResponse" + jsonResponse);
+        //public TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/")
+        //{
+        //    Debug.WriteLine("title inside service: " + title);
+        //    var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
+        //    Debug.WriteLine("jsonResponse" + jsonResponse);
 
-            TMDBJsonDTO? tmdbJsonDTO = new();
+        //    TMDBJsonDTO? tmdbJsonDTO = new();
+        //    try
+        //    {
+        //        tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+        //    }
+        //    catch (System.Text.Json.JsonException e)
+        //    {
+        //        tmdbJsonDTO = null;
+        //        Debug.WriteLine(e);
+        //    }
+
+        //    if (tmdbJsonDTO.results == null) return new TMDBTitle();
+
+        //    return tmdbJsonDTO.results.Select(r => new TMDBTitle()
+        //    {
+        //        Id = r.id,
+        //        Title = r.title ?? r.name,
+        //        MediaType = r.media_type,
+        //        ImagePath = r.poster_path ?? "",
+        //        Popularity = r.popularity,
+        //        ReleaseDate = r.release_date ?? r.first_air_date,
+        //        PlotSummary = r.overview
+        //    }).First();
+        //}
+
+        public ShowDetailsVM? GetShowDetails(int showId, string relativepath = "/tv/")
+        {
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{showId}");
+            Debug.WriteLine(this.Key, $"{relativepath}{showId}");
+            Debug.WriteLine(jsonResponse);
+
+
+            ShowDetailsVM? tmdbJsonDTO = new();
             try
             {
-                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<ShowDetailsVM>(jsonResponse);
             }
             catch (System.Text.Json.JsonException e)
             {
@@ -317,33 +352,50 @@ namespace WatchParty.Services.Concrete
                 Debug.WriteLine(e);
             }
 
-            if (tmdbJsonDTO.results == null) return new TMDBTitle();
+            if (tmdbJsonDTO == null) return new ShowDetailsVM();
 
-            return tmdbJsonDTO.results.Select(r => new TMDBTitle()
-            {
-                Id = r.id,
-                Title = r.title ?? r.name,
-                MediaType = r.media_type,
-                ImagePath = r.poster_path ?? "",
-                Popularity = r.popularity,
-                ReleaseDate = r.release_date ?? r.first_air_date,
-                PlotSummary = r.overview
-            }).First();
+            return tmdbJsonDTO;
 
-            //return tmdbJsonDTO.results.Where(results => results.title.Equals(title)).Select(r => new TMDBTitle()
+
+            //TMDBJsonDTO? tmdbJsonDTO = new();
+            //try
             //{
-            //    Id = r.id,
-            //    Title = r.title ?? r.name,
-            //    MediaType = r.media_type,
-            //    ImagePath = r.poster_path ?? "",
-            //    Popularity = r.popularity,
-            //    ReleaseDate = r.release_date ?? r.first_air_date,
-            //    PlotSummary = r.overview
-            //})
-            //.FirstOrDefault();
+            //    tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            //}
+            //catch (System.Text.Json.JsonException e)
+            //{
+            //    tmdbJsonDTO = null;
+            //    Debug.WriteLine(e);
+            //}
+
+            //if (tmdbJsonDTO == null) return new ShowDetailsVM();
+
+            //return tmdbJsonDTO.results.Select(r => new ShowDetailsVM()
+            //{
+            //    id = r.id,
+            //    name = r.name
+            //}).First();
+
+            //return tmdbJsonDTO;
+
+
+            //if (tmdbJsonDTO?.results == null) return new List<TMDBTitle>();
+
+            //return tmdbJsonDTO.results.Where(results => results.media_type != "person")
+            //    .OrderByDescending(results => results.popularity).Select(r => new TMDBTitle()
+            //    {
+            //        Id = r.id,
+            //        Title = r.title ?? r.name,
+            //        MediaType = r.media_type,
+            //        ImagePath = r.poster_path ?? "",
+            //        Popularity = r.popularity,
+            //        ReleaseDate = r.release_date ?? r.first_air_date,
+            //        PlotSummary = r.overview
+            //    })
+            //    .ToList();
         }
 
-        public TMDBTitle GetMovieDetails(string relativepath = "/movie/?query=")
+        public MovieDetailsVM GetMovieDetails(int movieId, string relativepath = "/movie/?query=")
         {
             throw new NotImplementedException();
         }
