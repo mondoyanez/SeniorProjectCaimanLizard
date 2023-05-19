@@ -23,7 +23,12 @@ public partial class Watcher
     public string? LastName { get; set; }
 
     [StringLength(256)]
+    [EmailAddress]
     public string? Email { get; set; }
+
+    [StringLength(16)]
+    [Phone]
+    public string? Phone { get; set; }
 
     [StringLength(256)]
     public string? Bio { get; set; }
