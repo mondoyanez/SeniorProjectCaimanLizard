@@ -1,10 +1,13 @@
-﻿using WatchParty.Services.Abstract;
+﻿using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+using WatchParty.Services.Abstract;
 
 namespace WatchParty.Services.Concrete;
 public class TwilioService: ITwilioService
 {
-    private string? _accountSid;
-    private string? _authToken;
+    private readonly string? _accountSid;
+    private readonly string? _authToken;
 
     public TwilioService(string accountSid, string authToken)
     {
@@ -12,8 +15,16 @@ public class TwilioService: ITwilioService
         _authToken = authToken;
     }
 
-    public void SendReminder(string recipientNumber, string message)
+    public void SendReminder(string recipientNumber, string messageSent)
     {
-        throw new NotImplementedException();
+        TwilioClient.Init(_accountSid, _authToken);
+
+        var message = MessageResource.Create(
+            new PhoneNumber(recipientNumber),
+            from: new PhoneNumber("+18552385106"),
+            body: messageSent
+        );
+
+        Console.WriteLine(message.Sid);
     }
 }
