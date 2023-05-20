@@ -64,10 +64,10 @@ public class WatchPartyGroupController : Controller
     [HttpGet]
     public IActionResult Details(int groupId)
     {
-        WatchPartyGroup group = _groupRepository.FindById(groupId);
+        WatchPartyGroup? group = _groupRepository.FindById(groupId);
         List<Watcher>? watchers = _watcherRepository.FindAllWatchers();
         bool userInGroup = _assignmentRepository.UserInGroup(groupId, User.Identity.Name);
-        bool hasOccurred = group.StartDate <= DateTime.Now;
+        bool hasOccurred = group?.StartDate <= DateTime.Now;
 
         PartyGroupVM vm = new()
         {
