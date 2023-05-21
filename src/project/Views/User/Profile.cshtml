@@ -19,7 +19,7 @@
             <div class="col-md-1">
                 @if (Model.isCurrentUser)
                 {
-                    <a class="btn cld-btn-secondary btn-sm" asp-controller="WatchPartyGroup" asp-action="Create" id="user-create-watch-party">Create Watch Party</a>
+                    <a class="btn cld-btn-secondary btn-sm text-dark-emphasis" asp-controller="WatchPartyGroup" asp-action="Create" id="user-create-watch-party">Create Watch Party</a>
                 }
             </div>
             <div class="col-md-4">
@@ -60,7 +60,7 @@
                 @*Only show here if it is the current user*@
                 @if (Model.isCurrentUser == true)
                 {              
-                    <button class="btn cld-btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal" id="user-profile-edit">Edit Profile</button>
+                    <button class="btn cld-btn-secondary btn-sm text-dark-emphasis" data-bs-toggle="modal" data-bs-target="#editProfileModal" id="user-profile-edit">Edit Profile</button>
                 }
                 else
                 {
