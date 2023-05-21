@@ -21,7 +21,7 @@
                             <label class="watch-party-title-label">Enter title:</label>
                         </div>
                         <div class="col-8">
-                            <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" value="@Model.GroupTitle"/>
+                            <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input text-dark-emphasis" value="@Model.GroupTitle"/>
                             <span asp-validation-for="GroupTitle" class="text-danger watch-party-title-input-validation"></span>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                             <label class="watch-party-description-label">Enter description:</label>
                         </div>
                         <div class="col-8">
-                            <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" rows="10">@Model.GroupDescription</textarea>
+                            <textarea asp-for="GroupDescription" class="form-control watch-party-description-input text-dark-emphasis" rows="10">@Model.GroupDescription</textarea>
                             <span asp-validation-for="GroupDescription" class="text-danger"></span>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             <label class="watch-party-date-label">Enter start date:</label>
                         </div>
                         <div class="col-8">
-                            <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")"/>
+                            <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input text-dark-emphasis" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")"/>
                             <span asp-validation-for="StartDate" class="text-danger"></span>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <label class="watch-party-date-label">TeleParty URL:</label>
                         </div>
                         <div class="col-8">
-                            <input asp-for="TelePartyUrl" type="text" class="form-control watch-party-url-input" value="@Model.TelePartyUrl"/>
+                            <input asp-for="TelePartyUrl" type="text" class="form-control watch-party-url-input text-dark-emphasis" value="@Model.TelePartyUrl"/>
                             <span asp-validation-for="TelePartyUrl" class="text-danger watch-party-url-input-validation"></span>
                         </div>
                     </div>
