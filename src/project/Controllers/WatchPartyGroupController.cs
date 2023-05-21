@@ -149,7 +149,7 @@ public class WatchPartyGroupController : Controller
 
                 string? phoneNumber = _userManager.GetPhoneNumberAsync(currentUser).Result;
 
-                if (phoneNumber != null)
+                if (phoneNumber != null && phoneNumber != "911" && phoneNumber != "311")
                     _twilioService.SendReminder(phoneNumber, messageReminder);
             }
         }
