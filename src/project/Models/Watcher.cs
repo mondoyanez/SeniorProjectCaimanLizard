@@ -26,8 +26,7 @@ public partial class Watcher
     [EmailAddress]
     public string? Email { get; set; }
 
-    [StringLength(16)]
-    [Phone]
+    [StringLength(18)]
     [RegularExpression("\\+?[0-9]{0,3}\\(?[0-9]{3}\\)?-?[0-9]{3}-?[0-9]{4}", ErrorMessage = "Must be a valid phone number in 123-456-7890 format")]
     public string? Phone { get; set; }
 
