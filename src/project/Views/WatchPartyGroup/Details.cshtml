@@ -17,6 +17,14 @@
 
                 @if (User?.Identity?.Name == Model.Group.Host.Username)
                 {
+                    <form asp-controller="WatchPartyGroup" asp-action="Details" method="post">
+                        <div class="col-1">
+                            <input class="btn bg-warning-subtle text-dark-emphasis" type="submit" value="Send SMS Reminder"/>
+                        </div>
+                        <input type="hidden" asp-for="ActionMethod" value="SendSMS" />
+                        <input type="hidden" asp-for="Group.Id" value="@Model.Group.Id"/>
+                    </form>
+                    
                     <div class="col-1">
                         <div class="dropdown">
                             <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="watch-group-options-btn">

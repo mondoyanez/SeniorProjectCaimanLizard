@@ -7,5 +7,6 @@ public class PartyGroupVM
     public List<Watcher>? Watchers { get; set; }
     public bool UserInGroup { get; set; }
     public bool HasOccurred { get; set; }
+    public string? ActionMethod { get; set; }
 }
 
