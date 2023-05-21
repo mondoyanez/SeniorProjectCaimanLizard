@@ -28,6 +28,7 @@ public partial class Watcher
 
     [StringLength(16)]
     [Phone]
+    [RegularExpression("\\+?[0-9]{0,3}\\(?[0-9]{3}\\)?-?[0-9]{3}-?[0-9]{4}", ErrorMessage = "Must be a valid phone number in 123-456-7890 format")]
     public string? Phone { get; set; }
 
     [StringLength(256)]
