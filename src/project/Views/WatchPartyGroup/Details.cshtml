@@ -11,21 +11,25 @@
 
         <div class="row text-center bg-light-subtle watch-party-table-container">
             <div class="row">
+                
+                @if (User?.Identity?.Name == Model.Group.Host.Username)
+                {
+                    <div class="col-1 watch-details-sms-container">
+                        <form asp-controller="WatchPartyGroup" asp-action="Details" method="post">
+                            <input class="btn bg-secondary-subtle text-dark-emphasis" type="submit" value="Send SMS Reminder"/>
+                            <input type="hidden" asp-for="ActionMethod" value="SendSMS"/>
+                            <input type="hidden" asp-for="Group.Id" value="@Model.Group.Id"/>
+                        </form>
+                    </div>
+                }
+
                 <div class="col-8 watch-party-details-header">
                     <h1 id="watch-group-details-header">Group Details</h1>
                 </div>
 
                 @if (User?.Identity?.Name == Model.Group.Host.Username)
                 {
-                    <form asp-controller="WatchPartyGroup" asp-action="Details" method="post">
-                        <div class="col-1">
-                            <input class="btn bg-warning-subtle text-dark-emphasis" type="submit" value="Send SMS Reminder"/>
-                        </div>
-                        <input type="hidden" asp-for="ActionMethod" value="SendSMS" />
-                        <input type="hidden" asp-for="Group.Id" value="@Model.Group.Id"/>
-                    </form>
-                    
-                    <div class="col-1">
+                    <div class="col-1 watch-group-options-container">
                         <div class="dropdown">
                             <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="watch-group-options-btn">
                                 Group Options
