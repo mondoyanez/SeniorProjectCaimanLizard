@@ -407,23 +407,6 @@ function searchDetails(title, releaseDate, mediaType) {
     const newtitle = title.replace("'", "&apos;");
     window.location.href = 'SearchDetails/' + '?title=' + newtitle + '&releaseDate=' + releaseDate;
 
-
-    //$.ajax({
-    //    type: "GET",
-    //    url: '/Home/SearchDetails/',
-    //    data: {
-    //        title: title,
-    //        releaseDate: releaseDate,
-    //        mediaType: mediaType
-    //    },
-    //    success: function (result) {
-    //        console.log("Going to detailed show page");
-    //    //    window.location.href = "/Home/SearchDetails/";
-    //    },
-    //    error: function (error) {
-    //        console.error("Error: " + error.responseText);
-    //    }
-    //});
 }
 
 

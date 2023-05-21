@@ -355,67 +355,12 @@ namespace WatchParty.Services.Concrete
             }
 
             if (tmdbJsonDTO == null) return 0;
-            //Debug.WriteLine(tmdbJsonDTO.results.First().first_air_date);
-            //Debug.WriteLine(releaseDate);
-            //Debug.WriteLine(releaseDate.ToString());
-
-            //DateOnly newReleaseDate = DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date);
 
             int showId = tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date) == releaseDate).First().id;
 
             return showId;
 
-            //return tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date) == releaseDate).Select(r => new ShowDetailsVM()
-            //{
-            //    name = r.name, 
-            //    id = r.id,
-            //    releaseDate = r.first_air_date
-
-            //}).First();
-
-            //return tmdbJsonDTO.results.Where(results => results.first_air_date == releaseDate.ToString()).Select(r => new ShowDetailsVM()
-            //{
-            //    id = r.id,
-            //    name = r.name
-            //}).First();
-
-
-            //TMDBJsonDTO? tmdbJsonDTO = new();
-            //try
-            //{
-            //    tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
-            //}
-            //catch (System.Text.Json.JsonException e)
-            //{
-            //    tmdbJsonDTO = null;
-            //    Debug.WriteLine(e);
-            //}
-
-            //if (tmdbJsonDTO == null) return new ShowDetailsVM();
-
-            //return tmdbJsonDTO.results.Select(r => new ShowDetailsVM()
-            //{
-            //    id = r.id,
-            //    name = r.name
-            //}).First();
-
-            //return tmdbJsonDTO;
-
-
-            //if (tmdbJsonDTO?.results == null) return new List<TMDBTitle>();
-
-            //return tmdbJsonDTO.results.Where(results => results.media_type != "person")
-            //    .OrderByDescending(results => results.popularity).Select(r => new TMDBTitle()
-            //    {
-            //        Id = r.id,
-            //        Title = r.title ?? r.name,
-            //        MediaType = r.media_type,
-            //        ImagePath = r.poster_path ?? "",
-            //        Popularity = r.popularity,
-            //        ReleaseDate = r.release_date ?? r.first_air_date,
-            //        PlotSummary = r.overview
-            //    })
-            //    .ToList();
+            
         }
     }
 }

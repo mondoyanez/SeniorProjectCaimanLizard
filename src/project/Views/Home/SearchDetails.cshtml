@@ -1,10 +1,10 @@
 ﻿@using WatchParty.ViewModels;
-@model ShowDetailsVM
+@model ShowDetailsVM 
 @{
     ViewData["Title"] = "Detailed Search";
 }
 
-<section class="cld-bg-light" style="text-align:center">
+<section class="bg-light-subtle" style="text-align:center">
     <br />
 
     @if (Model == null)
@@ -12,21 +12,47 @@
         <p>model is null</p>
 
     } else {
+        <div class="row">
+            <div class="col">
+                <div class="card bg-dark text-white">
+                    <img class="card-img opacity-25" src=@($"https://image.tmdb.org/t/p/original{Model.backdrop_path}") alt="Show Background" />
+                    <div class="card-img-overlay" style="text-align: justify-all">
+                        <h1 class="card-title">@Model.name</h1>
+                        <h4 class="card-text">@Model.overview</h4>
+                        <h4 class="card-text">First Air Date: @Model.first_air_date</h4>
+                    </div>
+                </div>
+            </div>
+            
 
-        <h1 id="title-details">@Model.name</h1>
-
-        <h4>Title ID: @Model.id</h4>
-        <p>Release date: @Model.releaseDate</p>
-
-        <p>Overview: @Model.overview</p>
-
-        <p>Number of episode: @Model.number_of_episodes</p>
 
 
+
+
+            @*<div class="row">
+                <img src=@($"https://image.tmdb.org/t/p/original{Model.poster_path}") alt="Show Poster" />
+                
+            </div>
+            <div class="col-md-9">
+                <h1>@Model.name</h1>
+                <h5>@Model.first_air_date - @Model.last_air_date</h5>
+                <br />
+                <h2>@Model.popularity</h2>
+                <h2>@Model.number_of_seasons</h2>
+                <h2>@Model.number_of_episodes</h2>
+
+                <br>
+                @foreach (var genre in @Model.genres)
+                {
+                    <h4>@genre.name</h4>
+                }
+            </div>*@
+            
+        </div>
+
+     
     }
     
-    <p id="descriptions-details"></p>
-
     <br />
     <br />
 </section>
