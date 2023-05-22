@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Net;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using WatchParty.Models;
 using WatchParty.Models.Abstract;
 using WatchParty.Models.Concrete;
 using WatchParty.Models.DTO;
 using WatchParty.Services.Abstract;
+using WatchParty.ViewModels;
 
 namespace WatchParty.Services.Concrete
 {
@@ -132,6 +134,7 @@ namespace WatchParty.Services.Concrete
         public IEnumerable<TMDBTitle> SearchTitles(string title, string relativePath = "/search/multi?query=")
         {
             var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
+            Debug.WriteLine(this.Key, $"{relativePath}{title}");
             Debug.WriteLine(jsonResponse);
 
             TMDBJsonDTO? tmdbJsonDTO = new();
@@ -300,11 +303,63 @@ namespace WatchParty.Services.Concrete
                 .ToList();
         }
 
-        public TMDBTitle? GetShowDetails(string title, string relativePath = "/tv/")
+
+        public ShowDetailsVM? GetShowDetails(int showId, string relativepath = "/tv/")
         {
-            Debug.WriteLine("title inside service: " + title);
-            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativePath}{title}");
-            Debug.WriteLine("jsonResponse" + jsonResponse);
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{showId}");
+            Debug.WriteLine(this.Key, $"{relativepath}{showId}");
+            Debug.WriteLine(jsonResponse);
+
+
+            ShowDetailsVM? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<ShowDetailsVM>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO == null) return new ShowDetailsVM();
+
+            return tmdbJsonDTO;
+
+
+        }
+
+        public MovieDetailsVM GetMovieDetails(int movieId, string relativepath = "/movie/")
+        {
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{movieId}");
+            Debug.WriteLine(this.Key, $"{relativepath}{movieId}");
+            Debug.WriteLine(jsonResponse);
+
+
+            MovieDetailsVM? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<MovieDetailsVM>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO == null) return new MovieDetailsVM();
+
+            return tmdbJsonDTO;
+        }
+
+
+
+        public int GetShowId(string title, DateOnly releaseDate, string relativepath = "/search/multi?query=")
+        {
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{title}");
+            Debug.WriteLine(this.Key, $"{relativepath}{title}");
+            Debug.WriteLine(jsonResponse);
+
 
             TMDBJsonDTO? tmdbJsonDTO = new();
             try
@@ -317,35 +372,38 @@ namespace WatchParty.Services.Concrete
                 Debug.WriteLine(e);
             }
 
-            if (tmdbJsonDTO.results == null) return new TMDBTitle();
+            if (tmdbJsonDTO == null) return 0;
 
-            return tmdbJsonDTO.results.Select(r => new TMDBTitle()
-            {
-                Id = r.id,
-                Title = r.title ?? r.name,
-                MediaType = r.media_type,
-                ImagePath = r.poster_path ?? "",
-                Popularity = r.popularity,
-                ReleaseDate = r.release_date ?? r.first_air_date,
-                PlotSummary = r.overview
-            }).First();
+            int showId = tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date) == releaseDate).First().id;
 
-            //return tmdbJsonDTO.results.Where(results => results.title.Equals(title)).Select(r => new TMDBTitle()
-            //{
-            //    Id = r.id,
-            //    Title = r.title ?? r.name,
-            //    MediaType = r.media_type,
-            //    ImagePath = r.poster_path ?? "",
-            //    Popularity = r.popularity,
-            //    ReleaseDate = r.release_date ?? r.first_air_date,
-            //    PlotSummary = r.overview
-            //})
-            //.FirstOrDefault();
+            return showId;            
         }
 
-        public TMDBTitle GetMovieDetails(string relativepath = "/movie/?query=")
+        public int GetMovieId(string title, DateOnly releaseDate, string relativepath = "/search/multi?query=")
         {
-            throw new NotImplementedException();
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{title}");
+            Debug.WriteLine(this.Key, $"{relativepath}{title}");
+            Debug.WriteLine(jsonResponse);
+
+
+            TMDBJsonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO == null) return 0;
+
+            int showId = tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().release_date) == releaseDate).First().id;
+
+            return showId;
+
+
         }
     }
 }

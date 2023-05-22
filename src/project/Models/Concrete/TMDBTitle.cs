@@ -9,5 +9,6 @@
 		public double Popularity { get; set; }
 		public string? ReleaseDate { get; set; }
 		public string? PlotSummary { get; set; }
+
 	}
 }
