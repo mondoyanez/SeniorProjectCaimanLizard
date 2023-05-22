@@ -21,6 +21,24 @@ namespace WatchParty.Services.Concrete
             _fromEmail = new EmailAddress("CaimanLizardDevelopment@pm.me", "The CLD Team");
         }
 
+        public void SendWatchPartyReminder(string toEmail)
+        {
+            var apiKey = _configuration["SendGrid:APIKey"];
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                throw new Exception("Null SendGridKey");
+            }
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = _fromEmail,
+            };
+            msg.AddTo(new EmailAddress(toEmail));
+            msg.SetTemplateId("d-1bb18ed9745142eebbf1a780aef95094");
+            msg.SetClickTracking(false, false);
+            var response = client.SendEmailAsync(msg);
+        }
+
         public async Task SendEmailAsync(string toEmail, string subject, string jsonData)
         {
             var apiKey = _configuration["SendGrid:APIKey"];
