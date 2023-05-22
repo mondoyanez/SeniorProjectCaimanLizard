@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Services.Abstract;
@@ -114,5 +115,41 @@ public class PostController : Controller
         }
         
         return View();
+    }
+
+    public IActionResult Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        Post? post = _postRepository.FindPostById((int) id);
+        if (post == null)
+        {
+            return NotFound();
+        }
+        return View(post);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(int id, Post updatedPost)
+    {
+        if (id != updatedPost.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            updatedPost.DatePosted = DateTime.Now;
+            updatedPost.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
+            updatedPost.IsVisible = true;
+            _postRepository.AddOrUpdate(updatedPost);
+            return RedirectToAction("Index");
+        }
+
+        return View(updatedPost);
     }
 }
