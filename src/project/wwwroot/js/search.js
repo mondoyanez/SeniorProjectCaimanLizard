@@ -255,19 +255,38 @@ function displayTitles(data) {
 
     $.each(data,
         function (index, item) {
+            const title = item.title.replace("'", "&apos;");
             let result =
                 `<div class="col cld-bg-light" id="${item.mediaType}-${index}">
                     <div class="card mb-3">
                       <div class="row g-0">
-                        <div class="col-sm-2 col-4 align-self-center">
+                        <div class="col-sm-2 col-4 align-self-center" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                         </div>
                         <div class="col">
                           <div class="card-body text-start">
-                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <h4 class="card-title" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                             <p class="card-text"><small class="text-muted">Media Type: ${item.mediaType}</small></p>
+                            <div>
+                                <div class="dropdown">
+                                    <button id="watchlist-dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Add to Watch List
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
+                                        <li>
+                                            <button id="addToCurrent" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                        </li>
+                                        <li>
+                                            <button id="addToWant" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                        </li>
+                                        <li>
+                                            <button id="addToHave" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -289,17 +308,17 @@ function displayMovies(data) {
     $("#resultCards").empty();
     $.each(data,
         function (index, item) {
-            const movieTitle = item.title.replace("'", "&apos;");
+            const title = item.title.replace("'", "&apos;");
             let result =
                 `<div class="col bg-light-subtle">
                     <div class="card mb-3">
                       <div class="row g-0">
-                        <div class="col-sm-2 col-4 align-self-center">
+                        <div class="col-sm-2 col-4 align-self-center" >
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                         </div>
                         <div class="col">
                           <div class="card-body text-start">
-                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <h4 class="card-title" onclick='searchDetails("${title}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                               <div>
@@ -349,12 +368,12 @@ function displayShows(data) {
                     `<div class="col bg-light-subtle">
                         <div class="card mb-3" id="${index}">
                           <div class="row g-0">
-                            <div class="col-sm-2 col-4 align-self-center">
+                            <div class="col-sm-2 col-4 align-self-center" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>
                               <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                             </div>
                             <div class="col">
                               <div class="card-body text-start">
-                                <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
+                                <h4 class="card-title" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")' >${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
                                 <p class="card-text truncate-overflow">${item.plotSummary}</p>
                                 <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                                 <div>
@@ -429,6 +448,25 @@ function errorOnAjax() {
     // take care of the error, maybe display a message to the user
     // ...
 }
+
+function searchDetails(title, releaseDate, mediaType) {
+    console.log("inside searchDetails");
+    console.log("title: " + title);
+    console.log("release date: " + releaseDate);
+    console.log("media type: " + mediaType);
+    //window.location.href = "/Home/SearchDetails/";
+
+    const newtitle = title.replace("'", "&apos;");
+
+    if (mediaType == "tv") {
+        window.location.href = 'SearchDetails/' + '?title=' + newtitle + '&releaseDate=' + releaseDate;
+    } else {
+        window.location.href = 'MovieDetails/' + '?title=' + newtitle + '&releaseDate=' + releaseDate;
+    }
+    
+
+}
+
 
 
 function addTitleToWatchList(Title, listType, mediaType) {
