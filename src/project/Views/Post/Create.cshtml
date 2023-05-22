@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create Post";
 }
 
-<div class="row cld-bg-light">
+<div class="row bg-light-subtle">
     <div class="row text-center">
         <h1>Create Post</h1>
         <hr />
@@ -14,15 +14,15 @@
             <form asp-action="Create" method="Post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group mt-2">
-                    <textarea asp-for="PostTitle" class="form-control" rows="2" cols="30" placeholder="Enter your title here"></textarea>
+                    <textarea asp-for="PostTitle" class="form-control" rows="2" cols="30" placeholder="Enter your title here" id="post-title"></textarea>
                     <span asp-validation-for="PostTitle" class="text-danger"></span>
                 </div>
                 <div class="form-group mt-2">
-                    <textarea asp-for="PostDescription" class="form-control" rows="20" cols="30" placeholder="Enter your description here"></textarea>
+                    <textarea asp-for="PostDescription" class="form-control" rows="20" cols="30" placeholder="Enter your description here" id="post-description"></textarea>
                     <span asp-validation-for="PostDescription" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary create-post-submit-btn" />
+                    <input type="submit" value="Create" class="btn btn-primary create-post-submit-btn" id="post-submit" />
                 </div>
             </form>
         </div>

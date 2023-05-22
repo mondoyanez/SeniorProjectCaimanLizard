@@ -1,35 +1,141 @@
-@model IEnumerable<Post>
+@model WatchParty.ViewModels.FeedVM
 
 @{
     ViewData["Title"] = "Feed";
 }
 
-@if (Model.Any())
+<div class="container-fluid bg-light-subtle pt-4">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h4 class="text-center">Popular Movies</h4>
+            <div id="PopularMoviesCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+                        var i = 0;
+                        foreach (var movie in Model.PopularMovies)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@($"{Model.ImageConfig.BaseUrl}/{Model.ImageConfig.PosterSizes.ElementAt(3)}{movie.ImagePath}")" class="d-block img-fluid mx-auto" alt="...">
+
+                                <div class="carousel-caption d-md-block">
+                                    <h5 class="fw-bold text-dark-emphasis">#@(i + 1) @movie.Title</h5>
+                                    <p class="text-dark-emphasis">@DateTime.Parse(movie.ReleaseDate).ToString("MMMM dd, yyyy") </p>
+                                </div>
+                                <div class="carousel-hidden-text text-white">@movie.PlotSummary</div>
+                            </div>
+
+                            i++;
+                        };
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselPopularMoviesAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselPopularMoviesAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-4">
+            <h4 class="text-center">Popular Shows</h4>
+            <div id="PopularShowsCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+                        var j = 0;
+                        foreach (var show in Model.PopularShows)
+                        {
+                            <div class="carousel-item @(j == 0 ? "active" : "")">
+                                <img src="@($"{Model.ImageConfig.BaseUrl}/{Model.ImageConfig.PosterSizes.ElementAt(3)}{show.ImagePath}")" class="d-block img-fluid mx-auto" alt="...">
+                                <div class="carousel-caption d-md-block">
+                                    <h5 class="fw-bold text-dark-emphasis">#@(j + 1) @show.Title</h5>
+                                    <p class="text-dark-emphasis">@DateTime.Parse(show.ReleaseDate).ToString("MMMM dd, yyyy") </p>
+                                </div>
+                                <div class="carousel-hidden-text text-white">@show.PlotSummary</div>
+                            </div>
+
+                            j++;
+                        };
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselPopularShowsAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselPopularShowsAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@if (Model.Posts.Any())
 {
-    <div class="row cld-bg-light">
+    <div class="row bg-light-subtle">
 
         <a asp-controller="Post" asp-action="Create" class="create-post-link">
-            <img class="create-post-image" src="~/img/clipboard2-plus.svg" alt="clipboard"/>
+            <img class="create-post-image" src="~/img/clipboard2-plus.svg" alt="clipboard" />
         </a>
 
-        @foreach (var post in Model)
+        @foreach (var post in Model.Posts)
         {
             <div class="row">
-                <div class="card post cld-btn-primary">
+                <div class="card post bg-primary-subtle">
                     <div class="card-body text-center">
                         <div class="row">
                             <h3 class="card-title post-title">@post.PostTitle</h3>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h6 class="card-subtitle mb-2 post-username">@@@post.User.Username</h6>
+                                <a class="post-username-link" href="/user/@post.User.Username"><h6 class="card-subtitle mb-2 post-username">@@@post.User.Username</h6></a>
                             </div>
                             <div class="col">
-                                <h6 class="card-subtitle mb-2 post-date">@post.DatePosted.ToString("MM/dd/yy")</h6>
+                                <h6 class="card-subtitle mb-2 post-date">@Model.Convert.ConvertDate(post.DatePosted, DateTime.Now)</h6>
                             </div>
                         </div>
                         <div class="row">
                             <p class="card-text post-text">@post.PostDescription</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <h4 class="card-title post-title mb-2 text-center">Comments</h4>
+                        </div>
+                        @if (post.Comments.Any(c => c.IsVisible))
+                        {
+                            int count = 1;
+
+                            foreach (var comment in Model.Comments)
+                            {
+                                if (comment.PostId == post.Id && count <= 3)
+                                {
+                                    <div class="row mt-3">
+                                        <div class="col-2">
+                                            <a class="post-username-link" href="/user/@comment.User.Username"><h6 class="card-subtitle comment-username">@@@comment.User.Username</h6></a>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <p class="card-text comment-text mb-2">@comment.CommentTitle</p>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <h6 class="card-subtitle comment-date">@Model.Convert.ConvertDate(comment.DatePosted, DateTime.Now)</h6>
+                                        </div>
+                                    </div>
+                                    count += 1;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <p class="card-text post-text">No comments on this post</p>
+                            </div>
+                        }
+                        <div class="row mt-5">
+                            <a asp-controller="Comment" asp-action="Index" asp-route-postId="@post.Id" class="comment-link">View All Comments</a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +146,7 @@
 }
 else
 {
-    <div class="row cld-bg-light text-center empty-page">
+    <div class="row bg-light-subtle text-center empty-page">
         <h1>No Posts</h1>
     </div>
 }

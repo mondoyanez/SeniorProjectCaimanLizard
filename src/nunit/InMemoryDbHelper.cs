@@ -11,7 +11,7 @@ namespace WatchPartyTest
     public enum DbPersistence { OneDbPerTest, ReuseDb }
     public class InMemoryDbHelper<TContext> : IDisposable where TContext : DbContext
     {
-        public  DbPersistence _persistOption;
+        public DbPersistence _persistOption;
         private string _seedFilePath;
         private DbConnection _dbConnection;
         private DbContextOptions<TContext> _dbContextOptions;
@@ -21,10 +21,10 @@ namespace WatchPartyTest
         /// </summary>
         /// <param name="seedFilePath">Path to a seed .sql file, or null if you don't want to seed the db</param>
         /// <param name="persistOption">Choose your model: a new db per test, or a shared instance</param>
-        public InMemoryDbHelper( string seedFilePath, DbPersistence persistOption ) 
+        public InMemoryDbHelper(string seedFilePath, DbPersistence persistOption)
         {
-            _persistOption= persistOption;
-            _seedFilePath= seedFilePath;
+            _persistOption = persistOption;
+            _seedFilePath = seedFilePath;
             Initialize();
         }
 
@@ -46,20 +46,20 @@ namespace WatchPartyTest
                 Debug.WriteLine("Entity Framework could not ensure the db was created using Code First");
             }
             // Seed data
-            if(_seedFilePath != null)
+            if (_seedFilePath != null)
             {
                 // No checking on this so will throw FileNotFoundException if it can't find it
                 string seedText = System.IO.File.ReadAllText(_seedFilePath);
                 using SqliteCommand cmd = new SqliteCommand(seedText, (SqliteConnection)_dbConnection);
                 cmd.ExecuteNonQuery();
             }
-            
+
             // The DB is now created and populated and will stick around until we dispose of the connection
         }
 
         public TContext GetContext()
         {
-            if( _persistOption == DbPersistence.OneDbPerTest)
+            if (_persistOption == DbPersistence.OneDbPerTest)
             {
                 Dispose();
                 Initialize();

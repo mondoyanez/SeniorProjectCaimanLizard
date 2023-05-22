@@ -1,5 +1,6 @@
 ﻿using WatchParty.DAL.Abstract;
 using WatchParty.Models;
+using WatchParty.Utilities;
 
 namespace WatchParty.DAL.Concrete;
 public class PostRepository: Repository<Post>, IPostRepository
@@ -10,7 +11,10 @@ public class PostRepository: Repository<Post>, IPostRepository
 
     public IEnumerable<Post> GetAllPostsDescending()
     {
-        IEnumerable<Post> posts = GetAll().OrderByDescending(p => p.DatePosted).ToList();
+        IEnumerable<Post> posts = GetAll()
+            .Where(p => p.IsVisible)
+            .OrderByDescending(p => p.DatePosted)
+            .ToList();
 
         if (!posts.Any())
             throw new Exception("No posts were found");
@@ -27,6 +31,30 @@ public class PostRepository: Repository<Post>, IPostRepository
 
         try
         {
+            AddOrUpdate(post);
+        }
+        catch
+        {
+            throw new Exception("Invalid information was given while trying to update database");
+        }
+    }
+
+    public Post? FindPostById(int id)
+    {
+        return GetAll().FirstOrDefault(p => p.Id == id);
+    }
+
+    public void HidePost(Post post)
+    {
+        if (FindPostById(post.Id) == null)
+            throw new Exception("Post does not exist");
+        
+        if (!post.IsVisible)
+            throw new Exception("Post is already hidden");
+
+        try
+        {
+            post.IsVisible = false;
             AddOrUpdate(post);
         }
         catch

@@ -1,0 +1,19 @@
+﻿@page
+@model Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal.ConfirmEmailModel
+@{
+    ViewData["Title"] = "Email Confirmation";
+}
+<section class="bg-light-subtle confirm-email-container">
+    <div class="container">
+        <div class="row">
+            <div class="col py-3">
+                <h1 class="fw-bold pt-5">@ViewData["Title"]</h1>
+                <p>
+                    @Model.StatusMessage
+                </p>
+                <img class="text-primary mx-auto d-block pb-5" src="@Url.Content("~/img/email-campaign-amico.svg")" alt="Bootstrap" width="30%" height="auto">
+            </div>
+        </div>
+        
+    </div>
+</section>

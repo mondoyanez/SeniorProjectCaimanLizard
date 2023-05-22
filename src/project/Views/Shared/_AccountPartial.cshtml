@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WatchParty.Areas.Identity.Data;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@*@model WatchParty.ViewModels.NavbarVM;*@
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+@*    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+    </li>
+*@
+
+    <li class="nav-item dropdown">
+            <a class="nav-link" id="notification-bell" asp-area=" " asp-controller="Notification" asp-action="Index">
+            <i class="bi bi-bell-fill"></i>
+            @*if the user has any notifications*@
+            @*<span class="badge rounded-pill badge-notification bg-danger">1</span>*@
+        </a>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="profileDropdown" role="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+                @User.Identity?.Name
+        </a>
+        <!-- Dropdown menu -->
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li class="nav-item">
+                <a class="nav-link text-dark-emphasis" id="profile-link" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">Profile</a>
+            </li>
+            <li>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" id="logout-button" class="nav-link btn btn-link text-dark-emphasis">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </li>
+
+        
+
+@*    <li class="nav-item">
+        <a class="nav-link text-dark" id="profile-link" asp-area="" asp-controller="User" asp-action="Profile" asp-route-username="@User.Identity?.Name">@User.Identity?.Name</a>
+    </li>*@
+
+
+
+    <li class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Theme
+        </button>
+        <div id="themeList" class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
+            <a class="dropdown-item" href="#" data-theme="light">Light</a>
+            <a class="dropdown-item" href="#" data-theme="dark">Dark</a>
+        </div>
+    </li>
+
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark-emphasis" id="register-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark-emphasis" id="login-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>
