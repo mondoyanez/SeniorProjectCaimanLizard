@@ -23,7 +23,12 @@ public partial class Watcher
     public string? LastName { get; set; }
 
     [StringLength(256)]
+    [EmailAddress]
     public string? Email { get; set; }
+
+    [StringLength(18)]
+    [RegularExpression("\\+?[0-9]{0,3}\\(?[0-9]{3}\\)?-?[0-9]{3}-?[0-9]{4}", ErrorMessage = "Must be a valid phone number in 123-456-7890 format")]
+    public string? Phone { get; set; }
 
     [StringLength(256)]
     public string? Bio { get; set; }

@@ -22,6 +22,7 @@ public class WatchPartyGroupModelValidator_Tests
             GroupTitle = "Marvel marathon movie night",
             GroupDescription = "Watching every movie in the MCU with friends",
             StartDate = new DateTime(2023, 5, 5, 8, 0, 0),
+            TelePartyUrl = "https://redirect.teleparty.com/join/2b84353bb7116c55",
             HostId = host.Id,
             Host = host
         };
@@ -271,6 +272,85 @@ public class WatchPartyGroupModelValidator_Tests
             Assert.That(mv.Valid, Is.True);
             Assert.That(mv.ContainsFailureFor("StartDate"), Is.False);
             Assert.That(actual, Is.Not.EqualTo(new DateTime(2020, 7, 2, 4, 15, 18)));
+        });
+    }
+
+    [Test]
+    public void MakeValidGroup_WithValidUrl_IsCorrect()
+    {
+        // Arrange
+        WatchPartyGroup group = MakeValidGroup();
+
+        // Act
+        ModelValidator mv = new ModelValidator(group);
+        string? actual = group.TelePartyUrl;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("TelePartyUrl"), Is.False);
+            Assert.That(actual, Is.EqualTo("https://redirect.teleparty.com/join/2b84353bb7116c55"));
+        });
+    }
+
+    [Test]
+    public void MakeValidGroup_WithUrlAsNull_IsCorrect()
+    {
+        // Arrange
+        WatchPartyGroup group = MakeValidGroup();
+        group.TelePartyUrl = null;
+
+        // Act
+        ModelValidator mv = new ModelValidator(group);
+        string? actual = group.TelePartyUrl;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("TelePartyUrl"), Is.False);
+            Assert.That(actual, Is.Null);
+        });
+    }
+
+    [Test]
+    public void MakeValidGroup_WithUrlAsEmptyString_IsCorrect()
+    {
+        // Arrange
+        WatchPartyGroup group = MakeValidGroup();
+        group.TelePartyUrl = "";
+
+        // Act
+        ModelValidator mv = new ModelValidator(group);
+        string? actual = group.TelePartyUrl;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.True);
+            Assert.That(mv.ContainsFailureFor("TelePartyUrl"), Is.False);
+            Assert.That(actual, Is.EqualTo(String.Empty));
+        });
+    }
+
+    [Test]
+    public void MakeValidGroup_WithUrlAsInValidUrl_FailsValidation()
+    {
+        // Arrange
+        WatchPartyGroup group = MakeValidGroup();
+        group.TelePartyUrl = "https://learn.microsoft.com";
+
+        // Act
+        ModelValidator mv = new ModelValidator(group);
+        string? actual = group.TelePartyUrl;
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(mv.Valid, Is.False);
+            Assert.That(mv.ContainsFailureFor("TelePartyUrl"), Is.True);
+            Assert.That(actual, Is.EqualTo("https://learn.microsoft.com"));
         });
     }
 
