@@ -12,14 +12,16 @@ namespace WatchParty.Controllers;
 public class PostController : Controller
 {
     private readonly IPostRepository _postRepository;
+    private readonly ILikePostRepository _likePostRepository;
     private readonly ICommentRepository _commentRepository;
     private readonly IWatcherRepository _watcherRepository;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly ITMDBService _tmdbService;
 
-    public PostController(IPostRepository postRepository, ICommentRepository commentRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager, ITMDBService tmdbService)
+    public PostController(IPostRepository postRepository, ILikePostRepository likePostRepository,ICommentRepository commentRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager, ITMDBService tmdbService)
     {
         _postRepository = postRepository;
+        _likePostRepository = likePostRepository;
         _commentRepository = commentRepository;
         _watcherRepository = watcherRepository;
         _userManager = userManager;
@@ -33,12 +35,13 @@ public class PostController : Controller
 	    FeedVM vm = new()
 	    {
 		    Posts = _postRepository.GetAllPostsDescending(),
+            LikePosts = _likePostRepository.GetAll(),
             Comments = _commentRepository.GetVisibleComments(),
 		    PopularMovies = _tmdbService.GetPopularMovies(),
             PopularShows = _tmdbService.GetPopularShows(),
-		    ImageConfig = _tmdbService.SetImageConfig()
-
-	    };
+		    ImageConfig = _tmdbService.SetImageConfig(),
+            CurrentWatcher = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!
+        };
 	    if (ModelState.IsValid)
 	    {
 		    ViewBag.IsValid = true;
@@ -69,8 +72,8 @@ public class PostController : Controller
             Comments = _commentRepository.GetVisibleComments(),
             PopularMovies = _tmdbService.GetPopularMovies(),
             PopularShows = _tmdbService.GetPopularShows(),
-            ImageConfig = _tmdbService.SetImageConfig()
-
+            ImageConfig = _tmdbService.SetImageConfig(),
+            CurrentWatcher = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!
         };
 
         if (ModelState.IsValid)

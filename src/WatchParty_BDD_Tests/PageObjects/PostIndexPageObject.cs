@@ -23,6 +23,12 @@ public class PostIndexPageObject : PageObject
 
     public string PopularShowsCarouselHoverText => PopularShowsCarouselHover.FindElement(By.ClassName("carousel-hidden-text")).Text;
     public string PopularMoviesCarouselHoverText => PopularMoviesCarouselHover.FindElement(By.ClassName("carousel-hidden-text")).Text;
+    public IWebElement NotLikedPostIcon => _webDriver.FindElement(By.ClassName("bi-heart"));
+    public IWebElement LikedPostIcon => _webDriver.FindElement(By.ClassName("bi-heart-fill"));
+    public string FirstNotLikePostID => NotLikedPostIcon.GetAttribute("data-post-id");
+    public IWebElement LikeIconSpecificPost(string postId) => _webDriver.FindElement(By.CssSelector($"i[data-post-id='{postId}']"));
+    public bool IsPostLiked(string postId) => LikeIconSpecificPost(postId).GetAttribute("class").Contains("bi-heart-fill");
+    public string GetPostLikes(string postId) => _webDriver.FindElement(By.CssSelector($"i[data-post-id='{postId}'] + p")).Text;
 
     public void HoverPopularShows()
     {
@@ -33,5 +39,20 @@ public class PostIndexPageObject : PageObject
     {
         new Actions(_webDriver).MoveToElement(PopularMoviesCarouselHover).Perform();
     }
+
+    public void LikeAPost()
+    {
+        NotLikedPostIcon.Click();
+    }
+
+    public void UnlikeAPost()
+    {
+        LikedPostIcon.Click();
+    }
+
+    public void LikeSpecificPost(string postId)
+    {
+        LikeIconSpecificPost(postId).Click();
+    }   
 }
 
