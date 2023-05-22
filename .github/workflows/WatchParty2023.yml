@@ -38,6 +38,9 @@ jobs:
       run: |
         dotnet restore "${{ env.MAIN_PROJECT }}"
         dotnet restore "${{ env.UNIT_TEST_PROJECT }}"
+    
+    - name: Restore node js dependencies
+      run: npm install "${{ env.MAIN_PROJECT }}"
 
     - name: Build main project
       run: dotnet build "${{ env.MAIN_PROJECT }}" --configuration ${{ env.CONFIGURATION }} --no-restore
