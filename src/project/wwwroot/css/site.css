@@ -12034,3 +12034,18 @@ a.user-profile-link:hover {
 #user-profile-following-icon {
   width: 7%;
 }
+
+.card-season {
+    width: auto;
+    height: 180px;
+}
+
+/*card-season {
+    width: 10px;
+    height: auto;
+}*/
+
+.card-season-img {
+    width: 180px;
+    height: auto;
+}

@@ -223,8 +223,8 @@ function displayTitles(data) {
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                         </div>
                         <div class="col">
-                          <div class="card-body text-start" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")'>
-                            <h4 class="card-title" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                          <div class="card-body text-start">
+                            <h4 class="card-title" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>      
                                <div>
@@ -268,12 +268,12 @@ function displayMovies(data) {
                 `<div class="col bg-light-subtle">
                     <div class="card mb-3">
                       <div class="row g-0">
-                        <div class="col-sm-2 col-4 align-self-center">
+                        <div class="col-sm-2 col-4 align-self-center" >
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                         </div>
                         <div class="col">
-                          <div class="card-body text-start" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")'>
-                            <h4 class="card-title" onclick='searchDetails("${item.title}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                          <div class="card-body text-start">
+                            <h4 class="card-title" onclick='searchDetails("${title}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                               <div>
@@ -318,12 +318,12 @@ function displayShows(data) {
                     `<div class="col bg-light-subtle">
                         <div class="card mb-3" id="${index}">
                           <div class="row g-0">
-                            <div class="col-sm-2 col-4 align-self-center">
+                            <div class="col-sm-2 col-4 align-self-center" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>
                               <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                             </div>
                             <div class="col">
-                              <div class="card-body text-start" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")'>
-                                <h4 class="card-title" onclick='searchDetails("${item.title}", "${item.releaseDate}", "${item.mediaType}")' >${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
+                              <div class="card-body text-start">
+                                <h4 class="card-title" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")' >${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
                                 <p class="card-text truncate-overflow">${item.plotSummary}</p>
                                 <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
                                 <div>
