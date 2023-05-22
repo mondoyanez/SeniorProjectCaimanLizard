@@ -63,6 +63,7 @@ public class Program
         builder.Services.AddScoped<IWatchPartyGroupRepository, WatchPartyGroupRepository>();
         builder.Services.AddScoped<IWatchPartyGroupAssignmentRepository, WatchPartyGroupAssignmentRepository>();
         builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+        builder.Services.AddTransient<SendGridService, SendGridService>(s => new SendGridService(builder.Configuration));
 
 
 

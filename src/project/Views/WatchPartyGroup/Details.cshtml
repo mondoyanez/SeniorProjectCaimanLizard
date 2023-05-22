@@ -20,7 +20,13 @@
                             <input type="hidden" asp-for="ActionMethod" value="SendSMS"/>
                             <input type="hidden" asp-for="Group.Id" value="@Model.Group.Id"/>
                         </form>
+                        <form asp-controller="WatchPartyGroup" asp-action="Details" method="post">
+                            <input class="btn bg-secondary-subtle text-dark-emphasis my-2" type="submit" value="Send Email Reminder" />
+                            <input type="hidden" asp-for="ActionMethod" value="SendEmail" />
+                            <input type="hidden" asp-for="Group.Id" value="@Model.Group.Id" />
+                        </form>
                     </div>
+                    
                 }
 
                 <div class="col-8 watch-party-details-header">
