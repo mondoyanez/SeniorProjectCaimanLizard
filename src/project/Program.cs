@@ -21,6 +21,8 @@ public class Program
 
         var tmdbKey = builder.Configuration["TMDB:APIKey"];
         var sendGridKey = builder.Configuration["SendGrid:APIKey"];
+        var twilioAuthTokenKey = builder.Configuration["Twilio:AuthToken"];
+        var twilioAccountSidKey = builder.Configuration["Twilio:AccountSid"];
 
         // Add services to the container.
 
@@ -46,6 +48,7 @@ public class Program
 
         builder.Services.AddScoped<DbContext, WatchPartyDbContext>();
         builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient { BaseAddress = new Uri("https://api.themoviedb.org/3") }));
+        builder.Services.AddScoped<ITwilioService, TwilioService>(s => new TwilioService(twilioAccountSidKey, twilioAuthTokenKey));
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IFollowingListRepository, FollowingListRepository>();

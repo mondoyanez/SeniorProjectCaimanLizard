@@ -5,139 +5,195 @@
 }
 @if (Model.Group != null)
 {
-    <div class="row text-center bg-light-subtle watch-party-table-container">
-        <div class="row">
-            <div class="col-8 watch-party-details-header">
-                <h1>Group Details</h1>
+    @if (!Model.HasOccurred)
+    {
+
+
+        <div class="row text-center bg-light-subtle watch-party-table-container">
+            <div class="row">
+                
+                @if (User?.Identity?.Name == Model.Group.Host.Username)
+                {
+                    <div class="col-1 watch-details-sms-container">
+                        <form asp-controller="WatchPartyGroup" asp-action="Details" method="post">
+                            <input class="btn bg-secondary-subtle text-dark-emphasis" type="submit" value="Send SMS Reminder"/>
+                            <input type="hidden" asp-for="ActionMethod" value="SendSMS"/>
+                            <input type="hidden" asp-for="Group.Id" value="@Model.Group.Id"/>
+                        </form>
+                    </div>
+                }
+
+                <div class="col-8 watch-party-details-header">
+                    <h1 id="watch-group-details-header">Group Details</h1>
+                </div>
+
+                @if (User?.Identity?.Name == Model.Group.Host.Username)
+                {
+                    <div class="col-1 watch-group-options-container">
+                        <div class="dropdown">
+                            <button class="btn bg-info-subtle dropdown-toggle text-dark-emphasis" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="watch-group-options-btn">
+                                Group Options
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a asp-controller="WatchPartyGroup" asp-action="Edit" asp-route-groupId="@Model.Group.Id" class="btn dropdown-item" id="watch-group-edit" type="button">Edit Group</a>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUsers" id="watch-group-invite">Invite Users</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#removeUsers" id="watch-group-remove">Remove Users</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+
             </div>
 
-            @if (User?.Identity?.Name == Model.Group.Host.Username)
+            @if (Model.UserInGroup)
             {
-                <div class="col-1">
-                    <div class="dropdown">
-                        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="watch-group-options-btn">
-                            Group Options
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUsers" id="watch-group-invite">Invite Users</button>
-                            </li>
-                            <li>
-                                <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#removeUsers" id="watch-group-remove">Remove Users</button>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="row mt-5">
+                    <h6>TeleParty third party extension required which can be installed <a href="https://www.teleparty.com" target="_blank">here</a></h6>
+                </div>
+                <div class="row mt-5">
+                    @if (Model.Group.TelePartyUrl != null)
+                    {
+                        <div class="col-2 watch-party-details-header-url">
+                            <h5>TeleParty URL:</h5>
+                        </div>
+                        <div class="col-4 watch-party-details-header-url-link">
+                            <a href="@Model.Group.TelePartyUrl" target="_blank" id="teleparty-url">
+                                @Model.Group.TelePartyUrl
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-2 watch-party-details-header-url-empty">
+                            <h5>TeleParty URL:</h5>
+                        </div>
+                        <div class="col-4 watch-party-details-header-url-link-empty">
+                            <p id="teleparty-url">N/A</p>
+                        </div>
+                    }
                 </div>
             }
 
-        </div>
-        <table class="table table-hover watch-party-table">
-            <thead>
+            <table class="table table-hover watch-party-table">
+                <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Participants</th>
-                    <th>Host</th>
-                    <th>Start Date</th>
+                    <th class="watch-party-table-title">Title</th>
+                    <th class="watch-party-table-description">Description</th>
+                    <th class="watch-party-table-participants">Participants</th>
+                    <th class="watch-party-table-host">Host</th>
+                    <th class="watch-party-table-date">Start Date</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr>
-                    <td>@Model?.Group?.GroupTitle</td>
-                    <td>@Model?.Group?.GroupDescription</td>
-                    <td id="watch-group-users">
+                    <td class="watch-party-table-title" id="teleparty-title">@Model?.Group?.GroupTitle</td>
+                    <td class="watch-party-table-description" id="teleparty-description">@Model?.Group?.GroupDescription</td>
+                    <td class="watch-party-table-participants" id="watch-group-users">
                         @foreach (var person in Model?.Group?.WatchPartyGroupAssignments!)
                         {
                             <p id="remove-user-@person.Watcher.Username">@person.Watcher.Username</p>
                         }
                     </td>
-                    <td>@Model?.Group?.Host.Username</td>
-                    <td>@Model?.Group?.StartDate</td>
+                    <td class="watch-party-table-host">@Model?.Group?.Host.Username</td>
+                    <td class="watch-party-table-date" id="teleparty-date">@Model?.Group?.StartDate</td>
                 </tr>
-            </tbody>
-        </table>
-        <input type="hidden" id="watch-group-id" value="@Model?.Group?.Id" />
-        <input type="hidden" id="watch-group-total-users" value="@Model?.Watchers?.Count" />
-        <input type="hidden" id="watch-group-current-users" value="@Model?.Group?.WatchPartyGroupAssignments.Count" />
-    </div>
+                </tbody>
+            </table>
+            <input type="hidden" id="watch-group-id" value="@Model?.Group?.Id"/>
+            <input type="hidden" id="watch-group-total-users" value="@Model?.Watchers?.Count"/>
+            <input type="hidden" id="watch-group-current-users" value="@Model?.Group?.WatchPartyGroupAssignments.Count"/>
+        </div>
 
-    <div class="modal fade" id="inviteUsers" tabindex="-1" aria-labelledby="inviteUsersLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="inviteUsersLabel">Invite Users</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="add-modal">
-                    @foreach (var user in Model?.Watchers)
-                    {
-                        bool isInvited = false;
-
-                        @foreach (var invitee in Model.Group.WatchPartyGroupAssignments)
+        <div class="modal fade" id="inviteUsers" tabindex="-1" aria-labelledby="inviteUsersLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="inviteUsersLabel">Invite Users</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="add-modal">
+                        @foreach (var user in Model?.Watchers)
                         {
-                            if (user.AspNetIdentityId == invitee.Watcher.AspNetIdentityId)
-                                isInvited = true;
+                            bool isInvited = false;
+
+                            @foreach (var invitee in Model.Group.WatchPartyGroupAssignments)
+                            {
+                                if (user.AspNetIdentityId == invitee.Watcher.AspNetIdentityId)
+                                    isInvited = true;
+                            }
+
+                            if (!isInvited && user.Username != User?.Identity?.Name)
+                            {
+                                <div class="col-2 watch-party-details-invite-btn">
+                                    <button type="button" class="btn bg-primary-subtle text-dark-emphasis add-user" value="@user.Id" name="@user.Username">@user.Username</button>
+                                </div>
+                            }
                         }
-
-                        if (!isInvited && user.Username != User?.Identity?.Name)
+                        @if (Model.Watchers.Count == Model.Group.WatchPartyGroupAssignments.Count)
                         {
-                            <div class="col-2 watch-party-details-invite-btn">
-                                <button type="button" class="btn btn-primary add-user" value="@user.Id" name="@user.Username">@user.Username</button>
+                            <div class="col-4">
+                                <p>No users to add</p>
                             </div>
                         }
-                    }
-                    @if (Model.Watchers.Count == Model.Group.WatchPartyGroupAssignments.Count)
-                    {
-                        <div class="col-4">
-                            <p>No users to add</p>
-                        </div>
-                    }
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="watch-group-modal-close-add">Close</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-secondary-subtle text-dark-emphasis" data-bs-dismiss="modal" id="watch-group-modal-close-add">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="removeUsers" tabindex="-1" aria-labelledby="removeUsersLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="removeUsersLabel">Remove Users</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="remove-modal">
-                    @foreach (var user in Model?.Watchers)
-                    {
-                        bool isInvited = false;
-
-                        @foreach (var invitee in Model.Group.WatchPartyGroupAssignments)
+        <div class="modal fade" id="removeUsers" tabindex="-1" aria-labelledby="removeUsersLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="removeUsersLabel">Remove Users</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="remove-modal">
+                        @foreach (var user in Model?.Watchers)
                         {
-                            if (user.AspNetIdentityId == invitee.Watcher.AspNetIdentityId)
-                                isInvited = true;
+                            bool isInvited = false;
+
+                            @foreach (var invitee in Model.Group.WatchPartyGroupAssignments)
+                            {
+                                if (user.AspNetIdentityId == invitee.Watcher.AspNetIdentityId)
+                                    isInvited = true;
+                            }
+
+                            if (isInvited && user.Username != User?.Identity?.Name)
+                            {
+                                <div class="col-2 watch-party-details-invite-btn">
+                                    <button type="button" class="btn bg-primary-subtle text-dark-emphasis remove-user" value="@user.Id" name="@user.Username">@user.Username</button>
+                                </div>
+                            }
                         }
-
-                        if (isInvited && user.Username != User?.Identity?.Name)
+                        @if (Model.Group.WatchPartyGroupAssignments.Count == 1)
                         {
-                            <div class="col-2 watch-party-details-invite-btn">
-                                <button type="button" class="btn btn-primary remove-user" value="@user.Id" name="@user.Username">@user.Username</button>
+                            <div class="col-4">
+                                <p>No users to remove</p>
                             </div>
                         }
-                    }
-                    @if (Model.Group.WatchPartyGroupAssignments.Count == 1)
-                    {
-                        <div class="col-4">
-                            <p>No users to remove</p>
-                        </div>
-                    }
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="watch-group-modal-close-remove">Close</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-secondary-subtle text-dark-emphasis" data-bs-dismiss="modal" id="watch-group-modal-close-remove">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row text-center bg-light-subtle empty-page">
+            <h1 class="mt-5" style="color: red">This watch party has already happened please create a new one</h1>
+        </div>
+    }
 }
 else
 {

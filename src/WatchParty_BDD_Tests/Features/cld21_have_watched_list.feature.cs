@@ -81,59 +81,59 @@ namespace WatchParty_BDD_Tests.Features
         {
 #line 6
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "UserName",
                         "Email",
                         "FirstName",
                         "LastName",
                         "Password"});
-            table7.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "TaliaK",
                         "knott@example.com",
                         "Talia",
                         "Knott",
                         "ScotIs#1"});
-            table7.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "ZaydenC",
                         "clark@example.com",
                         "Zayden",
                         "Clark",
                         "ScotIs#1"});
-            table7.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "DavilaH",
                         "hareem@example.com",
                         "Hareem",
                         "Davila",
                         "ScotIs#1"});
-            table7.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "KrzysztofP",
                         "krzysztof@example.com",
                         "Krzysztof",
                         "Ponce",
                         "ScotIs#1"});
 #line 7
- testRunner.Given("the following users exist", ((string)(null)), table7, "Given ");
+ testRunner.Given("the following users exist", ((string)(null)), table9, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "UserName",
                         "Email",
                         "FirstName",
                         "LastName",
                         "Password"});
-            table8.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "AndreC",
                         "colea@example.com",
                         "Andre",
                         "Cole",
                         "0a9dfi3.a"});
-            table8.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "JoannaV",
                         "valdezJ@example.com",
                         "Joanna",
                         "Valdez",
                         "d9u(*dsF4"});
 #line 13
- testRunner.And("the following users do not exist", ((string)(null)), table8, "And ");
+ testRunner.And("the following users do not exist", ((string)(null)), table10, "And ");
 #line hidden
         }
         

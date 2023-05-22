@@ -176,11 +176,11 @@ VALUES
 SET IDENTITY_INSERT [WatchListItems] OFF;
 
 SET IDENTITY_INSERT [WatchPartyGroup] ON;
-INSERT INTO [WatchPartyGroup] (ID, GroupTitle, GroupDescription, StartDate, HostID)
+INSERT INTO [WatchPartyGroup] (ID, GroupTitle, GroupDescription, StartDate, TelePartyURL, HostID)
 VALUES
-(1, 'Marvel marathon movie night', null, '2023-05-05 20:00:00', 1),
-(2, 'Harry Potter marathon', 'Going to watch all the Harry Potter movies in order all day', '2023-05-05 08:00:00', 5),
-(3, 'Sports movies', 'Going to be watching sports movies such as More than a Game, The Last Dance, etc', '2023-05-05 14:00:00', 9)
+(1, 'Marvel marathon movie night', null, '2023-05-05 20:00:00', null, 1),
+(2, 'Harry Potter marathon', 'Going to watch all the Harry Potter movies in order all day', '2023-05-05 08:00:00', 'https://redirect.teleparty.com/join/5ff6a69318b6a145', 5),
+(3, 'Sports movies', 'Going to be watching sports movies such as More than a Game, The Last Dance, etc', '2023-05-05 14:00:00', 'https://redirect.teleparty.com/join/dad235b867e64fed', 9)
 SET IDENTITY_INSERT [WatchPartyGroup] OFF;
 
 SET IDENTITY_INSERT [WatchPartyGroupAssignment] ON;

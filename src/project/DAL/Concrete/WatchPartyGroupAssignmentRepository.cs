@@ -57,4 +57,9 @@ public class WatchPartyGroupAssignmentRepository : Repository<WatchPartyGroupAss
             .Select(w => w.GroupId)
             .ToList();
     }
+
+    public bool UserInGroup(int groupId, string username)
+    {
+        return GetAll().FirstOrDefault(u => u.Watcher.Username == username && u.GroupId == groupId) != null;
+    }
 }
