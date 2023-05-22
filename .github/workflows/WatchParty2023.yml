@@ -1,50 +1,59 @@
-name: Build and deploy .NET Core application to Web App WatchParty2023
+name: Build, test and deploy Standups application to Azure
+
 on:
   push:
-    branches: ["integration"]
+    branches: [ "integration" ]
   pull_request:
-    branches: ["integration"]
-  
+    branches: [ "integration" ]
+  workflow_dispatch: 
+
 env:
+# path from root of repo to dir containing project folders (usually where the .sln file is)
+  PATH_TO_SOLUTION: './project'
+  MAIN_PROJECT: WatchParty
+  UNIT_TEST_PROJECT: WatchPartyTest
+# JS_UNIT_TEST_PROJECT: Standups_JS_Tests
   AZURE_WEBAPP_NAME: WatchParty2023
-  AZURE_WEBAPP_PACKAGE_PATH: project\published
+  AZURE_WEBAPP_PACKAGE_PATH: publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 7.0.x
-  WORKING_DIRECTORY: project
+
+defaults:
+  run:
+    working-directory: './project'
+
 jobs:
-  build:
-    runs-on: windows-latest
+  build_and_test:
+    name: Build and run tests
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v3
+  
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
-    - name: Restore
-      run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
-    - name: Build
-      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
-    - name: Test
-      run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build --filter FullyQualifiedName\!~Features --no-restore
+
+    - name: Restore all projects in use
+      run: |
+        dotnet restore "${{ env.MAIN_PROJECT }}"
+        dotnet restore "${{ env.UNIT_TEST_PROJECT }}"
+
+    - name: Build main project
+      run: dotnet build "${{ env.MAIN_PROJECT }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+
+    - name: Build unit test project
+      run: dotnet build "${{ env.UNIT_TEST_PROJECT }}" --configuration "Debug" --no-restore
+
+    - name: Run all unit tests, but exclude BDD tests
+      run: dotnet test --filter FullyQualifiedName\!~Features --no-restore
+
     - name: Publish
-      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-    - name: Deploy to Azure WebApp
+      run: dotnet publish "${{ env.MAIN_PROJECT }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+
+    - name: Deploy to Azure WebApp using previously stored publish profile
       uses: azure/webapps-deploy@v2
-      with:
+      with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.WatchParty2023_66B2 }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: ${{ env.PATH_TO_SOLUTION }}/${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
