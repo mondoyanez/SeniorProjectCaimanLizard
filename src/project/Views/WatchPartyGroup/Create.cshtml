@@ -12,10 +12,10 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row mt-5">
             <div class="col-4">
-                <label class="watch-party-title-label">Enter title:</label>
+                <label class="watch-party-title-label text-dark-emphasis">Enter title:</label>
             </div>
             <div class="col-8">
-                <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" placeholder="Enter group name here" />
+                <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input text-dark-emphasis" placeholder="Enter group name here" />
                 <span asp-validation-for="GroupTitle" class="text-danger watch-party-title-input-validation"></span>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <label class="watch-party-description-label">Enter description:</label>
             </div>
             <div class="col-8">
-                <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" placeholder="Enter description here" rows="10"></textarea>
+                <textarea asp-for="GroupDescription" class="form-control watch-party-description-input text-dark-emphasis" placeholder="Enter description here" rows="10"></textarea>
                 <span asp-validation-for="GroupDescription" class="text-danger"></span>
             </div>
         </div>
@@ -33,12 +33,12 @@
                 <label class="watch-party-date-label">Enter start date:</label>
             </div>
             <div class="col-8">
-                <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"/>
+                <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input text-dark-emphasis" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"/>
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
         </div>
         <div class="row mt-2">
-            <input type="submit" value="Create" class="btn btn-primary watch-party-btn" />
+            <input type="submit" value="Create" class="btn bg-primary-subtle text-dark-emphasis watch-party-btn" id="watch-party-submit-button" />
         </div>
     </form>
 </div>

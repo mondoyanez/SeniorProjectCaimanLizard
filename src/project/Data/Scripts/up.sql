@@ -8,6 +8,7 @@ CREATE TABLE [Watcher]
     [FirstName]             NVARCHAR(64),
     [LastName]              NVARCHAR(64),
     [Email]                 NVARCHAR(256),
+    [Phone]                 NVARCHAR(18),
     [Bio]                   NVARCHAR(256),
     [WatchListPrivacy]      BIT                NOT NULL
 );
@@ -113,6 +114,7 @@ CREATE TABLE [WatchPartyGroup]
     [GroupTitle]            NVARCHAR(512)       NOT NULL,
     [GroupDescription]      NVARCHAR(1024),
     [StartDate]             DATETIME            NOT NULL,
+    [TelePartyURL]          NVARCHAR(512),
 
     [HostID]                INT                 NOT NULL
 );

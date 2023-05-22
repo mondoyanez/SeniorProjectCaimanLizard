@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WatchParty.Models;
 
@@ -29,9 +27,11 @@ public partial class Comment
 
     [ForeignKey("PostId")]
     [InverseProperty("Comments")]
+    [ValidateNever]
     public virtual Post Post { get; set; } = null!;
 
     [ForeignKey("UserId")]
     [InverseProperty("Comments")]
+    [ValidateNever]
     public virtual Watcher User { get; set; } = null!;
 }

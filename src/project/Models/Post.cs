@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WatchParty.Models;
 
@@ -38,5 +36,6 @@ public partial class Post
 
     [ForeignKey("UserId")]
     [InverseProperty("Posts")]
+    [ValidateNever]
     public virtual Watcher User { get; set; } = null!;
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Comments";
 }
 
-<div class="row bg-light-subtle">
+<div class="row bg-light-subtle all-comments-container">
     @if (ViewBag.IsPostVisible)
     {
         <div class="row mb-5">
@@ -82,14 +82,13 @@
             </div>
         }
         <form asp-controller="Comment" asp-action="Index" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger comment-title-req"></div>
             <div class="row enter-comment-section">
                 <div class="col-2">
                     <label>Enter your comment:</label>
                 </div>
                 <div class="col-3">
-                    <textarea id="comment-entered" placeholder="Enter comment" rows="10" cols="70" asp-for="newComment.CommentTitle" required></textarea>
-                    <span asp-validation-for="newComment.CommentTitle" class="text-danger"></span>
+                    <textarea asp-for="newComment.CommentTitle" id="comment-entered" placeholder="Enter comment" rows="10" cols="70"></textarea>
                 </div>
                 <div class="col-2">
                     <input class="btn bg-warning-subtle text-dark-emphasis" id="comment-submit" type="submit" value="SUBMIT" />
