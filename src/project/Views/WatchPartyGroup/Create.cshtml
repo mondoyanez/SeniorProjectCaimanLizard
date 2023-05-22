@@ -1,0 +1,44 @@
+﻿@model WatchParty.Models.WatchPartyGroup
+
+@{
+    ViewData["Title"] = "Create Group";
+}
+
+<div class="row text-center bg-light-subtle watch-party-container">
+    <div class="row mt-5">
+        <h1>Create Watch Party Group</h1>
+    </div>
+    <form asp-controller="WatchPartyGroup" class="watch-party-form" asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mt-5">
+            <div class="col-4">
+                <label class="watch-party-title-label">Enter title:</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GroupTitle" type="text" class="form-control watch-party-title-input" placeholder="Enter group name here" />
+                <span asp-validation-for="GroupTitle" class="text-danger watch-party-title-input-validation"></span>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="watch-party-description-label">Enter description:</label>
+            </div>
+            <div class="col-8">
+                <textarea asp-for="GroupDescription" class="form-control watch-party-description-input" placeholder="Enter description here" rows="10"></textarea>
+                <span asp-validation-for="GroupDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="watch-party-date-label">Enter start date:</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="StartDate" type="datetime-local" class="form-control watch-party-date-input" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"/>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <input type="submit" value="Create" class="btn btn-primary watch-party-btn" />
+        </div>
+    </form>
+</div>

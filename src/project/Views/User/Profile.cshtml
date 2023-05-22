@@ -1,12 +1,12 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model ProfileVM
+@using Microsoft.AspNetCore.Identity
+@model WatchParty.ViewModels.ProfileVM
 @{
     ViewData["Title"] = "Profile Page";
 }
 
-<section class="cld-bg-light">
+<section class="bg-light-subtle profile-container">
     <br />
     <br />
 
@@ -16,13 +16,42 @@
             <div class="col-md-3">
                 <img src="@Url.Content("~/img/popcorn.svg")" alt="Logo" width="120" height="96" class="center">
             </div>
+            <div class="col-md-1">
+                @if (Model.isCurrentUser)
+                {
+                    <a class="btn cld-btn-secondary btn-sm" asp-controller="WatchPartyGroup" asp-action="Create">Create Watch Party</a>
+                }
+            </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body profile-card">
-                        <h3 class="card-title">@Model.Watcher.Username</h3>
+                    <div class="card-body profile-card text-center">
+                        <h3 class="card-title">@@@Model.Watcher.Username</h3>
                         <h5 class="card-subtitle mb-2">@Model.Watcher.FirstName @Model.Watcher.LastName</h5>
                         <p></p>
-                        @*<h6 class="card-subtitle mb-2 text-muted">Following @Model.Watcher.FollowingCount    Followers @Model.Watcher.FollowerCount</h6>*@
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 text-muted">Following:</h6>
+                                <h6 class="card-subtitle mb-2 text-muted" id="user-amount-following">@Model.Following.Count</h6>
+                            </div>
+                            <div class="col">
+                                <h6 class="card-subtitle mb-2 text-muted">Followers:</h6>
+                                <h6 class="card-subtitle mb-2 text-muted" id="user-amount-followers">@Model.Followers.Count</h6>
+                            </div>
+                        </div>
+                        <input type="hidden" id="user-profile-username" value="@Model.Watcher.Username" />
+                        @if (!Model.isCurrentUser)
+                        {
+                            @if (Convert.ToBoolean(Model.isFollowing))
+                            {
+                                <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" style="display: none;" />
+                                <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User"/>
+                            }
+                            else
+                            {
+                                <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" />
+                                <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User" style="display: none;"/>
+                            }
+                        }
                         <p class="card-text">@Model.Watcher.Bio</p>
                     </div>
                 </div>
@@ -30,13 +59,50 @@
             <div class="col-md-1">
                 @*Only show here if it is the current user*@
                 @if (Model.isCurrentUser == true)
-                {
-@*                    <a href=/User/Edit/@Model.Watcher.Username class="btn cld-btn-primary text-light">Edit Profile</a>
-*@                
+                {              
                     <button class="btn cld-btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
+                }
+                else
+                {
+                    @if (Model.Watcher.WatchListPrivacy == false)
+                    {
+                        <a class="btn cld-btn-secondary btn-sm" asp-area="" asp-controller="WatchList" asp-action="Index" asp-route-username="@Model.Watcher.Username">Watch List</a>
+                    }
                 }
             </div>
         </div>
+        
+        <div class="row text-center my-5">
+            <h2>Future Watch Parties</h2>
+        </div>
+        
+        <div class="row profile-watch-parties">
+            @if (Model.Groups.Any())
+            {
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Start Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var group in Model.Groups)
+                    {
+                        <tr>
+                            <td><a asp-controller="WatchPartyGroup" asp-action="Details" asp-route-groupId="@group.Id">@group.GroupTitle</a></td>
+                            <td>@group.StartDate</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h4>No watch parties currently</h4>
+            }
+        </div>
+        
     }
     else
     {
@@ -57,9 +123,9 @@
                         <input type="hidden" asp-for="Watcher.Id" />
                         <input type="hidden" asp-for="Watcher.AspNetIdentityId" />
                         <input type="hidden" asp-for="Watcher.Username" />
-                        <input type="hidden" asp-for="Watcher.FollowerCount" />
-                        <input type="hidden" asp-for="Watcher.FollowingCount" />
                         <input type="hidden" asp-for="Watcher.Email" />
+                        <input type="hidden" asp-for="Following.Count" />
+                        <input type="hidden" asp-for="Followers.Count" />
                         <div class="form-group">
                             <label asp-for="Watcher.FirstName" class="control-label">First Name</label>
                             <input asp-for="Watcher.FirstName" class="form-control" style="" />
@@ -74,6 +140,19 @@
                             <label asp-for="Watcher.Bio" class="control-label">Bio</label>
                             <input asp-for="Watcher.Bio" class="form-control" class="input-group-lg" />
                             <span asp-validation-for="Watcher.Bio" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="form-group form-check form-switch">
+                            @if (Model.Watcher.WatchListPrivacy == true)
+                            {
+                                <label asp-for="Watcher.WatchListPrivacy" class="form-check-label control-label">Watch List is private</label>
+                            }
+                            else
+                            {
+                                <label asp-for="Watcher.WatchListPrivacy" class="form-check-label control-label">Watch List is public</label>                                
+                            }
+                            <input asp-for="Watcher.WatchListPrivacy" class="form-check-input form-control" type="checkbox" />
+                            <span asp-validation-for="Watcher.WatchListPrivacy" class="text-danger"></span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" style="outline:none" data-bs-dismiss="modal">Cancel</button>
@@ -91,4 +170,7 @@
     <br />
 </section>
 
-
+@section Scripts
+{
+    <script type="text/javascript" src="~/dist/followUser.js"></script>
+}

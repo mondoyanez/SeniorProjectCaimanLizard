@@ -4,7 +4,7 @@
     ViewData["Title"] = "Register";
 }
 
-<section class="cld-bg-light">
+<section class="bg-light-subtle register-container">
     <br />
     <div class="row">
         <div class="col-md-3"></div>
@@ -23,6 +23,11 @@
                     <span asp-validation-for="Input.UserName" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                     <label asp-for="Input.Password">Password</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -32,14 +37,14 @@
                     <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg cld-btn-primary text-light">Register</button>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary text-light-emphasis bg-primary-subtle">Register</button>
             </form>
             <br />
             <h5 class="text-center">or</h5>
             <br />
             <div>
                 <p>
-                    <a class="w-100 btn btn-lg cld-btn-secondary text-light" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Log In Here</a>
+                    <a class="w-100 btn btn-lg btn-secondary text-light-emphasis bg-secondary-subtle" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Log In Here</a>
                 </p>
             </div>
         </div>

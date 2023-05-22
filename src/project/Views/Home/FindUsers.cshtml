@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Find Users";
+}
+
+<div class="row empty-page bg-light-subtle">
+    
+    <div class="row mt-2 text-center">
+        <h3>Find Other Users</h3>
+    </div>
+    <hr/>
+    
+    <div class="row">
+        <div class="col-1">
+            <label class="mt-2">Enter username:</label>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" placeholder="Watcher" id="username-entered"/>
+        </div>
+        <div class="col-1">
+            <input class="form-control" type="submit" value="Submit" id="username-search-btn" />
+        </div>
+    </div>
+    
+    <input type="hidden" value="@User?.Identity?.Name" id="currentUser"/>
+
+    <div class="row" id="user-search-input-error-message">
+
+    </div>
+
+    <table class="table table-hover table-striped user-search-table" id="users-found" style="display: none;">
+    </table>
+
+</div>
+
+@section Scripts
+{
+    <script type="module" src="~/dist/findUsers.js"></script>
+}

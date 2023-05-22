@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WatchParty.Models;
 using WatchParty.Models.Concrete;
 using WatchParty.Services.Abstract;
 
@@ -63,5 +64,23 @@ namespace WatchParty.Controllers
         {
             return Ok(_tmdbService.SearchYear(year));
         }
+
+		[HttpPost("addShowToWatchList")]
+		public IActionResult AddShowToWatchList(string title)
+		{
+			TMDBTitle tmdbTitle = _tmdbService.GetShowDetails(title);
+			Console.WriteLine(tmdbTitle);
+			Show show = new Show()
+			{
+				Title = tmdbTitle.Title,
+				Overview = tmdbTitle.PlotSummary,
+				FirstAirDate = tmdbTitle.ReleaseDate,
+				Tmdbid = tmdbTitle.Id
+			};
+
+			// Also need to add a watch list object as well as a show
+
+			return Ok(show);
+		}
 	}
 }

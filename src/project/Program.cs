@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using WatchParty.Areas.Identity.Data;
 using WatchParty.DAL.Abstract;
@@ -19,12 +20,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         var tmdbKey = builder.Configuration["TMDB:APIKey"];
+        var sendGridKey = builder.Configuration["SendGrid:APIKey"];
 
         // Add services to the container.
 
         var watchPartyConnectionString = builder.Configuration.GetConnectionString("WatchPartyConnection") ?? throw new InvalidOperationException("Connection string 'WatchPartyConnection' not found.");
         var authConnectionString = builder.Configuration.GetConnectionString("AuthConnection") ?? throw new InvalidOperationException("Connection string 'AuthConnection' not found.");
-        
+
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(authConnectionString));
 
@@ -34,18 +36,31 @@ public class Program
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-        {
-            options.SignIn.RequireConfirmedAccount = false;
-        })
-        
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.User.RequireUniqueEmail = true;
+            })
+
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddScoped<DbContext, WatchPartyDbContext>();
-		builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient {BaseAddress = new Uri("https://api.themoviedb.org/3") }));
+        builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient { BaseAddress = new Uri("https://api.themoviedb.org/3") }));
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
+        builder.Services.AddScoped<IFollowingListRepository, FollowingListRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
+        builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+        builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(builder.Configuration));
+        builder.Services.AddScoped<IWatchListRepository, WatchListRepository>();
+        builder.Services.AddScoped<IShowRepository, ShowRepository>();
+        builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+        builder.Services.AddScoped<IWatchListItemRepository, WatchListItemRepository>();
+        builder.Services.AddScoped<IWatchPartyGroupRepository, WatchPartyGroupRepository>();
+        builder.Services.AddScoped<IWatchPartyGroupAssignmentRepository, WatchPartyGroupAssignmentRepository>();
+        builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+
+
 
         var app = builder.Build();
 
@@ -94,6 +109,21 @@ public class Program
         app.UseRouting();
 
         app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "AddMovieToWatchList",
+            pattern: "watchlist/addMovieToWatchList",
+            defaults: new { controller = "WatchList", action = "addMovieToWatchList" });
+
+        app.MapControllerRoute(
+            name: "AddShowToWatchList",
+            pattern: "watchlist/addShowToWatchList",
+            defaults: new { controller = "WatchList", action = "addShowToWatchList" });
+
+        app.MapControllerRoute(
+            name: "watchList",
+            pattern: "watchlist/{username}",
+            defaults: new { controller = "WatchList", action = "Index" });
 
         app.MapControllerRoute(
            name: "editProfile",
