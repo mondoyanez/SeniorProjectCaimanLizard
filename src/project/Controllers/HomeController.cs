@@ -43,44 +43,7 @@ public class HomeController : Controller
         return View();
     }
 
-    //public IActionResult SearchDetails(string title, DateOnly ReleaseDate)
-    //{
-    //    Debug.WriteLine("Inside controller for search details");
-    //    Debug.WriteLine("Title: " + title);
-    //    Debug.WriteLine("Release Date: " + ReleaseDate);
-    //    //Debug.WriteLine("Media type: " + mediaType);
-
-    //    Show show = new Show()
-    //    {
-    //        Title = title,
-    //        FirstAirDate = ReleaseDate.ToString()
-    //    };
-    //    return View(show);
-
-
-    //    //if (mediaType == "tv")
-    //    //{
-    //    //    //make a call to the api
-    //    //    //for now just using basic data
-
-    //    //    Show show = new Show()
-    //    //    {
-    //    //        Title = title,
-    //    //        FirstAirDate = ReleaseDate.ToString()
-    //    //    };
-    //    //    return View(show);
-
-    //    //} else
-    //    //{
-    //    //    Movie movie = new Movie()
-    //    //    {
-    //    //        Title = title,
-    //    //        ReleaseDate = ReleaseDate.ToString()
-    //    //    };
-    //    //    return View(movie);
-    //    //}
-
-    //}
+    
 
     public IActionResult SearchDetails(string title, DateOnly ReleaseDate)
     {
@@ -89,10 +52,8 @@ public class HomeController : Controller
         Debug.WriteLine("Release Date: " + ReleaseDate);
         //Debug.WriteLine("Media type: " + mediaType);
 
-        int id = 100088;
 
         ShowDetailsVM vm = new ShowDetailsVM();
-        //vm = _tmdbService.GetShowDetails(id);
 
         int showId = _tmdbService.GetShowId(title, ReleaseDate);
 
@@ -105,9 +66,28 @@ public class HomeController : Controller
 
         return View(vm);
 
-        // Should be getting an id and a mediaType
-        // hit different services for the different media types, and pass in the correct id
-        // This is all manually entered right now, need to change it once the id is figured out
+    }
+
+    public IActionResult MovieDetails(string title, DateOnly ReleaseDate)
+    {
+        Debug.WriteLine("Inside controller for search details");
+        Debug.WriteLine("Title: " + title);
+        Debug.WriteLine("Release Date: " + ReleaseDate);
+        //Debug.WriteLine("Media type: " + mediaType);
+
+
+        MovieDetailsVM vm = new MovieDetailsVM();
+
+        int Id = _tmdbService.GetMovieId(title, ReleaseDate);
+        Debug.WriteLine("Id: " + Id);
+        if (Id == 0)
+        {
+            return View();
+        }
+
+        vm = _tmdbService.GetMovieDetails(Id);
+
+        return View(vm);
 
     }
 

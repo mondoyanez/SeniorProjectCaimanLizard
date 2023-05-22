@@ -329,9 +329,27 @@ namespace WatchParty.Services.Concrete
 
         }
 
-        public MovieDetailsVM GetMovieDetails(int movieId, string relativepath = "/movie/?query=")
+        public MovieDetailsVM GetMovieDetails(int movieId, string relativepath = "/movie/")
         {
-            throw new NotImplementedException();
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{movieId}");
+            Debug.WriteLine(this.Key, $"{relativepath}{movieId}");
+            Debug.WriteLine(jsonResponse);
+
+
+            MovieDetailsVM? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<MovieDetailsVM>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO == null) return new MovieDetailsVM();
+
+            return tmdbJsonDTO;
         }
 
 
@@ -358,9 +376,34 @@ namespace WatchParty.Services.Concrete
 
             int showId = tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().first_air_date) == releaseDate).First().id;
 
+            return showId;            
+        }
+
+        public int GetMovieId(string title, DateOnly releaseDate, string relativepath = "/search/multi?query=")
+        {
+            var jsonResponse = _httpClient.GetJsonStringFromEndpoint(this.Key, $"{relativepath}{title}");
+            Debug.WriteLine(this.Key, $"{relativepath}{title}");
+            Debug.WriteLine(jsonResponse);
+
+
+            TMDBJsonDTO? tmdbJsonDTO = new();
+            try
+            {
+                tmdbJsonDTO = System.Text.Json.JsonSerializer.Deserialize<TMDBJsonDTO>(jsonResponse);
+            }
+            catch (System.Text.Json.JsonException e)
+            {
+                tmdbJsonDTO = null;
+                Debug.WriteLine(e);
+            }
+
+            if (tmdbJsonDTO == null) return 0;
+
+            int showId = tmdbJsonDTO.results.Where(result => DateOnly.Parse(tmdbJsonDTO.results.First().release_date) == releaseDate).First().id;
+
             return showId;
 
-            
+
         }
     }
 }

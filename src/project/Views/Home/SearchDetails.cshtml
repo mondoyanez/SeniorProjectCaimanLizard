@@ -21,6 +21,7 @@
                         <h4 class="card-text">@Model.overview</h4>
                         
                         <footer>@Model.tagline</footer>
+                        
                     </div>
                 </div>
             </div>
@@ -70,10 +71,20 @@
                 }
                 <br />
                 <br />
+
+                <h4>Genres: </h4>
+                @foreach (var genre in Model.genres)
+                {
+                    <h6>@genre.name</h6>
+                }
+
+                <br />
+                <br />
+
                 <h4>Created By:</h4>
                 @foreach (var person in Model.created_by)
                 {
-                    <h5>@person.name</h5>
+                    <h6>@person.name</h6>
                 }
 
             </div>

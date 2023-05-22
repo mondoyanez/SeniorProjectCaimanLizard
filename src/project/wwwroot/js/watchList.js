@@ -50,7 +50,7 @@ $(document).on('click', '.delete-watchlist-movie-0', function () {
     var movieId = $(this).data('movie-id');
     var listType = 0;
     $.ajax({
-        url: '/Watchlist/DeleteWatchlistShow',
+        url: '/Watchlist/DeleteWatchlistMovie',
         type: 'POST',
         data: {
             movieId: movieId,
@@ -68,9 +68,9 @@ $(document).on('click', '.delete-watchlist-movie-0', function () {
 
 $(document).on('click', '.delete-watchlist-movie-1', function () {
     var movieId = $(this).data('movie-id');
-    var listType = 0;
+    var listType = 1;
     $.ajax({
-        url: '/Watchlist/DeleteWatchlistShow',
+        url: '/Watchlist/DeleteWatchlistMovie',
         type: 'POST',
         data: {
             movieId: movieId,
@@ -90,7 +90,7 @@ $(document).on('click', '.delete-watchlist-movie-2', function () {
     var movieId = $(this).data('movie-id');
     var listType = 2;
     $.ajax({
-        url: '/Watchlist/DeleteWatchlistShow',
+        url: '/Watchlist/DeleteWatchlistMovie',
         type: 'POST',
         data: {
             movieId: movieId,

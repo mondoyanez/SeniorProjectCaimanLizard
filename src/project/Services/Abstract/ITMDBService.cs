@@ -20,6 +20,9 @@ namespace WatchParty.Services.Abstract
         ShowDetailsVM? GetShowDetails(int id, string relativePath = "/tv/");
         int GetShowId(string title, DateOnly releaseDate, string relativePath = "/search/multi?query=");
 
-        MovieDetailsVM? GetMovieDetails(int id, string relativepath = "/movie/?query=");
+        MovieDetailsVM? GetMovieDetails(int id, string relativepath = "/movie/");
+        int GetMovieId(string title, DateOnly releaseDate, string relativePath = "/search/multi?query=");
+
+
     }
 }
