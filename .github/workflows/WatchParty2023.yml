@@ -10,8 +10,8 @@ on:
 env:
 # path from root of repo to dir containing project folders (usually where the .sln file is)
   PATH_TO_SOLUTION: './src'
-  MAIN_PROJECT: WatchParty
-  UNIT_TEST_PROJECT: WatchPartyTest
+  MAIN_PROJECT: project
+  UNIT_TEST_PROJECT: nunit
 # JS_UNIT_TEST_PROJECT: Standups_JS_Tests
   AZURE_WEBAPP_NAME: WatchParty2023
   AZURE_WEBAPP_PACKAGE_PATH: publish
