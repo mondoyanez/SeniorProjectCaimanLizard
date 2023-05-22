@@ -76,7 +76,7 @@
 @if (Model.Posts.Any())
 {
     <div class="row bg-light-subtle">
-
+        <input type="hidden" class="watcher-id" value="@Model.CurrentWatcher.Id" />
         <a asp-controller="Post" asp-action="Create" class="create-post-link">
             <img class="create-post-image" src="~/img/clipboard2-plus.svg" alt="clipboard" />
         </a>
@@ -99,6 +99,20 @@
                         </div>
                         <div class="row">
                             <p class="card-text post-text">@post.PostDescription</p>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col d-flex align-items-center justify-content-center">
+                                @* if current post is like by current user, show filled heart, else show empty heart *@
+                                @if (Model.LikePosts.Any(lp => lp.UserId == Model.CurrentWatcher.Id && lp.PostId == post.Id))
+                                {
+                                    <i class="bi bi-heart-fill text-light-emphasis" data-post-id="@post.Id" data-user-id="@Model.CurrentWatcher.Id"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-heart text-light-emphasis" data-post-id="@post.Id" data-user-id="@Model.CurrentWatcher.Id"></i>
+                                }
+                                <p class="card-text text-light-emphasis m-1">@post.LikePosts.Count(lp => lp.PostId == post.Id)</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -149,4 +163,8 @@ else
     <div class="row bg-light-subtle text-center empty-page">
         <h1>No Posts</h1>
     </div>
+}
+@section Scripts
+{
+    <script src="~/js/like.js"></script>                       
 }
