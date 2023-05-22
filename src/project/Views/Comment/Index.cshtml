@@ -20,11 +20,12 @@
                             <img src="~/img/three-dots-vertical.svg" alt="Dropdown Menu" />
                         </button>
                         <ul class="dropdown-menu">
+                            <a asp-controller="Post" asp-action="Edit" method="post" asp-route-id="@Model.PostId" class="btn dropdown-item" type="submit">Edit Post</a>
                             <form asp-controller="Post" asp-action="Index" method="post">
-                            <li>
-                                <input class="btn dropdown-item" type="submit" value="Delete Post" />
-                                <input type="hidden" asp-for="PostId" value="@Model.PostId" />
-                            </li>
+                                <li>
+                                    <input class="btn dropdown-item" type="submit" value="Delete Post"/>
+                                    <input type="hidden" asp-for="PostId" value="@Model.PostId"/>
+                                </li>
                             </form>
                         </ul>
                     </div>
