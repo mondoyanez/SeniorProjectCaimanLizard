@@ -20,7 +20,7 @@ env:
 
 defaults:
   run:
-    working-directory: './project'
+    working-directory: './src'
 
 jobs:
   build_and_test:
