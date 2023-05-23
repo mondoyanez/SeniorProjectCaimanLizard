@@ -544,13 +544,13 @@ body {
 #user-profile-btn-follow {
     width: 30%;
     height: 30%;
-    background-color: $purple;
 }
 
 #user-profile-btn-follow:hover {
     width: 30%;
     height: 30%;
-    background-color: $yellow;
+    background-color: $yellow !important;
+    color: $dark-text !important;
 }
 
 #user-profile-following-icon {

@@ -12089,13 +12089,13 @@ body {
 #user-profile-btn-follow {
   width: 30%;
   height: 30%;
-  background-color: #5D4A66;
 }
 
 #user-profile-btn-follow:hover {
   width: 30%;
   height: 30%;
-  background-color: #D5A021;
+  background-color: #D5A021 !important;
+  color: #000 !important;
 }
 
 #user-profile-following-icon {
