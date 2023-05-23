@@ -4,6 +4,12 @@ const submitButton = $("#username-search-btn");
 const errorMessageBody = $("#user-search-input-error-message");
 const re = /^[A-Za-z]+$/;
 const usersTable = $("#users-found");
+$("#username-entered").on("keypress", (e) => {
+    if (e.which === 13) {
+        e.preventDefault();
+        submitButton.trigger("click");
+    }
+});
 submitButton.on("click", (e) => {
     var _a, _b, _c, _d;
     e.preventDefault();
