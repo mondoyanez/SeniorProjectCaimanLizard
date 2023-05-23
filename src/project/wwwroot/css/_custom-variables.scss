@@ -541,21 +541,6 @@ body {
     width: 70%
 }
 
-a.user-profile-link:link, a.user-profile-link:visited {
-    color: $purple;
-    text-decoration: none;
-}
-
-a.user-profile-link:active {
-    color: $yellow;
-    text-decoration: none;
-}
-
-a.user-profile-link:hover {
-    color: $blue;
-    text-decoration: none;
-}
-
 #user-profile-btn-follow {
     width: 30%;
     height: 30%;

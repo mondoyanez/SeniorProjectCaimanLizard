@@ -36,7 +36,7 @@ function findUsers(data) {
             if (currentUser !== item.username) {
                 const result = `
                 <tr>
-                    <td><a class="user-profile-link" href="/user/${item.username}">${item.username}</a></td>
+                    <td><a class="text-dark-emphasis" href="/user/${item.username}">${item.username}</a></td>
                     <td>${(_a = item.email) !== null && _a !== void 0 ? _a : ""}</td>
                     <td>${(_b = item.firstName) !== null && _b !== void 0 ? _b : ""} ${(_c = item.lastName) !== null && _c !== void 0 ? _c : ""}</td>
                 </tr>

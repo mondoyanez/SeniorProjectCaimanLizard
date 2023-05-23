@@ -12086,21 +12086,6 @@ body {
   width: 70%;
 }
 
-a.user-profile-link:link, a.user-profile-link:visited {
-  color: #5D4A66;
-  text-decoration: none;
-}
-
-a.user-profile-link:active {
-  color: #D5A021;
-  text-decoration: none;
-}
-
-a.user-profile-link:hover {
-  color: #84AFE6;
-  text-decoration: none;
-}
-
 #user-profile-btn-follow {
   width: 30%;
   height: 30%;
@@ -12115,19 +12100,4 @@ a.user-profile-link:hover {
 
 #user-profile-following-icon {
   width: 7%;
-}
-
-.card-season {
-    width: auto;
-    height: 180px;
-}
-
-/*card-season {
-    width: 10px;
-    height: auto;
-}*/
-
-.card-season-img {
-    width: 180px;
-    height: auto;
 }

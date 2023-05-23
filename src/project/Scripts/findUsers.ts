@@ -38,7 +38,7 @@ function findUsers(data: any[]) {
                 const result: string =
                     `
                 <tr>
-                    <td><a class="user-profile-link" href="/user/${item.username}">${item.username}</a></td>
+                    <td><a class="text-dark-emphasis" href="/user/${item.username}">${item.username}</a></td>
                     <td>${item.email ?? ""}</td>
                     <td>${item.firstName ?? ""} ${item.lastName ?? ""}</td>
                 </tr>
