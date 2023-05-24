@@ -254,14 +254,16 @@ body {
 }
 
 #comment-entered {
-    margin-left: -20%;
+    width: 70%;
+    margin-bottom: 5%;
 }
 
 #comment-submit {
     color: $purple;
     background-color: $yellow;
     border-color: $yellow;
-    margin-left: 125%;
+    margin-left: 60%;
+    width: 10%;
 }
 
 .comment-title {

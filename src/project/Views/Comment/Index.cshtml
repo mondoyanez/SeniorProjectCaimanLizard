@@ -85,13 +85,10 @@
         <form asp-controller="Comment" asp-action="Index" method="post">
             <div asp-validation-summary="All" class="text-danger comment-title-req"></div>
             <div class="row enter-comment-section">
-                <div class="col-2">
-                    <label>Enter your comment:</label>
+                <div class="row">
+                    <textarea asp-for="newComment.CommentTitle" class="text-dark-emphasis" id="comment-entered" placeholder="Enter comment" rows="10" cols="10"></textarea>
                 </div>
-                <div class="col-3">
-                    <textarea asp-for="newComment.CommentTitle" class="text-dark-emphasis" id="comment-entered" placeholder="Enter comment" rows="10" cols="70"></textarea>
-                </div>
-                <div class="col-2">
+                <div class="row">
                     <input class="btn bg-warning-subtle text-dark-emphasis" id="comment-submit" type="submit" value="SUBMIT" />
                     <input type="hidden" asp-for="newComment.PostId" value="@Model.PostId" />
                     <input type="hidden" asp-for="ActionMethod" value="CreateComment" />
