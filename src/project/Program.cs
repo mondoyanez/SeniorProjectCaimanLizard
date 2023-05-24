@@ -53,6 +53,7 @@ public class Program
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IFollowingListRepository, FollowingListRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
+        builder.Services.AddScoped<ILikePostRepository, LikePostRepository>();
         builder.Services.AddScoped<ICommentRepository, CommentRepository>();
         builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(builder.Configuration));
         builder.Services.AddScoped<IWatchListRepository, WatchListRepository>();
@@ -62,6 +63,7 @@ public class Program
         builder.Services.AddScoped<IWatchPartyGroupRepository, WatchPartyGroupRepository>();
         builder.Services.AddScoped<IWatchPartyGroupAssignmentRepository, WatchPartyGroupAssignmentRepository>();
         builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+        builder.Services.AddTransient<SendGridService, SendGridService>(s => new SendGridService(builder.Configuration));
 
 
 

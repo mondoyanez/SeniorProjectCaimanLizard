@@ -11,7 +11,7 @@ public partial class Comment
     [Column("ID")]
     public int Id { get; set; }
 
-    [StringLength(2048), Required(AllowEmptyStrings = false, ErrorMessage = "Title is a required field")]
+    [StringLength(2048), Required(AllowEmptyStrings = false, ErrorMessage = "Comment field cannot be left empty")]
     public string CommentTitle { get; set; } = null!;
 
     [Column(TypeName = "datetime")]

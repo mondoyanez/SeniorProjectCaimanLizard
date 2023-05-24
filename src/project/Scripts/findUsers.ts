@@ -6,6 +6,13 @@ const errorMessageBody: JQuery<HTMLElement> = $("#user-search-input-error-messag
 const re: RegExp = /^[A-Za-z]+$/;
 const usersTable: JQuery<HTMLElement> = $("#users-found");
 
+$("#username-entered").on("keypress", (e: JQuery.Event) => {
+    if (e.which === 13) {
+        e.preventDefault();
+        submitButton.trigger("click");
+    }
+});
+
 submitButton.on("click", (e: JQuery.Event) => {
     e.preventDefault();
     const query: string = $("#username-entered").val()?.toString() ?? "";
@@ -38,7 +45,7 @@ function findUsers(data: any[]) {
                 const result: string =
                     `
                 <tr>
-                    <td><a class="user-profile-link" href="/user/${item.username}">${item.username}</a></td>
+                    <td><a class="text-dark-emphasis" href="/user/${item.username}">${item.username}</a></td>
                     <td>${item.email ?? ""}</td>
                     <td>${item.firstName ?? ""} ${item.lastName ?? ""}</td>
                 </tr>

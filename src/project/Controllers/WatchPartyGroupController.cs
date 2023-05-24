@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Services.Abstract;
+using WatchParty.Services.Concrete;
 using WatchParty.ViewModels;
 
 namespace WatchParty.Controllers;
@@ -16,14 +18,16 @@ public class WatchPartyGroupController : Controller
     private readonly IWatchPartyGroupAssignmentRepository _assignmentRepository;
     private readonly IWatcherRepository _watcherRepository;
     private readonly ITwilioService _twilioService;
+    private readonly SendGridService _emailSender;
 
-    public WatchPartyGroupController(UserManager<IdentityUser> userManager, IWatchPartyGroupRepository groupRepository, IWatchPartyGroupAssignmentRepository assignmentRepository, IWatcherRepository watcherRepository, ITwilioService twilioService)
+    public WatchPartyGroupController(UserManager<IdentityUser> userManager, IWatchPartyGroupRepository groupRepository, IWatchPartyGroupAssignmentRepository assignmentRepository, IWatcherRepository watcherRepository, ITwilioService twilioService, SendGridService emailSender)
     {
         _userManager = userManager;
         _groupRepository = groupRepository;
         _assignmentRepository = assignmentRepository;
         _watcherRepository = watcherRepository;
         _twilioService = twilioService;
+        _emailSender = emailSender;
     }
 
     [HttpGet]
@@ -60,7 +64,7 @@ public class WatchPartyGroupController : Controller
             if (group == null)
                 throw new NullReferenceException(nameof(group));
 
-            _assignmentRepository.AddToGroup(new WatchPartyGroupAssignment{ Group = group, GroupId = group.Id, Watcher = group.Host, WatcherId = group.HostId });
+            _assignmentRepository.AddToGroup(new WatchPartyGroupAssignment { Group = group, GroupId = group.Id, Watcher = group.Host, WatcherId = group.HostId });
             return RedirectToAction("Profile", "User", new { username = User.Identity.Name });
         }
 
@@ -94,6 +98,8 @@ public class WatchPartyGroupController : Controller
         {
             case "SendSMS":
                 return SendSms(group);
+            case "SendEmail":
+                return SendEmail(group);
             default:
                 return View();
         }
@@ -154,7 +160,40 @@ public class WatchPartyGroupController : Controller
             }
         }
 
-        
+
+        return RedirectToAction("Details", new { groupId = currentGroup.Id });
+    }
+
+    private IActionResult SendEmail(WatchPartyGroup group)
+    {
+        WatchPartyGroup? currentGroup = _groupRepository.GetById(group.Id);
+
+        if (currentGroup == null)
+            throw new Exception(nameof(currentGroup));
+
+        List<Watcher> watchers = _watcherRepository.FindAllWatchers();
+
+        foreach (Watcher watcher in watchers)
+        {
+            if (_assignmentRepository.UserInGroup(currentGroup.Id, watcher.Username))
+            {
+                IdentityUser? currentUser = _userManager.FindByNameAsync(watcher.Username).Result;
+
+                if (currentUser == null)
+                    throw new ArgumentException(nameof(currentUser));
+
+                // string? phoneNumber = _userManager.GetPhoneNumberAsync(currentUser).Result;
+                //
+                // if (phoneNumber != null && phoneNumber != "911" && phoneNumber != "311")
+                //     _twilioService.SendReminder(phoneNumber, messageReminder);
+                string? email = _userManager.GetEmailAsync(currentUser).Result;
+
+                if (email != null)
+                    _emailSender.SendWatchPartyReminder(email);
+            }
+        }
+
+
         return RedirectToAction("Details", new { groupId = currentGroup.Id });
     }
 }
