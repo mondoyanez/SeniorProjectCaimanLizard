@@ -59,9 +59,6 @@ public partial class Watcher
     [ValidateNever]
     public virtual ICollection<Post> Posts { get; } = new List<Post>();
 
-    [InverseProperty("User")]
-    [ValidateNever]
-    public virtual ICollection<Reshare> Reshares { get; } = new List<Reshare>();
 
     [InverseProperty("User")]
     [ValidateNever]

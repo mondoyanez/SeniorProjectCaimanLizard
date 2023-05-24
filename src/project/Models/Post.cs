@@ -31,9 +31,6 @@ public partial class Post
     [InverseProperty("Post")]
     public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();
 
-    [InverseProperty("Post")]
-    public virtual ICollection<Reshare> Reshares { get; } = new List<Reshare>();
-
     [ForeignKey("UserId")]
     [InverseProperty("Posts")]
     [ValidateNever]
