@@ -4,6 +4,12 @@ const submitButton = $("#username-search-btn");
 const errorMessageBody = $("#user-search-input-error-message");
 const re = /^[A-Za-z]+$/;
 const usersTable = $("#users-found");
+$("#username-entered").on("keypress", (e) => {
+    if (e.which === 13) {
+        e.preventDefault();
+        submitButton.trigger("click");
+    }
+});
 submitButton.on("click", (e) => {
     var _a, _b, _c, _d;
     e.preventDefault();
@@ -36,7 +42,7 @@ function findUsers(data) {
             if (currentUser !== item.username) {
                 const result = `
                 <tr>
-                    <td><a class="user-profile-link" href="/user/${item.username}">${item.username}</a></td>
+                    <td><a class="text-dark-emphasis" href="/user/${item.username}">${item.username}</a></td>
                     <td>${(_a = item.email) !== null && _a !== void 0 ? _a : ""}</td>
                     <td>${(_b = item.firstName) !== null && _b !== void 0 ? _b : ""} ${(_c = item.lastName) !== null && _c !== void 0 ? _c : ""}</td>
                 </tr>

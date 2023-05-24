@@ -43,12 +43,12 @@
                         {
                             @if (Convert.ToBoolean(Model.isFollowing))
                             {
-                                <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" style="display: none;" />
+                                <input type="submit" value="Follow" class="rounded btn bg-primary-subtle text-light" id="user-profile-btn-follow" style="display: none;" />
                                 <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User"/>
                             }
                             else
                             {
-                                <input type="submit" value="Follow" class="rounded" id="user-profile-btn-follow" />
+                                <input type="submit" value="Follow" class="rounded btn bg-primary-subtle text-light" id="user-profile-btn-follow" />
                                 <img src="~/img/people.svg" id="user-profile-following-icon" alt="Following User" style="display: none;"/>
                             }
                         }

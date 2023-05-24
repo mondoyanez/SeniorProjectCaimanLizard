@@ -65,10 +65,10 @@
                 <div class="row mt-5">
                     @if (Model.Group.TelePartyUrl != null)
                     {
-                        <div class="col-2 watch-party-details-header-url">
-                            <h5>TeleParty URL:</h5>
+                        <div class="row watch-party-details-header-url">
+                            <h5 class="text-decoration-underline">TeleParty URL</h5>
                         </div>
-                        <div class="col-4 watch-party-details-header-url-link">
+                        <div class="row watch-party-details-header-url-link">
                             <a href="@Model.Group.TelePartyUrl" target="_blank" id="teleparty-url">
                                 @Model.Group.TelePartyUrl
                             </a>
@@ -76,10 +76,10 @@
                     }
                     else
                     {
-                        <div class="col-2 watch-party-details-header-url-empty">
-                            <h5>TeleParty URL:</h5>
+                        <div class="row watch-party-details-header-url-empty">
+                            <h5 class="text-decoration-underline">TeleParty URL</h5>
                         </div>
-                        <div class="col-4 watch-party-details-header-url-link-empty">
+                        <div class="row watch-party-details-header-url-link-empty">
                             <p id="teleparty-url">N/A</p>
                         </div>
                     }
