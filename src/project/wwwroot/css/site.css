@@ -11907,7 +11907,7 @@ body {
 }
 
 .watch-group-options-container {
-  margin-left: 7%;
+  margin-left: 2%;
 }
 
 .watch-details-sms-container {
@@ -11944,23 +11944,13 @@ body {
   margin-left: 7%;
 }
 
-.watch-party-details-header-url {
-  margin-left: 30%;
+.watch-party-details-header-url, .watch-party-details-header-url-empty {
+  margin-left: -1%;
+  padding-bottom: 2%;
 }
 
-.watch-party-details-header-url-empty {
-  margin-left: 40%;
-}
-
-.watch-party-details-header-url-link {
+.watch-party-details-header-url-link, .watch-party-details-header-url-link-empty {
   font-size: 20px;
-  margin-left: -9%;
-  margin-top: -3px;
-}
-
-.watch-party-details-header-url-link-empty {
-  font-size: 20px;
-  margin-left: -395px;
   margin-top: -3px;
 }
 
