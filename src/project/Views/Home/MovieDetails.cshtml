@@ -1,0 +1,71 @@
+﻿@using WatchParty.ViewModels;
+@model MovieDetailsVM 
+@{
+    ViewData["Title"] = "Detailed Search";
+}
+
+<section class="bg-light-subtle" style="text-align:center">
+    <br />
+
+    @if (Model == null)
+    {
+        <p>model is null</p>
+
+    } else {
+        <div class="row">
+            <div class="col">
+                <div class="card bg-dark text-white">
+                    <img class="card-img opacity-25" src=@($"https://image.tmdb.org/t/p/original{Model.backdrop_path}") alt="Show Background" />
+                    <div class="card-img-overlay" style="text-align: justify-all">
+                        <h1 class="card-title">@Model.title</h1>
+                        <h4 class="card-text">@Model.overview</h4>
+                        <footer>@Model.tagline</footer>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <br />
+        <br />
+
+        <div class="row">
+            <br />
+            <div class="col-md">
+                <h3>Runtime:</h3>
+                <h5>@Model.runtime minutes</h5>
+@*                <br />
+*@                <h3>Release Date:</h3>
+                <h5>@Model.release_date</h5>
+
+            </div>
+            <div class="col-md">
+                <h3>Genres:</h3>
+                @foreach (var genre in Model.genres)
+                {
+                    <h5>@genre.name</h5>
+                }
+            </div>
+            <div class="col-md">
+                <h3>Production Companies:</h3>
+                @foreach (var company in Model.production_companies)
+                {
+                    <h5>@company.name</h5>
+                }
+            </div>
+            
+        </div>
+        
+
+    }
+    
+    <br />
+    <br />
+</section>
+
+@section Scripts
+{
+	<script type="text/javascript" src="~/js/searchDetails.js"></script>
+	<script>
+		console.log("loaded Scripts section");
+	</script>
+}

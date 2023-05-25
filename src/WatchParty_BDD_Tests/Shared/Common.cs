@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WatchParty_BDD_Tests.Shared
+﻿namespace WatchParty_BDD_Tests.Shared
 {
     // Sitewide definitions and useful methods
     public class Common
@@ -20,9 +14,13 @@ namespace WatchParty_BDD_Tests.Shared
         public static readonly Dictionary<string, string> Paths = new()
         {
             { "CreatePost", "/Post/Create" },
+            { "CreateWatchParty", "/WatchPartyGroup/Create"},
+            { "ExistingWatchParty", "/WatchPartyGroup/Details?groupId=1" },
+            { "EditExistingWatchParty", "/WatchPartyGroup/Edit?groupId=1" },
             { "Home" , "/" },
             { "Login", "/Identity/Account/Login" },
             { "Post", "/Post/Index" },
+            { "Profile", "/user/" },
             { "Register", "/Identity/Account/Register" }
         };
 

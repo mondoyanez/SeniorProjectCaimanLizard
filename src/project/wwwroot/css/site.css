@@ -11755,6 +11755,10 @@ body {
   padding-bottom: 21%;
 }
 
+.all-comments-container {
+  padding-bottom: 22%;
+}
+
 .all-comments-date {
   color: #EDE7D9;
   margin-left: 45%;
@@ -11792,21 +11796,28 @@ body {
 
 .comment-username {
   color: #84AFE6;
+  width: 200%;
 }
 
 #comment-entered {
-  margin-left: -20%;
+  width: 70%;
+  margin-bottom: 5%;
 }
 
 #comment-submit {
   color: #5D4A66;
   background-color: #D5A021;
   border-color: #D5A021;
-  margin-left: 125%;
+  margin-left: 60%;
+  width: 10%;
 }
 
 .comment-title {
   margin-left: 45%;
+}
+
+.comment-title-req {
+  margin-left: 23%;
 }
 
 .dropdown-section {
@@ -11878,8 +11889,32 @@ body {
 }
 
 .profile-watch-parties {
-  margin-left: 40%;
-  width: 25%;
+  margin-left: 15%;
+  width: 70%;
+}
+
+.profile-watch-party-header-empty {
+  margin-left: 38%;
+}
+
+.profile-watch-party-table-title {
+  width: 20%;
+}
+
+.profile-watch-party-table-date {
+  width: 7%;
+}
+
+.profile-watch-party-table-url {
+  width: 10%;
+}
+
+.watch-group-options-container {
+  margin-left: 2%;
+}
+
+.watch-details-sms-container {
+  margin-left: 1%;
 }
 
 .watch-party-container {
@@ -11890,7 +11925,7 @@ body {
   margin-top: 2%;
 }
 
-.watch-party-title-input, .watch-party-description-input, .watch-party-date-input {
+.watch-party-title-input, .watch-party-description-input, .watch-party-date-input, .watch-party-url-input {
   width: 47%;
 }
 
@@ -11909,7 +11944,17 @@ body {
 }
 
 .watch-party-details-header {
-  margin-left: 15%;
+  margin-left: 7%;
+}
+
+.watch-party-details-header-url, .watch-party-details-header-url-empty {
+  margin-left: -1%;
+  padding-bottom: 2%;
+}
+
+.watch-party-details-header-url-link, .watch-party-details-header-url-link-empty {
+  font-size: 20px;
+  margin-top: -3px;
 }
 
 .watch-party-details-invite {
@@ -11924,15 +11969,53 @@ body {
 
 .watch-party-table {
   margin-top: 5%;
+  margin-left: 7%;
+  width: 80%;
+}
+
+.watch-party-table-title {
+  width: 20%;
+}
+
+.watch-party-table-description {
+  width: 20%;
+}
+
+.watch-party-table-participants {
+  width: 15%;
+}
+
+.watch-party-table-host {
+  width: 15%;
+}
+
+.watch-party-table-date {
+  width: 10%;
 }
 
 .watch-party-title-input-validation {
   margin-left: -87%;
 }
 
+.watch-party-url-input-validation {
+  margin-left: -42%;
+}
+
 .watch-party-table-container {
   padding-top: 3%;
   padding-bottom: 26%;
+}
+
+.watch-party-edit-error {
+  color: red;
+  margin-left: 45%;
+  padding-top: 2%;
+}
+
+.watch-party-edit-unauthorized-error {
+  color: red;
+  margin-left: 20%;
+  padding-top: 2%;
 }
 
 .watchlist-container {
@@ -11996,31 +12079,16 @@ body {
   width: 70%;
 }
 
-a.user-profile-link:link, a.user-profile-link:visited {
-  color: #5D4A66;
-  text-decoration: none;
-}
-
-a.user-profile-link:active {
-  color: #D5A021;
-  text-decoration: none;
-}
-
-a.user-profile-link:hover {
-  color: #84AFE6;
-  text-decoration: none;
-}
-
 #user-profile-btn-follow {
   width: 30%;
   height: 30%;
-  background-color: #5D4A66;
 }
 
 #user-profile-btn-follow:hover {
   width: 30%;
   height: 30%;
-  background-color: #D5A021;
+  background-color: #D5A021 !important;
+  color: #000 !important;
 }
 
 #user-profile-following-icon {

@@ -24,15 +24,8 @@ $(document).ready(function () {
             data: { title: query },
             dataType: "json",
             success: function (response) {
-                if (document.getElementById('multiCheck').checked) {
-                    displayTitles(response);
-                }
-                if (document.getElementById('moviesCheck').checked) {
-                    displayMovies(response);
-                }
-                if (document.getElementById('showsCheck').checked) {
-                    displayShows(response);
-                }
+                displayTitles(response);
+                window.ShowAndMovieData = response;
             },
             error: function() {
                 errorOnAjax();
@@ -53,6 +46,52 @@ $(document).ready(function () {
     });
 });
 
+// Function to handle radio button change event
+function handleFilterChange() {
+    // Get the selected value
+    var filterValue = document.querySelector('input[type="radio"][name="filter"]:checked').value;
+    console.log(filterValue);
+
+    // Get all items to be filtered
+    var items = window.ShowAndMovieData;
+    console.log(items.length);
+
+    // Iterate over the items and show/hide based on the selected value
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (filterValue === "all") {
+            $("#" + item.mediaType + "-" + i).show();
+        }
+        else if ("movie" === filterValue) {
+            $("#movie-" + i).show();
+            $("#tv-" + i).hide();
+            //item.style.display = 'block'; // Show the item
+            console.log("shows the item");
+            console.log(filterValue);
+        } else if ("tv" === filterValue) {
+            $("#tv-" + i).show();
+            $("#movie-" + i).hide();
+            //item.style.display = 'none'; // Hide the item
+            console.log("hides the item");
+            console.log(filterValue);
+        }
+    }
+}
+
+// Add event listener to the radio button group
+var filterRadios = document.querySelectorAll('input[type="radio"][name="filter"]');
+filterRadios.forEach(radio => radio.addEventListener('change', handleFilterChange));
+
+
+
+
+
+
+/*$(function () {
+    $('#showsCheck').on('change', () => {
+        alert('tvvvvvv;');
+    });
+});*/
 
 /* TODO: commented out for now, when below functionality is replaced by ability to search by filters then this can be removed
 // Once the DOM is ready, execute everything in this function to set up the UI
@@ -208,28 +247,47 @@ function displayTitles(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
 
+    $("#resultCards").empty();
+
     if (data.length == 0) {
         alert("Your search query returned no results");
     }
 
-    $("#resultCards").empty();
     $.each(data,
         function (index, item) {
+            const title = item.title.replace("'", "&apos;");
             let result =
-                `<div class="col bg-light-subtle">
+                `<div class="col cld-bg-light" id="${item.mediaType}-${index}">
                     <div class="card mb-3">
                       <div class="row g-0">
-                        <div class="col-sm-2 col-4 align-self-center">
+                        <div class="col-sm-2 col-4 align-self-center" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                         </div>
                         <div class="col">
                           <div class="card-body text-start">
-                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <h4 class="card-title" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
-                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>      
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
-                        </div>
+                            <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
+                            <p class="card-text"><small class="text-muted">Media Type: ${item.mediaType}</small></p>
+                            <div>
+                                <div class="dropdown">
+                                    <button id="watchlist-dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Add to Watch List
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
+                                        <li>
+                                            <button id="addToCurrent" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                        </li>
+                                        <li>
+                                            <button id="addToWant" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                        </li>
+                                        <li>
+                                            <button id="addToHave" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -243,24 +301,44 @@ function displayMovies(data) {
     console.log("populating basic user info with the following data:");
     console.log(data);
 
+    if (data.length == 0) {
+        alert("Your search query returned no results");
+    }
+
     $("#resultCards").empty();
     $.each(data,
         function (index, item) {
-            const movieTitle = item.title.replace("'", "&apos;");
+            const title = item.title.replace("'", "&apos;");
             let result =
                 `<div class="col bg-light-subtle">
                     <div class="card mb-3">
                       <div class="row g-0">
-                        <div class="col-sm-2 col-4 align-self-center">
+                        <div class="col-sm-2 col-4 align-self-center" >
                           <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                         </div>
                         <div class="col">
                           <div class="card-body text-start">
-                            <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4>
+                            <h4 class="card-title" onclick='searchDetails("${title}", "${item.mediaType}")'>${item.title} (${item.releaseDate.substr(0, 4)})</h4>
                             <p class="card-text truncate-overflow">${item.plotSummary}</p>
                             <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                              <div>
+                                    <li class="dropdown">
+                                        <button id="watchlist-dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Add to Watch List
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
+                                            <li>
+                                                <button id="addToCurrent" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                            </li>
+                                            <li>
+                                                <button id="addToWant" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                            </li>
+                                            <li>
+                                                <button id="addToHave" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </div>
                         </div>
                       </div>
                     </div>
@@ -277,6 +355,11 @@ function displayShows(data) {
     console.log(data);
 
     $("#resultCards").empty();
+
+    if (data.length == 0) {
+        alert("Your search query returned no results");
+    }
+
     $.each(data,
         function (index, item) {
             const title = item.title.replace("'", "&apos;");
@@ -285,18 +368,31 @@ function displayShows(data) {
                     `<div class="col bg-light-subtle">
                         <div class="card mb-3" id="${index}">
                           <div class="row g-0">
-                            <div class="col-sm-2 col-4 align-self-center">
+                            <div class="col-sm-2 col-4 align-self-center" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")'>
                               <img class="results img-fluid rounded-start" src="" alt="..." data-posterpath="${item.imagePath}" >
                             </div>
                             <div class="col">
                               <div class="card-body text-start">
-                                <h4 class="card-title">${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
+                                <h4 class="card-title" onclick='searchDetails("${title}", "${item.releaseDate}", "${item.mediaType}")' >${item.title} (${item.releaseDate.substr(0, 4)})</h4> 
                                 <p class="card-text truncate-overflow">${item.plotSummary}</p>
                                 <p class="card-text"><small class="text-muted">Rated: ${item.popularity}</small></p>
-                                    <div class="dropdown">
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
-                                        <button id="card-button" class="btn cld-btn-secondary text-light text-right add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
-                                    </div>
+                                <div>
+                                    <li class="dropdown">
+                                        <button id="watchlist-dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Add to Watch List
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="watchListDropdown">
+                                            <li>
+                                                <button id="addToCurrent" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${0}", "${item.mediaType}")'>Add To Currently Watching</button>
+                                            </li>
+                                            <li>
+                                                <button id="addToWant" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${1}", "${item.mediaType}")'>Add To Want To Watch</button>
+                                            </li>
+                                            <li>
+                                                <button id="addToHave" class="dropdown-item add-watchlist-item" onclick='addTitleToWatchList("${title}", "${2}", "${item.mediaType}")'>Add To Have Watched</button>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </div>
                               </div>
                             </div>
@@ -345,11 +441,32 @@ function displayTextForNoPosters() {
     });
 }
 
+//event listener for radio buttons
+
 function errorOnAjax() {
     console.log("ERROR in ajax request");
     // take care of the error, maybe display a message to the user
     // ...
 }
+
+function searchDetails(title, releaseDate, mediaType) {
+    console.log("inside searchDetails");
+    console.log("title: " + title);
+    console.log("release date: " + releaseDate);
+    console.log("media type: " + mediaType);
+    //window.location.href = "/Home/SearchDetails/";
+
+    const newtitle = title.replace("'", "&apos;");
+
+    if (mediaType == "tv") {
+        window.location.href = 'SearchDetails/' + '?title=' + newtitle + '&releaseDate=' + releaseDate;
+    } else {
+        window.location.href = 'MovieDetails/' + '?title=' + newtitle + '&releaseDate=' + releaseDate;
+    }
+    
+
+}
+
 
 
 function addTitleToWatchList(Title, listType, mediaType) {

@@ -8,6 +8,7 @@ CREATE TABLE [Watcher]
     [FirstName]             NVARCHAR(64),
     [LastName]              NVARCHAR(64),
     [Email]                 NVARCHAR(256),
+    [Phone]                 NVARCHAR(18),
     [Bio]                   NVARCHAR(256),
     [WatchListPrivacy]      BIT                NOT NULL
 );
@@ -39,14 +40,6 @@ CREATE TABLE [Comment]
 
     [UserID]                INT                 NOT NULL,
     [PostID]                INT                 NOT NULL
-);
-
-CREATE TABLE [Reshare]
-(
-    [ID]                    INT                 NOT NULL PRIMARY KEY IDENTITY(1,1),
-    
-    [PostID]                INT                 NOT NULL,
-    [UserID]                INT                 NOT NULL
 );
 
 CREATE TABLE [LikePost]
@@ -113,6 +106,7 @@ CREATE TABLE [WatchPartyGroup]
     [GroupTitle]            NVARCHAR(512)       NOT NULL,
     [GroupDescription]      NVARCHAR(1024),
     [StartDate]             DATETIME            NOT NULL,
+    [TelePartyURL]          NVARCHAR(512),
 
     [HostID]                INT                 NOT NULL
 );
@@ -132,9 +126,6 @@ ALTER TABLE [Comment]                       ADD CONSTRAINT [Fk_Comment_PostID]  
 
 ALTER TABLE [FollowingList]                 ADD CONSTRAINT [Fk_FollowingList_UserID]                            FOREIGN KEY([UserID])                   REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE [FollowingList]                 ADD CONSTRAINT [Fk_FollowingList_FollowingID]                       FOREIGN KEY([FollowingID])              REFERENCES[Watcher]([Id])           ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE [Reshare]                       ADD CONSTRAINT [Fk_Reshare_PostID]                                  FOREIGN KEY([PostID])                   REFERENCES[Post]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE [Reshare]                       ADD CONSTRAINT [Fk_Reshare_UserID]                                  FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [LikePost]                      ADD CONSTRAINT [Fk_LikePost_PostID]                                 FOREIGN KEY([PostID])                   REFERENCES[Post]([ID])              ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE [LikePost]                      ADD CONSTRAINT [Fk_LikePost_UserID]                                 FOREIGN KEY([UserID])                   REFERENCES[Watcher]([ID])           ON DELETE NO ACTION ON UPDATE NO ACTION;

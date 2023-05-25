@@ -21,6 +21,8 @@ public class Program
 
         var tmdbKey = builder.Configuration["TMDB:APIKey"];
         var sendGridKey = builder.Configuration["SendGrid:APIKey"];
+        var twilioAuthTokenKey = builder.Configuration["Twilio:AuthToken"];
+        var twilioAccountSidKey = builder.Configuration["Twilio:AccountSid"];
 
         // Add services to the container.
 
@@ -46,10 +48,12 @@ public class Program
 
         builder.Services.AddScoped<DbContext, WatchPartyDbContext>();
         builder.Services.AddScoped<ITMDBService, TMDBService>(s => new TMDBService(tmdbKey, new TMDBClient { BaseAddress = new Uri("https://api.themoviedb.org/3") }));
+        builder.Services.AddScoped<ITwilioService, TwilioService>(s => new TwilioService(twilioAccountSidKey, twilioAuthTokenKey));
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         builder.Services.AddScoped<IWatcherRepository, WatcherRepository>();
         builder.Services.AddScoped<IFollowingListRepository, FollowingListRepository>();
         builder.Services.AddScoped<IPostRepository, PostRepository>();
+        builder.Services.AddScoped<ILikePostRepository, LikePostRepository>();
         builder.Services.AddScoped<ICommentRepository, CommentRepository>();
         builder.Services.AddTransient<IEmailSender, SendGridService>(s => new SendGridService(builder.Configuration));
         builder.Services.AddScoped<IWatchListRepository, WatchListRepository>();
@@ -59,6 +63,7 @@ public class Program
         builder.Services.AddScoped<IWatchPartyGroupRepository, WatchPartyGroupRepository>();
         builder.Services.AddScoped<IWatchPartyGroupAssignmentRepository, WatchPartyGroupAssignmentRepository>();
         builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+        builder.Services.AddTransient<SendGridService, SendGridService>(s => new SendGridService(builder.Configuration));
 
 
 
@@ -109,6 +114,11 @@ public class Program
         app.UseRouting();
 
         app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "SearchDetails",
+            pattern: "Home/SearchDetails/title={title}&releaseDate={releaseDate}",
+            defaults: new { controller = "Home", action = "SearchDetails" });
 
         app.MapControllerRoute(
             name: "AddMovieToWatchList",

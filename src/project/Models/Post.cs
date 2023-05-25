@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WatchParty.Models;
 
@@ -33,10 +31,8 @@ public partial class Post
     [InverseProperty("Post")]
     public virtual ICollection<LikePost> LikePosts { get; } = new List<LikePost>();
 
-    [InverseProperty("Post")]
-    public virtual ICollection<Reshare> Reshares { get; } = new List<Reshare>();
-
     [ForeignKey("UserId")]
     [InverseProperty("Posts")]
+    [ValidateNever]
     public virtual Watcher User { get; set; } = null!;
 }

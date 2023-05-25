@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WatchParty.Models;
 
@@ -13,7 +11,7 @@ public partial class Comment
     [Column("ID")]
     public int Id { get; set; }
 
-    [StringLength(2048), Required(AllowEmptyStrings = false, ErrorMessage = "Title is a required field")]
+    [StringLength(2048), Required(AllowEmptyStrings = false, ErrorMessage = "Comment field cannot be left empty")]
     public string CommentTitle { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
@@ -29,9 +27,11 @@ public partial class Comment
 
     [ForeignKey("PostId")]
     [InverseProperty("Comments")]
+    [ValidateNever]
     public virtual Post Post { get; set; } = null!;
 
     [ForeignKey("UserId")]
     [InverseProperty("Comments")]
+    [ValidateNever]
     public virtual Watcher User { get; set; } = null!;
 }

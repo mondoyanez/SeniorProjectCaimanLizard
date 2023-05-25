@@ -1,10 +1,7 @@
-﻿using System.Diagnostics;
-using Azure.Identity;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchParty.Areas.Identity.Data;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.ViewModels;
@@ -34,7 +31,7 @@ public class UserController : Controller
 
     // GET: user/ {username}
     [Authorize]
-    public async Task<ActionResult<Watcher>> Profile(string username)
+    public IActionResult Profile(string username)
     {
         if (_watcherRepository == null)
         {
@@ -63,6 +60,7 @@ public class UserController : Controller
                 watchPartyGroups.Add(_groupRepository.GetById(group));
         }
         
+        watchPartyGroups = watchPartyGroups.Where(g => g.StartDate >= DateTime.Now).OrderBy(g => g.StartDate).ToList();
 
         vm.Watcher = watcher;
         vm.Following = followingList;
@@ -70,15 +68,19 @@ public class UserController : Controller
 
         vm.isFollowing = watcher.Id != loggedInUser?.Id ? _followingListRepository.IsFollowing(loggedInUser.Id, watcher.Id) : null;
 
-        var currentUser = await _userManager.GetUserAsync(User);
+        var currentUser = _userManager.GetUserAsync(User).Result;
         vm.isCurrentUser = _watcherRepository.IsCurrentUser(username, currentUser);
 
         vm.Groups = watchPartyGroups;
+
+        vm.Watcher.Phone = _userManager.GetPhoneNumberAsync(currentUser).Result;
 
         if (watcher == null)
         {
             return View("Notfound");
         }
+
+        ViewBag.ValidInput = true;
 
         return View(vm);
     }
@@ -114,27 +116,80 @@ public class UserController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ProfileAsync([Bind("Id,AspNetIdentityId,Username,FirstName,LastName,Email,FollowingCount,FollowerCount,Bio,WatchListPrivacy")] Watcher watcher)
+    public IActionResult ProfileAsync([Bind("Username, FirstName, LastName, Phone, Bio, WatchListPrivacy")] Watcher watcher)
     {
-        ModelState.ClearValidationState("watcher.AspNetIdentityId");
-        ModelState.ClearValidationState("watcher.Id");
-        //if (ModelState.IsValid)
-        //{
-        //}
-        _watcherRepository.AddOrUpdate(watcher);
+        ModelState.Clear();
 
-        Watcher? loggedInUser = _watcherRepository.FindByUsername(User.Identity.Name);
+        Watcher? updatedWatcher = _watcherRepository.FindByUsername(watcher.Username);
 
-        ProfileVM vm = new ProfileVM();
-        vm.Watcher = watcher;
+        if (updatedWatcher == null)
+            throw new NullReferenceException(nameof(updatedWatcher));
 
-        var currentUser = await _userManager.GetUserAsync(User);
-        vm.isCurrentUser = _watcherRepository.IsCurrentUser(watcher.Username, currentUser);
-        vm.Followers = _followingListRepository.GetFollowerList(watcher.Id);
-        vm.Following = _followingListRepository.GetFollowingList(watcher.Id);
-        vm.isFollowing = watcher.Id != loggedInUser?.Id ? _followingListRepository.IsFollowing(loggedInUser.Id, watcher.Id) : null;
+        IdentityUser? currentUser = _userManager.GetUserAsync(User).Result;
 
-        return View(vm);
+        if (currentUser == null)
+            throw new NullReferenceException(nameof(currentUser));
+
+        updatedWatcher.Username = watcher.Username;
+        updatedWatcher.FirstName = watcher.FirstName;
+        updatedWatcher.LastName = watcher.LastName;
+        updatedWatcher.Phone = watcher.Phone;
+        updatedWatcher.Bio = watcher.Bio;
+        updatedWatcher.WatchListPrivacy = watcher.WatchListPrivacy;
+
+        TryValidateModel(updatedWatcher);
+
+        if (!ModelState.IsValid)
+        {
+            updatedWatcher.Phone = null;
+
+            ViewBag.ValidInput = false;
+
+            ProfileVM vm = new ProfileVM();
+            Watcher? loggedInUser = _watcherRepository.FindByUsername(User.Identity.Name);
+
+            if (loggedInUser == null)
+                throw new ArgumentNullException(nameof(loggedInUser));
+
+            List<FollowingList> followingList = _followingListRepository.GetFollowingList(updatedWatcher.Id);
+            List<FollowingList> followerList = _followingListRepository.GetFollowerList(updatedWatcher.Id);
+            List<WatchPartyGroup> watchPartyGroups = new List<WatchPartyGroup>();
+
+            List<int> groupIds = _assignmentRepository.GetGroupIds(updatedWatcher.Id);
+
+            if (groupIds.Any())
+            {
+                foreach (var group in groupIds)
+                    watchPartyGroups.Add(_groupRepository.GetById(group));
+            }
+
+            watchPartyGroups = watchPartyGroups.Where(g => g.StartDate >= DateTime.Now).OrderBy(g => g.StartDate).ToList();
+
+            vm.Watcher = updatedWatcher;
+            vm.Following = followingList;
+            vm.Followers = followerList;
+
+            vm.isFollowing = updatedWatcher.Id != loggedInUser?.Id ? _followingListRepository.IsFollowing(loggedInUser.Id, updatedWatcher.Id) : null;
+
+            vm.isCurrentUser = _watcherRepository.IsCurrentUser(updatedWatcher.Username, currentUser);
+
+            vm.Groups = watchPartyGroups;
+
+            vm.Watcher.Phone = _userManager.GetPhoneNumberAsync(currentUser).Result;
+
+            if (watcher == null)
+            {
+                return View("Notfound");
+            }
+
+            return View(vm);
+        }
+
+        _userManager.SetPhoneNumberAsync(currentUser, updatedWatcher.Phone);
+        _userManager.UpdateAsync(currentUser);
+        updatedWatcher.Phone = null;
+        _watcherRepository.AddOrUpdate(updatedWatcher);
+        return RedirectToAction("Profile", new { username = watcher.Username });
     }
 
     private bool WatcherExists(int id)

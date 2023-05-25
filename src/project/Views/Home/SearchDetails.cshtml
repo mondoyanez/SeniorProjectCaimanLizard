@@ -1,0 +1,105 @@
+﻿@using WatchParty.ViewModels;
+@model ShowDetailsVM 
+@{
+    ViewData["Title"] = "Detailed Search";
+}
+
+<section class="bg-light-subtle" style="text-align:center">
+    <br />
+
+    @if (Model == null)
+    {
+        <p>model is null</p>
+
+    } else {
+        <div class="row">
+            <div class="col">
+                <div class="card bg-dark text-white">
+                    <img class="card-img opacity-25" src=@($"https://image.tmdb.org/t/p/original{Model.backdrop_path}") alt="Show Background" />
+                    <div class="card-img-overlay" style="text-align: justify-all">
+                        <h1 class="card-title">@Model.name</h1>
+                        <h4 class="card-text">@Model.overview</h4>
+                        
+                        <footer>@Model.tagline</footer>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-8">
+
+                <h4> Seasons: </h4>
+                <div class="card-deck">
+                    @foreach (var season in Model.seasons)
+                    {
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><img style="width:180px;" class="card-img-top card-season-img" src=@($"https://image.tmdb.org/t/p/original{season.poster_path}") alt="Poster Image" /></th>
+
+                                    <td>
+                                        <div class="card bg-dark text-white">
+                                            <div class="card-body">
+                                                <h6>@season.name (@season.season_number)</h6>
+                                                <p>@season.overview</p>
+                                                <p>Episodes: @season.episode_count</p>
+                                                <p>Air Date: @season.air_date</p>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+
+                        <br/>
+                    }
+                </div>
+                
+            </div>
+            <div class="col-md-4">
+                <h4>Watch It Here:</h4>
+                @foreach (var network in Model.networks)
+                {                    
+                    <img style="width:160px;" src=@($"https://image.tmdb.org/t/p/original{network.logo_path}") alt="Poster Image" />
+                }
+                <br />
+                <br />
+
+                <h4>Genres: </h4>
+                @foreach (var genre in Model.genres)
+                {
+                    <h6>@genre.name</h6>
+                }
+
+                <br />
+                <br />
+
+                <h4>Created By:</h4>
+                @foreach (var person in Model.created_by)
+                {
+                    <h6>@person.name</h6>
+                }
+
+            </div>
+        </div>
+
+    }
+    
+    <br />
+    <br />
+</section>
+
+@section Scripts
+{
+	<script type="text/javascript" src="~/js/searchDetails.js"></script>
+	<script>
+		console.log("loaded Scripts section");
+	</script>
+}

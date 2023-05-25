@@ -65,22 +65,22 @@ namespace WatchParty.Controllers
             return Ok(_tmdbService.SearchYear(year));
         }
 
-		[HttpPost("addShowToWatchList")]
-		public IActionResult AddShowToWatchList(string title)
-		{
-			TMDBTitle tmdbTitle = _tmdbService.GetShowDetails(title);
-			Console.WriteLine(tmdbTitle);
-			Show show = new Show()
-			{
-				Title = tmdbTitle.Title,
-				Overview = tmdbTitle.PlotSummary,
-				FirstAirDate = tmdbTitle.ReleaseDate,
-				Tmdbid = tmdbTitle.Id
-			};
+		//[HttpPost("addShowToWatchList")]
+		//public IActionResult AddShowToWatchList(string title)
+		//{
+		//	TMDBTitle tmdbTitle = _tmdbService.GetShowDetails(title);
+		//	Console.WriteLine(tmdbTitle);
+		//	Show show = new Show()
+		//	{
+		//		Title = tmdbTitle.Title,
+		//		Overview = tmdbTitle.PlotSummary,
+		//		FirstAirDate = tmdbTitle.ReleaseDate,
+		//		Tmdbid = tmdbTitle.Id
+		//	};
 
-			// Also need to add a watch list object as well as a show
+		//	// Also need to add a watch list object as well as a show
 
-			return Ok(show);
-		}
+		//	return Ok(show);
+		//}
 	}
 }

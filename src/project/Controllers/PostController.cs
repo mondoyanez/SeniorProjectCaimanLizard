@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using WatchParty.DAL.Abstract;
 using WatchParty.Models;
 using WatchParty.Services.Abstract;
@@ -13,14 +13,16 @@ namespace WatchParty.Controllers;
 public class PostController : Controller
 {
     private readonly IPostRepository _postRepository;
+    private readonly ILikePostRepository _likePostRepository;
     private readonly ICommentRepository _commentRepository;
     private readonly IWatcherRepository _watcherRepository;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly ITMDBService _tmdbService;
 
-    public PostController(IPostRepository postRepository, ICommentRepository commentRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager, ITMDBService tmdbService)
+    public PostController(IPostRepository postRepository, ILikePostRepository likePostRepository,ICommentRepository commentRepository, IWatcherRepository watcherRepository ,UserManager<IdentityUser> userManager, ITMDBService tmdbService)
     {
         _postRepository = postRepository;
+        _likePostRepository = likePostRepository;
         _commentRepository = commentRepository;
         _watcherRepository = watcherRepository;
         _userManager = userManager;
@@ -34,12 +36,13 @@ public class PostController : Controller
 	    FeedVM vm = new()
 	    {
 		    Posts = _postRepository.GetAllPostsDescending(),
+            LikePosts = _likePostRepository.GetAll(),
             Comments = _commentRepository.GetVisibleComments(),
 		    PopularMovies = _tmdbService.GetPopularMovies(),
             PopularShows = _tmdbService.GetPopularShows(),
-		    ImageConfig = _tmdbService.SetImageConfig()
-
-	    };
+		    ImageConfig = _tmdbService.SetImageConfig(),
+            CurrentWatcher = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!
+        };
 	    if (ModelState.IsValid)
 	    {
 		    ViewBag.IsValid = true;
@@ -70,8 +73,8 @@ public class PostController : Controller
             Comments = _commentRepository.GetVisibleComments(),
             PopularMovies = _tmdbService.GetPopularMovies(),
             PopularShows = _tmdbService.GetPopularShows(),
-            ImageConfig = _tmdbService.SetImageConfig()
-
+            ImageConfig = _tmdbService.SetImageConfig(),
+            CurrentWatcher = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!
         };
 
         if (ModelState.IsValid)
@@ -104,7 +107,6 @@ public class PostController : Controller
 
         post.DatePosted = DateTime.Now;
         post.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
-        post.User = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!;
         post.IsVisible = true;
 
         TryValidateModel(post);
@@ -116,5 +118,41 @@ public class PostController : Controller
         }
         
         return View();
+    }
+
+    public IActionResult Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        Post? post = _postRepository.FindPostById((int) id);
+        if (post == null)
+        {
+            return NotFound();
+        }
+        return View(post);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(int id, Post updatedPost)
+    {
+        if (id != updatedPost.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            updatedPost.DatePosted = DateTime.Now;
+            updatedPost.UserId = _watcherRepository.FindByAspNetId(_userManager.GetUserId(User)!)!.Id;
+            updatedPost.IsVisible = true;
+            _postRepository.AddOrUpdate(updatedPost);
+            return RedirectToAction("Index");
+        }
+
+        return View(updatedPost);
     }
 }
