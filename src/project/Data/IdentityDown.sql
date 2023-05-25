@@ -1,4 +1,5 @@
-﻿DROP TABLE [AspNetUserRoles]
+﻿DROP TABLE [__EFMigrationsHistory]
+DROP TABLE [AspNetUserRoles]
 DROP TABLE [AspNetRoleClaims]
 DROP TABLE [AspNetRoles]
 DROP TABLE [AspNetUserClaims]
